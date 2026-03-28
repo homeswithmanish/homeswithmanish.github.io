@@ -161,7 +161,7 @@ function writeMortgageRatesToSheet(sheet, rates) {
   }
 
   var rows = rates.map(function(r) {
-    return [r.date, r.rate30, r.rate15];
+    return [r.date, r.rate30 / 100, r.rate15 / 100];
   });
 
   if (rows.length > 0) {

@@ -386,7 +386,7 @@
             <div class="container">
                 <div class="about-grid">
                     <div class="about-image fade-in">
-                        <img src="images/headshot.jpg" alt="Manish Anand - East Bay Real Estate Agent" loading="lazy" width="500" height="600" style="width:100%;height:auto;border-radius:12px;object-fit:cover;">
+                        <img src="images/Manish.png" alt="Manish Anand - East Bay Real Estate Agent" loading="lazy" width="500" height="600" style="width:100%;height:auto;border-radius:12px;object-fit:cover;">
                         <div class="accent-card">
                             <div class="num">8</div>
                             <div class="label">Cities Served</div>
@@ -1287,8 +1287,10 @@
               initCalculator(res.data);
             }
           })
-          .catch(function() {
+          .catch(function(err) {
+            console.log('Market data fetch error:', err);
             if (tbody) tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:32px;color:var(--gray-400);">Market data loading. Check back shortly.</td></tr>';
+            if (areasGrid) areasGrid.innerHTML = '<p style="text-align:center;padding:40px;color:var(--gray-400);">City data loading. Check back shortly.</p>';
           });
       })();
 
@@ -1318,14 +1320,26 @@
                 ch15.innerHTML = (c15 >= 0 ? '<span style="color:#ef4444;">&#9650; +' : '<span style="color:#22c55e;">&#9660; ') + Math.abs(c15).toFixed(2) + '% vs last week</span>';
               }
 
+              function fmtDate(d) {
+                if (!d) return '';
+                var s = String(d);
+                // Handle ISO timestamp (2026-03-26T07:00:00.000Z) or date string (2026-03-26)
+                var m = s.match(/(\d{4})-(\d{2})-(\d{2})/);
+                if (m) {
+                  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                  return months[parseInt(m[2]) - 1] + ' ' + parseInt(m[3]) + ', ' + m[1];
+                }
+                return s;
+              }
+
               if (trend && d.trend && d.trend.length > 0) {
                 var trendHtml = d.trend.map(function(w) {
-                  return '<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.08);"><span style="color:var(--gray-400);font-size:.85rem;">' + w.date + '</span><span style="color:var(--white);font-weight:600;font-size:.85rem;">' + w.rate30.toFixed(2) + '%</span></div>';
+                  return '<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.08);"><span style="color:var(--gray-400);font-size:.85rem;">' + fmtDate(w.date) + '</span><span style="color:var(--white);font-weight:600;font-size:.85rem;">' + w.rate30.toFixed(2) + '%</span></div>';
                 }).join('');
                 trend.innerHTML = trendHtml;
               }
 
-              if (attr && d.asOf) attr.textContent = 'As of ' + d.asOf + ' \u00B7 Source: Freddie Mac PMMS';
+              if (attr && d.asOf) attr.textContent = 'As of ' + fmtDate(d.asOf) + ' \u00B7 Source: Freddie Mac PMMS';
 
               // Store rate for calculator
               window._mortgageRate30 = d.rate30;
