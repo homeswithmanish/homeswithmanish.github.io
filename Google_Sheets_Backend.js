@@ -185,10 +185,22 @@ function doGet(e) {
 
     const action = e.parameter.action || 'list';
 
-    // Market data endpoint is public (no API key required)
+    // Public endpoints (no API key required)
     if (action === 'marketdata') {
       const marketResponse = handleMarketDataRequest();
       return ContentService.createTextOutput(JSON.stringify(marketResponse))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    if (action === 'mortgagerates') {
+      const ratesResponse = handleMortgageRatesRequest();
+      return ContentService.createTextOutput(JSON.stringify(ratesResponse))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    if (action === 'rentaldata') {
+      const rentalResponse = handleRentalDataRequest();
+      return ContentService.createTextOutput(JSON.stringify(rentalResponse))
         .setMimeType(ContentService.MimeType.JSON);
     }
 

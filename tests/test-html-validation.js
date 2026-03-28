@@ -122,6 +122,10 @@ test('Has trust badges section', /trust|badge/i.test(indexHtml));
 test('Has DRE license number', /02247006/.test(indexHtml));
 test('Links to privacy.html', /href=["']privacy\.html["']/.test(indexHtml));
 test('Links to terms.html', /href=["']terms\.html["']/.test(indexHtml));
+test('Has mortgage rates section', /id=["']rates["']/.test(indexHtml));
+test('Has payment calculator section', /id=["']calculator["']/.test(indexHtml));
+test('Has rental yield section', /id=["']rental-yield["']/.test(indexHtml));
+test('Area cards are dynamic', /id=["']areas-grid["']/.test(indexHtml));
 
 // --- Accessibility ---
 console.log('\n\x1b[36mAccessibility:\x1b[0m');
@@ -186,7 +190,9 @@ const requiredFiles = [
   'Google_Sheets_Backend.js',
   '404.html',
   'privacy.html',
-  'terms.html'
+  'terms.html',
+  'Mortgage_Rate_Fetcher.js',
+  'Rental_Data_Fetcher.js'
 ];
 
 requiredFiles.forEach(file => {

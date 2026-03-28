@@ -594,136 +594,10 @@
         <section id="areas">
             <div class="container">
                 <div class="section-label">COVERAGE AREA</div>
-                <h2 class="section-title">8 East Bay Cities, One Expert</h2>
+                <h2 class="section-title">East Bay Cities, One Expert</h2>
 
-                <div class="areas-grid">
-                    <div class="area-card fade-in">
-                        <h3><span class="area-emoji">🏔️</span> San Ramon</h3>
-                        <div class="area-stat">
-                            <span class="stat-label">Median SFH</span>
-                            <span class="stat-value">$1.55M</span>
-                        </div>
-                        <div class="area-stat">
-                            <span class="stat-label">Days on Market</span>
-                            <span class="stat-value">10</span>
-                        </div>
-                        <div class="area-stat">
-                            <span class="stat-label">YoY Change</span>
-                            <span class="stat-value trend-up">+6%</span>
-                        </div>
-                    </div>
-
-                    <div class="area-card fade-in fade-in-delay-1">
-                        <h3><span class="area-emoji">🍷</span> Pleasanton</h3>
-                        <div class="area-stat">
-                            <span class="stat-label">Median SFH</span>
-                            <span class="stat-value">$1.70M</span>
-                        </div>
-                        <div class="area-stat">
-                            <span class="stat-label">Days on Market</span>
-                            <span class="stat-value">9</span>
-                        </div>
-                        <div class="area-stat">
-                            <span class="stat-label">YoY Change</span>
-                            <span class="stat-value trend-up">+5%</span>
-                        </div>
-                    </div>
-
-                    <div class="area-card fade-in fade-in-delay-2">
-                        <h3><span class="area-emoji">🏡</span> Danville</h3>
-                        <div class="area-stat">
-                            <span class="stat-label">Median SFH</span>
-                            <span class="stat-value">$1.85M</span>
-                        </div>
-                        <div class="area-stat">
-                            <span class="stat-label">Days on Market</span>
-                            <span class="stat-value">11</span>
-                        </div>
-                        <div class="area-stat">
-                            <span class="stat-label">YoY Change</span>
-                            <span class="stat-value trend-up">+4%</span>
-                        </div>
-                    </div>
-
-                    <div class="area-card fade-in">
-                        <h3><span class="area-emoji">🌉</span> Dublin</h3>
-                        <div class="area-stat">
-                            <span class="stat-label">Median SFH</span>
-                            <span class="stat-value">$1.39M</span>
-                        </div>
-                        <div class="area-stat">
-                            <span class="stat-label">Days on Market</span>
-                            <span class="stat-value">11</span>
-                        </div>
-                        <div class="area-stat">
-                            <span class="stat-label">YoY Change</span>
-                            <span class="stat-value trend-up">+4%</span>
-                        </div>
-                    </div>
-
-                    <div class="area-card fade-in fade-in-delay-1">
-                        <h3><span class="area-emoji">🍇</span> Livermore</h3>
-                        <div class="area-stat">
-                            <span class="stat-label">Median SFH</span>
-                            <span class="stat-value">$1.11M</span>
-                        </div>
-                        <div class="area-stat">
-                            <span class="stat-label">Days on Market</span>
-                            <span class="stat-value">12</span>
-                        </div>
-                        <div class="area-stat">
-                            <span class="stat-label">YoY Change</span>
-                            <span class="stat-value trend-up">+5%</span>
-                        </div>
-                    </div>
-
-                    <div class="area-card fade-in fade-in-delay-2">
-                        <h3><span class="area-emoji">🌁</span> Fremont</h3>
-                        <div class="area-stat">
-                            <span class="stat-label">Median SFH</span>
-                            <span class="stat-value">$1.60M</span>
-                        </div>
-                        <div class="area-stat">
-                            <span class="stat-label">Days on Market</span>
-                            <span class="stat-value">8</span>
-                        </div>
-                        <div class="area-stat">
-                            <span class="stat-label">YoY Change</span>
-                            <span class="stat-value trend-up">+12%</span>
-                        </div>
-                    </div>
-
-                    <div class="area-card fade-in">
-                        <h3><span class="area-emoji">🌾</span> Tracy</h3>
-                        <div class="area-stat">
-                            <span class="stat-label">Median SFH</span>
-                            <span class="stat-value">$670K</span>
-                        </div>
-                        <div class="area-stat">
-                            <span class="stat-label">Days on Market</span>
-                            <span class="stat-value">9</span>
-                        </div>
-                        <div class="area-stat">
-                            <span class="stat-label">YoY Change</span>
-                            <span class="stat-value trend-down">-4%</span>
-                        </div>
-                    </div>
-
-                    <div class="area-card fade-in fade-in-delay-1">
-                        <h3><span class="area-emoji">⛰️</span> Mountain House</h3>
-                        <div class="area-stat">
-                            <span class="stat-label">Median SFH</span>
-                            <span class="stat-value">$800K</span>
-                        </div>
-                        <div class="area-stat">
-                            <span class="stat-label">Days on Market</span>
-                            <span class="stat-value">14</span>
-                        </div>
-                        <div class="area-stat">
-                            <span class="stat-label">YoY Change</span>
-                            <span class="stat-value trend-up">+3%</span>
-                        </div>
-                    </div>
+                <div class="areas-grid" id="areas-grid">
+                    <!-- Area cards populated dynamically from Zillow ZHVI data -->
                 </div>
             </div>
         </section>
@@ -755,6 +629,121 @@
                 <div style="text-align: center; margin-top: 48px;">
                     <p style="color: var(--gray-600); margin-bottom: 16px;">Want a custom market report for your target city? Get one free.</p>
                     <button class="btn btn-navy btn-lg" data-scroll-to="contact">Request Your Report</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mortgage Rate Tracker Section -->
+        <section id="rates" style="background: var(--off-white);">
+            <div class="container">
+                <div class="section-label">MORTGAGE RATES</div>
+                <h2 class="section-title">Current Mortgage Rates</h2>
+                <p class="section-subtitle">Freddie Mac Primary Mortgage Market Survey, updated weekly</p>
+
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:24px; margin-top:40px;">
+                    <div class="rate-card" id="rate-30yr" style="background:var(--navy); border-radius:16px; padding:32px; text-align:center;">
+                        <div style="color:var(--gold); font-size:.85rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">30-Year Fixed</div>
+                        <div id="rate-30yr-value" style="color:var(--white); font-family:var(--font-display); font-size:3rem; font-weight:700;">--%</div>
+                        <div id="rate-30yr-change" style="color:var(--gray-400); font-size:.9rem; margin-top:4px;">Loading...</div>
+                    </div>
+                    <div class="rate-card" id="rate-15yr" style="background:var(--navy); border-radius:16px; padding:32px; text-align:center;">
+                        <div style="color:var(--gold); font-size:.85rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">15-Year Fixed</div>
+                        <div id="rate-15yr-value" style="color:var(--white); font-family:var(--font-display); font-size:3rem; font-weight:700;">--%</div>
+                        <div id="rate-15yr-change" style="color:var(--gray-400); font-size:.9rem; margin-top:4px;">Loading...</div>
+                    </div>
+                    <div class="rate-card" id="rate-payment" style="background:var(--navy); border-radius:16px; padding:32px; text-align:center;">
+                        <div style="color:var(--gold); font-size:.85rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Rate Trend (4 Weeks)</div>
+                        <div id="rate-trend" style="color:var(--white); font-family:var(--font-display); font-size:1.4rem; font-weight:700; margin-top:12px;">Loading...</div>
+                    </div>
+                </div>
+                <p id="rate-attribution" style="text-align:right; font-size:.8rem; color:var(--gray-400); margin-top:12px;"></p>
+            </div>
+        </section>
+
+        <!-- Monthly Payment Calculator Section -->
+        <section id="calculator">
+            <div class="container">
+                <div class="section-label">AFFORDABILITY TOOL</div>
+                <h2 class="section-title">Monthly Payment Calculator</h2>
+                <p class="section-subtitle">Estimate your monthly payment based on real median home prices</p>
+
+                <div style="max-width:680px; margin:40px auto 0; background:var(--white); border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,.08); padding:40px;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+                        <div>
+                            <label for="calc-city" style="display:block; font-size:.85rem; font-weight:600; color:var(--navy); margin-bottom:6px;">City</label>
+                            <select id="calc-city" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-size:1rem; font-family:var(--font-body);">
+                                <option value="">Select a city</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="calc-price" style="display:block; font-size:.85rem; font-weight:600; color:var(--navy); margin-bottom:6px;">Home Price</label>
+                            <input type="text" id="calc-price" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-size:1rem; box-sizing:border-box;" placeholder="$1,500,000">
+                        </div>
+                        <div>
+                            <label for="calc-down" style="display:block; font-size:.85rem; font-weight:600; color:var(--navy); margin-bottom:6px;">Down Payment %</label>
+                            <input type="number" id="calc-down" value="20" min="0" max="100" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-size:1rem; box-sizing:border-box;">
+                        </div>
+                        <div>
+                            <label for="calc-term" style="display:block; font-size:.85rem; font-weight:600; color:var(--navy); margin-bottom:6px;">Loan Term</label>
+                            <select id="calc-term" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-size:1rem; font-family:var(--font-body);">
+                                <option value="30">30-Year Fixed</option>
+                                <option value="15">15-Year Fixed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="calc-results" style="margin-top:32px; padding:24px; background:var(--navy); border-radius:12px; display:none;">
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; text-align:center;">
+                            <div>
+                                <div style="color:var(--gold); font-size:.8rem; text-transform:uppercase; letter-spacing:1px;">Monthly Payment</div>
+                                <div id="calc-monthly" style="color:var(--white); font-family:var(--font-display); font-size:2.2rem; font-weight:700; margin-top:4px;">$0</div>
+                                <div style="color:var(--gray-400); font-size:.75rem;">Principal + Interest</div>
+                            </div>
+                            <div>
+                                <div style="color:var(--gold); font-size:.8rem; text-transform:uppercase; letter-spacing:1px;">Total with Tax & Insurance</div>
+                                <div id="calc-total" style="color:var(--white); font-family:var(--font-display); font-size:2.2rem; font-weight:700; margin-top:4px;">$0</div>
+                                <div style="color:var(--gray-400); font-size:.75rem;">Estimated PITI</div>
+                            </div>
+                        </div>
+                        <div style="margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,.1); display:grid; grid-template-columns:repeat(3,1fr); gap:8px; text-align:center;">
+                            <div><span style="color:var(--gray-400); font-size:.75rem;">Down Payment</span><br><span id="calc-dp-amount" style="color:var(--white); font-weight:600;">$0</span></div>
+                            <div><span style="color:var(--gray-400); font-size:.75rem;">Loan Amount</span><br><span id="calc-loan" style="color:var(--white); font-weight:600;">$0</span></div>
+                            <div><span style="color:var(--gray-400); font-size:.75rem;">Interest Rate</span><br><span id="calc-rate-display" style="color:var(--white); font-weight:600;">0%</span></div>
+                        </div>
+                    </div>
+                    <p style="text-align:center; font-size:.75rem; color:var(--gray-400); margin-top:12px;">Estimates include property tax (~1.1%) and insurance (~0.35%). Actual costs may vary.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rental Yield Estimator Section -->
+        <section id="rental-yield" style="background: var(--off-white);">
+            <div class="container">
+                <div class="section-label">INVESTOR INSIGHTS</div>
+                <h2 class="section-title">Rental Yield Estimator</h2>
+                <p class="section-subtitle">Compare home values to estimated rents across East Bay cities</p>
+
+                <div class="market-table-wrapper fade-in" style="margin-top:40px;">
+                    <table class="market-table" id="rental-yield-table">
+                        <thead>
+                            <tr>
+                                <th>City</th>
+                                <th>Median Home Value</th>
+                                <th>Est. Monthly Rent</th>
+                                <th>Gross Yield</th>
+                                <th>Price-to-Rent Ratio</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rental-yield-body">
+                            <tr><td colspan="5" style="text-align:center;padding:32px;color:var(--gray-400);">Loading rental data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p id="rental-yield-attribution" style="text-align:right; font-size:.8rem; color:var(--gray-400); margin-top:12px;"></p>
+
+                <div style="text-align: center; margin-top: 48px;">
+                    <p style="color: var(--gray-600); margin-bottom: 16px;">Want a detailed investment analysis for a specific property? Let's talk.</p>
+                    <button class="btn btn-navy btn-lg" data-scroll-to="contact">Get Investment Analysis</button>
                 </div>
             </div>
         </section>
@@ -1046,7 +1035,7 @@
                         <a href="#areas">Pleasanton</a>
                         <a href="#areas">Danville & Dublin</a>
                         <a href="#areas">Livermore & Fremont</a>
-                        <a href="#areas">Tracy & Mountain House</a>
+                        <a href="#areas">Tracy</a>
                     </div>
                 </div>
             </div>
@@ -1229,40 +1218,220 @@
       // --- Dynamic Market Data ---
       var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby67NfkUwnxnZLnLmp5O0X278VRwPsgYHJOZrEA20SIEBEv1U8M-urD-1gOiG5yE6oebg/exec';
 
+      // City emoji mapping for area cards
+      var cityEmojis = {
+        'San Ramon': '🏔️', 'Pleasanton': '🍷', 'Danville': '🏡', 'Dublin': '🌉',
+        'Livermore': '🍇', 'Fremont': '🌁', 'Tracy': '🌾'
+      };
+
+      function formatPrice(price) {
+        if (!price) return 'N/A';
+        var num = Number(price);
+        if (num >= 1000000) return '$' + (num / 1000000).toFixed(2) + 'M';
+        if (num >= 1000) return '$' + Math.round(num / 1000) + 'K';
+        return '$' + num.toLocaleString();
+      }
+
+      function formatChange(change) {
+        if (change === null || change === '' || change === undefined) return { html: 'N/A', cls: '' };
+        var num = parseFloat(change);
+        if (num >= 0) return { html: '+' + num.toFixed(1) + '%', cls: 'trend-up' };
+        return { html: num.toFixed(1) + '%', cls: 'trend-down' };
+      }
+
       (function loadMarketData() {
         var tbody = document.getElementById('market-data-body');
         var attribution = document.getElementById('market-data-attribution');
-        if (!tbody) return;
+        var areasGrid = document.getElementById('areas-grid');
 
         fetch(SCRIPT_URL + '?action=marketdata')
           .then(function(r) { return r.json(); })
           .then(function(res) {
             if (res.success && res.data && res.data.length > 0) {
-              var html = '';
-              res.data.forEach(function(city) {
-                var price = city.medianPrice ? '$' + Number(city.medianPrice).toLocaleString() : 'N/A';
-                var dom = city.daysOnMarket || 'N/A';
-                var change = city.priceChange;
-                var changeHtml = 'N/A';
-                if (change !== null && change !== '' && change !== undefined) {
-                  var num = parseFloat(change);
-                  if (num >= 0) {
-                    changeHtml = '<span class="trend-up">+' + num.toFixed(1) + '%</span>';
-                  } else {
-                    changeHtml = '<span class="trend-down">' + num.toFixed(1) + '%</span>';
-                  }
-                }
-                html += '<tr><td>' + city.city + '</td><td>' + price + '</td><td>' + dom + '</td><td>' + changeHtml + '</td></tr>';
-              });
-              tbody.innerHTML = html;
+              // Populate market data table
+              if (tbody) {
+                var tableHtml = '';
+                res.data.forEach(function(city) {
+                  var price = city.medianPrice ? '$' + Number(city.medianPrice).toLocaleString() : 'N/A';
+                  var dom = city.daysOnMarket || 'N/A';
+                  var chg = formatChange(city.priceChange);
+                  tableHtml += '<tr><td>' + city.city + '</td><td>' + price + '</td><td>' + dom + '</td><td><span class="' + chg.cls + '">' + chg.html + '</span></td></tr>';
+                });
+                tbody.innerHTML = tableHtml;
+              }
               if (attribution && res.lastUpdated) {
                 attribution.textContent = 'Last updated: ' + res.lastUpdated + ' \u00B7 ' + (res.attribution || 'Data from Zillow ZHVI');
               }
+
+              // Populate area cards
+              if (areasGrid) {
+                var cardsHtml = '';
+                var delays = ['', ' fade-in-delay-1', ' fade-in-delay-2'];
+                res.data.forEach(function(city, i) {
+                  var emoji = cityEmojis[city.city] || '🏠';
+                  var price = formatPrice(city.medianPrice);
+                  var dom = city.daysOnMarket || 'N/A';
+                  var chg = formatChange(city.priceChange);
+                  var delay = delays[i % 3];
+                  cardsHtml += '<div class="area-card fade-in' + delay + '">'
+                    + '<h3><span class="area-emoji">' + emoji + '</span> ' + city.city + '</h3>'
+                    + '<div class="area-stat"><span class="stat-label">Median SFH</span><span class="stat-value">' + price + '</span></div>'
+                    + '<div class="area-stat"><span class="stat-label">Days on Market</span><span class="stat-value">' + dom + '</span></div>'
+                    + '<div class="area-stat"><span class="stat-label">YoY Change</span><span class="stat-value ' + chg.cls + '">' + chg.html + '</span></div>'
+                    + '</div>';
+                });
+                areasGrid.innerHTML = cardsHtml;
+              }
+
+              // Initialize calculator with city data
+              initCalculator(res.data);
             }
           })
           .catch(function() {
-            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:32px;color:var(--gray-400);">Market data loading. Check back shortly.</td></tr>';
+            if (tbody) tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:32px;color:var(--gray-400);">Market data loading. Check back shortly.</td></tr>';
           });
+      })();
+
+      // --- Mortgage Rate Tracker ---
+      (function loadMortgageRates() {
+        fetch(SCRIPT_URL + '?action=mortgagerates')
+          .then(function(r) { return r.json(); })
+          .then(function(res) {
+            if (res.success && res.data) {
+              var d = res.data;
+              var el30 = document.getElementById('rate-30yr-value');
+              var el15 = document.getElementById('rate-15yr-value');
+              var ch30 = document.getElementById('rate-30yr-change');
+              var ch15 = document.getElementById('rate-15yr-change');
+              var trend = document.getElementById('rate-trend');
+              var attr = document.getElementById('rate-attribution');
+
+              if (el30 && d.rate30) el30.textContent = d.rate30.toFixed(2) + '%';
+              if (el15 && d.rate15) el15.textContent = d.rate15.toFixed(2) + '%';
+
+              if (ch30 && d.change30 !== undefined) {
+                var c30 = d.change30;
+                ch30.innerHTML = (c30 >= 0 ? '<span style="color:#ef4444;">&#9650; +' : '<span style="color:#22c55e;">&#9660; ') + Math.abs(c30).toFixed(2) + '% vs last week</span>';
+              }
+              if (ch15 && d.change15 !== undefined) {
+                var c15 = d.change15;
+                ch15.innerHTML = (c15 >= 0 ? '<span style="color:#ef4444;">&#9650; +' : '<span style="color:#22c55e;">&#9660; ') + Math.abs(c15).toFixed(2) + '% vs last week</span>';
+              }
+
+              if (trend && d.trend && d.trend.length > 0) {
+                var trendHtml = d.trend.map(function(w) {
+                  return '<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.08);"><span style="color:var(--gray-400);font-size:.85rem;">' + w.date + '</span><span style="color:var(--white);font-weight:600;font-size:.85rem;">' + w.rate30.toFixed(2) + '%</span></div>';
+                }).join('');
+                trend.innerHTML = trendHtml;
+              }
+
+              if (attr && d.asOf) attr.textContent = 'As of ' + d.asOf + ' \u00B7 Source: Freddie Mac PMMS';
+
+              // Store rate for calculator
+              window._mortgageRate30 = d.rate30;
+              window._mortgageRate15 = d.rate15;
+              updateCalculator();
+            }
+          })
+          .catch(function() {});
+      })();
+
+      // --- Monthly Payment Calculator ---
+      var calcCityData = [];
+
+      function updateCalculator() {
+        var citySelect = document.getElementById('calc-city');
+        var priceInput = document.getElementById('calc-price');
+        var downInput = document.getElementById('calc-down');
+        var termSelect = document.getElementById('calc-term');
+        var results = document.getElementById('calc-results');
+
+        if (!citySelect || !priceInput || !results) return;
+
+        var price = parseFloat(priceInput.value.replace(/[^0-9.]/g, ''));
+        var down = parseFloat(downInput.value) || 20;
+        var term = parseInt(termSelect.value) || 30;
+        var rate = term === 15 ? (window._mortgageRate15 || 5.8) : (window._mortgageRate30 || 6.5);
+
+        if (!price || price <= 0) { results.style.display = 'none'; return; }
+
+        results.style.display = 'block';
+        var downPayment = price * (down / 100);
+        var loanAmount = price - downPayment;
+        var monthlyRate = (rate / 100) / 12;
+        var numPayments = term * 12;
+        var monthlyPI = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1);
+        var monthlyTax = price * 0.011 / 12;
+        var monthlyInsurance = price * 0.0035 / 12;
+        var totalMonthly = monthlyPI + monthlyTax + monthlyInsurance;
+
+        document.getElementById('calc-monthly').textContent = '$' + Math.round(monthlyPI).toLocaleString();
+        document.getElementById('calc-total').textContent = '$' + Math.round(totalMonthly).toLocaleString();
+        document.getElementById('calc-dp-amount').textContent = '$' + Math.round(downPayment).toLocaleString();
+        document.getElementById('calc-loan').textContent = '$' + Math.round(loanAmount).toLocaleString();
+        document.getElementById('calc-rate-display').textContent = rate.toFixed(2) + '%';
+      }
+
+      // Wire up calculator events after market data loads
+      function initCalculator(cities) {
+        var citySelect = document.getElementById('calc-city');
+        if (!citySelect) return;
+
+        cities.forEach(function(city) {
+          var opt = document.createElement('option');
+          opt.value = city.medianPrice || '';
+          opt.textContent = city.city;
+          citySelect.appendChild(opt);
+        });
+
+        citySelect.addEventListener('change', function() {
+          var priceInput = document.getElementById('calc-price');
+          if (this.value && priceInput) {
+            priceInput.value = '$' + Number(this.value).toLocaleString();
+            updateCalculator();
+          }
+        });
+
+        ['calc-price', 'calc-down', 'calc-term'].forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.addEventListener('input', updateCalculator);
+          if (el) el.addEventListener('change', updateCalculator);
+        });
+      }
+
+      // --- Rental Yield Estimator ---
+      (function loadRentalYield() {
+        fetch(SCRIPT_URL + '?action=rentaldata')
+          .then(function(r) { return r.json(); })
+          .then(function(res) {
+            if (res.success && res.data && res.data.length > 0) {
+              var tbody = document.getElementById('rental-yield-body');
+              var attr = document.getElementById('rental-yield-attribution');
+              if (!tbody) return;
+
+              var html = '';
+              res.data.forEach(function(city) {
+                var price = city.medianPrice ? '$' + Number(city.medianPrice).toLocaleString() : 'N/A';
+                var rent = city.monthlyRent ? '$' + Number(city.monthlyRent).toLocaleString() : 'N/A';
+                var grossYield = 'N/A';
+                var ptr = 'N/A';
+                if (city.medianPrice && city.monthlyRent) {
+                  var annualRent = city.monthlyRent * 12;
+                  grossYield = (annualRent / city.medianPrice * 100).toFixed(2) + '%';
+                  ptr = Math.round(city.medianPrice / annualRent);
+                  var yieldNum = parseFloat(grossYield);
+                  grossYield = '<span class="' + (yieldNum >= 4 ? 'trend-up' : yieldNum >= 3 ? '' : 'trend-down') + '">' + grossYield + '</span>';
+                }
+                html += '<tr><td>' + city.city + '</td><td>' + price + '</td><td>' + rent + '</td><td>' + grossYield + '</td><td>' + ptr + '</td></tr>';
+              });
+              tbody.innerHTML = html;
+
+              if (attr && res.lastUpdated) {
+                attr.textContent = 'Last updated: ' + res.lastUpdated + ' \u00B7 ' + (res.attribution || 'Data from Zillow ZORI & ZHVI');
+              }
+            }
+          })
+          .catch(function() {});
       })();
 
       // --- Form Submission ---
