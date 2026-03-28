@@ -1264,23 +1264,29 @@
               }
 
               // Populate area cards
-              if (areasGrid) {
-                var cardsHtml = '';
-                var delays = ['', ' fade-in-delay-1', ' fade-in-delay-2'];
-                res.data.forEach(function(city, i) {
-                  var emoji = cityEmojis[city.city] || '🏠';
-                  var price = formatPrice(city.medianPrice);
-                  var dom = city.daysOnMarket || 'N/A';
-                  var chg = formatChange(city.priceChange);
-                  var delay = delays[i % 3];
-                  cardsHtml += '<div class="area-card fade-in' + delay + '">'
-                    + '<h3><span class="area-emoji">' + emoji + '</span> ' + city.city + '</h3>'
-                    + '<div class="area-stat"><span class="stat-label">Median SFH</span><span class="stat-value">' + price + '</span></div>'
-                    + '<div class="area-stat"><span class="stat-label">Days on Market</span><span class="stat-value">' + dom + '</span></div>'
-                    + '<div class="area-stat"><span class="stat-label">YoY Change</span><span class="stat-value ' + chg.cls + '">' + chg.html + '</span></div>'
-                    + '</div>';
-                });
-                areasGrid.innerHTML = cardsHtml;
+              console.log('areasGrid element:', areasGrid, 'data length:', res.data.length);
+              try {
+                if (areasGrid) {
+                  var cardsHtml = '';
+                  var delays = ['', ' fade-in-delay-1', ' fade-in-delay-2'];
+                  res.data.forEach(function(city, i) {
+                    var emoji = cityEmojis[city.city] || '🏠';
+                    var price = formatPrice(city.medianPrice);
+                    var dom = city.daysOnMarket || 'N/A';
+                    var chg = formatChange(city.priceChange);
+                    var delay = delays[i % 3];
+                    cardsHtml += '<div class="area-card fade-in' + delay + '">'
+                      + '<h3><span class="area-emoji">' + emoji + '</span> ' + city.city + '</h3>'
+                      + '<div class="area-stat"><span class="stat-label">Median SFH</span><span class="stat-value">' + price + '</span></div>'
+                      + '<div class="area-stat"><span class="stat-label">Days on Market</span><span class="stat-value">' + dom + '</span></div>'
+                      + '<div class="area-stat"><span class="stat-label">YoY Change</span><span class="stat-value ' + chg.cls + '">' + chg.html + '</span></div>'
+                      + '</div>';
+                  });
+                  console.log('cardsHtml length:', cardsHtml.length);
+                  areasGrid.innerHTML = cardsHtml;
+                }
+              } catch(cardErr) {
+                console.error('Area cards error:', cardErr);
               }
 
               // Initialize calculator with city data
