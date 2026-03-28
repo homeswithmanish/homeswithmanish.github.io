@@ -621,6 +621,10 @@ section {
   color: var(--white);
 }
 
+#areas .section-title {
+  color: var(--white);
+}
+
 #areas .section-subtitle {
   color: rgba(255,255,255,.6);
 }
