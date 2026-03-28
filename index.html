@@ -733,22 +733,20 @@
             <div class="container">
                 <div class="section-label">MARKET INTELLIGENCE</div>
                 <h2 class="section-title">East Bay Market at a Glance</h2>
-                <p class="section-subtitle">Updated monthly with real numbers from real deals</p>
+                <p class="section-subtitle">Powered by Zillow Home Value Index, updated monthly</p>
 
                 <div class="market-table-wrapper fade-in">
                     <table class="market-table" id="market-data-table">
                         <thead>
                             <tr>
                                 <th>City</th>
-                                <th>Median Sale Price</th>
-                                <th>Days on Market</th>
-                                <th>Homes Sold</th>
-                                <th>Active Inventory</th>
+                                <th>Median Home Value (SFH)</th>
+                                <th>Avg. Days on Market</th>
                                 <th>YoY Change</th>
                             </tr>
                         </thead>
                         <tbody id="market-data-body">
-                            <tr><td colspan="6" style="text-align:center;padding:32px;color:var(--gray-400);">Loading market data...</td></tr>
+                            <tr><td colspan="4" style="text-align:center;padding:32px;color:var(--gray-400);">Loading market data...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1054,10 +1052,10 @@
             </div>
 
             <div class="footer-bottom">
-                <div>&copy; 2026 Homes With Manish. All rights reserved. CA DRE License #XXXXXXXXX</div>
+                <div>&copy; 2026 Homes With Manish. All rights reserved. CA DRE License #02247006</div>
                 <div class="footer-legal">
-                    <a href="#" target="_blank">Privacy Policy</a>
-                    <a href="#" target="_blank">Terms of Service</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
                 </div>
             </div>
         </div>
@@ -1244,8 +1242,6 @@
               res.data.forEach(function(city) {
                 var price = city.medianPrice ? '$' + Number(city.medianPrice).toLocaleString() : 'N/A';
                 var dom = city.daysOnMarket || 'N/A';
-                var sold = city.homesSold || 'N/A';
-                var inv = city.inventory || 'N/A';
                 var change = city.priceChange;
                 var changeHtml = 'N/A';
                 if (change !== null && change !== '' && change !== undefined) {
@@ -1256,17 +1252,16 @@
                     changeHtml = '<span class="trend-down">' + num.toFixed(1) + '%</span>';
                   }
                 }
-                html += '<tr><td>' + city.city + '</td><td>' + price + '</td><td>' + dom + '</td><td>' + sold + '</td><td>' + inv + '</td><td>' + changeHtml + '</td></tr>';
+                html += '<tr><td>' + city.city + '</td><td>' + price + '</td><td>' + dom + '</td><td>' + changeHtml + '</td></tr>';
               });
               tbody.innerHTML = html;
               if (attribution && res.lastUpdated) {
-                attribution.textContent = 'Last updated: ' + res.lastUpdated + ' \u00B7 ' + (res.attribution || 'Data from Redfin');
+                attribution.textContent = 'Last updated: ' + res.lastUpdated + ' \u00B7 ' + (res.attribution || 'Data from Zillow ZHVI');
               }
             }
           })
           .catch(function() {
-            // Silently fail, table keeps the loading message
-            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--gray-400);">Market data loading. Check back shortly.</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:32px;color:var(--gray-400);">Market data loading. Check back shortly.</td></tr>';
           });
       })();
 

@@ -119,6 +119,9 @@ test('Has why-work-with-me section', /id=["']why["']/.test(indexHtml) || /why.*w
 test('Has newsletter signup', /newsletter/i.test(indexHtml));
 test('Has skip-to-content link', /skip.*content/i.test(indexHtml));
 test('Has trust badges section', /trust|badge/i.test(indexHtml));
+test('Has DRE license number', /02247006/.test(indexHtml));
+test('Links to privacy.html', /href=["']privacy\.html["']/.test(indexHtml));
+test('Links to terms.html', /href=["']terms\.html["']/.test(indexHtml));
 
 // --- Accessibility ---
 console.log('\n\x1b[36mAccessibility:\x1b[0m');
@@ -182,7 +185,8 @@ const requiredFiles = [
   'sitemap.xml',
   'Google_Sheets_Backend.js',
   '404.html',
-  'privacy.html'
+  'privacy.html',
+  'terms.html'
 ];
 
 requiredFiles.forEach(file => {
@@ -213,6 +217,20 @@ test('Mentions data collection', /data.*collect|collect.*data|information.*colle
 test('Mentions cookies', /cookie/i.test(privacyHtml));
 test('Mentions Google Sheets', /Google Sheets/i.test(privacyHtml));
 test('Has contact information', /homeswithmanish|manish/i.test(privacyHtml));
+
+// ==================== TERMS.HTML TESTS ====================
+console.log('\n\n\x1b[1m=== terms.html Tests ===\x1b[0m\n');
+
+const termsHtml = readFile('terms.html');
+
+console.log('\x1b[36mTerms of Service Page:\x1b[0m');
+test('Has DOCTYPE', termsHtml.includes('<!DOCTYPE html'));
+test('Has title tag', /<title>/.test(termsHtml));
+test('Mentions DRE license number', /02247006/.test(termsHtml));
+test('Has real estate disclaimer', /disclaimer|informational purposes/i.test(termsHtml));
+test('Has limitation of liability', /limitation.*liab|liable/i.test(termsHtml));
+test('Has governing law section', /governing law|California/i.test(termsHtml));
+test('Has contact information', /homeswithmanish|manish/i.test(termsHtml));
 
 // ==================== ADMIN CHART TESTS ====================
 console.log('\n\n\x1b[1m=== admin.html Charts & Enhancements ===\x1b[0m\n');

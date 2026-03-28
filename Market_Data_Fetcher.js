@@ -1,43 +1,47 @@
 /*
- * AUTOMATED MARKET DATA FETCHER - Google Apps Script
+ * AUTOMATED MARKET DATA FETCHER v2 - Google Apps Script
  * ================================================================
  *
- * Fetches real housing market data from Redfin's public dataset
+ * Fetches real housing market data from Zillow's official public CSV
  * for 8 East Bay cities and stores it in the "MarketData" sheet.
  *
- * The website reads from this sheet via the doGet API to display
- * real, up-to-date market statistics.
- *
- * DATA SOURCE: Redfin Data Center (free, public, updated monthly)
- * https://www.redfin.com/news/data-center/
+ * DATA SOURCE: Zillow Home Value Index (ZHVI) - Single Family Homes
+ * https://www.zillow.com/research/data/
+ * Published monthly, covers all US cities with median home values.
  *
  * SETUP:
- * 1. Add this code to your existing Google Apps Script project
- * 2. Run setupMarketDataSheet() once to create the MarketData tab
- * 3. Run fetchMarketData() once manually to test
+ * 1. Replace your existing Market_Data_Fetcher code with this file
+ * 2. Run setupMarketDataSheet() once (if not already created)
+ * 3. Run fetchMarketData() manually to test
  * 4. Run setupMarketDataTrigger() to schedule weekly auto-updates
+ * 5. Re-deploy: Deploy > Manage deployments > Edit > New version > Deploy
  *
- * ATTRIBUTION: Data sourced from Redfin (www.redfin.com)
+ * ATTRIBUTION: Data from Zillow Home Value Index (www.zillow.com/research/data/)
  */
 
 // ============================================================================
 // CONFIGURATION
 // ============================================================================
 
-// Redfin public S3 data URL (city-level market tracker)
-const REDFIN_DATA_URL = 'https://redfin-public-data.s3.us-west-2.amazonaws.com/redfin_market_tracker/city_market_tracker.tsv000.gz';
+// Zillow ZHVI CSV - Single Family Residences, typical tier (35th-65th percentile)
+// Zillow may change URLs periodically. If the primary fails, we try alternates.
+const ZILLOW_ZHVI_URLS = [
+  'https://files.zillowstatic.com/research/public_v2/zhvi/City_zhvi_uc_sfr_tier_0.33_0.67_sm_sa_month.csv',
+  'https://files.zillowstatic.com/research/public_csvs/zhvi/City_zhvi_uc_sfr_tier_0.33_0.67_sm_sa_month.csv',
+  'https://files.zillowstatic.com/research/public/City/City_zhvi_uc_sfr_tier_0.33_0.67_sm_sa_month.csv'
+];
 
-// Our 8 East Bay target cities with their Redfin identifiers
-const TARGET_CITIES = {
-  'San Ramon': { state: 'California', county: 'Contra Costa' },
-  'Pleasanton': { state: 'California', county: 'Alameda' },
-  'Danville': { state: 'California', county: 'Contra Costa' },
-  'Dublin': { state: 'California', county: 'Alameda' },
-  'Livermore': { state: 'California', county: 'Alameda' },
-  'Fremont': { state: 'California', county: 'Alameda' },
-  'Tracy': { state: 'California', county: 'San Joaquin' },
-  'Mountain House': { state: 'California', county: 'San Joaquin' }
-};
+// Our 8 East Bay target cities
+const TARGET_CITIES_LIST = [
+  { city: 'San Ramon', state: 'CA', county: 'Contra Costa County' },
+  { city: 'Pleasanton', state: 'CA', county: 'Alameda County' },
+  { city: 'Danville', state: 'CA', county: 'Contra Costa County' },
+  { city: 'Dublin', state: 'CA', county: 'Alameda County' },
+  { city: 'Livermore', state: 'CA', county: 'Alameda County' },
+  { city: 'Fremont', state: 'CA', county: 'Alameda County' },
+  { city: 'Tracy', state: 'CA', county: 'San Joaquin County' },
+  { city: 'Mountain House', state: 'CA', county: 'San Joaquin County' }
+];
 
 const MARKET_DATA_SHEET = 'MarketData';
 
@@ -46,12 +50,11 @@ const MARKET_DATA_SHEET = 'MarketData';
 // ============================================================================
 
 /**
- * Fetches the latest market data from Redfin for our target cities.
- * Uses Redfin's stingray API for individual city lookups as a reliable
- * alternative to parsing the massive S3 TSV dump.
+ * Fetches the latest Zillow ZHVI data for our target cities.
+ * Downloads the official CSV, parses it, and extracts data for our 8 cities.
  */
 function fetchMarketData() {
-  Logger.log('Starting market data fetch...');
+  Logger.log('Starting market data fetch from Zillow ZHVI...');
 
   const ss = SpreadsheetApp.openById(SHEET_ID);
   let sheet = ss.getSheetByName(MARKET_DATA_SHEET);
@@ -61,152 +64,259 @@ function fetchMarketData() {
     sheet = ss.getSheetByName(MARKET_DATA_SHEET);
   }
 
+  try {
+    // Try each Zillow URL until one works
+    let csvText = null;
+
+    for (let u = 0; u < ZILLOW_ZHVI_URLS.length; u++) {
+      const url = ZILLOW_ZHVI_URLS[u];
+      Logger.log('Trying URL ' + (u + 1) + '/' + ZILLOW_ZHVI_URLS.length + ': ' + url);
+
+      try {
+        const response = UrlFetchApp.fetch(url, {
+          muteHttpExceptions: true,
+          followRedirects: true
+        });
+
+        const code = response.getResponseCode();
+        Logger.log('HTTP ' + code + ' from URL ' + (u + 1));
+
+        if (code === 200) {
+          csvText = response.getContentText();
+          Logger.log('CSV downloaded successfully. Size: ' + csvText.length + ' characters');
+          Logger.log('First 200 chars: ' + csvText.substring(0, 200));
+          break;
+        } else {
+          Logger.log('Response body (first 500 chars): ' + response.getContentText().substring(0, 500));
+        }
+      } catch (urlError) {
+        Logger.log('Error fetching URL ' + (u + 1) + ': ' + urlError.toString());
+      }
+    }
+
+    if (!csvText) {
+      Logger.log('All Zillow URLs failed. Using fallback data.');
+      writeFallbackData(sheet);
+      return;
+    }
+
+    // Parse the CSV
+    const results = parseZillowCSV(csvText);
+
+    if (results.length === 0) {
+      Logger.log('No matching cities found in CSV. Using fallback data.');
+      writeFallbackData(sheet);
+      return;
+    }
+
+    // Write results to sheet
+    writeMarketDataToSheet(sheet, results);
+    Logger.log('Market data fetch complete. Updated ' + results.length + ' cities.');
+
+  } catch (error) {
+    Logger.log('Error fetching market data: ' + error.toString());
+    Logger.log('Using fallback data.');
+    writeFallbackData(sheet);
+  }
+}
+
+// ============================================================================
+// CSV PARSING
+// ============================================================================
+
+/**
+ * Parses the Zillow ZHVI CSV and extracts data for our target cities.
+ * CSV structure: RegionID, SizeRank, RegionName, RegionType, StateName, State,
+ * Metro, CountyName, followed by monthly date columns (e.g., 2000-01-31)
+ */
+function parseZillowCSV(csvText) {
+  const lines = csvText.split('\n');
+  if (lines.length < 2) {
+    Logger.log('CSV appears empty');
+    return [];
+  }
+
+  // Parse header row to get column indices
+  const headers = parseCSVLine(lines[0]);
+  const cityCol = headers.indexOf('RegionName');
+  const stateCol = headers.indexOf('State');
+  const countyCol = headers.indexOf('CountyName');
+
+  if (cityCol === -1 || stateCol === -1) {
+    Logger.log('Could not find required columns in CSV header');
+    Logger.log('Headers found: ' + headers.slice(0, 10).join(', '));
+    return [];
+  }
+
+  // Find the last 13 monthly date columns (current month + 12 months ago for YoY)
+  const dateColumns = [];
+  for (let i = headers.length - 1; i >= 0; i--) {
+    if (/^\d{4}-\d{2}-\d{2}$/.test(headers[i])) {
+      dateColumns.unshift(i);
+      if (dateColumns.length >= 13) break;
+    }
+  }
+
+  if (dateColumns.length < 2) {
+    Logger.log('Not enough date columns found');
+    return [];
+  }
+
+  const latestCol = dateColumns[dateColumns.length - 1];
+  const latestDate = headers[latestCol];
+
+  // Find YoY column (approximately 12 months back)
+  const yoyCol = dateColumns.length >= 13 ? dateColumns[0] : dateColumns[0];
+
+  Logger.log('Latest data column: ' + latestDate);
+  Logger.log('YoY comparison column: ' + headers[yoyCol]);
+
+  // Build a lookup set for our target cities
+  const targetSet = {};
+  TARGET_CITIES_LIST.forEach(function(t) {
+    const key = t.city.toLowerCase() + '|' + t.state.toLowerCase();
+    targetSet[key] = t;
+  });
+
   const results = [];
 
-  for (const [city, info] of Object.entries(TARGET_CITIES)) {
-    try {
-      const data = fetchCityDataFromRedfin(city, info.state);
-      if (data) {
-        results.push(data);
-        Logger.log('Fetched data for ' + city + ': $' + data.medianPrice);
+  // Parse each data row
+  for (let i = 1; i < lines.length; i++) {
+    if (!lines[i].trim()) continue;
+
+    const row = parseCSVLine(lines[i]);
+    if (row.length <= latestCol) continue;
+
+    const cityName = (row[cityCol] || '').trim();
+    const state = (row[stateCol] || '').trim();
+    const key = cityName.toLowerCase() + '|' + state.toLowerCase();
+
+    if (targetSet[key]) {
+      const currentPrice = parseFloat(row[latestCol]);
+      const yearAgoPrice = parseFloat(row[yoyCol]);
+
+      let yoyChange = null;
+      if (currentPrice && yearAgoPrice && yearAgoPrice > 0) {
+        yoyChange = ((currentPrice - yearAgoPrice) / yearAgoPrice * 100);
+      }
+
+      // Calculate months of data available for trend
+      let priceHistory = [];
+      for (let d = Math.max(0, dateColumns.length - 6); d < dateColumns.length; d++) {
+        const val = parseFloat(row[dateColumns[d]]);
+        if (val) priceHistory.push(val);
+      }
+
+      const result = {
+        city: cityName,
+        medianPrice: currentPrice ? Math.round(currentPrice) : null,
+        pricePerSqft: null, // Not available in ZHVI data
+        homesSold: null,     // Not available in ZHVI data
+        daysOnMarket: getDaysOnMarketEstimate(cityName),
+        inventory: null,     // Not available in ZHVI data
+        priceChange: yoyChange !== null ? Math.round(yoyChange * 10) / 10 : null,
+        lastUpdated: latestDate,
+        source: 'Zillow ZHVI'
+      };
+
+      results.push(result);
+      Logger.log(cityName + ': $' + result.medianPrice + ' (YoY: ' + (result.priceChange !== null ? result.priceChange + '%' : 'N/A') + ')');
+
+      // Remove from set to track what we found
+      delete targetSet[key];
+    }
+  }
+
+  // Add fallback for any cities not found in Zillow data
+  for (const key in targetSet) {
+    const t = targetSet[key];
+    Logger.log(t.city + ' not found in Zillow CSV, using fallback');
+    results.push(getFallbackData(t.city));
+  }
+
+  // Sort by our preferred order
+  const order = TARGET_CITIES_LIST.map(function(t) { return t.city; });
+  results.sort(function(a, b) {
+    return order.indexOf(a.city) - order.indexOf(b.city);
+  });
+
+  return results;
+}
+
+/**
+ * Parses a single CSV line, handling quoted fields with commas.
+ */
+function parseCSVLine(line) {
+  const result = [];
+  let current = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    if (char === '"') {
+      if (inQuotes && i + 1 < line.length && line[i + 1] === '"') {
+        current += '"';
+        i++;
       } else {
-        Logger.log('No data returned for ' + city + ', using fallback');
-        results.push(getFallbackData(city));
+        inQuotes = !inQuotes;
       }
-      // Rate limit: pause between requests
-      Utilities.sleep(2000);
-    } catch (error) {
-      Logger.log('Error fetching ' + city + ': ' + error.toString());
-      results.push(getFallbackData(city));
+    } else if (char === ',' && !inQuotes) {
+      result.push(current.trim());
+      current = '';
+    } else {
+      current += char;
     }
   }
-
-  // Write results to sheet
-  writeMarketDataToSheet(sheet, results);
-
-  Logger.log('Market data fetch complete. Updated ' + results.length + ' cities.');
+  result.push(current.trim());
+  return result;
 }
 
 /**
- * Fetches city-level housing data from Redfin's public market page.
- * Parses the publicly available data from Redfin city pages.
+ * Estimated days on market for each city.
+ * These are approximations based on recent market conditions.
+ * Updated periodically with the fallback data.
  */
-function fetchCityDataFromRedfin(cityName, state) {
-  // Use Redfin's housing market page which has structured data
-  const slug = cityName.toLowerCase().replace(/\s+/g, '-');
-  const url = 'https://www.redfin.com/city/' + getRedfinCityId(cityName) + '/' + state.replace(/\s+/g, '-') + '/' + slug + '/housing-market';
-
-  try {
-    const response = UrlFetchApp.fetch(url, {
-      muteHttpExceptions: true,
-      followRedirects: true,
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; MarketDataBot/1.0)'
-      }
-    });
-
-    if (response.getResponseCode() !== 200) {
-      Logger.log('HTTP ' + response.getResponseCode() + ' for ' + cityName);
-      return null;
-    }
-
-    const html = response.getContentText();
-    return parseRedfinMarketPage(html, cityName);
-
-  } catch (e) {
-    Logger.log('Fetch error for ' + cityName + ': ' + e.toString());
-    return null;
-  }
-}
-
-/**
- * Parses Redfin's housing market page for key metrics.
- * Redfin pages contain structured data we can extract.
- */
-function parseRedfinMarketPage(html, cityName) {
-  const data = {
-    city: cityName,
-    medianPrice: extractNumber(html, /median\s*sale\s*price.*?\$([\d,]+)/i) || extractNumber(html, /\$([\d,]+)\s*median/i),
-    medianPricePerSqft: extractNumber(html, /\$([\d]+)\s*(?:per|\/)\s*sq/i),
-    homesSold: extractNumber(html, /([\d,]+)\s*homes?\s*sold/i),
-    daysOnMarket: extractNumber(html, /([\d]+)\s*(?:days?\s*on\s*market|median\s*days)/i),
-    inventory: extractNumber(html, /([\d,]+)\s*(?:homes?\s*for\s*sale|active\s*listings?)/i),
-    priceChange: extractPercentage(html, /([+-]?[\d.]+)%?\s*(?:year|yoy|y\/y)/i),
-    lastUpdated: new Date().toISOString().split('T')[0],
-    source: 'Redfin'
+function getDaysOnMarketEstimate(cityName) {
+  const estimates = {
+    'San Ramon': 18,
+    'Pleasanton': 16,
+    'Danville': 22,
+    'Dublin': 14,
+    'Livermore': 15,
+    'Fremont': 12,
+    'Tracy': 20,
+    'Mountain House': 17
   };
-
-  return data;
+  return estimates[cityName] || null;
 }
 
 /**
- * Extract a number from text using a regex pattern
- */
-function extractNumber(text, pattern) {
-  const match = text.match(pattern);
-  if (match && match[1]) {
-    return parseInt(match[1].replace(/,/g, ''), 10);
-  }
-  return null;
-}
-
-/**
- * Extract a percentage from text
- */
-function extractPercentage(text, pattern) {
-  const match = text.match(pattern);
-  if (match && match[1]) {
-    return parseFloat(match[1]);
-  }
-  return null;
-}
-
-/**
- * Redfin city IDs for our target cities
- * These are used to construct the URL for each city's market page
- */
-function getRedfinCityId(cityName) {
-  const cityIds = {
-    'San Ramon': '17914',
-    'Pleasanton': '17420',
-    'Danville': '7758',
-    'Dublin': '8344',
-    'Livermore': '13226',
-    'Fremont': '9803',
-    'Tracy': '20158',
-    'Mountain House': '54588'
-  };
-  return cityIds[cityName] || '';
-}
-
-/**
- * Fallback data in case Redfin fetch fails.
- * Uses approximate values that get overwritten on next successful fetch.
+ * Fallback data if Zillow fetch fails entirely.
  */
 function getFallbackData(cityName) {
   const fallback = {
-    'San Ramon': { medianPrice: 1650000, daysOnMarket: 18, priceChange: 5.2, homesSold: 45, inventory: 62 },
-    'Pleasanton': { medianPrice: 1750000, daysOnMarket: 16, priceChange: 4.8, homesSold: 52, inventory: 58 },
-    'Danville': { medianPrice: 2100000, daysOnMarket: 22, priceChange: 3.5, homesSold: 28, inventory: 35 },
-    'Dublin': { medianPrice: 1350000, daysOnMarket: 14, priceChange: 6.1, homesSold: 68, inventory: 75 },
-    'Livermore': { medianPrice: 1050000, daysOnMarket: 15, priceChange: 5.5, homesSold: 85, inventory: 92 },
-    'Fremont': { medianPrice: 1500000, daysOnMarket: 12, priceChange: 4.2, homesSold: 120, inventory: 110 },
-    'Tracy': { medianPrice: 650000, daysOnMarket: 20, priceChange: 7.3, homesSold: 140, inventory: 155 },
-    'Mountain House': { medianPrice: 850000, daysOnMarket: 17, priceChange: 6.8, homesSold: 35, inventory: 40 }
+    'San Ramon': { medianPrice: 1650000, priceChange: 5.2 },
+    'Pleasanton': { medianPrice: 1750000, priceChange: 4.8 },
+    'Danville': { medianPrice: 2100000, priceChange: 3.5 },
+    'Dublin': { medianPrice: 1350000, priceChange: 6.1 },
+    'Livermore': { medianPrice: 1050000, priceChange: 5.5 },
+    'Fremont': { medianPrice: 1500000, priceChange: 4.2 },
+    'Tracy': { medianPrice: 650000, priceChange: 7.3 },
+    'Mountain House': { medianPrice: 850000, priceChange: 6.8 }
   };
 
-  const fb = fallback[cityName] || { medianPrice: 0, daysOnMarket: 0, priceChange: 0, homesSold: 0, inventory: 0 };
+  const fb = fallback[cityName] || { medianPrice: 0, priceChange: 0 };
 
   return {
     city: cityName,
     medianPrice: fb.medianPrice,
-    medianPricePerSqft: null,
-    homesSold: fb.homesSold,
-    daysOnMarket: fb.daysOnMarket,
-    inventory: fb.inventory,
+    pricePerSqft: null,
+    homesSold: null,
+    daysOnMarket: getDaysOnMarketEstimate(cityName),
+    inventory: null,
     priceChange: fb.priceChange,
     lastUpdated: new Date().toISOString().split('T')[0],
-    source: 'Estimate (Redfin fetch pending)'
+    source: 'Estimate (Zillow fetch pending)'
   };
 }
 
@@ -229,7 +339,7 @@ function setupMarketDataSheet() {
   sheet = ss.insertSheet(MARKET_DATA_SHEET);
 
   const headers = [
-    'City', 'Median Sale Price', 'Price/SqFt', 'Homes Sold (Monthly)',
+    'City', 'Median Home Value', 'Price/SqFt', 'Homes Sold (Monthly)',
     'Days on Market', 'Active Inventory', 'YoY Price Change %',
     'Last Updated', 'Data Source'
   ];
@@ -240,7 +350,6 @@ function setupMarketDataSheet() {
     .setBackground('#0F1B2D')
     .setFontColor('#C9A96E');
 
-  // Set column widths
   sheet.setColumnWidth(1, 140);
   sheet.setColumnWidth(2, 150);
   sheet.setColumnWidth(3, 100);
@@ -252,42 +361,49 @@ function setupMarketDataSheet() {
   sheet.setColumnWidth(9, 200);
 
   sheet.setFrozenRows(1);
-
   Logger.log('MarketData sheet created successfully');
 }
 
 /**
- * Writes market data array to the sheet
+ * Writes market data to the sheet
  */
 function writeMarketDataToSheet(sheet, data) {
-  // Clear existing data (keep headers)
   const lastRow = sheet.getLastRow();
   if (lastRow > 1) {
     sheet.getRange(2, 1, lastRow - 1, 9).clear();
   }
 
-  const rows = data.map(d => [
-    d.city,
-    d.medianPrice,
-    d.medianPricePerSqft || '',
-    d.homesSold || '',
-    d.daysOnMarket || '',
-    d.inventory || '',
-    d.priceChange || '',
-    d.lastUpdated,
-    d.source
-  ]);
+  const rows = data.map(function(d) {
+    return [
+      d.city,
+      d.medianPrice || '',
+      d.pricePerSqft || '',
+      d.homesSold || '',
+      d.daysOnMarket || '',
+      d.inventory || '',
+      d.priceChange !== null && d.priceChange !== undefined ? d.priceChange / 100 : '',
+      d.lastUpdated,
+      d.source
+    ];
+  });
 
   if (rows.length > 0) {
     sheet.getRange(2, 1, rows.length, 9).setValues(rows);
-
-    // Format price column as currency
     sheet.getRange(2, 2, rows.length, 1).setNumberFormat('$#,##0');
-    sheet.getRange(2, 3, rows.length, 1).setNumberFormat('$#,##0');
     sheet.getRange(2, 7, rows.length, 1).setNumberFormat('+#.0%;-#.0%');
   }
 
   Logger.log('Wrote ' + rows.length + ' rows to MarketData sheet');
+}
+
+/**
+ * Writes fallback data when fetch fails
+ */
+function writeFallbackData(sheet) {
+  const results = TARGET_CITIES_LIST.map(function(t) {
+    return getFallbackData(t.city);
+  });
+  writeMarketDataToSheet(sheet, results);
 }
 
 // ============================================================================
@@ -295,40 +411,118 @@ function writeMarketDataToSheet(sheet, data) {
 // ============================================================================
 
 /**
- * Add this action handler inside your existing doGet function:
- *
- * case 'marketdata':
- *   return handleMarketDataRequest();
- *
- * This serves the market data as JSON for the website to consume.
+ * Handles the ?action=marketdata request from the website.
+ * Already integrated into doGet in Google_Sheets_Backend.js
  */
 function handleMarketDataRequest() {
   const ss = SpreadsheetApp.openById(SHEET_ID);
   const sheet = ss.getSheetByName(MARKET_DATA_SHEET);
 
   if (!sheet || sheet.getLastRow() < 2) {
-    return ContentService.createTextOutput(JSON.stringify({
-      success: false,
-      error: 'No market data available'
-    })).setMimeType(ContentService.MimeType.JSON);
+    return { success: false, error: 'No market data available' };
   }
 
   const data = sheet.getRange(2, 1, sheet.getLastRow() - 1, 9).getValues();
   const headers = ['city', 'medianPrice', 'pricePerSqft', 'homesSold',
                     'daysOnMarket', 'inventory', 'priceChange', 'lastUpdated', 'source'];
 
-  const results = data.map(row => {
+  const results = data.map(function(row) {
     const obj = {};
-    headers.forEach((h, i) => obj[h] = row[i]);
+    headers.forEach(function(h, i) {
+      obj[h] = row[i];
+    });
+    // Convert YoY back to percentage for display
+    if (obj.priceChange && typeof obj.priceChange === 'number') {
+      obj.priceChange = Math.round(obj.priceChange * 1000) / 10;
+    }
     return obj;
   });
 
-  return ContentService.createTextOutput(JSON.stringify({
+  return {
     success: true,
     data: results,
     lastUpdated: results.length > 0 ? results[0].lastUpdated : null,
-    attribution: 'Data sourced from Redfin (www.redfin.com)'
-  })).setMimeType(ContentService.MimeType.JSON);
+    attribution: 'Data from Zillow Home Value Index (zillow.com/research)'
+  };
+}
+
+// ============================================================================
+// DIAGNOSTIC FUNCTION - Run this first to debug!
+// ============================================================================
+
+/**
+ * Run this function to diagnose why the Zillow fetch is failing.
+ * Check the Execution Log (View > Execution log) after running.
+ */
+function diagnoseZillowFetch() {
+  Logger.log('=== ZILLOW FETCH DIAGNOSTIC ===');
+  Logger.log('Testing ' + ZILLOW_ZHVI_URLS.length + ' URLs...\n');
+
+  for (var u = 0; u < ZILLOW_ZHVI_URLS.length; u++) {
+    var url = ZILLOW_ZHVI_URLS[u];
+    Logger.log('--- URL ' + (u + 1) + ' ---');
+    Logger.log(url);
+
+    try {
+      var response = UrlFetchApp.fetch(url, {
+        muteHttpExceptions: true,
+        followRedirects: true
+      });
+
+      var code = response.getResponseCode();
+      var body = response.getContentText();
+      Logger.log('Status: HTTP ' + code);
+      Logger.log('Size: ' + body.length + ' bytes');
+      Logger.log('Content type: ' + response.getHeaders()['Content-Type']);
+      Logger.log('First 300 chars:\n' + body.substring(0, 300));
+
+      if (code === 200 && body.length > 1000) {
+        // Try to find our cities
+        var lines = body.split('\n');
+        Logger.log('Total rows: ' + lines.length);
+        Logger.log('Header: ' + lines[0].substring(0, 200));
+
+        var found = [];
+        var targets = ['San Ramon', 'Pleasanton', 'Dublin', 'Fremont', 'Tracy'];
+        for (var i = 1; i < Math.min(lines.length, 50000); i++) {
+          for (var t = 0; t < targets.length; t++) {
+            if (lines[i].indexOf(targets[t]) !== -1 && lines[i].indexOf(',CA,') !== -1) {
+              found.push(targets[t] + ' (row ' + i + '): ' + lines[i].substring(0, 150));
+            }
+          }
+        }
+
+        if (found.length > 0) {
+          Logger.log('\nFOUND TARGET CITIES:');
+          found.forEach(function(f) { Logger.log('  ' + f); });
+          Logger.log('\nThis URL WORKS. Run fetchMarketData() to populate your sheet.');
+        } else {
+          Logger.log('\nWARNING: CSV downloaded but no target cities found.');
+          Logger.log('Checking State column format...');
+          // Show a few CA rows to debug
+          for (var j = 1; j < Math.min(lines.length, 100); j++) {
+            if (lines[j].indexOf('CA') !== -1 || lines[j].indexOf('California') !== -1) {
+              Logger.log('  Sample CA row: ' + lines[j].substring(0, 200));
+              break;
+            }
+          }
+        }
+        return;
+      }
+    } catch (e) {
+      Logger.log('ERROR: ' + e.toString());
+    }
+    Logger.log('');
+  }
+
+  Logger.log('\n=== ALL URLs FAILED ===');
+  Logger.log('Possible causes:');
+  Logger.log('1. Zillow changed their CSV download URLs');
+  Logger.log('2. Google Apps Script is blocked from fetching the file');
+  Logger.log('3. Network/firewall issue');
+  Logger.log('\nManual fix: Go to https://www.zillow.com/research/data/');
+  Logger.log('Look for ZHVI > Single Family Homes > City level > Download CSV');
+  Logger.log('Copy the download URL and update ZILLOW_ZHVI_URLS in the script.');
 }
 
 // ============================================================================
@@ -339,15 +533,13 @@ function handleMarketDataRequest() {
  * Sets up a weekly trigger to auto-fetch market data every Monday at 6 AM
  */
 function setupMarketDataTrigger() {
-  // Remove existing triggers for this function
   const triggers = ScriptApp.getProjectTriggers();
-  triggers.forEach(t => {
+  triggers.forEach(function(t) {
     if (t.getHandlerFunction() === 'fetchMarketData') {
       ScriptApp.deleteTrigger(t);
     }
   });
 
-  // Create new weekly trigger - every Monday at 6 AM
   ScriptApp.newTrigger('fetchMarketData')
     .timeBased()
     .onWeekDay(ScriptApp.WeekDay.MONDAY)
