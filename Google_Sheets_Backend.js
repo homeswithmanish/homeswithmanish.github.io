@@ -183,11 +183,18 @@ function doGet(e) {
       'Content-Type': 'application/json'
     };
 
-    // Get the API key from query parameters
-    const apiKey = e.parameter.key;
     const action = e.parameter.action || 'list';
 
-    // Validate API key
+    // Market data endpoint is public (no API key required)
+    if (action === 'marketdata') {
+      const marketResponse = handleMarketDataRequest();
+      return ContentService.createTextOutput(JSON.stringify(marketResponse))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // All other actions require API key
+    const apiKey = e.parameter.key;
+
     if (!isValidApiKey(apiKey)) {
       return HtmlService.createHtmlOutput(JSON.stringify({
         success: false,
@@ -226,6 +233,40 @@ function doGet(e) {
       message: 'An error occurred processing your request'
     })).setHeader('Content-Type', 'application/json');
   }
+}
+
+// ============================================================================
+// MARKET DATA HANDLER (PUBLIC - NO AUTH REQUIRED)
+// ============================================================================
+
+/**
+ * Returns market data from the MarketData sheet as JSON.
+ * Called by the website to populate the market data table dynamically.
+ */
+function handleMarketDataRequest() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const sheet = ss.getSheetByName('MarketData');
+
+  if (!sheet || sheet.getLastRow() < 2) {
+    return { success: false, error: 'No market data available' };
+  }
+
+  const data = sheet.getRange(2, 1, sheet.getLastRow() - 1, 9).getValues();
+  const headers = ['city', 'medianPrice', 'pricePerSqft', 'homesSold',
+                    'daysOnMarket', 'inventory', 'priceChange', 'lastUpdated', 'source'];
+
+  const results = data.map(row => {
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = row[i]);
+    return obj;
+  });
+
+  return {
+    success: true,
+    data: results,
+    lastUpdated: results.length > 0 ? results[0].lastUpdated : null,
+    attribution: 'Data sourced from Redfin (www.redfin.com)'
+  };
 }
 
 // ============================================================================
