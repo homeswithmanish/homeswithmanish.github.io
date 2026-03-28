@@ -34,7 +34,7 @@
 // ============================================================================
 
 // Google Sheet ID - REQUIRED: Replace with your actual Sheet ID
-const SHEET_ID = 'SHEET_ID_PLACEHOLDER'; // Replace with your Google Sheet ID
+const SHEET_ID = '1Ee-7rplfP4rzFH28_6_0BM8s6xV2OyzVpqZSAIlY2TU';
 
 // Name of the sheet tab where leads will be stored
 const SHEET_NAME = 'Leads';
