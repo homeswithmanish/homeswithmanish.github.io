@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | Homes With Manish</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    /* --- CSS Custom Properties --- */
+    :root {
+      --navy: #0F1B2D;
+      --navy-light: #1A2B45;
+      --gold: #C9A96E;
+      --gold-dark: #A68B4B;
+      --white: #FFFFFF;
+      --gray-500: #6C757D;
+      --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --shadow-lg: 0 10px 25px rgba(0,0,0,.08), 0 20px 50px rgba(0,0,0,.06);
+      --transition: all .3s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* --- Reset & Base --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--gray-500);
+      background: var(--navy);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    /* --- Main Container --- */
+    .page-404 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .content-wrapper {
+      max-width: 600px;
+    }
+
+    /* --- 404 Number --- */
+    .error-code {
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 15vw, 10rem);
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 24px;
+      letter-spacing: -2px;
+    }
+
+    /* --- Message --- */
+    .error-message {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-family: var(--font-display);
+      color: var(--white);
+      margin-bottom: 20px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .error-subtitle {
+      font-size: 1rem;
+      color: var(--gray-500);
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+
+    /* --- Buttons --- */
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    @media (min-width: 640px) {
+      .button-group {
+        flex-direction: row;
+        justify-content: center;
+        gap: 16px;
+      }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 32px;
+      font-size: .95rem;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: var(--transition);
+      white-space: nowrap;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      flex: 1;
+    }
+
+    @media (min-width: 640px) {
+      .btn-primary {
+        flex: 0 1 auto;
+      }
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(201,169,110,.35);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      background: transparent;
+      flex: 1;
+    }
+
+    @media (min-width: 640px) {
+      .btn-outline {
+        flex: 0 1 auto;
+      }
+    }
+
+    .btn-outline:hover {
+      background: var(--gold);
+      color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    /* --- Footer Navigation --- */
+    .back-to-site {
+      color: var(--gold);
+      font-size: .9rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .back-to-site:hover {
+      color: var(--gold-dark);
+      text-decoration: underline;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 640px) {
+      .page-404 {
+        padding: 60px 20px;
+      }
+
+      .error-code {
+        margin-bottom: 16px;
+      }
+
+      .error-message {
+        margin-bottom: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-404">
+    <div class="content-wrapper">
+      <div class="error-code">404</div>
+      <h1 class="error-message">This page doesn't exist, but your dream home does.</h1>
+      <p class="error-subtitle">Let's get you back on track to finding the perfect property.</p>
+
+      <div class="button-group">
+        <a href="/" class="btn btn-primary">Go Home</a>
+        <a href="/#areas" class="btn btn-outline">Search Properties</a>
+      </div>
+
+      <a href="/" class="back-to-site">← Back to Homes With Manish</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "homeswithmanish-website",
+  "version": "1.0.0",
+  "description": "Homes With Manish — East Bay Real Estate Website",
+  "scripts": {
+    "test": "node tests/test-html-validation.js"
+  },
+  "author": "Manish Anand",
+  "license": "MIT"
+}

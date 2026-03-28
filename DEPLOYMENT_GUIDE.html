@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deployment Guide — Homes With Manish Website</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1B2D;--gold:#C9A96E;--green:#2ECC71;--red:#E74C3C;--blue:#3498DB;--bg:#F8F9FA;--card:#FFF;--text:#343A40;--muted:#6C757D;--border:#DEE2E6;--radius:12px;--shadow:0 2px 8px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.8}
+.wrap{max-width:800px;margin:0 auto;padding:40px 24px 80px}
+h1{font-family:'Playfair Display',serif;font-size:2rem;color:var(--navy);margin-bottom:8px}
+h2{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--navy);margin:48px 0 16px;padding-bottom:12px;border-bottom:2px solid var(--gold)}
+h3{font-size:1rem;font-weight:700;color:var(--navy);margin:24px 0 8px}
+.subtitle{color:var(--muted);margin-bottom:32px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin:16px 0;box-shadow:var(--shadow)}
+.step{display:flex;gap:16px;margin:16px 0;align-items:flex-start}
+.step-num{width:32px;height:32px;min-width:32px;background:var(--navy);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;margin-top:2px}
+.step-content{flex:1}
+.step-content strong{color:var(--navy)}
+code{background:#E9ECEF;padding:2px 8px;border-radius:4px;font-size:.85rem;font-family:'SF Mono',monospace}
+.code-block{background:var(--navy);color:#E2E8F0;padding:16px 20px;border-radius:8px;font-size:.85rem;font-family:'SF Mono',monospace;overflow-x:auto;margin:12px 0;line-height:1.6;white-space:pre-wrap}
+.warn{background:#FEF3C7;border-left:4px solid #F59E0B;padding:12px 16px;border-radius:0 8px 8px 0;font-size:.9rem;margin:12px 0}
+.success{background:#DCFCE7;border-left:4px solid var(--green);padding:12px 16px;border-radius:0 8px 8px 0;font-size:.9rem;margin:12px 0}
+.info{background:#DBEAFE;border-left:4px solid var(--blue);padding:12px 16px;border-radius:0 8px 8px 0;font-size:.9rem;margin:12px 0}
+a{color:var(--blue)}
+.tag{display:inline-block;padding:2px 10px;border-radius:12px;font-size:.75rem;font-weight:700}
+.tag-free{background:#DCFCE7;color:#166534}
+.tag-time{background:#DBEAFE;color:#1E40AF}
+.toc{margin:24px 0}
+.toc a{display:block;padding:6px 0;font-size:.9rem;color:var(--navy);border-bottom:1px solid var(--border)}
+.toc a:hover{color:var(--gold)}
+.checklist{margin:12px 0}
+.checklist label{display:flex;gap:10px;padding:6px 0;font-size:.9rem;cursor:pointer}
+.checklist input[type=checkbox]{width:18px;height:18px;accent-color:var(--green)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Deployment Guide</h1>
+<p class="subtitle">Complete setup for your Homes With Manish website — domain, GitHub, lead capture, and CI/CD. Total time: ~30 minutes. Total cost: $0/month.</p>
+
+<div class="toc">
+<strong>Contents:</strong>
+<a href="#overview">Overview & Architecture</a>
+<a href="#step1">Step 1: Create Google Sheet Backend</a>
+<a href="#step2">Step 2: Deploy Apps Script as Web App</a>
+<a href="#step3">Step 3: Push to GitHub</a>
+<a href="#step4">Step 4: Enable GitHub Pages</a>
+<a href="#step5">Step 5: Connect Your Domain</a>
+<a href="#step6">Step 6: Verify CI/CD Pipeline</a>
+<a href="#step7">Step 7: Test Everything</a>
+<a href="#maintenance">Ongoing Maintenance</a>
+<a href="#security">Security Checklist</a>
+</div>
+
+<!-- OVERVIEW -->
+<h2 id="overview">Overview & Architecture</h2>
+
+<div class="card">
+<h3>How It All Connects</h3>
+<div class="code-block">
+Visitor → homeswithmanish.com (GitHub Pages)
+         ↓
+    Fills lead form
+         ↓
+    JS POSTs to Google Apps Script
+         ↓
+    Apps Script → writes to Google Sheet
+              → emails you a notification
+         ↓
+    Admin Dashboard (admin.html) → reads from Google Sheet
+
+GitHub Push → GitHub Actions → Tests → Auto-Deploy to GitHub Pages
+</div>
+</div>
+
+<div class="card">
+<h3>Cost Breakdown</h3>
+<p><span class="tag tag-free">FREE</span> GitHub Pages hosting (static site)</p>
+<p><span class="tag tag-free">FREE</span> GitHub Actions CI/CD (2,000 minutes/month)</p>
+<p><span class="tag tag-free">FREE</span> Google Sheets backend (up to 5M cells)</p>
+<p><span class="tag tag-free">FREE</span> Google Apps Script (6M operations/month)</p>
+<p><span class="tag tag-free">FREE</span> SSL certificate (auto from GitHub Pages)</p>
+<p style="margin-top:12px;font-weight:700;color:var(--navy)">Total: $0/month (only your domain renewal fee)</p>
+</div>
+
+<!-- STEP 1 -->
+<h2 id="step1">Step 1: Create Google Sheet Backend <span class="tag tag-time">~5 min</span></h2>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <div class="step-content">
+    <strong>Create a new Google Sheet</strong>
+    <p>Go to <a href="https://sheets.google.com" target="_blank">sheets.google.com</a> (logged in as <code>homeswithmanish@gmail.com</code>). Create a blank spreadsheet and name it <strong>"Website Leads"</strong>.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div class="step-content">
+    <strong>Copy the Sheet ID</strong>
+    <p>The Sheet ID is in the URL: <code>docs.google.com/spreadsheets/d/<strong>THIS_PART</strong>/edit</code>. Copy it — you'll need it in Step 2.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div class="step-content">
+    <strong>Open Apps Script</strong>
+    <p>In your Google Sheet, go to <strong>Extensions → Apps Script</strong>. This opens the script editor attached to your sheet.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">4</div>
+  <div class="step-content">
+    <strong>Paste the backend code</strong>
+    <p>Delete the default <code>function myFunction()</code> code. Open <code>Google_Sheets_Backend.js</code> from the website folder, copy all contents, and paste it into the Apps Script editor.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">5</div>
+  <div class="step-content">
+    <strong>Set your Sheet ID</strong>
+    <p>Near the top of the code, find <code>const SHEET_ID = 'YOUR_SHEET_ID_HERE';</code> and replace it with your actual Sheet ID from step 2.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">6</div>
+  <div class="step-content">
+    <strong>Run initial setup</strong>
+    <p>Click the function dropdown (next to the play button) → select <code>createInitialSheet</code> → click Run. Authorize when prompted. This creates the "Leads" sheet with proper headers.</p>
+    <p>Then run <code>setAdminKey</code>. Check the Execution Log (View → Logs) — it will show your admin API key. <strong>Copy and save this key securely.</strong></p>
+  </div>
+</div>
+
+<div class="warn">
+<strong>Important:</strong> The admin API key is only shown once in the logs. Save it somewhere safe — you'll need it for the admin dashboard.
+</div>
+
+<!-- STEP 2 -->
+<h2 id="step2">Step 2: Deploy Apps Script as Web App <span class="tag tag-time">~3 min</span></h2>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <div class="step-content">
+    <strong>Click Deploy → New deployment</strong>
+    <p>In the Apps Script editor, click the <strong>Deploy</strong> button (top right) → <strong>New deployment</strong>.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div class="step-content">
+    <strong>Configure the deployment</strong>
+    <p>Click the gear icon → select <strong>Web app</strong>.</p>
+    <p>Set these options:</p>
+    <p>• Description: "Leads Backend v1"</p>
+    <p>• Execute as: <strong>Me (homeswithmanish@gmail.com)</strong></p>
+    <p>• Who has access: <strong>Anyone</strong></p>
+    <p>Click <strong>Deploy</strong>.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div class="step-content">
+    <strong>Copy the Web App URL</strong>
+    <p>You'll see a URL like: <code>https://script.google.com/macros/s/AKfyc.../exec</code></p>
+    <p><strong>Copy this URL.</strong> This is your backend endpoint.</p>
+  </div>
+</div>
+
+<div class="info">
+<strong>Note:</strong> "Anyone" access means anyone can submit the form, but only requests with the admin API key can read leads. The form has rate limiting built in.
+</div>
+
+<!-- STEP 3 -->
+<h2 id="step3">Step 3: Push to GitHub <span class="tag tag-time">~5 min</span></h2>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <div class="step-content">
+    <strong>Update the website with your URLs</strong>
+    <p>Before pushing, update these placeholders in the code:</p>
+    <div class="code-block">
+In index.html:
+  Find: YOUR_GOOGLE_SCRIPT_URL
+  Replace with: your Apps Script web app URL from Step 2
+
+In admin.html:
+  Find: YOUR_GOOGLE_SCRIPT_URL
+  Replace with: same Apps Script URL
+
+  Find: YOUR_ADMIN_API_KEY
+  Replace with: your admin key from Step 1</div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div class="step-content">
+    <strong>Create GitHub repo</strong>
+    <p>Go to <a href="https://github.com/new" target="_blank">github.com/new</a>. Create a new repo named <code>homeswithmanish.github.io</code> (or any name). Set it to <strong>Public</strong>.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div class="step-content">
+    <strong>Push the website folder</strong>
+    <div class="code-block">
+cd /path/to/REALTOR_LEAD_SYSTEM/website
+git init
+git add .
+git commit -m "Initial website launch"
+git branch -M main
+git remote add origin https://github.com/homeswithmanish/homeswithmanish.github.io.git
+git push -u origin main</div>
+  </div>
+</div>
+
+<div class="warn">
+<strong>Before pushing:</strong> Make sure <code>Google_Sheets_Backend.js</code> doesn't contain your actual Sheet ID or admin key. The file is for reference only — the actual script lives in Google Apps Script. Consider adding it to <code>.gitignore</code> if you've added sensitive values.
+</div>
+
+<!-- STEP 4 -->
+<h2 id="step4">Step 4: Enable GitHub Pages <span class="tag tag-time">~2 min</span></h2>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <div class="step-content">
+    <strong>Go to repo Settings</strong>
+    <p>In your GitHub repo, click <strong>Settings</strong> (tab at top).</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div class="step-content">
+    <strong>Configure Pages</strong>
+    <p>In the left sidebar, click <strong>Pages</strong>.</p>
+    <p>Under "Build and deployment":</p>
+    <p>• Source: <strong>GitHub Actions</strong></p>
+    <p>That's it! The CI/CD pipeline in <code>.github/workflows/deploy.yml</code> handles everything.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div class="step-content">
+    <strong>Verify deployment</strong>
+    <p>Go to <strong>Actions</strong> tab in your repo. You should see a workflow running. Once it completes (green check), your site will be live.</p>
+    <p>Temporary URL: <code>https://homeswithmanish.github.io</code></p>
+  </div>
+</div>
+
+<!-- STEP 5 -->
+<h2 id="step5">Step 5: Connect Your Domain <span class="tag tag-time">~10 min</span></h2>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <div class="step-content">
+    <strong>Add custom domain in GitHub Pages</strong>
+    <p>In Settings → Pages → Custom domain, type <code>homeswithmanish.com</code> and click Save.</p>
+    <p>The CNAME file is already in the repo.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div class="step-content">
+    <strong>Update DNS at your domain registrar</strong>
+    <p>Log into wherever your domain <code>homeswithmanish.com</code> is registered. Go to DNS settings and add these records:</p>
+    <div class="code-block">
+Type: A
+Name: @ (or leave blank)
+Value: 185.199.108.153
+
+Type: A
+Name: @ (or leave blank)
+Value: 185.199.109.153
+
+Type: A
+Name: @ (or leave blank)
+Value: 185.199.110.153
+
+Type: A
+Name: @ (or leave blank)
+Value: 185.199.111.153
+
+Type: CNAME
+Name: www
+Value: homeswithmanish.github.io</div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div class="step-content">
+    <strong>Enable HTTPS</strong>
+    <p>Back in GitHub Settings → Pages, check <strong>"Enforce HTTPS"</strong>. This may take a few minutes to provision the SSL certificate.</p>
+  </div>
+</div>
+
+<div class="info">
+<strong>DNS Propagation:</strong> Changes can take 15 minutes to 48 hours. Typically works within 30 minutes. You can check progress at <a href="https://dnschecker.org" target="_blank">dnschecker.org</a>.
+</div>
+
+<!-- STEP 6 -->
+<h2 id="step6">Step 6: Verify CI/CD Pipeline <span class="tag tag-time">~2 min</span></h2>
+
+<div class="card">
+<h3>How the CI/CD Works</h3>
+<p>Every time you push code to the <code>main</code> branch, GitHub Actions automatically:</p>
+<p>1. Runs 99 validation tests (HTML structure, SEO, accessibility, security, etc.)</p>
+<p>2. Checks file sizes for performance</p>
+<p>3. Validates HTML tag structure</p>
+<p>4. Checks for broken internal links</p>
+<p>5. If all tests pass → deploys to GitHub Pages</p>
+<p>6. If any test fails → deployment is blocked, you'll see a red X on the Actions tab</p>
+</div>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <div class="step-content">
+    <strong>Make a test change</strong>
+    <p>Edit any file (like adding a word to a testimonial), commit, and push. Watch the Actions tab to see the pipeline run.</p>
+  </div>
+</div>
+
+<!-- STEP 7 -->
+<h2 id="step7">Step 7: Test Everything <span class="tag tag-time">~5 min</span></h2>
+
+<div class="checklist">
+<label><input type="checkbox"> Website loads at https://homeswithmanish.com</label>
+<label><input type="checkbox"> Navigation links scroll to correct sections</label>
+<label><input type="checkbox"> Hero lead form submits successfully (check your email + Google Sheet)</label>
+<label><input type="checkbox"> Contact form submits successfully</label>
+<label><input type="checkbox"> Admin dashboard loads at /admin.html</label>
+<label><input type="checkbox"> Admin login works with your password</label>
+<label><input type="checkbox"> Admin dashboard shows leads from the sheet</label>
+<label><input type="checkbox"> CSV export works</label>
+<label><input type="checkbox"> Mobile view looks good (test on your phone)</label>
+<label><input type="checkbox"> Social media links go to correct profiles</label>
+<label><input type="checkbox"> Google search "site:homeswithmanish.com" shows results (may take a few days)</label>
+<label><input type="checkbox"> GitHub Actions pipeline runs and deploys on push</label>
+</div>
+
+<!-- MAINTENANCE -->
+<h2 id="maintenance">Ongoing Maintenance</h2>
+
+<div class="card">
+<h3>Monthly (5 minutes)</h3>
+<p>• Update market data in the Areas and Market Data sections</p>
+<p>• Add new testimonials as you get them</p>
+<p>• Update your headshot/photos as needed</p>
+<p>• Review and clean up old leads in Google Sheet</p>
+</div>
+
+<div class="card">
+<h3>Making Changes</h3>
+<div class="code-block">
+# 1. Edit files locally
+# 2. Test locally (open index.html in browser)
+# 3. Push to GitHub
+git add .
+git commit -m "Update market data for April 2026"
+git push
+
+# 4. GitHub Actions runs tests automatically
+# 5. If tests pass → site is updated in ~60 seconds
+</div>
+</div>
+
+<div class="card">
+<h3>To Update Social Media Links</h3>
+<p>In <code>index.html</code>, search for "instagram.com/homeswithmanish" and update all social links to your actual handles. They appear in two places: the Contact section and the Footer.</p>
+</div>
+
+<!-- SECURITY -->
+<h2 id="security">Security Checklist</h2>
+
+<div class="checklist">
+<label><input type="checkbox"> Admin API key is stored in Google Script Properties (not in code)</label>
+<label><input type="checkbox"> Admin password hash in admin.html (never the plaintext password)</label>
+<label><input type="checkbox"> Google Sheet is private (not shared publicly)</label>
+<label><input type="checkbox"> Apps Script Web App executes as "Me" only</label>
+<label><input type="checkbox"> Rate limiting is active (5 submissions per email per day)</label>
+<label><input type="checkbox"> HTTPS is enforced on GitHub Pages</label>
+<label><input type="checkbox"> admin.html has noindex meta tag</label>
+<label><input type="checkbox"> Google_Sheets_Backend.js is in .gitignore (if it contains real credentials)</label>
+<label><input type="checkbox"> No API keys or passwords in GitHub repo</label>
+</div>
+
+<div class="success">
+<strong>Your lead data is protected by:</strong> Google Sheets private access (only your account), Apps Script admin API key authentication, rate limiting on submissions, SHA-256 hashed admin password, HTTPS encryption, and noindex on admin page. Data lives in your Google account — backed up automatically by Google.
+</div>
+
+<div style="margin-top:48px;padding-top:24px;border-top:2px solid var(--border);text-align:center;color:var(--muted);font-size:.85rem">
+  Homes With Manish — Deployment Guide<br>
+  Generated March 2026
+</div>
+
+</div>
+</body>
+</html>

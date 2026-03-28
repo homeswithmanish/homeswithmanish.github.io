@@ -1,0 +1,110 @@
+name: Test & Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run validation tests
+        run: node tests/test-html-validation.js
+
+      - name: Check HTML file sizes
+        run: |
+          echo "=== File Size Check ==="
+          for f in index.html admin.html css/style.css; do
+            if [ -f "$f" ]; then
+              size=$(wc -c < "$f")
+              echo "$f: ${size} bytes"
+              if [ "$size" -gt 500000 ]; then
+                echo "WARNING: $f is over 500KB"
+              fi
+            fi
+          done
+
+      - name: Validate HTML structure
+        run: |
+          echo "=== HTML Structure Validation ==="
+          for f in index.html admin.html; do
+            if [ -f "$f" ]; then
+              # Check for unclosed tags
+              opens=$(grep -o '<div' "$f" | wc -l)
+              closes=$(grep -o '</div>' "$f" | wc -l)
+              echo "$f: $opens <div> opens, $closes </div> closes"
+
+              opens=$(grep -o '<section' "$f" | wc -l)
+              closes=$(grep -o '</section>' "$f" | wc -l)
+              echo "$f: $opens <section> opens, $closes </section> closes"
+            fi
+          done
+
+      - name: Check for broken internal links
+        run: |
+          echo "=== Internal Link Check ==="
+          # Extract all href="#..." and verify the IDs exist
+          hrefs=$(grep -oP 'href="#\K[^"]+' index.html | sort -u)
+          missing=0
+          for id in $hrefs; do
+            if ! grep -q "id=\"$id\"" index.html; then
+              echo "BROKEN: #$id referenced but no element with id=$id found"
+              missing=$((missing + 1))
+            else
+              echo "OK: #$id"
+            fi
+          done
+          if [ "$missing" -gt 0 ]; then
+            echo "$missing broken internal link(s) found"
+            exit 1
+          fi
+
+      - name: Verify CNAME file
+        run: |
+          if [ -f CNAME ]; then
+            echo "CNAME content: $(cat CNAME)"
+          else
+            echo "WARNING: No CNAME file found"
+          fi
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
