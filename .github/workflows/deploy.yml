@@ -62,15 +62,15 @@ jobs:
       - name: Check for broken internal links
         run: |
           echo "=== Internal Link Check ==="
-          # Extract all href="#..." and verify the IDs exist
-          hrefs=$(grep -oP 'href="#\K[^"]+' index.html | sort -u)
+          # Extract href="#word" links (only clean alphabetic IDs, skip JS regex patterns)
+          hrefs=$(grep -oP 'href="#[a-zA-Z][a-zA-Z0-9_-]*"' index.html | grep -oP '#\K[a-zA-Z][a-zA-Z0-9_-]*' | sort -u)
           missing=0
           for id in $hrefs; do
-            if ! grep -q "id=\"$id\"" index.html; then
+            if grep -q "id=\"$id\"" index.html; then
+              echo "OK: #$id"
+            else
               echo "BROKEN: #$id referenced but no element with id=$id found"
               missing=$((missing + 1))
-            else
-              echo "OK: #$id"
             fi
           done
           if [ "$missing" -gt 0 ]; then
