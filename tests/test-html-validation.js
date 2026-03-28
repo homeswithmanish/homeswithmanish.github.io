@@ -107,7 +107,7 @@ test('Has YouTube link', /youtube/i.test(indexHtml));
 
 // --- Market Data ---
 console.log('\n\x1b[36mMarket Data:\x1b[0m');
-const cities = ['San Ramon', 'Pleasanton', 'Danville', 'Dublin', 'Livermore', 'Fremont', 'Tracy', 'Mountain House'];
+const cities = ['San Ramon', 'Pleasanton', 'Danville', 'Dublin', 'Livermore', 'Fremont', 'Tracy'];
 cities.forEach(city => {
   test(`Lists ${city}`, indexHtml.includes(city));
 });

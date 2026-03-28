@@ -39,8 +39,7 @@ const TARGET_CITIES_LIST = [
   { city: 'Dublin', state: 'CA', county: 'Alameda County' },
   { city: 'Livermore', state: 'CA', county: 'Alameda County' },
   { city: 'Fremont', state: 'CA', county: 'Alameda County' },
-  { city: 'Tracy', state: 'CA', county: 'San Joaquin County' },
-  { city: 'Mountain House', state: 'CA', county: 'San Joaquin County' }
+  { city: 'Tracy', state: 'CA', county: 'San Joaquin County' }
 ];
 
 const MARKET_DATA_SHEET = 'MarketData';
@@ -284,8 +283,7 @@ function getDaysOnMarketEstimate(cityName) {
     'Dublin': 14,
     'Livermore': 15,
     'Fremont': 12,
-    'Tracy': 20,
-    'Mountain House': 17
+    'Tracy': 20
   };
   return estimates[cityName] || null;
 }
@@ -301,8 +299,7 @@ function getFallbackData(cityName) {
     'Dublin': { medianPrice: 1350000, priceChange: 6.1 },
     'Livermore': { medianPrice: 1050000, priceChange: 5.5 },
     'Fremont': { medianPrice: 1500000, priceChange: 4.2 },
-    'Tracy': { medianPrice: 650000, priceChange: 7.3 },
-    'Mountain House': { medianPrice: 850000, priceChange: 6.8 }
+    'Tracy': { medianPrice: 650000, priceChange: 7.3 }
   };
 
   const fb = fallback[cityName] || { medianPrice: 0, priceChange: 0 };
