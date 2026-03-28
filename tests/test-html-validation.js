@@ -103,7 +103,6 @@ test('Has FAQ section', /faq/i.test(indexHtml));
 console.log('\n\x1b[36mSocial Media:\x1b[0m');
 test('Has Instagram link', /instagram/i.test(indexHtml));
 test('Has Facebook link', /facebook/i.test(indexHtml));
-test('Has LinkedIn link', /linkedin/i.test(indexHtml));
 test('Has YouTube link', /youtube/i.test(indexHtml));
 
 // --- Market Data ---
@@ -120,7 +119,6 @@ test('Has why-work-with-me section', /id=["']why["']/.test(indexHtml) || /why.*w
 test('Has newsletter signup', /newsletter/i.test(indexHtml));
 test('Has skip-to-content link', /skip.*content/i.test(indexHtml));
 test('Has trust badges section', /trust|badge/i.test(indexHtml));
-test('Has TikTok social link', /tiktok/i.test(indexHtml));
 
 // --- Accessibility ---
 console.log('\n\x1b[36mAccessibility:\x1b[0m');

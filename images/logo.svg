@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="400" height="120">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8D5A8"/>
+      <stop offset="30%" style="stop-color:#C9A96E"/>
+      <stop offset="60%" style="stop-color:#D4B97A"/>
+      <stop offset="100%" style="stop-color:#A68B4B"/>
+    </linearGradient>
+    <linearGradient id="goldGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#A68B4B"/>
+      <stop offset="50%" style="stop-color:#C9A96E"/>
+      <stop offset="100%" style="stop-color:#E8D5A8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- House icon with elegant lines -->
+  <g transform="translate(15, 12)">
+    <!-- Roof -->
+    <path d="M40 45 L20 65 L60 65 Z" fill="none" stroke="url(#goldGrad)" stroke-width="2.2" stroke-linejoin="round"/>
+    <!-- House body -->
+    <rect x="24" y="65" width="32" height="28" rx="1" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+    <!-- Door -->
+    <rect x="35" y="74" width="12" height="19" rx="1" fill="none" stroke="url(#goldGrad)" stroke-width="1.5"/>
+    <!-- Door handle -->
+    <circle cx="44" cy="84" r="1.2" fill="url(#goldGrad)"/>
+    <!-- Window left -->
+    <rect x="27" y="70" width="6" height="6" rx="0.5" fill="none" stroke="url(#goldGrad)" stroke-width="1.2"/>
+    <!-- Chimney -->
+    <rect x="48" y="50" width="6" height="15" rx="0.5" fill="none" stroke="url(#goldGrad)" stroke-width="1.5"/>
+  </g>
+
+  <!-- Decorative arc - inspired by the circular motif -->
+  <ellipse cx="55" cy="58" rx="48" ry="52" fill="none" stroke="url(#goldGrad2)" stroke-width="0.8" opacity="0.4" transform="rotate(-8, 55, 58)"/>
+  <ellipse cx="55" cy="58" rx="51" ry="55" fill="none" stroke="url(#goldGrad)" stroke-width="0.5" opacity="0.25" transform="rotate(5, 55, 58)"/>
+
+  <!-- Brand name -->
+  <text x="115" y="52" font-family="'Playfair Display', Georgia, serif" font-size="30" font-weight="700" fill="url(#goldGrad)" letter-spacing="1">
+    Homes With
+  </text>
+  <text x="115" y="90" font-family="'Playfair Display', Georgia, serif" font-size="36" font-weight="700" fill="url(#goldGrad)" letter-spacing="2" font-style="italic">
+    Manish
+  </text>
+
+  <!-- Subtle tagline -->
+  <line x1="115" y1="98" x2="310" y2="98" stroke="url(#goldGrad2)" stroke-width="0.8" opacity="0.5"/>
+  <text x="115" y="113" font-family="'Inter', sans-serif" font-size="9.5" fill="#C9A96E" letter-spacing="4" opacity="0.8">
+    EAST BAY REAL ESTATE
+  </text>
+</svg>

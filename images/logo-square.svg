@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8D5A8"/>
+      <stop offset="30%" style="stop-color:#C9A96E"/>
+      <stop offset="60%" style="stop-color:#D4B97A"/>
+      <stop offset="100%" style="stop-color:#A68B4B"/>
+    </linearGradient>
+    <linearGradient id="gold2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#A68B4B"/>
+      <stop offset="50%" style="stop-color:#C9A96E"/>
+      <stop offset="100%" style="stop-color:#E8D5A8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" rx="20" fill="#0F1B2D"/>
+
+  <!-- Outer decorative circles (inspired by sample logo) -->
+  <circle cx="100" cy="95" r="78" fill="none" stroke="url(#gold2)" stroke-width="1.2" opacity="0.35"/>
+  <circle cx="100" cy="95" r="82" fill="none" stroke="url(#gold)" stroke-width="0.7" opacity="0.2" transform="rotate(15, 100, 95)"/>
+  <ellipse cx="100" cy="95" rx="75" ry="80" fill="none" stroke="url(#gold2)" stroke-width="0.6" opacity="0.2" transform="rotate(-10, 100, 95)"/>
+
+  <!-- House icon centered -->
+  <g transform="translate(100, 55)">
+    <!-- Roof -->
+    <path d="M0 -15 L-25 10 L25 10 Z" fill="none" stroke="url(#gold)" stroke-width="2.5" stroke-linejoin="round"/>
+    <!-- Body -->
+    <rect x="-20" y="10" width="40" height="32" rx="1.5" fill="none" stroke="url(#gold)" stroke-width="2"/>
+    <!-- Door -->
+    <rect x="-5" y="22" width="14" height="20" rx="1.5" fill="none" stroke="url(#gold)" stroke-width="1.8"/>
+    <!-- Door handle -->
+    <circle cx="6" cy="33" r="1.5" fill="url(#gold)"/>
+    <!-- Window -->
+    <rect x="-17" y="16" width="9" height="9" rx="1" fill="none" stroke="url(#gold)" stroke-width="1.3"/>
+    <!-- Window cross -->
+    <line x1="-12.5" y1="16" x2="-12.5" y2="25" stroke="url(#gold)" stroke-width="0.8"/>
+    <line x1="-17" y1="20.5" x2="-8" y2="20.5" stroke="url(#gold)" stroke-width="0.8"/>
+  </g>
+
+  <!-- Text -->
+  <text x="100" y="120" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="18" font-weight="700" fill="url(#gold)" letter-spacing="1">
+    HOMES WITH
+  </text>
+  <text x="100" y="148" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="26" font-weight="700" fill="url(#gold)" letter-spacing="2" font-style="italic">
+    Manish
+  </text>
+
+  <!-- Tagline -->
+  <line x1="45" y1="157" x2="155" y2="157" stroke="url(#gold2)" stroke-width="0.6" opacity="0.4"/>
+  <text x="100" y="172" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#C9A96E" letter-spacing="3.5" opacity="0.7">
+    EAST BAY REAL ESTATE
+  </text>
+</svg>
