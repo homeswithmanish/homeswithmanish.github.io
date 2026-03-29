@@ -145,6 +145,11 @@ function doPost(e) {
 
     appendLeadToSheet(leadData);
 
+    // If source is newsletter, also add to Newsletter subscribers sheet
+    if (source === 'newsletter') {
+      addNewsletterSubscriber(email, firstName, lastName);
+    }
+
     // Send notification email to admin
     sendNotificationEmail(firstName, lastName, email, phone, city, interest, message, guideRequested);
 
@@ -936,4 +941,114 @@ function generateRandomKey(length) {
 function resetAdminKey() {
   Logger.log('Resetting admin API key...');
   setAdminKey();
+}
+
+// ============================================================================
+// NEWSLETTER SUBSCRIBER MANAGEMENT
+// ============================================================================
+
+const NEWSLETTER_SHEET_NAME = 'Newsletter';
+
+/**
+ * Adds a subscriber to the Newsletter sheet (deduplicates by email).
+ * Creates the sheet with headers if it doesn't exist.
+ *
+ * @param {string} email - Subscriber's email
+ * @param {string} firstName - Subscriber's first name (may be empty)
+ * @param {string} lastName - Subscriber's last name (may be empty)
+ */
+function addNewsletterSubscriber(email, firstName, lastName) {
+  try {
+    const ss = SpreadsheetApp.openById(SHEET_ID);
+    let sheet = ss.getSheetByName(NEWSLETTER_SHEET_NAME);
+
+    // Create sheet if it doesn't exist
+    if (!sheet) {
+      sheet = ss.insertSheet(NEWSLETTER_SHEET_NAME);
+      sheet.getRange(1, 1, 1, 5).setValues([['Email', 'First Name', 'Last Name', 'Subscribed Date', 'Status']]);
+      const headerRange = sheet.getRange(1, 1, 1, 5);
+      headerRange.setFontWeight('bold');
+      headerRange.setBackground('#0F1B2D');
+      headerRange.setFontColor('#FFFFFF');
+      sheet.setColumnWidth(1, 250);
+      sheet.setColumnWidth(2, 140);
+      sheet.setColumnWidth(3, 140);
+      sheet.setColumnWidth(4, 180);
+      sheet.setColumnWidth(5, 100);
+      sheet.setFrozenRows(1);
+    }
+
+    // Check for duplicate email
+    if (sheet.getLastRow() > 1) {
+      const emails = sheet.getRange(2, 1, sheet.getLastRow() - 1, 1).getValues().flat();
+      if (emails.some(e => e.toString().toLowerCase() === email.toLowerCase())) {
+        Logger.log('Newsletter subscriber already exists: ' + email);
+        return;
+      }
+    }
+
+    // Add new subscriber
+    sheet.appendRow([email, firstName || '', lastName || '', new Date().toISOString(), 'Active']);
+    Logger.log('Newsletter subscriber added: ' + email);
+
+  } catch (error) {
+    Logger.log('Error adding newsletter subscriber: ' + error.toString());
+  }
+}
+
+/**
+ * Returns all active newsletter subscribers.
+ *
+ * @returns {Array} Array of {email, firstName, lastName} objects
+ */
+function getActiveSubscribers() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const sheet = ss.getSheetByName(NEWSLETTER_SHEET_NAME);
+
+  if (!sheet || sheet.getLastRow() < 2) return [];
+
+  const data = sheet.getRange(2, 1, sheet.getLastRow() - 1, 5).getValues();
+  return data
+    .filter(row => row[4] === 'Active')
+    .map(row => ({ email: row[0], firstName: row[1], lastName: row[2] }));
+}
+
+/**
+ * Run this once to create the Newsletter sheet with headers.
+ * Also backfills existing newsletter signups from the Leads sheet.
+ */
+function setupNewsletterSheet() {
+  // Create sheet (addNewsletterSubscriber handles creation)
+  addNewsletterSubscriber('placeholder@setup.com', '', '');
+
+  // Remove the placeholder
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const sheet = ss.getSheetByName(NEWSLETTER_SHEET_NAME);
+  if (sheet.getLastRow() > 1) {
+    sheet.deleteRow(2);
+  }
+
+  // Backfill from Leads sheet
+  const leadsSheet = ss.getSheetByName(SHEET_NAME);
+  if (leadsSheet && leadsSheet.getLastRow() > 1) {
+    const leadsData = leadsSheet.getRange(2, 1, leadsSheet.getLastRow() - 1, 11).getValues();
+    let backfilled = 0;
+
+    leadsData.forEach(row => {
+      const source = row[7]; // Source column (0-indexed col 8)
+      if (source === 'newsletter') {
+        const email = row[3];  // Email
+        const firstName = row[1]; // First Name
+        const lastName = row[2];  // Last Name
+        if (email) {
+          addNewsletterSubscriber(email, firstName, lastName);
+          backfilled++;
+        }
+      }
+    });
+
+    Logger.log('Backfilled ' + backfilled + ' newsletter subscribers from Leads sheet');
+  }
+
+  Logger.log('Newsletter sheet setup complete');
 }
