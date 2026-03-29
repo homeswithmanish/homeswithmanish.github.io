@@ -917,7 +917,7 @@
                             <li>Closing cost breakdown</li>
                             <li>Inspection checklist</li>
                         </ul>
-                        <a href="#contact" class="btn btn-primary btn-sm resource-cta">Get Free Guide →</a>
+                        <a href="#contact" class="btn btn-primary btn-sm resource-cta" data-guide="First-Time Buyer Checklist">Get Free Guide →</a>
                     </div>
 
                     <div class="resource-card fade-in fade-in-delay-1">
@@ -931,7 +931,7 @@
                             <li>Cash flow projections</li>
                             <li>Best neighborhoods for ROI</li>
                         </ul>
-                        <a href="#contact" class="btn btn-primary btn-sm resource-cta">Get Free Guide →</a>
+                        <a href="#contact" class="btn btn-primary btn-sm resource-cta" data-guide="East Bay Investment Guide">Get Free Guide →</a>
                     </div>
 
                     <div class="resource-card fade-in fade-in-delay-2">
@@ -945,7 +945,7 @@
                             <li>Commute time comparisons</li>
                             <li>Cost of living breakdown</li>
                         </ul>
-                        <a href="#contact" class="btn btn-primary btn-sm resource-cta">Get Free Guide →</a>
+                        <a href="#contact" class="btn btn-primary btn-sm resource-cta" data-guide="Relocating to East Bay">Get Free Guide →</a>
                     </div>
 
                 </div>
@@ -1269,6 +1269,7 @@
                                     <option value="Selling">Selling</option>
                                     <option value="Investing">Investing</option>
                                     <option value="Market Report">Market Report</option>
+                                    <option value="Free Guide Request">Free Guide Request</option>
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
@@ -1277,6 +1278,7 @@
                                 <label for="message">Message</label>
                                 <textarea id="message" name="message" required aria-label="Message"></textarea>
                             </div>
+                            <input type="hidden" id="guideRequested" name="guideRequested" value="">
 
                             <button type="submit" class="btn btn-primary">Send Message</button>
 
@@ -1852,6 +1854,36 @@
 
       handleForm('hero-lead-form', 'hero');
       handleForm('contact-lead-form', 'contact');
+
+      // --- Guide Request Buttons ---
+      document.querySelectorAll('[data-guide]').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var guideName = this.getAttribute('data-guide');
+          var contactSection = document.getElementById('contact');
+          var subjectSelect = document.getElementById('subject');
+          var messageArea = document.getElementById('message');
+          var guideField = document.getElementById('guideRequested');
+
+          // Set form values
+          if (subjectSelect) subjectSelect.value = 'Free Guide Request';
+          if (messageArea) messageArea.value = 'Hi Manish, I\'d like to receive the free "' + guideName + '" guide. Thank you!';
+          if (guideField) guideField.value = guideName;
+
+          // Scroll to contact
+          if (contactSection) {
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+            // Focus the name field after scroll
+            setTimeout(function() {
+              var nameInput = document.getElementById('fullName');
+              if (nameInput) nameInput.focus();
+            }, 600);
+          }
+
+          // Track in analytics
+          if (typeof gtag === 'function') gtag('event', 'guide_request', { event_category: 'engagement', event_label: guideName });
+        });
+      });
 
       // Newsletter form
       var nlForm = document.getElementById('newsletter-form');

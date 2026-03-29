@@ -100,6 +100,7 @@ function doPost(e) {
     const interest = sanitizeInput(requestData.interest);
     const source = sanitizeInput(requestData.source);
     const message = sanitizeInput(requestData.message);
+    const guideRequested = sanitizeInput(requestData.guideRequested);
 
     // Validate required fields
     if (!firstName || !email) {
@@ -145,7 +146,12 @@ function doPost(e) {
     appendLeadToSheet(leadData);
 
     // Send notification email to admin
-    sendNotificationEmail(firstName, lastName, email, phone, city, interest, message);
+    sendNotificationEmail(firstName, lastName, email, phone, city, interest, message, guideRequested);
+
+    // If a guide was requested, send the auto-response with guide link
+    if (guideRequested) {
+      sendGuideEmail(firstName, email, guideRequested);
+    }
 
     // Return success response
     return HtmlService.createHtmlOutput(JSON.stringify({
@@ -618,17 +624,19 @@ function updateLeadRow(rowNumber, columnNumber, value) {
  * @param {string} city - Lead's city
  * @param {string} interest - Lead's area of interest
  * @param {string} message - Lead's optional message
+ * @param {string} guideRequested - Name of the guide requested (optional)
  */
-function sendNotificationEmail(firstName, lastName, email, phone, city, interest, message) {
+function sendNotificationEmail(firstName, lastName, email, phone, city, interest, message, guideRequested) {
   try {
-    const subject = 'New Lead Submission: ' + firstName + ' ' + lastName;
+    const guideTag = guideRequested ? ' [Guide Request]' : '';
+    const subject = 'New Lead Submission: ' + firstName + ' ' + lastName + guideTag;
 
     const htmlBody = `
       <html>
         <body style="font-family: Arial, sans-serif; color: #333;">
           <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
             <h2 style="color: #4285F4; border-bottom: 2px solid #4285F4; padding-bottom: 10px;">
-              New Lead Submission
+              New Lead Submission${guideTag}
             </h2>
 
             <div style="margin: 20px 0;">
@@ -637,12 +645,19 @@ function sendNotificationEmail(firstName, lastName, email, phone, city, interest
               <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
               <p><strong>City:</strong> ${city || 'Not provided'}</p>
               <p><strong>Interest:</strong> ${interest || 'Not specified'}</p>
+              ${guideRequested ? `<p><strong>Guide Requested:</strong> <span style="color: #C9A96E; font-weight: bold;">${escapeHtml(guideRequested)}</span></p>` : ''}
             </div>
 
             ${message ? `
               <div style="background-color: #f5f5f5; padding: 15px; border-radius: 3px; margin: 20px 0;">
                 <p><strong>Message:</strong></p>
                 <p>${escapeHtml(message)}</p>
+              </div>
+            ` : ''}
+
+            ${guideRequested ? `
+              <div style="background-color: #e8f4e8; padding: 12px; border-radius: 3px; margin: 20px 0; border-left: 4px solid #27ae60;">
+                <p style="margin: 0; font-size: 13px; color: #27ae60;"><strong>Auto-response sent:</strong> The "${escapeHtml(guideRequested)}" guide link was emailed to the lead automatically.</p>
               </div>
             ` : ''}
 
@@ -661,6 +676,130 @@ function sendNotificationEmail(firstName, lastName, email, phone, city, interest
 
   } catch (error) {
     Logger.log('Error sending notification email: ' + error.toString());
+  }
+}
+
+// ============================================================================
+// GUIDE AUTO-EMAIL - Sends requested guide to lead
+// ============================================================================
+
+/**
+ * Map of guide names to their PDF filenames on the website
+ */
+const GUIDE_MAP = {
+  'First-Time Buyer Checklist': {
+    filename: 'First-Time-Buyer-Checklist.pdf',
+    title: 'First-Time Buyer Checklist',
+    description: 'Your complete step-by-step guide from pre-approval to closing day.'
+  },
+  'East Bay Investment Guide': {
+    filename: 'East-Bay-Investment-Guide.pdf',
+    title: 'East Bay Investment Guide',
+    description: 'Rental yields, cap rates, and cash flow projections across all East Bay cities.'
+  },
+  'Relocating to East Bay': {
+    filename: 'Relocating-to-East-Bay.pdf',
+    title: 'Relocating to East Bay Guide',
+    description: 'School districts, commute times, lifestyle, and housing costs compared.'
+  }
+};
+
+const WEBSITE_URL = 'https://homeswithmanish.com';
+
+/**
+ * Sends an auto-response email to the lead with a link to their requested guide PDF
+ *
+ * @param {string} firstName - Lead's first name
+ * @param {string} email - Lead's email address
+ * @param {string} guideName - Name of the requested guide (must match GUIDE_MAP key)
+ */
+function sendGuideEmail(firstName, email, guideName) {
+  try {
+    const guide = GUIDE_MAP[guideName];
+    if (!guide) {
+      Logger.log('Unknown guide requested: ' + guideName);
+      return;
+    }
+
+    const guideUrl = WEBSITE_URL + '/guides/' + guide.filename;
+    const subject = 'Your Free ' + guide.title + ' — Homes With Manish';
+
+    const htmlBody = `
+      <html>
+        <body style="font-family: 'Helvetica Neue', Arial, sans-serif; color: #333; margin: 0; padding: 0; background-color: #f5f5f5;">
+          <div style="max-width: 600px; margin: 0 auto; background: #ffffff;">
+
+            <!-- Header -->
+            <div style="background-color: #0F1B2D; padding: 32px 40px; text-align: center;">
+              <h1 style="color: #C9A96E; margin: 0; font-size: 22px; font-weight: 600; letter-spacing: 0.5px;">HOMES WITH MANISH</h1>
+              <p style="color: rgba(255,255,255,0.6); margin: 8px 0 0; font-size: 13px;">Your East Bay Real Estate Expert</p>
+            </div>
+
+            <!-- Body -->
+            <div style="padding: 40px;">
+              <h2 style="color: #0F1B2D; margin: 0 0 16px; font-size: 20px;">Hi ${escapeHtml(firstName)},</h2>
+              <p style="font-size: 15px; line-height: 1.6; color: #555;">
+                Thank you for your interest! Here's the guide you requested:
+              </p>
+
+              <!-- Guide Card -->
+              <div style="background: linear-gradient(135deg, #0F1B2D 0%, #1a2d47 100%); border-radius: 12px; padding: 28px; margin: 24px 0; text-align: center;">
+                <p style="color: #C9A96E; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 8px;">FREE GUIDE</p>
+                <h3 style="color: #ffffff; margin: 0 0 12px; font-size: 18px;">${escapeHtml(guide.title)}</h3>
+                <p style="color: rgba(255,255,255,0.7); font-size: 13px; margin: 0 0 20px; line-height: 1.5;">
+                  ${escapeHtml(guide.description)}
+                </p>
+                <a href="${guideUrl}" style="display: inline-block; background-color: #C9A96E; color: #0F1B2D; text-decoration: none; padding: 12px 32px; border-radius: 6px; font-weight: 600; font-size: 14px;">
+                  Download Your Guide →
+                </a>
+              </div>
+
+              <p style="font-size: 15px; line-height: 1.6; color: #555;">
+                Have questions about anything in the guide? I'm always happy to chat — just reply to this email or give me a call.
+              </p>
+
+              <!-- Other Guides -->
+              <div style="background: #f8f8f8; border-radius: 8px; padding: 20px; margin: 24px 0;">
+                <p style="font-size: 13px; font-weight: 600; color: #0F1B2D; margin: 0 0 12px;">You might also like:</p>
+                ${Object.entries(GUIDE_MAP).filter(([key]) => key !== guideName).map(([key, g]) =>
+                  '<p style="margin: 8px 0; font-size: 13px;">' +
+                  '<a href="' + WEBSITE_URL + '/guides/' + g.filename + '" style="color: #C9A96E; text-decoration: none; font-weight: 500;">' +
+                  escapeHtml(g.title) + '</a>' +
+                  ' — <span style="color: #888;">' + escapeHtml(g.description.split('.')[0]) + '</span></p>'
+                ).join('')}
+              </div>
+
+              <!-- Sign-off -->
+              <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #eee;">
+                <p style="font-size: 14px; color: #555; line-height: 1.6; margin: 0;">
+                  Best regards,<br>
+                  <strong style="color: #0F1B2D;">Manish Anand</strong><br>
+                  Licensed REALTOR® | DRE #02247006<br>
+                  <a href="tel:4087075324" style="color: #C9A96E; text-decoration: none;">(408) 707-5324</a> |
+                  <a href="mailto:homeswithmanish@gmail.com" style="color: #C9A96E; text-decoration: none;">homeswithmanish@gmail.com</a><br>
+                  <a href="${WEBSITE_URL}" style="color: #C9A96E; text-decoration: none;">homeswithmanish.com</a>
+                </p>
+              </div>
+            </div>
+
+            <!-- Footer -->
+            <div style="background-color: #f5f5f5; padding: 20px 40px; text-align: center;">
+              <p style="font-size: 11px; color: #999; margin: 0;">
+                REeBroker Group | DRE #01522411<br>
+                Serving San Ramon, Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy & Mountain House
+              </p>
+            </div>
+
+          </div>
+        </body>
+      </html>
+    `;
+
+    GmailApp.sendEmail(email, subject, 'Here is your free guide: ' + guideUrl, { htmlBody: htmlBody, name: 'Manish Anand — Homes With Manish', replyTo: NOTIFICATION_EMAIL });
+    Logger.log('Guide email sent to ' + email + ' for guide: ' + guideName);
+
+  } catch (error) {
+    Logger.log('Error sending guide email: ' + error.toString());
   }
 }
 
