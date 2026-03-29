@@ -131,6 +131,24 @@ test('Has Blinq QR code', /blinq-qr/.test(indexHtml));
 test('Has resources section', /id=["']resources["']/.test(indexHtml));
 test('Has Schema.org broker/worksFor', /worksFor/.test(indexHtml));
 
+// --- New Sections (Round 3) ---
+console.log('\n\x1b[36mNew Sections (Round 3):\x1b[0m');
+test('Has stats banner section', /id=["']stats-banner["']/.test(indexHtml));
+test('Has Why East Bay section', /id=["']why-east-bay["']/.test(indexHtml));
+test('Has insights/blog teaser section', /id=["']insights["']/.test(indexHtml));
+test('Has scroll progress bar', /scroll-progress/.test(indexHtml));
+test('Has BreadcrumbList schema', /BreadcrumbList/.test(indexHtml));
+test('Has AggregateRating schema', /AggregateRating/.test(indexHtml));
+test('Has expanded FAQ (11+ questions)', (indexHtml.match(/faq-item/g) || []).length >= 11);
+test('FAQ has school district question', /school.*district|best.*school/i.test(indexHtml));
+test('FAQ has investment cities question', /best.*cities.*investment|investment.*east.*bay/i.test(indexHtml));
+test('FAQ has house cost question', /how.*much.*house.*cost|house.*cost.*east.*bay/i.test(indexHtml));
+test('Stats section has animated counters', /data-count/.test(indexHtml) && /stat-number/.test(indexHtml));
+test('Why East Bay has lifestyle cards', /lifestyle-card/.test(indexHtml));
+test('Insights section has article cards', /insight-card/.test(indexHtml));
+test('Has comparison grid (Why Work With Me)', /comparison-grid/.test(indexHtml));
+test('Hero image has fetchpriority', /fetchpriority/.test(indexHtml));
+
 // --- Accessibility ---
 console.log('\n\x1b[36mAccessibility:\x1b[0m');
 test('Has ARIA labels', /aria-label/.test(indexHtml));
@@ -268,6 +286,19 @@ test('Has CORS headers', /Access-Control|CORS/i.test(backendJs));
 test('Has notification email', /sendNotification|notification.*email/i.test(backendJs));
 test('Has admin key auth', /ADMIN.*KEY|admin.*key/i.test(backendJs));
 test('Has setup/initialization', /createInitialSheet|setup/i.test(backendJs));
+
+// ==================== ROBOTS.TXT TESTS ====================
+console.log('\n\n\x1b[1m=== robots.txt Tests ===\x1b[0m\n');
+
+const robotsTxt = readFile('robots.txt');
+
+console.log('\x1b[36mAI Crawler Access:\x1b[0m');
+test('Allows all user agents', /User-agent: \*[\s\S]*?Allow: \//.test(robotsTxt));
+test('Has sitemap reference', /Sitemap:/.test(robotsTxt));
+test('Allows GPTBot', /GPTBot/.test(robotsTxt));
+test('Allows ClaudeBot', /ClaudeBot/.test(robotsTxt));
+test('Allows Google-Extended', /Google-Extended/.test(robotsTxt));
+test('Allows PerplexityBot', /PerplexityBot/.test(robotsTxt));
 
 // ==================== SUMMARY ====================
 console.log('\n' + '='.repeat(50));

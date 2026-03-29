@@ -213,14 +213,89 @@
                     "@type": "Answer",
                     "text": "Yes, buyer representation is traditionally free to you as the buyer. I'm compensated by the seller's commission split. My free consultation includes a personalized market report and strategy session to get started."
                 }
+            },
+            {
+                "@type": "Question",
+                "name": "How much does a house cost in the East Bay?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "East Bay home prices vary significantly by city. Danville and Pleasanton tend to be the most expensive, with median single-family home values often exceeding $2 million. San Ramon and Dublin typically range from $1.5M to $1.8M. Livermore and Fremont offer mid-range options around $1.2M to $1.5M, while Tracy provides the most affordable entry point at around $650K-$750K. Visit homeswithmanish.com for live market data updated monthly from Zillow ZHVI."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What are the best cities for real estate investment in the East Bay?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "For rental yield, Tracy and Livermore currently offer the highest gross yields in the East Bay, typically ranging from 3-4%. For appreciation potential, San Ramon, Pleasanton, and Dublin have shown strong year-over-year growth driven by tech employment and excellent schools. The best investment depends on your strategy—cash flow vs. appreciation. I provide detailed investment analysis with actual yield calculations for each city."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How long does it take to buy a house in the East Bay?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The typical timeline from starting your search to closing is 60-90 days in the East Bay market. Pre-approval takes 1-3 days, active searching averages 4-8 weeks depending on inventory and competition, and closing after an accepted offer takes 30-45 days. In competitive markets like San Ramon and Pleasanton, you may need to act faster. I help buyers prepare in advance so they can move quickly when the right home appears."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is a good school district in the East Bay?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The East Bay has several highly rated school districts. San Ramon Valley Unified (serving San Ramon, Danville, and parts of Dublin) consistently ranks among California's top districts. Pleasanton Unified is equally strong with excellent test scores. Dublin Unified and Livermore Valley Joint Unified also perform well. Fremont Unified is known for its STEM programs. I provide detailed school analysis as part of every buyer consultation."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Should I buy or rent in the East Bay?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The buy vs. rent decision depends on your timeline, financial situation, and market conditions. In the East Bay, price-to-rent ratios typically range from 25-35x, meaning buying becomes more advantageous if you plan to stay 5+ years. With current mortgage rates and strong appreciation trends in most East Bay cities, buying can build significant equity over time. I provide personalized buy vs. rent analysis using current market data and mortgage rates."
+                }
             }
         ]
     }
     </script>
 
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://homeswithmanish.com" },
+            { "@type": "ListItem", "position": 2, "name": "East Bay Market Data", "item": "https://homeswithmanish.com/#market" },
+            { "@type": "ListItem", "position": 3, "name": "Contact", "item": "https://homeswithmanish.com/#contact" }
+        ]
+    }
+    </script>
+
+    <!-- AggregateRating Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "RealEstateAgent",
+        "name": "Manish Anand - Homes With Manish",
+        "url": "https://homeswithmanish.com",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "3",
+            "bestRating": "5",
+            "worstRating": "1"
+        }
+    }
+    </script>
+
+    <!-- Performance: Preload LCP hero font -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/playfairdisplay/v37/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTbtbK-F2rA0s.woff2" as="font" type="font/woff2" crossorigin>
+
     <title>Manish Anand - East Bay Real Estate Expert | Homes With Manish</title>
 </head>
 <body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Navigation -->
     <header class="navbar" id="navbar">
@@ -234,9 +309,9 @@
             <nav class="nav-links">
                 <a href="#about">About</a>
                 <a href="#services">Services</a>
-                <a href="#areas">Areas</a>
+                <a href="#why-east-bay">East Bay</a>
                 <a href="#market">Market Data</a>
-                <a href="#testimonials">Testimonials</a>
+                <a href="#faq">FAQ</a>
                 <a href="#contact">Contact</a>
                 <a href="#contact" class="nav-cta">Get Free Consultation</a>
             </nav>
@@ -254,9 +329,9 @@
         <span class="mobile-close" id="mobileClose">✕</span>
         <a href="#about">About</a>
         <a href="#services">Services</a>
-        <a href="#areas">Areas</a>
+        <a href="#why-east-bay">Why East Bay</a>
         <a href="#market">Market Data</a>
-        <a href="#testimonials">Testimonials</a>
+        <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
         <a href="#contact">Get Free Consultation</a>
     </div>
@@ -398,7 +473,7 @@
             <div class="container">
                 <div class="about-grid">
                     <div class="about-image fade-in">
-                        <img src="images/Manish.png" alt="Manish Anand - East Bay Real Estate Agent" loading="lazy" width="500" height="600" style="width:100%;height:auto;border-radius:12px;object-fit:cover;">
+                        <img src="images/Manish.png" alt="Manish Anand - East Bay Real Estate Agent" loading="eager" fetchpriority="high" width="500" height="600" style="width:100%;height:auto;border-radius:12px;object-fit:cover;">
                         <div class="accent-card">
                             <div class="num">8</div>
                             <div class="label">Cities Served</div>
@@ -537,7 +612,7 @@
         </section>
 
         <!-- Why Choose Me -->
-        <section id="why" style="background:var(--off-white);">
+        <section id="why" class="why-section">
             <div class="container">
                 <div style="text-align:center;">
                     <div class="section-label">THE DIFFERENCE</div>
@@ -545,58 +620,119 @@
                     <div class="section-divider" style="margin:12px auto 0;"></div>
                 </div>
 
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:48px;max-width:900px;margin-left:auto;margin-right:auto;">
-                    <div class="fade-in" style="background:var(--white);border-radius:var(--radius);padding:32px;border:1px solid var(--gray-100);">
-                        <h3 style="color:var(--gray-400);font-size:1rem;font-weight:600;margin-bottom:20px;font-family:var(--font-body);">Typical Agent</h3>
-                        <div style="display:flex;flex-direction:column;gap:14px;">
-                            <div style="display:flex;gap:10px;align-items:flex-start;color:var(--gray-500);font-size:.9rem;">
-                                <span style="color:var(--gray-300);font-size:1.1rem;">✕</span>
-                                <span>Generic market knowledge across many property types</span>
-                            </div>
-                            <div style="display:flex;gap:10px;align-items:flex-start;color:var(--gray-500);font-size:.9rem;">
-                                <span style="color:var(--gray-300);font-size:1.1rem;">✕</span>
-                                <span>Gut-feel pricing and vague comparisons</span>
-                            </div>
-                            <div style="display:flex;gap:10px;align-items:flex-start;color:var(--gray-500);font-size:.9rem;">
-                                <span style="color:var(--gray-300);font-size:1.1rem;">✕</span>
-                                <span>Slow response times and limited availability</span>
-                            </div>
-                            <div style="display:flex;gap:10px;align-items:flex-start;color:var(--gray-500);font-size:.9rem;">
-                                <span style="color:var(--gray-300);font-size:1.1rem;">✕</span>
-                                <span>One-size-fits-all approach to every client</span>
-                            </div>
-                            <div style="display:flex;gap:10px;align-items:flex-start;color:var(--gray-500);font-size:.9rem;">
-                                <span style="color:var(--gray-300);font-size:1.1rem;">✕</span>
-                                <span>Relationship ends after the transaction closes</span>
-                            </div>
+                <div class="comparison-grid">
+                    <div class="comparison-card comparison-card--other fade-in">
+                        <h3 class="comparison-heading comparison-heading--other">Typical Agent</h3>
+                        <div class="comparison-list">
+                            <div class="comparison-item"><span class="comparison-x">✕</span><span>Generic market knowledge across many property types</span></div>
+                            <div class="comparison-item"><span class="comparison-x">✕</span><span>Gut-feel pricing and vague comparisons</span></div>
+                            <div class="comparison-item"><span class="comparison-x">✕</span><span>Slow response times and limited availability</span></div>
+                            <div class="comparison-item"><span class="comparison-x">✕</span><span>One-size-fits-all approach to every client</span></div>
+                            <div class="comparison-item"><span class="comparison-x">✕</span><span>Relationship ends after the transaction closes</span></div>
                         </div>
                     </div>
 
-                    <div class="fade-in fade-in-delay-1" style="background:var(--navy);border-radius:var(--radius);padding:32px;border:2px solid var(--gold);position:relative;overflow:hidden;">
-                        <div style="position:absolute;top:12px;right:12px;background:var(--gold);color:var(--navy);font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:1px;">Your Advantage</div>
-                        <h3 style="color:var(--gold);font-size:1rem;font-weight:600;margin-bottom:20px;font-family:var(--font-body);">Working With Manish</h3>
-                        <div style="display:flex;flex-direction:column;gap:14px;">
-                            <div style="display:flex;gap:10px;align-items:flex-start;color:rgba(255,255,255,.85);font-size:.9rem;">
-                                <span style="color:var(--gold);font-size:1.1rem;">✓</span>
-                                <span>100% focused on East Bay single-family homes</span>
-                            </div>
-                            <div style="display:flex;gap:10px;align-items:flex-start;color:rgba(255,255,255,.85);font-size:.9rem;">
-                                <span style="color:var(--gold);font-size:1.1rem;">✓</span>
-                                <span>Data-driven analysis with real yield and cap rate numbers</span>
-                            </div>
-                            <div style="display:flex;gap:10px;align-items:flex-start;color:rgba(255,255,255,.85);font-size:.9rem;">
-                                <span style="color:var(--gold);font-size:1.1rem;">✓</span>
-                                <span>2-hour response guarantee, available 7 days a week</span>
-                            </div>
-                            <div style="display:flex;gap:10px;align-items:flex-start;color:rgba(255,255,255,.85);font-size:.9rem;">
-                                <span style="color:var(--gold);font-size:1.1rem;">✓</span>
-                                <span>Personalized strategy for buyers, investors, and sellers</span>
-                            </div>
-                            <div style="display:flex;gap:10px;align-items:flex-start;color:rgba(255,255,255,.85);font-size:.9rem;">
-                                <span style="color:var(--gold);font-size:1.1rem;">✓</span>
-                                <span>Lifetime resource with market updates and support long after closing</span>
-                            </div>
+                    <div class="comparison-card comparison-card--manish fade-in fade-in-delay-1">
+                        <div class="comparison-badge">Your Advantage</div>
+                        <h3 class="comparison-heading comparison-heading--manish">Working With Manish</h3>
+                        <div class="comparison-list">
+                            <div class="comparison-item comparison-item--highlight"><span class="comparison-check">✓</span><span>100% focused on East Bay single-family homes</span></div>
+                            <div class="comparison-item comparison-item--highlight"><span class="comparison-check">✓</span><span>Data-driven analysis with real yield and cap rate numbers</span></div>
+                            <div class="comparison-item comparison-item--highlight"><span class="comparison-check">✓</span><span>2-hour response guarantee, available 7 days a week</span></div>
+                            <div class="comparison-item comparison-item--highlight"><span class="comparison-check">✓</span><span>Personalized strategy for buyers, investors, and sellers</span></div>
+                            <div class="comparison-item comparison-item--highlight"><span class="comparison-check">✓</span><span>Lifetime resource with market updates and support long after closing</span></div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- East Bay by the Numbers -->
+        <section id="stats-banner" class="stats-banner">
+            <div class="container">
+                <div class="section-label" style="color:var(--gold);">EAST BAY AT A GLANCE</div>
+                <h2 class="section-title" style="color:var(--white);">The East Bay by the Numbers</h2>
+                <div class="stats-grid">
+                    <div class="stat-block fade-in">
+                        <div class="stat-number" data-count="8" data-suffix="">0</div>
+                        <div class="stat-label">Cities Covered</div>
+                        <div class="stat-detail">Deep local expertise across the Tri-Valley, Fremont, and Tracy corridor</div>
+                    </div>
+                    <div class="stat-block fade-in fade-in-delay-1">
+                        <div class="stat-number" data-count="650" data-suffix="K+">0</div>
+                        <div class="stat-label">Starting Home Price</div>
+                        <div class="stat-detail">Entry-level single-family homes available in Tracy and surrounding areas</div>
+                    </div>
+                    <div class="stat-block fade-in fade-in-delay-2">
+                        <div class="stat-number" data-count="2" data-suffix=" hrs">0</div>
+                        <div class="stat-label">Response Guarantee</div>
+                        <div class="stat-detail">Every inquiry answered within 2 hours, 7 days a week</div>
+                    </div>
+                    <div class="stat-block fade-in fade-in-delay-3">
+                        <div class="stat-number" data-count="100" data-suffix="%">0</div>
+                        <div class="stat-label">SFH Focused</div>
+                        <div class="stat-detail">Exclusively single-family homes — no condos, no distractions</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why East Bay Section -->
+        <section id="why-east-bay" class="why-east-bay-section">
+            <div class="container">
+                <div style="text-align:center;">
+                    <div class="section-label">DISCOVER THE EAST BAY</div>
+                    <h2 class="section-title">Why Families & Investors Choose the East Bay</h2>
+                    <p class="section-subtitle">World-class schools, tech job access, and strong appreciation — all without San Francisco prices</p>
+                </div>
+
+                <div class="lifestyle-grid">
+                    <div class="lifestyle-card fade-in">
+                        <div class="lifestyle-icon-wrap">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                        </div>
+                        <h3>Top-Rated Schools</h3>
+                        <p>San Ramon Valley Unified and Pleasanton Unified consistently rank in the top 5% of California school districts. Families relocating from SF often cite schools as the primary reason for choosing the East Bay.</p>
+                    </div>
+
+                    <div class="lifestyle-card fade-in fade-in-delay-1">
+                        <div class="lifestyle-icon-wrap lifestyle-icon--gold">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                        </div>
+                        <h3>Tech Hub Access</h3>
+                        <p>Minutes from major employers like Apple, Google, Meta, and Tesla in the Silicon Valley and Fremont corridors. BART and I-680 connect the East Bay to San Francisco and San Jose for easy commuting.</p>
+                    </div>
+
+                    <div class="lifestyle-card fade-in fade-in-delay-2">
+                        <div class="lifestyle-icon-wrap lifestyle-icon--green">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                        </div>
+                        <h3>Strong Appreciation</h3>
+                        <p>East Bay home values have consistently outpaced the national average, with many cities seeing 5-8% annual appreciation. Homes here have proven to be among the best long-term investments in California.</p>
+                    </div>
+
+                    <div class="lifestyle-card fade-in">
+                        <div class="lifestyle-icon-wrap lifestyle-icon--navy">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                        </div>
+                        <h3>Diverse Communities</h3>
+                        <p>The East Bay is one of the most culturally diverse regions in the U.S. From Fremont's vibrant South Asian community to Dublin's growing multicultural families, you'll find a welcoming neighborhood that feels like home.</p>
+                    </div>
+
+                    <div class="lifestyle-card fade-in fade-in-delay-1">
+                        <div class="lifestyle-icon-wrap lifestyle-icon--wine">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22c5.5-3 9-7 9-12V5l-9-3-9 3v5c0 5 3.5 9 9 12z"/></svg>
+                        </div>
+                        <h3>Quality of Life</h3>
+                        <p>Vineyards in Livermore, hiking trails in Danville, Iron Horse Trail connecting cities — the East Bay offers a lifestyle that balances suburban comfort with outdoor adventure and culinary excellence.</p>
+                    </div>
+
+                    <div class="lifestyle-card fade-in fade-in-delay-2">
+                        <div class="lifestyle-icon-wrap lifestyle-icon--blue">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        </div>
+                        <h3>Inventory Opportunity</h3>
+                        <p>While competition remains in premium neighborhoods, cities like Tracy and Livermore offer more inventory and better value for first-time buyers and investors compared to the Peninsula or South Bay.</p>
                     </div>
                 </div>
             </div>
@@ -932,8 +1068,105 @@
                   If you're pre-approved, we can start touring homes immediately. I'm often able to arrange same-day or next-day showings. If you're just getting started, I can have you connected with a lender within 24 hours and set up MLS alerts for your target cities right away. The earlier we connect, the more prepared you'll be when the right home hits the market.
                 </div>
               </div>
+
+              <div class="faq-item fade-in">
+                <button class="faq-toggle" aria-expanded="false">
+                  <span>How much does a house cost in the East Bay?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-content">
+                  East Bay home prices vary significantly by city. Danville and Pleasanton tend to be the most expensive, with median single-family home values often exceeding $2 million. San Ramon and Dublin typically range from $1.5M to $1.8M. Livermore and Fremont offer mid-range options around $1.2M to $1.5M, while Tracy provides the most affordable entry point at around $650K-$750K. Check my live market data section above for real-time numbers updated monthly from Zillow ZHVI.
+                </div>
+              </div>
+
+              <div class="faq-item fade-in fade-in-delay-1">
+                <button class="faq-toggle" aria-expanded="false">
+                  <span>What are the best cities for real estate investment in the East Bay?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-content">
+                  For rental yield, Tracy and Livermore currently offer the highest gross yields in the East Bay, typically ranging from 3-4%. For appreciation potential, San Ramon, Pleasanton, and Dublin have shown strong year-over-year growth driven by tech employment and excellent schools. The best investment depends on your strategy — cash flow vs. appreciation. I provide detailed investment analysis with actual yield calculations for each city.
+                </div>
+              </div>
+
+              <div class="faq-item fade-in fade-in-delay-2">
+                <button class="faq-toggle" aria-expanded="false">
+                  <span>How long does it take to buy a house in the East Bay?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-content">
+                  The typical timeline from starting your search to closing is 60-90 days in the East Bay market. Pre-approval takes 1-3 days, active searching averages 4-8 weeks depending on inventory and competition, and closing after an accepted offer takes 30-45 days. In competitive markets like San Ramon and Pleasanton, you may need to act faster. I help buyers prepare in advance so they can move quickly when the right home appears.
+                </div>
+              </div>
+
+              <div class="faq-item fade-in">
+                <button class="faq-toggle" aria-expanded="false">
+                  <span>What are the best school districts in the East Bay?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-content">
+                  The East Bay has several highly rated school districts. San Ramon Valley Unified (serving San Ramon, Danville, and parts of Dublin) consistently ranks among California's top districts. Pleasanton Unified is equally strong with excellent test scores. Dublin Unified and Livermore Valley Joint Unified also perform well. Fremont Unified is known for its STEM programs. I provide detailed school analysis as part of every buyer consultation.
+                </div>
+              </div>
+
+              <div class="faq-item fade-in fade-in-delay-1">
+                <button class="faq-toggle" aria-expanded="false">
+                  <span>Should I buy or rent in the East Bay?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-content">
+                  The buy vs. rent decision depends on your timeline, financial situation, and market conditions. In the East Bay, price-to-rent ratios typically range from 25-35x, meaning buying becomes more advantageous if you plan to stay 5+ years. With current mortgage rates and strong appreciation trends in most East Bay cities, buying can build significant equity over time. I provide personalized buy vs. rent analysis using current market data and mortgage rates.
+                </div>
+              </div>
             </div>
           </div>
+        </section>
+
+        <!-- Market Insights / Blog Teaser Section -->
+        <section id="insights" class="insights-section">
+            <div class="container">
+                <div style="text-align:center;">
+                    <div class="section-label">MARKET INSIGHTS</div>
+                    <h2 class="section-title">Stay Ahead of the Market</h2>
+                    <p class="section-subtitle">Data-driven analysis and local knowledge to help you make smarter decisions</p>
+                </div>
+
+                <div class="insights-grid">
+                    <article class="insight-card fade-in">
+                        <div class="insight-tag">Market Analysis</div>
+                        <h3 class="insight-title">East Bay SFH Market Outlook: Spring 2026</h3>
+                        <p class="insight-excerpt">Mortgage rates are stabilizing and inventory is slowly increasing across the Tri-Valley. Here's what that means for buyers, sellers, and investors heading into the spring buying season.</p>
+                        <div class="insight-meta">
+                            <span>Manish Anand</span>
+                            <span>5 min read</span>
+                        </div>
+                    </article>
+
+                    <article class="insight-card fade-in fade-in-delay-1">
+                        <div class="insight-tag insight-tag--gold">Investment</div>
+                        <h3 class="insight-title">Tracy vs. Livermore: Which Offers Better Rental Yields?</h3>
+                        <p class="insight-excerpt">A detailed comparison of gross yields, cash flow projections, and appreciation potential between the East Bay's two most popular cities for single-family rental investments.</p>
+                        <div class="insight-meta">
+                            <span>Manish Anand</span>
+                            <span>7 min read</span>
+                        </div>
+                    </article>
+
+                    <article class="insight-card fade-in fade-in-delay-2">
+                        <div class="insight-tag insight-tag--navy">Buyer Guide</div>
+                        <h3 class="insight-title">Pre-Approval to Keys: Your East Bay Home Buying Timeline</h3>
+                        <p class="insight-excerpt">A week-by-week breakdown of the home buying process in the East Bay market. From finding a lender to closing day, know exactly what to expect and how to prepare.</p>
+                        <div class="insight-meta">
+                            <span>Manish Anand</span>
+                            <span>6 min read</span>
+                        </div>
+                    </article>
+                </div>
+
+                <div style="text-align:center; margin-top:40px;">
+                    <a href="#contact" class="btn btn-outline" style="border-color:var(--navy);color:var(--navy);">Get Personalized Market Insights →</a>
+                </div>
+            </div>
         </section>
 
         <!-- Newsletter Signup -->
@@ -1087,7 +1320,9 @@
                     <div class="footer-links">
                         <a href="#about">About</a>
                         <a href="#services">Services</a>
-                        <a href="#areas">Areas</a>
+                        <a href="#why-east-bay">Why East Bay</a>
+                        <a href="#market">Market Data</a>
+                        <a href="#faq">FAQ</a>
                         <a href="#contact">Contact</a>
                     </div>
                 </div>
@@ -1162,9 +1397,10 @@
         setTimeout(function() { t.classList.remove('show'); }, 4000);
       }
 
-      // --- Navbar Scroll ---
+      // --- Navbar Scroll + Progress Bar ---
       var navbar = document.getElementById('navbar');
       var backToTop = document.getElementById('backToTop');
+      var scrollProgress = document.getElementById('scrollProgress');
       window.addEventListener('scroll', function() {
         var y = window.scrollY;
         if (y > 50) { navbar.classList.add('scrolled'); }
@@ -1172,6 +1408,12 @@
         if (backToTop) {
           if (y > 500) { backToTop.classList.add('visible'); }
           else { backToTop.classList.remove('visible'); }
+        }
+        // Scroll progress
+        if (scrollProgress) {
+          var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          var pct = docHeight > 0 ? (y / docHeight) * 100 : 0;
+          scrollProgress.style.width = pct + '%';
         }
       });
 
@@ -1247,22 +1489,28 @@
         requestAnimationFrame(step);
       }
 
-      var countersRan = false;
-      var counterObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting && !countersRan) {
-            countersRan = true;
-            document.querySelectorAll('[data-count]').forEach(function(el) {
-              var val = parseInt(el.getAttribute('data-count'));
-              var suffix = el.getAttribute('data-suffix') || '';
-              animateCounter(el, val, suffix);
-            });
-          }
-        });
-      }, { threshold: 0.3 });
+      // Counter observer for multiple stat sections
+      function createCounterObserver(container) {
+        var ran = false;
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting && !ran) {
+              ran = true;
+              container.querySelectorAll('[data-count]').forEach(function(el) {
+                var val = parseInt(el.getAttribute('data-count'));
+                var suffix = el.getAttribute('data-suffix') || '';
+                animateCounter(el, val, suffix);
+              });
+            }
+          });
+        }, { threshold: 0.3 });
+        obs.observe(container);
+      }
 
-      var statsSection = document.querySelector('.hero-stats');
-      if (statsSection) counterObserver.observe(statsSection);
+      var heroStats = document.querySelector('.hero-stats');
+      if (heroStats) createCounterObserver(heroStats);
+      var statsBanner = document.getElementById('stats-banner');
+      if (statsBanner) createCounterObserver(statsBanner);
 
       // --- FAQ Accordion ---
       document.querySelectorAll('.faq-toggle').forEach(function(toggle) {
