@@ -101,7 +101,19 @@
             "Investment Properties",
             "First-Time Buyers",
             "East Bay Real Estate"
-        ]
+        ],
+        "worksFor": {
+            "@type": "RealEstateAgent",
+            "name": "REeBroker Group",
+            "url": "https://reebroker.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "950 Boardwalk Suite 203",
+                "addressLocality": "San Marcos",
+                "addressRegion": "CA",
+                "postalCode": "92078"
+            }
+        }
     }
     </script>
 
@@ -748,6 +760,40 @@
             </div>
         </section>
 
+        <!-- Homebuyer Resources Section -->
+        <section id="resources">
+            <div class="container">
+                <div class="section-label">FREE RESOURCES</div>
+                <h2 class="section-title">Homebuyer & Investor Guides</h2>
+                <p class="section-subtitle">Practical knowledge to help you make smarter real estate decisions</p>
+
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:24px; margin-top:40px;">
+
+                    <div class="area-card fade-in" style="background:var(--white); border:1px solid #e5e7eb;">
+                        <div style="font-size:2rem; margin-bottom:12px;">🏡</div>
+                        <h3 style="color:var(--navy); font-size:1.15rem; margin-bottom:8px;">First-Time Buyer Checklist</h3>
+                        <p style="color:var(--gray-500); font-size:.9rem; line-height:1.6; margin-bottom:16px;">From pre-approval to closing day: the complete step-by-step guide for buying your first home in the East Bay. Covers timelines, costs, and common pitfalls to avoid.</p>
+                        <button class="btn btn-navy" data-scroll-to="contact" style="font-size:.85rem; padding:10px 20px;">Get Free Guide</button>
+                    </div>
+
+                    <div class="area-card fade-in fade-in-delay-1" style="background:var(--white); border:1px solid #e5e7eb;">
+                        <div style="font-size:2rem; margin-bottom:12px;">📈</div>
+                        <h3 style="color:var(--navy); font-size:1.15rem; margin-bottom:8px;">East Bay Investment Guide</h3>
+                        <p style="color:var(--gray-500); font-size:.9rem; line-height:1.6; margin-bottom:16px;">Rental yields, cap rates, and cash flow projections across all 7 cities. Learn which neighborhoods offer the best returns and how to evaluate deals like a pro.</p>
+                        <button class="btn btn-navy" data-scroll-to="contact" style="font-size:.85rem; padding:10px 20px;">Get Free Guide</button>
+                    </div>
+
+                    <div class="area-card fade-in fade-in-delay-2" style="background:var(--white); border:1px solid #e5e7eb;">
+                        <div style="font-size:2rem; margin-bottom:12px;">🔑</div>
+                        <h3 style="color:var(--navy); font-size:1.15rem; margin-bottom:8px;">Relocating to East Bay</h3>
+                        <p style="color:var(--gray-500); font-size:.9rem; line-height:1.6; margin-bottom:16px;">Moving from SF, the Peninsula, or out of state? Compare school districts, commute times, lifestyle, and housing costs across all East Bay cities in one guide.</p>
+                        <button class="btn btn-navy" data-scroll-to="contact" style="font-size:.85rem; padding:10px 20px;">Get Free Guide</button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
         <!-- Testimonials Section -->
         <section id="testimonials">
             <div class="container">
@@ -933,6 +979,12 @@
                                     </svg>
                                 </a>
                             </div>
+
+                            <!-- Blinq QR Code -->
+                            <div style="margin-top:24px;padding:20px;background:var(--white);border-radius:12px;text-align:center;">
+                                <img src="images/blinq-qr.png" alt="Scan to save Manish's contact info" width="140" height="140" style="width:140px;height:140px;border-radius:8px;">
+                                <p style="margin-top:8px;font-size:.85rem;color:var(--gray-500);font-weight:500;">Scan to save my contact</p>
+                            </div>
                         </div>
                     </div>
 
@@ -1041,7 +1093,7 @@
             </div>
 
             <div class="footer-bottom">
-                <div>&copy; 2026 Homes With Manish. All rights reserved. CA DRE License #02247006</div>
+                <div>&copy; 2026 Homes With Manish. All rights reserved.<br>Manish Anand, CA DRE #02247006 | REeBroker Group, CA DRE #01522411</div>
                 <div class="footer-legal">
                     <a href="privacy.html">Privacy Policy</a>
                     <a href="terms.html">Terms of Service</a>
