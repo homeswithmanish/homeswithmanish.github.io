@@ -54,12 +54,14 @@
   transition: var(--transition);
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .blog-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
   border-color: var(--gold-light);
+  cursor: pointer;
 }
 
 .blog-card-image {
@@ -117,6 +119,15 @@
 .blog-card-body h3 a {
   color: var(--navy);
   transition: var(--transition);
+  text-decoration: none;
+}
+
+/* Stretched link: makes entire card clickable */
+.blog-card-body h3 a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
 }
 
 .blog-card-body h3 a:hover {
@@ -413,12 +424,14 @@
   overflow: hidden;
   border: 1px solid var(--gray-100);
   transition: var(--transition);
+  position: relative;
 }
 
 .related-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
   border-color: var(--gold-light);
+  cursor: pointer;
 }
 
 .related-image {
@@ -457,6 +470,15 @@
 .related-content h3 a {
   color: var(--navy);
   transition: var(--transition);
+  text-decoration: none;
+}
+
+/* Stretched link: makes entire related card clickable */
+.related-content h3 a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
 }
 
 .related-content h3 a:hover {
