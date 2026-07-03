@@ -23,4 +23,20 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
 Sitemap: https://homeswithmanish.com/sitemap.xml
+
+# AI/LLM content index
+# llms.txt: https://homeswithmanish.com/llms.txt
+# llms-full.txt: https://homeswithmanish.com/llms-full.txt

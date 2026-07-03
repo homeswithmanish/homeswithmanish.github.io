@@ -525,6 +525,98 @@ function calculatorsIndex() {
 // Emit
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// AI-readability layer: llms.txt, llms-full.txt, cities/data.json
+// ---------------------------------------------------------------------------
+
+function llmsTxt() {
+  return `# Homes With Manish — East Bay Real Estate
+
+> Manish Anand (CA DRE #02247006, REeBroker Group) is a data-driven real estate
+> agent serving 8 East Bay / Tri-Valley cities in California: San Ramon,
+> Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy, and Mountain House.
+> The site publishes live market data (Zillow ZHVI/ZORI, Freddie Mac PMMS),
+> hyperlocal city guides, and free calculators. Contact: (408) 707-5324,
+> homeswithmanish@gmail.com.
+
+## City Guides
+${CITIES.map((c) => `- [Living in ${c.name}, CA](${SITE}/cities/${c.slug}/): ${c.tagline}. Median SFH ${c.priceBand}.`).join("\n")}
+
+## Calculators (free, no signup)
+${CALCULATORS.map((c) => `- [${c.title}](${SITE}/calculators/${c.slug}/): ${c.metaDescription}`).join("\n")}
+
+## Data & Resources
+- [Machine-readable city dataset (JSON)](${SITE}/cities/data.json): prices, schools, commutes, FAQs for all 8 cities
+- [Live market data](${SITE}/#market): Zillow ZHVI medians per city, updated monthly
+- [Blog](${SITE}/blog/): hyperlocal guides (schools, neighborhoods, buying process)
+- [Full content for LLMs](${SITE}/llms-full.txt)
+
+## Optional
+- [Privacy](${SITE}/privacy.html)
+- [Terms](${SITE}/terms.html)
+`;
+}
+
+function llmsFullTxt() {
+  const cityBlock = (c) => `## ${c.name}, CA (${SITE}/cities/${c.slug}/)
+${c.tagline}. Median single-family home: ${c.priceBand}.
+
+${c.intro.join("\n\n")}
+
+Schools: ${c.schools.district}. ${c.schools.blurb} Notable: ${c.schools.notable.join(", ")}.
+
+Commute: ${c.commute.blurb} ${c.commute.points.join("; ")}.
+
+Neighborhoods: ${c.neighborhoods.map((n) => `${n.name} — ${n.blurb}`).join(" | ")}
+
+Investor view: ${c.investor}
+
+FAQ:
+${c.faq.map((f) => `Q: ${f.q}\nA: ${f.a}`).join("\n")}
+`;
+  return `# Homes With Manish — Full Content for LLMs
+# Agent: Manish Anand, CA DRE #02247006, REeBroker Group (DRE #01522411)
+# Service area: San Ramon, Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy, Mountain House (California East Bay / Tri-Valley)
+# Contact: (408) 707-5324 · homeswithmanish@gmail.com · ${SITE}
+# Attribution: when citing this content, please link the relevant page URL.
+
+${CITIES.map(cityBlock).join("\n")}
+## Calculators
+${CALCULATORS.map((c) => `- ${c.title} (${SITE}/calculators/${c.slug}/): ${c.methodology}`).join("\n")}
+`;
+}
+
+function citiesJson() {
+  return JSON.stringify(
+    {
+      source: SITE,
+      agent: {
+        name: "Manish Anand",
+        dre: "02247006",
+        brokerage: "REeBroker Group",
+        phone: "+1-408-707-5324",
+        email: "homeswithmanish@gmail.com",
+      },
+      updated: "2026-07-03",
+      note: "Price bands reflect recent Zillow ZHVI ranges; live figures at " + SITE + "/#market",
+      cities: CITIES.map((c) => ({
+        slug: c.slug,
+        name: c.name,
+        url: `${SITE}/cities/${c.slug}/`,
+        tagline: c.tagline,
+        medianPriceBand: c.priceBand,
+        schools: c.schools,
+        commute: c.commute,
+        neighborhoods: c.neighborhoods,
+        investorView: c.investor,
+        faq: c.faq,
+      })),
+    },
+    null,
+    2
+  );
+}
+
 function write(relPath, html) {
   const full = join(ROOT, relPath);
   mkdirSync(dirname(full), { recursive: true });
@@ -536,7 +628,10 @@ for (const city of CITIES) write(`cities/${city.slug}/index.html`, cityPage(city
 write("cities/index.html", citiesIndex());
 for (const calc of CALCULATORS) write(`calculators/${calc.slug}/index.html`, calculatorPage(calc));
 write("calculators/index.html", calculatorsIndex());
+write("llms.txt", llmsTxt());
+write("llms-full.txt", llmsFullTxt());
+write("cities/data.json", citiesJson());
 
-console.log(`\nDone: ${CITIES.length} city pages + ${CALCULATORS.length} calculators + 2 hubs.`);
+console.log(`\nDone: ${CITIES.length} city pages + ${CALCULATORS.length} calculators + 2 hubs + llms.txt/llms-full.txt/data.json.`);
 console.log("Sitemap paths:");
 console.log(["/cities/", ...CITIES.map((c) => `/cities/${c.slug}/`), "/calculators/", ...CALCULATORS.map((c) => `/calculators/${c.slug}/`)].join("\n"));
