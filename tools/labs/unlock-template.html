@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Private Preview</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: #0e1116; color: #e6e8ec; font-family: system-ui, -apple-system, sans-serif;
+  }
+  .lock-card {
+    width: min(400px, 92vw); text-align: center; padding: 44px 34px;
+    background: #161b23; border: 1px solid #262d38; border-radius: 16px;
+  }
+  .lock-icon { font-size: 40px; margin-bottom: 14px; }
+  h1 { font-size: 19px; font-weight: 700; margin-bottom: 6px; }
+  p { font-size: 13.5px; color: #9aa3b2; margin-bottom: 22px; line-height: 1.5; }
+  input {
+    width: 100%; padding: 12px 14px; font-size: 15px; border-radius: 10px;
+    border: 1px solid #313a48; background: #0e1116; color: #e6e8ec; outline: none;
+    margin-bottom: 12px; text-align: center;
+  }
+  input:focus { border-color: #5b8dee; }
+  button {
+    width: 100%; padding: 12px; font-size: 15px; font-weight: 700; border: none;
+    border-radius: 10px; background: #5b8dee; color: #fff; cursor: pointer;
+  }
+  button:disabled { opacity: .55; cursor: wait; }
+  .err { color: #ff7a7a; font-size: 13px; margin-top: 12px; min-height: 18px; }
+  .shake { animation: shake .35s; }
+  @keyframes shake { 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
+</style>
+</head>
+<body>
+<div class="lock-card" id="card">
+  <div class="lock-icon">🔒</div>
+  <h1>Private Preview</h1>
+  <p>This page is invite-only. Enter the access code you were given.</p>
+  <form id="form">
+    <input id="pw" type="password" placeholder="access code" autocomplete="off" autofocus>
+    <button id="btn" type="submit">Unlock</button>
+  </form>
+  <div class="err" id="err"></div>
+</div>
+<script>
+const DATA = __LABS_PAYLOAD__;
+
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const enc = new TextEncoder();
+
+async function deriveKek(password, salt) {
+  const mat = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey(
+    { name: 'PBKDF2', salt, iterations: DATA.iter, hash: 'SHA-256' },
+    mat, { name: 'AES-GCM', length: 256 }, false, ['decrypt']
+  );
+}
+
+async function tryUnlock(password) {
+  for (const entry of DATA.keys) {
+    try {
+      const kek = await deriveKek(password, b64(entry.salt));
+      const rawK = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(entry.iv) }, kek, b64(entry.wrapped));
+      const K = await crypto.subtle.importKey('raw', rawK, 'AES-GCM', false, ['decrypt']);
+      const gz = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(DATA.payload.iv) }, K, b64(DATA.payload.ct));
+      let html;
+      if (DATA.gz) {
+        if (typeof DecompressionStream === 'undefined') {
+          throw new Error('This browser is too old for this page — please use a current Chrome, Safari, Firefox, or Edge.');
+        }
+        const stream = new Blob([gz]).stream().pipeThrough(new DecompressionStream('gzip'));
+        html = await new Response(stream).text();
+      } else {
+        html = new TextDecoder().decode(gz);
+      }
+      document.open();
+      document.write(html);
+      document.close();
+      return true;
+    } catch (e) {
+      if (e && e.message && e.message.indexOf('browser') !== -1) { showErr(e.message); return false; }
+      /* wrong key for this entry — try the next one */
+    }
+  }
+  return false;
+}
+
+const card = document.getElementById('card');
+const err = document.getElementById('err');
+const btn = document.getElementById('btn');
+const pw = document.getElementById('pw');
+
+function showErr(msg) {
+  err.textContent = msg;
+  card.classList.remove('shake');
+  void card.offsetWidth;
+  card.classList.add('shake');
+}
+
+async function attempt(password) {
+  if (!password) return;
+  btn.disabled = true;
+  btn.textContent = 'Unlocking…';
+  const ok = await tryUnlock(password.trim());
+  if (!ok) {
+    btn.disabled = false;
+    btn.textContent = 'Unlock';
+    showErr('That code didn’t work. Check for typos — codes are case-sensitive.');
+  }
+}
+
+document.getElementById('form').addEventListener('submit', e => {
+  e.preventDefault();
+  attempt(pw.value);
+});
+
+// One-click links: /labs/<slug>/#k=<code> — the fragment never reaches the server.
+const m = location.hash.match(/[#&]k=([^&]+)/);
+if (m) attempt(decodeURIComponent(m[1]));
+</script>
+</body>
+</html>

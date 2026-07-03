@@ -1,0 +1,10 @@
+{
+  "friends": {
+    "manish": "",
+    "friend1": "",
+    "friend2": ""
+  },
+  "projects": {
+    "tax-season": ["manish", "friend1", "friend2"]
+  }
+}
