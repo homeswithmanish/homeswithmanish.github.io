@@ -1,5 +1,5 @@
 # Roadmap — Homes With Manish Platform
-Phases are approval-gated (project charter). Status: **Phase 0 COMPLETE (2026-07-03). Phase 1 awaiting approval.**
+Phases are approval-gated (project charter). Status: **Phase 0 COMPLETE. Phase 1 code COMPLETE (2026-07-03) — production launch pending Manish's setup checklist (see below and `homeswithmanish-app/README.md`).**
 
 ---
 
@@ -54,6 +54,7 @@ Phases are approval-gated (project charter). Status: **Phase 0 COMPLETE (2026-07
 ---
 
 **Action items for Manish (external, cannot be done by the agent):**
-1. Contact MLSListings vendor/API program: request IDX (RESO Web API) access; ask explicitly whether NorCal MLS Alliance shared listings (Bay East/bridgeMLS coverage of Alameda, Contra Costa, San Joaquin counties) are includable in IDX display. Get REeBroker's signature on the IDX agreement.
-2. Confirm testimonials are from real clients (Phase 0 item 3).
-3. DNS: be ready to add a CNAME record for `app.homeswithmanish.com` → Vercel (Phase 1).
+0. **URGENT (D-010):** Apps Script deployment returns 403 "Access Denied" to anonymous requests — the live site's market data / rates / rental sections and possibly lead form POSTs may be broken for visitors. Apps Script editor → Deploy → Manage deployments → edit → Execute as *Me*, Who has access *Anyone* → Deploy. If the /exec URL changes, update it in index.html, admin.html, and the app's `APPS_SCRIPT_URL`.
+1. **Phase 1 launch checklist (~30 min):** follow `homeswithmanish-app/README.md` — create Supabase project (+ admin user, signups disabled), import repo to Vercel with env vars, add DNS CNAME `app` → `cname.vercel-dns.com`, run `prisma db push` against Supabase, run `scripts/import-leads.mjs` backfill. Then I'll add the dual-write to the marketing site forms.
+2. Contact MLSListings vendor/API program: request IDX (RESO Web API) access; ask explicitly whether NorCal MLS Alliance shared listings (Bay East/bridgeMLS coverage of Alameda, Contra Costa, San Joaquin counties) are includable in IDX display. Get REeBroker's signature on the IDX agreement.
+3. Create the GitHub repo for `homeswithmanish-app` and push (or tell me and I'll push once the remote exists).

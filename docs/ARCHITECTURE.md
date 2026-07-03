@@ -43,7 +43,8 @@
 5. **`WebSite SearchAction` schema** points to `/search?q=` which doesn't exist.
 6. **Single Apps Script URL** serves both public actions and admin actions; admin key travels as a GET query param (logged in browser history/proxies).
 7. **Scalability ceiling** — no server, no auth, no database beyond Sheets; client portal, IDX search, and AI features cannot be built on the current stack.
-8. Stats claim "8 cities" but one guide card says "all 7 cities" — copy drift.
+8. ~~Stats claim "8 cities" but one guide card says "all 7 cities" — copy drift.~~ Fixed in Phase 0.
+9. **URGENT (found 2026-07-03, Phase 1 verification): the Apps Script web app returns HTTP 403 "Access Denied — You need access" to anonymous server-side requests.** The same URL is what index.html calls from visitors' browsers for market data, mortgage rates, rental yields, AND form submissions (doPost). If the deployment's "Who has access" is no longer "Anyone", these features are likely failing for all logged-out visitors right now. **Fix (Manish, ~2 min):** Apps Script editor → Deploy → Manage deployments → ✏️ edit the active deployment → Execute as: *Me*, Who has access: *Anyone* → Deploy. If Google issues a new /exec URL, update `SCRIPT_URL` in index.html and `GOOGLE_SCRIPT_URL` in admin.html, and `APPS_SCRIPT_URL` in the app tier env.
 
 ## 2. Target Architecture (per D-001, approved 2026-07-03)
 
