@@ -95,7 +95,8 @@ test('Has about section', /id=["']about["']/.test(indexHtml));
 test('Has services section', /id=["']services["']/.test(indexHtml));
 test('Has areas section', /id=["']areas["']/.test(indexHtml));
 test('Has market data section', /id=["']market["']/.test(indexHtml));
-test('Has testimonials section', /id=["']testimonials["']/.test(indexHtml));
+// Testimonials removed 2026-07-03 (D-006) until real client reviews exist (~end of July 2026)
+test('No unsubstantiated testimonials section', !/id=["']testimonials["']/.test(indexHtml));
 test('Has contact section', /id=["']contact["']/.test(indexHtml));
 test('Has FAQ section', /faq/i.test(indexHtml));
 
@@ -138,7 +139,8 @@ test('Has Why East Bay section', /id=["']why-east-bay["']/.test(indexHtml));
 test('Has insights/blog teaser section', /id=["']insights["']/.test(indexHtml));
 test('Has scroll progress bar', /scroll-progress/.test(indexHtml));
 test('Has BreadcrumbList schema', /BreadcrumbList/.test(indexHtml));
-test('Has AggregateRating schema', /AggregateRating/.test(indexHtml));
+// AggregateRating schema removed 2026-07-03 (D-006) — no on-page review source; re-add with real reviews
+test('No AggregateRating schema without real reviews', !/AggregateRating/.test(indexHtml));
 test('Has expanded FAQ (11+ questions)', (indexHtml.match(/faq-item/g) || []).length >= 11);
 test('FAQ has school district question', /school.*district|best.*school/i.test(indexHtml));
 test('FAQ has investment cities question', /best.*cities.*investment|investment.*east.*bay/i.test(indexHtml));
