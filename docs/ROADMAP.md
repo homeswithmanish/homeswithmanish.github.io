@@ -1,5 +1,5 @@
 # Roadmap — Homes With Manish Platform
-Phases are approval-gated (project charter). Status: **Phase 0 COMPLETE. Phase 1 code COMPLETE (2026-07-03) — production launch pending Manish's setup checklist (see below and `homeswithmanish-app/README.md`).**
+Phases are approval-gated (project charter). Status: **Phases 0 & 2 COMPLETE. Phase 1 code COMPLETE — production launch pending Manish's setup checklist (below + `homeswithmanish-app/README.md`). Phase 2 shipped 2026-07-03: city pages, calculators, growth playbook (`docs/GROWTH-PLAYBOOK.md`).**
 
 ---
 

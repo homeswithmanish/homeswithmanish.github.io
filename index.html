@@ -286,9 +286,9 @@
 
             <nav class="nav-links">
                 <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#why-east-bay">East Bay</a>
+                <a href="cities/">Cities</a>
                 <a href="#market">Market Data</a>
+                <a href="calculators/">Calculators</a>
                 <a href="blog/">Blog</a>
                 <a href="#faq">FAQ</a>
                 <a href="#contact">Contact</a>
@@ -307,9 +307,9 @@
     <div class="mobile-menu" id="mobileMenu">
         <span class="mobile-close" id="mobileClose">✕</span>
         <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#why-east-bay">Why East Bay</a>
+        <a href="cities/">Cities</a>
         <a href="#market">Market Data</a>
+        <a href="calculators/">Calculators</a>
         <a href="blog/">Blog</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
@@ -1258,10 +1258,10 @@
                     <div class="footer-links">
                         <a href="#about">About</a>
                         <a href="#services">Services</a>
-                        <a href="#why-east-bay">Why East Bay</a>
+                        <a href="cities/">City Guides</a>
+                        <a href="calculators/">Calculators</a>
                         <a href="#market">Market Data</a>
                         <a href="blog/">Blog</a>
-                        <a href="#faq">FAQ</a>
                         <a href="#contact">Contact</a>
                     </div>
                 </div>
@@ -1279,11 +1279,14 @@
                 <div>
                     <h4>Markets</h4>
                     <div class="footer-links">
-                        <a href="#areas">San Ramon</a>
-                        <a href="#areas">Pleasanton</a>
-                        <a href="#areas">Danville & Dublin</a>
-                        <a href="#areas">Livermore & Fremont</a>
-                        <a href="#areas">Tracy</a>
+                        <a href="cities/san-ramon/">San Ramon</a>
+                        <a href="cities/pleasanton/">Pleasanton</a>
+                        <a href="cities/danville/">Danville</a>
+                        <a href="cities/dublin/">Dublin</a>
+                        <a href="cities/livermore/">Livermore</a>
+                        <a href="cities/fremont/">Fremont</a>
+                        <a href="cities/tracy/">Tracy</a>
+                        <a href="cities/mountain-house/">Mountain House</a>
                     </div>
                 </div>
             </div>
@@ -1535,12 +1538,14 @@
                     var dom = city.daysOnMarket || 'N/A';
                     var chg = formatChange(city.priceChange);
                     var delay = delays[i % 3];
-                    cardsHtml += '<div class="area-card fade-in' + delay + '">'
+                    var citySlug = String(city.city).toLowerCase().replace(/\s+/g, '-');
+                    cardsHtml += '<a class="area-card fade-in' + delay + '" href="cities/' + citySlug + '/" style="display:block;text-decoration:none;color:inherit;">'
                       + '<h3><span class="area-emoji">' + emoji + '</span> ' + city.city + '</h3>'
                       + '<div class="area-stat"><span class="stat-label">Median SFH</span><span class="stat-value">' + price + '</span></div>'
                       + '<div class="area-stat"><span class="stat-label">Days on Market</span><span class="stat-value">' + dom + '</span></div>'
                       + '<div class="area-stat"><span class="stat-label">YoY Change</span><span class="stat-value ' + chg.cls + '">' + chg.html + '</span></div>'
-                      + '</div>';
+                      + '<div style="margin-top:12px;color:var(--gold);font-size:.85rem;font-weight:600;">View city guide →</div>'
+                      + '</a>';
                   });
                   areasGrid.innerHTML = cardsHtml;
                   // Re-observe new cards for fade-in animation

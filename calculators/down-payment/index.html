@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Down Payment Planner | Homes With Manish</title>
+    <meta name="description" content="Plan your down payment for an East Bay home: savings timeline, closing-cost cushion, and PMI trade-offs for buying with less than 20% down.">
+    <link rel="canonical" href="https://homeswithmanish.com/calculators/down-payment/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://homeswithmanish.com/calculators/down-payment/">
+    <meta property="og:title" content="Down Payment Planner | Homes With Manish">
+    <meta property="og:description" content="Plan your down payment for an East Bay home: savings timeline, closing-cost cushion, and PMI trade-offs for buying with less than 20% down.">
+    <meta property="og:image" content="https://homeswithmanish.com/images/logo-square.svg">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%230F1B2D' width='32' height='32'/><path fill='%23C9A96E' d='M16 4l8 8v12H8V12l8-8z'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+      .page-hero { background: var(--navy); color: var(--white); padding: 140px 0 64px; }
+      .page-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); margin: 12px 0; }
+      .page-hero p.tagline { color: var(--gray-400); font-size: 1.15rem; max-width: 640px; }
+      .page-hero .price-band { display:inline-block; margin-top:18px; background: rgba(201,169,110,.15); border:1px solid var(--gold); color: var(--gold); border-radius: 999px; padding: 8px 18px; font-weight: 600; }
+      .content-section { padding: 56px 0; }
+      .content-section.alt { background: var(--off-white); }
+      .content-section h2 { font-family: var(--font-display); color: var(--navy); font-size: 1.7rem; margin-bottom: 18px; }
+      .content-section p.lead { color: var(--gray-600); line-height: 1.75; margin-bottom: 16px; max-width: 780px; }
+      .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 28px; }
+      .info-card { background: var(--white); border: 1px solid #eee; border-radius: 14px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.04); }
+      .info-card h3 { color: var(--navy); font-size: 1.05rem; margin-bottom: 8px; }
+      .info-card p { color: var(--gray-600); font-size: .95rem; line-height: 1.65; }
+      .check-list { list-style: none; padding: 0; margin: 16px 0 0; }
+      .check-list li { padding: 8px 0 8px 30px; position: relative; color: var(--gray-600); line-height: 1.6; }
+      .check-list li::before { content: "✓"; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+      .cta-band { background: var(--navy); border-radius: 18px; padding: 44px 32px; text-align: center; color: var(--white); }
+      .cta-band h2 { color: var(--white); font-family: var(--font-display); margin-bottom: 10px; }
+      .cta-band p { color: var(--gray-400); margin-bottom: 22px; }
+      .calc-card { max-width: 720px; margin: 32px auto 0; background: var(--white); border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,.08); padding: 36px; }
+      .calc-form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+      .calc-results { margin-top: 28px; background: var(--navy); border-radius: 12px; padding: 22px 26px; display: none; }
+      .calc-result-row { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.08); color: var(--gray-400); font-size: .95rem; }
+      .calc-result-row strong { color: var(--white); text-align: right; }
+      .calc-result-row.calc-result-total { border-bottom: 0; padding-top: 14px; }
+      .calc-result-row.calc-result-total strong { color: var(--gold); font-size: 1.15rem; }
+      .live-stat-note { font-size: .85rem; color: var(--gray-400); margin-top: 10px; }
+      .breadcrumb-bar { padding: 96px 0 0; }
+      .breadcrumb-bar ol { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; font-size: .85rem; color: var(--gray-400); }
+      .breadcrumb-bar a { color: var(--gray-600); text-decoration: none; }
+      .breadcrumb-bar li + li::before { content: "›"; margin-right: 6px; color: var(--gray-400); }
+      .hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin-top: 36px; }
+      .hub-card { display: block; background: var(--white); border: 1px solid #eee; border-radius: 16px; padding: 28px; text-decoration: none; box-shadow: 0 2px 12px rgba(0,0,0,.05); transition: transform .2s, box-shadow .2s; }
+      .hub-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,.1); }
+      .hub-card h3 { color: var(--navy); font-family: var(--font-display); font-size: 1.25rem; margin: 8px 0; }
+      .hub-card p { color: var(--gray-600); font-size: .95rem; line-height: 1.6; }
+      .hub-card .hub-emoji { font-size: 1.8rem; }
+      .hub-card .hub-band { color: var(--gold); font-weight: 700; font-size: .95rem; margin-top: 10px; display: block; }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CK983XLXCC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-CK983XLXCC');
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://homeswithmanish.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Calculators",
+          "item": "https://homeswithmanish.com/calculators/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "How long until I can buy?",
+          "item": "https://homeswithmanish.com/calculators/down-payment/"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I really need 20% down in the Bay Area?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Conventional loans allow as little as 3–5% down (with PMI), and strong buyers win offers at 10% down regularly. 20% avoids PMI and strengthens offers, but waiting years to reach it in an appreciating market has its own cost."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What about jumbo loans?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most Tri-Valley purchases exceed conforming limits and use jumbo financing, which typically wants 10–20% down and stronger reserves. Tracy and Mountain House often fit within conforming/high-balance limits — one reason first-time buyers start there."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use gift funds or RSUs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Gift funds from family are broadly allowed with documentation, and lenders increasingly count vested RSU income for tech buyers. Both need to be papered correctly — connect with a lender early (I can introduce you)."
+          }
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Down Payment Planner",
+      "url": "https://homeswithmanish.com/calculators/down-payment/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+</head>
+<body>
+
+    <header class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="/" class="nav-logo" aria-label="Homes With Manish - Home">
+                    <img src="/images/logo.svg" alt="Homes With Manish" height="48" width="160" style="height:48px;width:auto;">
+                </a>
+            </div>
+            <nav class="nav-links">
+                <a href="/#about">About</a>
+                <a href="/cities/">Cities</a>
+                <a href="/#market">Market Data</a>
+                <a href="/calculators/">Calculators</a>
+                <a href="/blog/">Blog</a>
+                <a href="/#faq">FAQ</a>
+                <a href="/#contact" class="nav-cta">Get Free Consultation</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+    <div class="mobile-menu" id="mobileMenu">
+        <span class="mobile-close" id="mobileClose">✕</span>
+        <a href="/#about">About</a>
+        <a href="/cities/">Cities</a>
+        <a href="/#market">Market Data</a>
+        <a href="/calculators/">Calculators</a>
+        <a href="/blog/">Blog</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/#contact">Get Free Consultation</a>
+    </div>
+    <main>
+        <div class="breadcrumb-bar">
+            <div class="container">
+                <nav aria-label="Breadcrumb"><ol>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><span aria-current="page">How long until I can buy?</span></li>
+                </ol></nav>
+            </div>
+        </div>
+
+        <section class="page-hero" style="padding-top:24px;">
+            <div class="container">
+                <div class="section-label" style="color:var(--gold);">FREE TOOL</div>
+                <h1>Down Payment Planner</h1>
+                <p class="tagline">How long until I can buy?</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <p class="lead">The down payment is the biggest hurdle for most East Bay buyers — but 20% is a benchmark, not a rule. Conventional loans start at 3–5% down, and buying with PMI sooner is sometimes cheaper than renting while you save toward a rising target.</p>
+                <p class="lead">This planner turns your target home price and monthly savings into a concrete timeline, including the closing-cost cushion buyers often forget.</p>
+
+                <div class="calc-card">
+                    <div class="calc-form-grid">
+
+      <div><label for="dp-price" style="display:block;font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:6px;">Target Home Price</label><input id="dp-price" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:1rem;box-sizing:border-box;font-family:inherit;" type="text" inputmode="numeric" placeholder="$1,000,000"></div>
+      <div><label for="dp-pct" style="display:block;font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:6px;">Target Down Payment (%)</label><input id="dp-pct" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:1rem;box-sizing:border-box;font-family:inherit;" type="number" value="20" min="3" max="100"></div>
+      <div><label for="dp-saved" style="display:block;font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:6px;">Current Savings for the Purchase</label><input id="dp-saved" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:1rem;box-sizing:border-box;font-family:inherit;" type="text" inputmode="numeric" placeholder="$120,000"></div>
+      <div><label for="dp-monthly" style="display:block;font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:6px;">Monthly Savings Going Forward</label><input id="dp-monthly" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:1rem;box-sizing:border-box;font-family:inherit;" type="text" inputmode="numeric" placeholder="$4,000"></div>
+                    </div>
+                    <div style="text-align:center;margin-top:26px;">
+                        <button class="btn btn-primary btn-lg" id="calc-run">Calculate</button>
+                    </div>
+                    <div class="calc-results" id="calc-results">
+
+      <div class="calc-result-row"><span>Down payment needed</span><strong id="dp-need">—</strong></div>
+      <div class="calc-result-row"><span>+ Closing cost cushion (~2%)</span><strong id="dp-cc">—</strong></div>
+      <div class="calc-result-row"><span>Remaining to save</span><strong id="dp-gap">—</strong></div>
+      <div class="calc-result-row calc-result-total"><span>Time to goal</span><strong id="dp-time">—</strong></div>
+                    </div>
+                    <p style="text-align:center;font-size:.75rem;color:var(--gray-400);margin-top:14px;">Estimates only — not financial, tax, or lending advice. See methodology below.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section alt">
+            <div class="container">
+                <div class="section-label">HOW IT WORKS</div>
+                <h2>Methodology &amp; Assumptions</h2>
+                <p class="lead">The plan targets your chosen down payment plus a ~2% closing-cost cushion. It doesn't model home-price appreciation working against you while you save, investment returns on your savings, or PMI trade-offs of buying sooner with less down — all three are worth a real conversation, because in appreciating markets waiting to reach 20% can cost more than PMI would.</p>
+                <p class="lead"><strong>More tools:</strong> <a href="/calculators/affordability/">How much house can I afford?</a> · <a href="/calculators/buy-vs-rent/">Should I buy or keep renting?</a> · <a href="/calculators/closing-costs/">What will I pay at closing?</a> · <a href="/calculators/property-tax/">What will my property taxes be?</a></p>
+            </div>
+        </section>
+
+        <section class="content-section alt">
+            <div class="container">
+                <div class="section-label">FREQUENTLY ASKED</div>
+                <h2>Common Questions</h2>
+                <div class="faq-wrapper">
+                    <div class="faq-item">
+                        <button class="faq-toggle" aria-expanded="false"><span>Do I really need 20% down in the Bay Area?</span><span class="faq-icon">+</span></button>
+                        <div class="faq-content">No. Conventional loans allow as little as 3–5% down (with PMI), and strong buyers win offers at 10% down regularly. 20% avoids PMI and strengthens offers, but waiting years to reach it in an appreciating market has its own cost.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-toggle" aria-expanded="false"><span>What about jumbo loans?</span><span class="faq-icon">+</span></button>
+                        <div class="faq-content">Most Tri-Valley purchases exceed conforming limits and use jumbo financing, which typically wants 10–20% down and stronger reserves. Tracy and Mountain House often fit within conforming/high-balance limits — one reason first-time buyers start there.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-toggle" aria-expanded="false"><span>Can I use gift funds or RSUs?</span><span class="faq-icon">+</span></button>
+                        <div class="faq-content">Gift funds from family are broadly allowed with documentation, and lenders increasingly count vested RSU income for tech buyers. Both need to be papered correctly — connect with a lender early (I can introduce you).</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script>
+        (function() {
+          function num(id) {
+            var v = document.getElementById(id).value || '';
+            return parseFloat(String(v).replace(/[^0-9.]/g, '')) || 0;
+          }
+          function fmt(n) {
+            return '$' + Math.round(n).toLocaleString();
+          }
+          function set(id, text) { document.getElementById(id).textContent = text; }
+          function show() { document.getElementById('calc-results').style.display = 'block'; }
+
+      function calc() {
+        var price = num('dp-price'), saved = num('dp-saved'), monthly = num('dp-monthly');
+        var pct = (parseFloat(document.getElementById('dp-pct').value) || 20) / 100;
+        if (!price) return;
+        var need = price * pct, cushion = price * 0.02;
+        var gap = Math.max(0, need + cushion - saved);
+        set('dp-need', fmt(need) + ' (' + (pct * 100).toFixed(0) + '%)');
+        set('dp-cc', fmt(cushion));
+        set('dp-gap', fmt(gap));
+        if (gap === 0) { set('dp-time', 'You\u2019re ready now \u2014 let\u2019s talk strategy'); }
+        else if (!monthly) { set('dp-time', 'Enter monthly savings to see a timeline'); }
+        else {
+          var months = Math.ceil(gap / monthly);
+          var yrs = Math.floor(months / 12), mos = months % 12;
+          set('dp-time', (yrs ? yrs + ' yr ' : '') + mos + ' mo of saving');
+        }
+        show();
+      }
+          document.getElementById('calc-run').addEventListener('click', calc);
+          document.querySelectorAll('.calc-form-grid input, .calc-form-grid select').forEach(function(el) {
+            el.addEventListener('keydown', function(e) { if (e.key === 'Enter') calc(); });
+          });
+        })();
+        </script>
+        <section class="content-section">
+            <div class="container">
+                <div class="cta-band">
+                    <h2>Let's Talk Strategy</h2>
+                    <p>Free consultation, zero pressure — market analysis, financing guidance, and a plan built around your goals.</p>
+                    <a href="/#contact" class="btn btn-primary btn-lg">Get Your Free Consultation</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="/images/logo.svg" alt="Homes With Manish" height="44" width="150" style="height:44px;width:auto;margin-bottom:12px;">
+                    <p>Data-driven real estate expertise for buyers, sellers, and investors across the East Bay. Your trusted partner in finding home.</p>
+                </div>
+                <div>
+                    <h4>Explore</h4>
+                    <div class="footer-links">
+                        <a href="/#about">About</a>
+                        <a href="/cities/">City Guides</a>
+                        <a href="/calculators/">Calculators</a>
+                        <a href="/blog/">Blog</a>
+                        <a href="/#contact">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Cities</h4>
+                    <div class="footer-links">
+                        <a href="/cities/san-ramon/">San Ramon</a>
+                        <a href="/cities/pleasanton/">Pleasanton</a>
+                        <a href="/cities/danville/">Danville</a>
+                        <a href="/cities/dublin/">Dublin</a>
+                        <a href="/cities/livermore/">Livermore</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Calculators</h4>
+                    <div class="footer-links">
+                        <a href="/calculators/affordability/">How much house can I afford?</a>
+                        <a href="/calculators/buy-vs-rent/">Should I buy or keep renting?</a>
+                        <a href="/calculators/closing-costs/">What will I pay at closing?</a>
+                        <a href="/calculators/property-tax/">What will my property taxes be?</a>
+                        <a href="/calculators/down-payment/">How long until I can buy?</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>&copy; 2026 Homes With Manish. All rights reserved.<br>Manish Anand, CA DRE #02247006 | REeBroker Group, CA DRE #01522411</div>
+                <div class="footer-legal">
+                    <a href="/privacy.html">Privacy Policy</a>
+                    <a href="/terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+      var navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', function() {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+      });
+      var hamburger = document.getElementById('hamburger');
+      var mobileMenu = document.getElementById('mobileMenu');
+      var mobileClose = document.getElementById('mobileClose');
+      hamburger.addEventListener('click', function() { mobileMenu.classList.add('active'); });
+      mobileClose.addEventListener('click', function() { mobileMenu.classList.remove('active'); });
+      mobileMenu.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A' || e.target === mobileMenu) { mobileMenu.classList.remove('active'); }
+      });
+      var faqs = document.querySelectorAll('.faq-toggle');
+      faqs.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var item = btn.parentElement;
+          var open = item.classList.contains('active');
+          item.classList.toggle('active', !open);
+          btn.setAttribute('aria-expanded', String(!open));
+          var icon = btn.querySelector('.faq-icon');
+          if (icon) icon.textContent = open ? '+' : '−';
+        });
+      });
+    })();
+    </script>
+</body>
+</html>

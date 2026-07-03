@@ -85,7 +85,7 @@ test('Forms have submit buttons', /<button[^>]*type=["']submit["']/.test(indexHt
 console.log('\n\x1b[36mNavigation:\x1b[0m');
 test('Has About link', /#about/.test(indexHtml));
 test('Has Services link', /#services/.test(indexHtml));
-test('Has Areas link', /#areas/.test(indexHtml));
+test('Has Cities/Areas navigation', /href=["']cities\//.test(indexHtml));
 test('Has Contact link', /#contact/.test(indexHtml));
 test('Has mobile menu', /hamburger|mobile-menu/.test(indexHtml));
 
