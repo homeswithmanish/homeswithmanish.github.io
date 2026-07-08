@@ -868,11 +868,13 @@
 
         <!-- ============================================================
              TRUE MONTHLY COST CALCULATOR (Mello-Roos + HOA)
-             DATA WARNING: values in TC_PRESETS are PLANNING ESTIMATES.
-             Before promoting, replace cfdAnnual / hoaMonthly / taxRate with
-             figures verified against the City of Dublin AB 1483 exaction
-             schedule, Goodwin Consulting RMA documents, and county secured
-             tax bills, then update TC_VERIFIED with the verification date.
+             DATA PROVENANCE: Dublin special-tax figures are verified against the
+             City of Dublin FY2024-25 CFD tax administration reports (Goodwin
+             Consulting Group); see docs/DECISION_LOG.md D-013. San Ramon /
+             Dougherty Valley special taxes are per-parcel and not published
+             centrally, so those cfdAnnual values are planning estimates and HOA
+             figures are representative ranges. Refresh Dublin figures each year
+             from the newest admin report at dublin.ca.gov/2682.
              ============================================================ -->
         <section id="true-cost" style="background: var(--off-white);">
           <div class="container">
@@ -922,7 +924,7 @@
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
                       <div>
                         <label for="tc-cfd" style="display:block; font-size:.85rem; font-weight:600; color:var(--navy); margin-bottom:6px;">Mello-Roos $/yr</label>
-                        <input type="number" id="tc-cfd" value="2800" min="0" max="10000" step="50"
+                        <input type="number" id="tc-cfd" value="5900" min="0" max="10000" step="50"
                           style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-size:1rem; box-sizing:border-box;">
                       </div>
                       <div>
@@ -980,7 +982,7 @@
               </div>
 
               <p style="text-align:center; font-size:.75rem; color:var(--gray-400); margin-top:20px; max-width:760px; margin-left:auto; margin-right:auto;">
-                Estimates for planning only, not a loan quote. Special taxes are set per parcel by each Community Facilities District and can escalate annually. Verify exact amounts on the property's current secured tax bill and HOA disclosures before making offer decisions.
+                <strong style="color:var(--gray-600);">All figures shown are estimates for planning only</strong> — not a loan quote and not exact for any specific property. Even the Dublin special taxes drawn from FY2024-25 city reports vary by individual home size, tax zone, and parcel, and can escalate annually; San Ramon figures are planning estimates. Confirm the exact amounts on the property's current secured tax bill, its Notice of Special Tax, and HOA disclosures before making offer decisions.
               </p>
             </div>
           </div>
@@ -998,16 +1000,20 @@
 
           <script>
           (function () {
-            /* PLANNING ESTIMATES. Replace with verified county figures, then update TC_VERIFIED. */
-            var TC_VERIFIED = "Figures are planning estimates pending county verification";
+            /* Dublin special taxes verified against City of Dublin FY2024-25 CFD tax
+               administration reports (Goodwin Consulting Group) — see docs/DECISION_LOG.md D-013.
+               San Ramon / Dougherty Valley special taxes are per-parcel and not published
+               centrally, so those cfdAnnual values remain planning estimates; HOA figures are
+               representative ranges. Refresh Dublin figures yearly from the newest admin report. */
+            var TC_VERIFIED = "Dublin special taxes reflect the City of Dublin FY2024-25 CFD administration reports (Goodwin Consulting); San Ramon figures are planning estimates. Special taxes are set per parcel by home size or tax zone";
             var TC_PRESETS = [
-              { id:"boulevard",  city:"Dublin",    name:"Boulevard",     cfd:"CFD 2015-1 / 2017-1",  cfdAnnual:2800, hoaMonthly:265, taxRate:1.14, note:"Includes a services CFD component that does not expire with the bonds." },
-              { id:"eastranch",  city:"Dublin",    name:"East Ranch",    cfd:"CFD 2023-1",           cfdAnnual:3200, hoaMonthly:220, taxRate:1.14, note:"Newest Dublin CFD. Confirm escalator terms in the RMA before relying on this figure." },
-              { id:"dublinranch",city:"Dublin",    name:"Dublin Ranch",  cfd:"Varies by tract",      cfdAnnual:1900, hoaMonthly:180, taxRate:1.14, note:"Older districts. Some bonds are approaching payoff, which changes the math in your favor." },
-              { id:"westdublin", city:"Dublin",    name:"West Dublin",   cfd:"None typical",         cfdAnnual:0,    hoaMonthly:0,   taxRate:1.12, note:"Most older west-side tracts carry no special tax and no HOA." },
-              { id:"windemere",  city:"San Ramon", name:"Windemere",     cfd:"Dougherty Valley CFD", cfdAnnual:2400, hoaMonthly:60,  taxRate:1.13, note:"Parcel bonds vary by village and phase. Two identical homes one street apart can differ." },
-              { id:"galeranch",  city:"San Ramon", name:"Gale Ranch",    cfd:"Varies by phase",      cfdAnnual:1200, hoaMonthly:185, taxRate:1.13, note:"Generally higher HOA and lower special tax than Windemere. Compare the combined total." },
-              { id:"bridges",    city:"San Ramon", name:"The Bridges",   cfd:"Varies",               cfdAnnual:1000, hoaMonthly:210, taxRate:1.13, note:"Golf community. Confirm any club-adjacent assessments in the HOA package." }
+              { id:"boulevard",  city:"Dublin",    name:"Boulevard",     cfd:"Dublin CFD 2015-1 + 2017-1",  cfdAnnual:5900, hoaMonthly:265, taxRate:1.14, note:"Dublin Crossing. Facilities special tax runs $4,988–$5,830/yr by home size (FY24-25), plus a ~$75/yr services tax that does not expire with the bonds. Larger detached homes pay the top rate." },
+              { id:"eastranch",  city:"Dublin",    name:"East Ranch",    cfd:"Dublin CFD 2023-1",           cfdAnnual:5300, hoaMonthly:220, taxRate:1.14, note:"Newest Dublin CFD (formed 2023). Facilities tax runs about $2,040–$5,970/yr by tax zone, escalating 2%/yr; total tax is capped at 1.58% of sale price. Confirm the lot's tax zone." },
+              { id:"dublinranch",city:"Dublin",    name:"Dublin Ranch",  cfd:"No City CFD",                 cfdAnnual:0,    hoaMonthly:180, taxRate:1.14, note:"Built before Dublin's CFDs, so no City of Dublin Mello-Roos facilities tax applies. A Dublin USD school-facilities CFD may apply to some tracts — confirm on the parcel's secured tax bill." },
+              { id:"westdublin", city:"Dublin",    name:"West Dublin",   cfd:"No CFD",                      cfdAnnual:0,    hoaMonthly:0,   taxRate:1.12, note:"Older west-side tracts predate CFD financing and typically carry no Mello-Roos special tax and no HOA." },
+              { id:"windemere",  city:"San Ramon", name:"Windemere",     cfd:"Dougherty Valley CFD (est.)", cfdAnnual:2400, hoaMonthly:60,  taxRate:1.13, note:"Estimate — Contra Costa publishes special taxes only per parcel. Windemere carries the heaviest Mello-Roos of the three; many detached homes have little or no HOA. Verify on the tax bill." },
+              { id:"galeranch",  city:"San Ramon", name:"Gale Ranch",    cfd:"Dougherty Valley CFD (est.)", cfdAnnual:1200, hoaMonthly:185, taxRate:1.13, note:"Estimate — HOA typically runs $110–$250/mo (Silvercreek); generally lighter Mello-Roos than Windemere. Confirm both on the tax bill and HOA disclosure." },
+              { id:"bridges",    city:"San Ramon", name:"The Bridges",   cfd:"Dougherty Valley CFD (est.)", cfdAnnual:1000, hoaMonthly:450, taxRate:1.13, note:"Estimate — golf community; listings show HOA roughly $375–$620/mo. Golf-club membership is separate from HOA. Confirm any special assessments in the HOA package." }
             ];
 
             var active = TC_PRESETS[0];

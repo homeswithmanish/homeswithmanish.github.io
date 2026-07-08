@@ -163,6 +163,9 @@ test('Has true monthly cost output', /id=["']tc-true["']/.test(indexHtml));
 test('Has advertised-vs-hidden bar', /id=["']tc-bar-adv["']/.test(indexHtml) && /id=["']tc-bar-hidden["']/.test(indexHtml));
 test('Has planning-estimate data disclaimer', /TC_VERIFIED/.test(indexHtml) && /planning estimates|planning only/i.test(indexHtml));
 test('Covers Dublin + San Ramon neighborhoods', /Boulevard/.test(indexHtml) && /Windemere/.test(indexHtml));
+test('Dublin figures cite verified FY2024-25 admin reports', /Goodwin Consulting/.test(indexHtml) && /FY2024-25/.test(indexHtml));
+test('Boulevard Mello-Roos reflects verified figure (~$5,900/yr)', /cfdAnnual:5900/.test(indexHtml));
+test('San Ramon special taxes labeled as estimates', /San Ramon figures are planning estimates/.test(indexHtml));
 test('True Cost CTA links to contact', /id=["']true-cost["'][\s\S]*?href=["']#contact["'][\s\S]*?<\/section>/.test(indexHtml));
 test('Uses design system in true-cost (navy/gold/off-white)', /id=["']true-cost["'][\s\S]*?var\(--navy\)[\s\S]*?<\/section>/.test(indexHtml));
 
