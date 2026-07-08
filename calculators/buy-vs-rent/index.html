@@ -113,6 +113,14 @@
         },
         {
           "@type": "Question",
+          "name": "How does the tax savings figure work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It values your deductible mortgage interest and property tax at your marginal rate, but it assumes you itemize and clear the standard deduction — and it applies the $750k mortgage-interest cap and the $10k SALT cap. Many buyers get less than the full figure; confirm your situation with a CPA before relying on it."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Does renting ever make more sense?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -205,6 +213,7 @@
       <div><label for="bvr-years" style="display:block;font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:6px;">Years You Plan to Stay</label><input id="bvr-years" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:1rem;box-sizing:border-box;font-family:inherit;" type="number" value="7" min="1" max="30"></div>
       <div><label for="bvr-appr" style="display:block;font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:6px;">Annual Home Appreciation (%)</label><input id="bvr-appr" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:1rem;box-sizing:border-box;font-family:inherit;" type="number" step="0.1" value="4"></div>
       <div><label for="bvr-rentgrowth" style="display:block;font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:6px;">Annual Rent Increase (%)</label><input id="bvr-rentgrowth" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:1rem;box-sizing:border-box;font-family:inherit;" type="number" step="0.1" value="3"></div>
+      <div><label for="bvr-taxrate" style="display:block;font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:6px;">Marginal Tax Rate (%) — for deductions</label><input id="bvr-taxrate" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:1rem;box-sizing:border-box;font-family:inherit;" type="number" step="1" value="32" min="0" max="55"></div>
                     </div>
                     <div style="text-align:center;margin-top:26px;">
                         <button class="btn btn-primary btn-lg" id="calc-run">Calculate</button>
@@ -212,8 +221,9 @@
                     <div class="calc-results" id="calc-results">
 
       <div class="calc-result-row"><span>Total cost of renting</span><strong id="bvr-rentcost">—</strong></div>
-      <div class="calc-result-row"><span>Net cost of owning (after equity & sale)</span><strong id="bvr-owncost">—</strong></div>
-      <div class="calc-result-row"><span>Verdict</span><strong id="bvr-verdict">—</strong></div>
+      <div class="calc-result-row"><span>Est. tax savings (if you itemize)</span><strong id="bvr-taxsave">—</strong></div>
+      <div class="calc-result-row"><span>Net cost of owning (after equity, sale & tax)</span><strong id="bvr-owncost">—</strong></div>
+      <div class="calc-result-row calc-result-total"><span>Verdict</span><strong id="bvr-verdict">—</strong></div>
                     </div>
                     <p style="text-align:center;font-size:.75rem;color:var(--gray-400);margin-top:14px;">Estimates only — not financial, tax, or lending advice. See methodology below.</p>
                 </div>
@@ -224,8 +234,8 @@
             <div class="container">
                 <div class="section-label">HOW IT WORKS</div>
                 <h2>Methodology &amp; Assumptions</h2>
-                <p class="lead">Owning costs include down payment, principal &amp; interest (30-yr), ~1.1% property tax + ~0.35% insurance, and 1%/yr maintenance; the projected sale nets out remaining loan balance and 6% selling costs at your appreciation assumption. Renting compounds your rent at the growth rate you set. Simplifications: tax deductions, investment opportunity cost on the down payment, and PMI are excluded. Treat it as a framing tool, not a forecast.</p>
-                <p class="lead"><strong>More tools:</strong> <a href="/calculators/affordability/">How much house can I afford?</a> · <a href="/calculators/closing-costs/">What will I pay at closing?</a> · <a href="/calculators/property-tax/">What will my property taxes be?</a> · <a href="/calculators/down-payment/">How long until I can buy?</a></p>
+                <p class="lead">Owning costs include down payment, principal &amp; interest (30-yr), ~1.1% property tax + ~0.35% insurance, and 1%/yr maintenance; the projected sale nets out remaining loan balance and 6% selling costs at your appreciation assumption. Renting compounds your rent at the growth rate you set. Tax savings value your deductible mortgage interest (on the first $750k of loan balance) plus property tax (capped at the $10k SALT limit) at the marginal rate you enter — this assumes you itemize and exceed the standard deduction, so treat it as an upper bound. Investment opportunity cost on the down payment and PMI are excluded. A framing tool, not a forecast — and not tax advice.</p>
+                <p class="lead"><strong>More tools:</strong> <a href="/calculators/affordability/">How much house can I afford?</a> · <a href="/calculators/closing-costs/">What will I pay at closing?</a> · <a href="/calculators/property-tax/">What will my property taxes be?</a> · <a href="/calculators/down-payment/">How long until I can buy?</a> · <a href="/calculators/sell-to-net/">What should I list to net my goal?</a></p>
             </div>
         </section>
 
@@ -241,6 +251,10 @@
                     <div class="faq-item">
                         <button class="faq-toggle" aria-expanded="false"><span>Why does the calculator ask about appreciation?</span><span class="faq-icon">+</span></button>
                         <div class="faq-content">Because it dominates the outcome. East Bay cities have historically appreciated strongly, but no rate is guaranteed — try conservative (2–3%) and historical (5–8%) scenarios to see the range.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-toggle" aria-expanded="false"><span>How does the tax savings figure work?</span><span class="faq-icon">+</span></button>
+                        <div class="faq-content">It values your deductible mortgage interest and property tax at your marginal rate, but it assumes you itemize and clear the standard deduction — and it applies the $750k mortgage-interest cap and the $10k SALT cap. Many buyers get less than the full figure; confirm your situation with a CPA before relying on it.</div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-toggle" aria-expanded="false"><span>Does renting ever make more sense?</span><span class="faq-icon">+</span></button>
@@ -268,6 +282,7 @@
         var years = parseInt(document.getElementById('bvr-years').value, 10) || 7;
         var appr = (parseFloat(document.getElementById('bvr-appr').value) || 4) / 100;
         var rg = (parseFloat(document.getElementById('bvr-rentgrowth').value) || 3) / 100;
+        var mtr = (parseFloat(document.getElementById('bvr-taxrate').value) || 0) / 100;
         if (!rent || !price) return;
         var rentTotal = 0, m = rent;
         for (var y = 0; y < years; y++) { rentTotal += m * 12; m *= 1 + rg; }
@@ -281,11 +296,17 @@
         }
         var taxIns = price * 0.0145 * years;
         var maint = price * 0.01 * years;
+        // Itemized tax benefit: mortgage interest (capped to first $750k of loan)
+        // + property tax (capped at the $10k SALT limit), valued at your marginal rate.
+        var deductInt = interestPaid * Math.min(1, 750000 / loan);
+        var saltPerYear = Math.min(price * 0.011, 10000);
+        var taxSavings = mtr > 0 ? mtr * (deductInt + saltPerYear * years) : 0;
         var futureValue = price * Math.pow(1 + appr, years);
         var sellingCosts = futureValue * 0.06;
         var equity = futureValue - bal - sellingCosts;
-        var ownNet = (down + pmt * years * 12 + taxIns + maint) - equity;
+        var ownNet = (down + pmt * years * 12 + taxIns + maint) - equity - taxSavings;
         set('bvr-rentcost', fmt(rentTotal));
+        set('bvr-taxsave', mtr > 0 ? fmt(taxSavings) + ' over ' + years + ' yrs' : 'Enter a tax rate to include');
         set('bvr-owncost', fmt(ownNet));
         var diff = rentTotal - ownNet;
         set('bvr-verdict', diff > 0
@@ -345,6 +366,7 @@
                         <a href="/calculators/closing-costs/">What will I pay at closing?</a>
                         <a href="/calculators/property-tax/">What will my property taxes be?</a>
                         <a href="/calculators/down-payment/">How long until I can buy?</a>
+                        <a href="/calculators/sell-to-net/">What should I list to net my goal?</a>
                     </div>
                 </div>
             </div>

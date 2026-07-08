@@ -181,6 +181,30 @@ test('Links to external CSS (not all inline)', /link[^>]*style\.css/.test(indexH
 test('Does not include jQuery', !/jquery/i.test(indexHtml));
 test('Does not include heavy frameworks', !/react|angular|vue\.js/i.test(indexHtml));
 
+// ==================== CALCULATOR PAGES ====================
+console.log('\n\n\x1b[1m=== Calculator Pages (Sell-to-Net & Buy vs Rent) ===\x1b[0m\n');
+
+const sellToNet = readFile('calculators/sell-to-net/index.html');
+console.log('\x1b[36mSell-to-Net:\x1b[0m');
+test('Sell-to-Net page exists with title', /<title>[^<]*Sell-to-Net/i.test(sellToNet));
+test('Has net-proceeds input', /id=["']stn-net["']/.test(sellToNet));
+test('Has commission + costs inputs', /id=["']stn-commission["']/.test(sellToNet) && /id=["']stn-costs["']/.test(sellToNet));
+test('Has target sale price output', /id=["']stn-list["']/.test(sellToNet));
+test('Solves backward (net + payoff + fixed)', /net \+ payoff \+ fixed/.test(sellToNet));
+test('Has WebApplication schema', /WebApplication/.test(sellToNet));
+test('Has FAQ schema', /FAQPage/.test(sellToNet));
+test('Has estimates-only disclaimer', /Estimates only/i.test(sellToNet));
+test('Listed in calculators hub', /calculators\/sell-to-net\//.test(readFile('calculators/index.html')));
+test('Listed in sitemap', /calculators\/sell-to-net\//.test(readFile('sitemap.xml')));
+
+const buyVsRent = readFile('calculators/buy-vs-rent/index.html');
+console.log('\n\x1b[36mBuy vs Rent (tax-savings upgrade):\x1b[0m');
+test('Has marginal tax rate input', /id=["']bvr-taxrate["']/.test(buyVsRent));
+test('Has tax savings output row', /id=["']bvr-taxsave["']/.test(buyVsRent));
+test('Applies $750k mortgage-interest cap', /750000/.test(buyVsRent));
+test('Applies $10k SALT cap', /10000/.test(buyVsRent));
+test('Methodology notes upper-bound / itemize caveat', /upper bound/i.test(buyVsRent) && /itemize/i.test(buyVsRent));
+
 // ==================== ADMIN.HTML TESTS ====================
 console.log('\n\n\x1b[1m=== admin.html Tests ===\x1b[0m\n');
 

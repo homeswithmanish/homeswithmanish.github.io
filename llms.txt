@@ -23,6 +23,7 @@
 - [California Closing Cost Calculator (Buyer)](https://homeswithmanish.com/calculators/closing-costs/): Estimate buyer closing costs in Alameda, Contra Costa, and San Joaquin counties: escrow, title, lender fees, and prepaids for East Bay home purchases.
 - [California Property Tax Estimator (East Bay & Tracy)](https://homeswithmanish.com/calculators/property-tax/): Estimate property taxes for San Ramon, Dublin, Pleasanton, Tracy, Mountain House and more — including Mello-Roos/CFD assessments and the supplemental tax bill.
 - [Down Payment Planner](https://homeswithmanish.com/calculators/down-payment/): Plan your down payment for an East Bay home: savings timeline, closing-cost cushion, and PMI trade-offs for buying with less than 20% down.
+- [Sell-to-Net Calculator (Seller's Net → List Price)](https://homeswithmanish.com/calculators/sell-to-net/): Work backward from the cash you want to walk away with to the right list price. Estimate East Bay seller net proceeds after commission, closing costs, and loan payoff.
 
 ## Data & Resources
 - [Machine-readable city dataset (JSON)](https://homeswithmanish.com/cities/data.json): prices, schools, commutes, FAQs for all 8 cities

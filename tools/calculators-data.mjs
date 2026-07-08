@@ -84,11 +84,13 @@ export const CALCULATORS = [
       ${field("bvr-rate", "Interest Rate (%)", 'type="number" step="0.01" value="6.5"')}
       ${field("bvr-years", "Years You Plan to Stay", 'type="number" value="7" min="1" max="30"')}
       ${field("bvr-appr", "Annual Home Appreciation (%)", 'type="number" step="0.1" value="4"')}
-      ${field("bvr-rentgrowth", "Annual Rent Increase (%)", 'type="number" step="0.1" value="3"')}`,
+      ${field("bvr-rentgrowth", "Annual Rent Increase (%)", 'type="number" step="0.1" value="3"')}
+      ${field("bvr-taxrate", "Marginal Tax Rate (%) — for deductions", 'type="number" step="1" value="32" min="0" max="55"')}`,
     resultsHtml: `
       <div class="calc-result-row"><span>Total cost of renting</span><strong id="bvr-rentcost">—</strong></div>
-      <div class="calc-result-row"><span>Net cost of owning (after equity & sale)</span><strong id="bvr-owncost">—</strong></div>
-      <div class="calc-result-row"><span>Verdict</span><strong id="bvr-verdict">—</strong></div>`,
+      <div class="calc-result-row"><span>Est. tax savings (if you itemize)</span><strong id="bvr-taxsave">—</strong></div>
+      <div class="calc-result-row"><span>Net cost of owning (after equity, sale & tax)</span><strong id="bvr-owncost">—</strong></div>
+      <div class="calc-result-row calc-result-total"><span>Verdict</span><strong id="bvr-verdict">—</strong></div>`,
     js: `
       function calc() {
         var rent = num('bvr-rent'), price = num('bvr-price');
@@ -97,6 +99,7 @@ export const CALCULATORS = [
         var years = parseInt(document.getElementById('bvr-years').value, 10) || 7;
         var appr = (parseFloat(document.getElementById('bvr-appr').value) || 4) / 100;
         var rg = (parseFloat(document.getElementById('bvr-rentgrowth').value) || 3) / 100;
+        var mtr = (parseFloat(document.getElementById('bvr-taxrate').value) || 0) / 100;
         if (!rent || !price) return;
         var rentTotal = 0, m = rent;
         for (var y = 0; y < years; y++) { rentTotal += m * 12; m *= 1 + rg; }
@@ -110,11 +113,17 @@ export const CALCULATORS = [
         }
         var taxIns = price * 0.0145 * years;
         var maint = price * 0.01 * years;
+        // Itemized tax benefit: mortgage interest (capped to first $750k of loan)
+        // + property tax (capped at the $10k SALT limit), valued at your marginal rate.
+        var deductInt = interestPaid * Math.min(1, 750000 / loan);
+        var saltPerYear = Math.min(price * 0.011, 10000);
+        var taxSavings = mtr > 0 ? mtr * (deductInt + saltPerYear * years) : 0;
         var futureValue = price * Math.pow(1 + appr, years);
         var sellingCosts = futureValue * 0.06;
         var equity = futureValue - bal - sellingCosts;
-        var ownNet = (down + pmt * years * 12 + taxIns + maint) - equity;
+        var ownNet = (down + pmt * years * 12 + taxIns + maint) - equity - taxSavings;
         set('bvr-rentcost', fmt(rentTotal));
+        set('bvr-taxsave', mtr > 0 ? fmt(taxSavings) + ' over ' + years + ' yrs' : 'Enter a tax rate to include');
         set('bvr-owncost', fmt(ownNet));
         var diff = rentTotal - ownNet;
         set('bvr-verdict', diff > 0
@@ -123,10 +132,11 @@ export const CALCULATORS = [
         show();
       }`,
     methodology:
-      "Owning costs include down payment, principal & interest (30-yr), ~1.1% property tax + ~0.35% insurance, and 1%/yr maintenance; the projected sale nets out remaining loan balance and 6% selling costs at your appreciation assumption. Renting compounds your rent at the growth rate you set. Simplifications: tax deductions, investment opportunity cost on the down payment, and PMI are excluded. Treat it as a framing tool, not a forecast.",
+      "Owning costs include down payment, principal & interest (30-yr), ~1.1% property tax + ~0.35% insurance, and 1%/yr maintenance; the projected sale nets out remaining loan balance and 6% selling costs at your appreciation assumption. Renting compounds your rent at the growth rate you set. Tax savings value your deductible mortgage interest (on the first $750k of loan balance) plus property tax (capped at the $10k SALT limit) at the marginal rate you enter — this assumes you itemize and exceed the standard deduction, so treat it as an upper bound. Investment opportunity cost on the down payment and PMI are excluded. A framing tool, not a forecast — and not tax advice.",
     faq: [
       { q: "How long do I need to stay for buying to win in the Bay Area?", a: "With typical East Bay price-to-rent ratios, buying usually needs a 5+ year horizon to overcome transaction costs — longer when appreciation is slow, shorter when rents are rising quickly. Run your own scenario above." },
       { q: "Why does the calculator ask about appreciation?", a: "Because it dominates the outcome. East Bay cities have historically appreciated strongly, but no rate is guaranteed — try conservative (2–3%) and historical (5–8%) scenarios to see the range." },
+      { q: "How does the tax savings figure work?", a: "It values your deductible mortgage interest and property tax at your marginal rate, but it assumes you itemize and clear the standard deduction — and it applies the $750k mortgage-interest cap and the $10k SALT cap. Many buyers get less than the full figure; confirm your situation with a CPA before relying on it." },
       { q: "Does renting ever make more sense?", a: "Absolutely — short time horizons, career uncertainty, or a market you may leave all favor renting. My job is honest math, not pushing a purchase." },
     ],
   },
@@ -273,6 +283,52 @@ export const CALCULATORS = [
       { q: "Do I really need 20% down in the Bay Area?", a: "No. Conventional loans allow as little as 3–5% down (with PMI), and strong buyers win offers at 10% down regularly. 20% avoids PMI and strengthens offers, but waiting years to reach it in an appreciating market has its own cost." },
       { q: "What about jumbo loans?", a: "Most Tri-Valley purchases exceed conforming limits and use jumbo financing, which typically wants 10–20% down and stronger reserves. Tracy and Mountain House often fit within conforming/high-balance limits — one reason first-time buyers start there." },
       { q: "Can I use gift funds or RSUs?", a: "Gift funds from family are broadly allowed with documentation, and lenders increasingly count vested RSU income for tech buyers. Both need to be papered correctly — connect with a lender early (I can introduce you)." },
+    ],
+  },
+  {
+    slug: "sell-to-net",
+    title: "Sell-to-Net Calculator (Seller's Net → List Price)",
+    short: "What should I list to net my goal?",
+    metaDescription:
+      "Work backward from the cash you want to walk away with to the right list price. Estimate East Bay seller net proceeds after commission, closing costs, and loan payoff.",
+    intro: [
+      "Most seller calculators ask for a price and tell you what's left. This one runs the other direction: start with the cash you want in your pocket, and it solves for the sale price you need after commission, closing costs, and paying off your loan.",
+      "It's the fastest way to pressure-test a list price against a real goal — a 1031 exchange target, the down payment on your next home, or simply the number that makes moving worth it.",
+    ],
+    formHtml: `
+      ${field("stn-net", "Net Proceeds You Want (cash in pocket)", 'type="text" inputmode="numeric" placeholder="$600,000"')}
+      ${field("stn-payoff", "Remaining Mortgage Payoff", 'type="text" inputmode="numeric" placeholder="$450,000"')}
+      ${field("stn-commission", "Total Commission (%)", 'type="number" step="0.1" value="5" min="0" max="10"')}
+      ${field("stn-costs", "Other Selling Costs (%) — title, escrow, transfer tax", 'type="number" step="0.1" value="1.5" min="0" max="5"')}
+      ${field("stn-fixed", "Fixed Costs (repairs, staging, concessions)", 'type="text" inputmode="numeric" placeholder="$15,000"')}`,
+    resultsHtml: `
+      <div class="calc-result-row"><span>Commission at that price</span><strong id="stn-commamt">—</strong></div>
+      <div class="calc-result-row"><span>Other selling costs</span><strong id="stn-costamt">—</strong></div>
+      <div class="calc-result-row"><span>Loan payoff</span><strong id="stn-payoffamt">—</strong></div>
+      <div class="calc-result-row"><span>Fixed costs</span><strong id="stn-fixedamt">—</strong></div>
+      <div class="calc-result-row calc-result-total"><span>Target sale price to hit your net</span><strong id="stn-list">—</strong></div>`,
+    js: `
+      function calc() {
+        var net = num('stn-net'), payoff = num('stn-payoff'), fixed = num('stn-fixed');
+        var comm = (parseFloat(document.getElementById('stn-commission').value) || 0) / 100;
+        var costs = (parseFloat(document.getElementById('stn-costs').value) || 0) / 100;
+        if (!net) return;
+        var pctCosts = comm + costs;
+        if (pctCosts >= 1) { set('stn-list', 'Percentage costs must total under 100%'); show(); return; }
+        var sale = (net + payoff + fixed) / (1 - pctCosts);
+        set('stn-commamt', fmt(sale * comm));
+        set('stn-costamt', fmt(sale * costs));
+        set('stn-payoffamt', fmt(payoff));
+        set('stn-fixedamt', fmt(fixed));
+        set('stn-list', fmt(sale));
+        show();
+      }`,
+    methodology:
+      "Working backward from your target net: Sale Price = (desired net + loan payoff + fixed costs) ÷ (1 − commission% − other-costs%). Commission and 'other selling costs' (escrow, title, the seller-customary $1.10 per $1,000 county transfer tax, and misc) are treated as a percentage of the sale price; loan payoff and fixed costs (repairs, staging, buyer concessions) are flat dollars. It excludes property-tax and HOA prorations, mortgage payoff interest and recording fees, and any capital-gains tax — all of which I quantify in a full seller net sheet before you list.",
+    faq: [
+      { q: "How is this different from a normal seller net sheet?", a: "A standard net sheet starts from a sale price and tells you what's left. This one starts from the net you need and solves for the price to list at — useful when your next purchase, a 1031 exchange, or a payoff goal sets the number first." },
+      { q: "What commission rate should I enter?", a: "Commissions are negotiable and never set by law. Since the 2024 buyer-broker changes, the seller-paid buyer-agent portion is explicitly negotiated in every deal — enter the total you expect to pay across both sides, and I'll walk you through current East Bay norms." },
+      { q: "Does this include capital-gains tax?", a: "No. A primary residence often qualifies for the $250K/$500K capital-gains exclusion, but investment properties and large gains can owe real tax. That belongs with your CPA and a full net sheet — never guess on it." },
     ],
   },
 ];
