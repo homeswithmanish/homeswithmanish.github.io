@@ -309,6 +309,7 @@
                 <a href="cities/">Cities</a>
                 <a href="#market">Market Data</a>
                 <a href="calculators/">Calculators</a>
+                <a href="#true-cost">True Cost</a>
                 <a href="blog/">Blog</a>
                 <a href="#faq">FAQ</a>
                 <a href="#contact">Contact</a>
@@ -330,6 +331,7 @@
         <a href="cities/">Cities</a>
         <a href="#market">Market Data</a>
         <a href="calculators/">Calculators</a>
+        <a href="#true-cost">True Cost</a>
         <a href="blog/">Blog</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
@@ -862,6 +864,241 @@
                     <p style="text-align:center; font-size:.75rem; color:var(--gray-400); margin-top:12px;">Estimates include property tax (~1.1%) and insurance (~0.35%). Actual costs may vary.</p>
                 </div>
             </div>
+        </section>
+
+        <!-- ============================================================
+             TRUE MONTHLY COST CALCULATOR (Mello-Roos + HOA)
+             DATA WARNING: values in TC_PRESETS are PLANNING ESTIMATES.
+             Before promoting, replace cfdAnnual / hoaMonthly / taxRate with
+             figures verified against the City of Dublin AB 1483 exaction
+             schedule, Goodwin Consulting RMA documents, and county secured
+             tax bills, then update TC_VERIFIED with the verification date.
+             ============================================================ -->
+        <section id="true-cost" style="background: var(--off-white);">
+          <div class="container">
+            <div class="section-label">BEYOND THE LISTING PRICE</div>
+            <h2 class="section-title">True Monthly Cost Calculator</h2>
+            <p class="section-subtitle">Mello-Roos special taxes and HOA dues are missing from most payment estimates. Your lender counts every dollar of them. See the real number by neighborhood.</p>
+
+            <div style="max-width:960px; margin:40px auto 0;">
+
+              <!-- Neighborhood preset chips -->
+              <div id="tc-chips" style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:32px;"></div>
+
+              <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:32px;" class="tc-grid">
+
+                <!-- Inputs card -->
+                <div style="background:var(--white); border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,.08); padding:32px;">
+                  <div style="display:grid; gap:18px;">
+                    <div>
+                      <label for="tc-price" style="display:block; font-size:.85rem; font-weight:600; color:var(--navy); margin-bottom:6px;">Home Price</label>
+                      <input type="text" id="tc-price" value="$1,600,000" inputmode="numeric"
+                        style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-size:1rem; box-sizing:border-box;">
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                      <div>
+                        <label for="tc-down" style="display:block; font-size:.85rem; font-weight:600; color:var(--navy); margin-bottom:6px;">Down Payment %</label>
+                        <input type="number" id="tc-down" value="20" min="0" max="100"
+                          style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-size:1rem; box-sizing:border-box;">
+                      </div>
+                      <div>
+                        <label for="tc-rate" style="display:block; font-size:.85rem; font-weight:600; color:var(--navy); margin-bottom:6px;">Interest Rate %</label>
+                        <input type="number" id="tc-rate" value="6.40" min="0" max="15" step="0.05"
+                          style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-size:1rem; box-sizing:border-box;">
+                      </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                      <div>
+                        <label for="tc-taxrate" style="display:block; font-size:.85rem; font-weight:600; color:var(--navy); margin-bottom:6px;">Base Tax Rate %</label>
+                        <input type="number" id="tc-taxrate" value="1.14" min="0.9" max="1.6" step="0.01"
+                          style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-size:1rem; box-sizing:border-box;">
+                      </div>
+                      <div>
+                        <label for="tc-ins" style="display:block; font-size:.85rem; font-weight:600; color:var(--navy); margin-bottom:6px;">Insurance $/mo</label>
+                        <input type="number" id="tc-ins" value="190" min="0" max="1000" step="10"
+                          style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-size:1rem; box-sizing:border-box;">
+                      </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                      <div>
+                        <label for="tc-cfd" style="display:block; font-size:.85rem; font-weight:600; color:var(--navy); margin-bottom:6px;">Mello-Roos $/yr</label>
+                        <input type="number" id="tc-cfd" value="2800" min="0" max="10000" step="50"
+                          style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-size:1rem; box-sizing:border-box;">
+                      </div>
+                      <div>
+                        <label for="tc-hoa" style="display:block; font-size:.85rem; font-weight:600; color:var(--navy); margin-bottom:6px;">HOA $/mo</label>
+                        <input type="number" id="tc-hoa" value="265" min="0" max="1500" step="5"
+                          style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-size:1rem; box-sizing:border-box;">
+                      </div>
+                    </div>
+                    <div id="tc-note" style="font-size:.8rem; line-height:1.5; color:var(--gray-600); background:var(--off-white); border-radius:8px; padding:12px;"></div>
+                  </div>
+                </div>
+
+                <!-- Statement card -->
+                <div style="background:var(--navy); border-radius:16px; padding:32px; box-shadow:0 4px 24px rgba(0,0,0,.15);">
+                  <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:20px;">
+                    <div style="color:var(--gold); font-size:.8rem; text-transform:uppercase; letter-spacing:1px;">True Monthly Cost Statement</div>
+                    <div id="tc-hood-label" style="color:var(--gray-400); font-size:.85rem;"></div>
+                  </div>
+
+                  <div id="tc-line-pi" class="tc-line"></div>
+                  <div id="tc-line-tax" class="tc-line"></div>
+                  <div id="tc-line-ins" class="tc-line"></div>
+
+                  <div style="display:flex; justify-content:space-between; padding:12px 0; border-top:1px solid rgba(255,255,255,.15); margin-top:4px;">
+                    <span style="color:var(--white); font-weight:600;">Advertised payment</span>
+                    <span id="tc-advertised" style="color:var(--white); font-weight:700; font-family:var(--font-display); font-size:1.3rem;"></span>
+                  </div>
+
+                  <div style="border-top:2px dashed rgba(255,255,255,.25); margin:12px 0 8px;"></div>
+                  <div style="color:var(--gold); font-size:.75rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">The part the listing leaves out</div>
+
+                  <div id="tc-line-cfd" class="tc-line"></div>
+                  <div id="tc-line-hoa" class="tc-line"></div>
+
+                  <div style="display:flex; justify-content:space-between; align-items:baseline; padding:16px 0 8px; border-top:1px solid rgba(255,255,255,.15); margin-top:8px;">
+                    <span style="color:var(--white); font-weight:600;">True monthly cost</span>
+                    <span id="tc-true" style="color:var(--gold); font-weight:700; font-family:var(--font-display); font-size:2.4rem;"></span>
+                  </div>
+
+                  <div style="height:10px; border-radius:5px; overflow:hidden; display:flex; margin-top:12px;" role="img" aria-label="Share of payment hidden from listing estimates">
+                    <div id="tc-bar-adv" style="background:#3E5C8A;"></div>
+                    <div id="tc-bar-hidden" style="background:var(--gold);"></div>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; margin-top:8px; font-size:.8rem;">
+                    <span style="color:var(--gray-400);">Advertised <span id="tc-adv-small"></span></span>
+                    <span style="color:var(--gold); font-weight:600;">Hidden <span id="tc-hidden-small"></span></span>
+                  </div>
+
+                  <p id="tc-power" style="color:var(--gray-400); font-size:.8rem; line-height:1.6; margin-top:16px;"></p>
+
+                  <div style="text-align:center; margin-top:20px;">
+                    <a href="#contact" class="btn btn-primary" style="text-decoration:none;">Get the Exact Numbers for a Property</a>
+                  </div>
+                </div>
+              </div>
+
+              <p style="text-align:center; font-size:.75rem; color:var(--gray-400); margin-top:20px; max-width:760px; margin-left:auto; margin-right:auto;">
+                Estimates for planning only, not a loan quote. Special taxes are set per parcel by each Community Facilities District and can escalate annually. Verify exact amounts on the property's current secured tax bill and HOA disclosures before making offer decisions.
+              </p>
+            </div>
+          </div>
+
+          <style>
+            #true-cost .tc-line { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed rgba(255,255,255,.12); }
+            #true-cost .tc-line .l { color:var(--gray-400); font-size:.9rem; }
+            #true-cost .tc-line .l small { display:block; font-size:.72rem; opacity:.7; margin-top:2px; }
+            #true-cost .tc-line .v { color:var(--white); font-weight:600; }
+            #true-cost .tc-chip { padding:8px 16px; border-radius:999px; border:1px solid #ddd; background:var(--white); color:var(--navy); font-size:.9rem; font-family:var(--font-body); cursor:pointer; transition:all .2s; }
+            #true-cost .tc-chip:hover { border-color:var(--gold); }
+            #true-cost .tc-chip.active { background:var(--navy); color:var(--white); border-color:var(--navy); }
+            @media (max-width: 860px) { #true-cost .tc-grid { grid-template-columns:1fr !important; } }
+          </style>
+
+          <script>
+          (function () {
+            /* PLANNING ESTIMATES. Replace with verified county figures, then update TC_VERIFIED. */
+            var TC_VERIFIED = "Figures are planning estimates pending county verification";
+            var TC_PRESETS = [
+              { id:"boulevard",  city:"Dublin",    name:"Boulevard",     cfd:"CFD 2015-1 / 2017-1",  cfdAnnual:2800, hoaMonthly:265, taxRate:1.14, note:"Includes a services CFD component that does not expire with the bonds." },
+              { id:"eastranch",  city:"Dublin",    name:"East Ranch",    cfd:"CFD 2023-1",           cfdAnnual:3200, hoaMonthly:220, taxRate:1.14, note:"Newest Dublin CFD. Confirm escalator terms in the RMA before relying on this figure." },
+              { id:"dublinranch",city:"Dublin",    name:"Dublin Ranch",  cfd:"Varies by tract",      cfdAnnual:1900, hoaMonthly:180, taxRate:1.14, note:"Older districts. Some bonds are approaching payoff, which changes the math in your favor." },
+              { id:"westdublin", city:"Dublin",    name:"West Dublin",   cfd:"None typical",         cfdAnnual:0,    hoaMonthly:0,   taxRate:1.12, note:"Most older west-side tracts carry no special tax and no HOA." },
+              { id:"windemere",  city:"San Ramon", name:"Windemere",     cfd:"Dougherty Valley CFD", cfdAnnual:2400, hoaMonthly:60,  taxRate:1.13, note:"Parcel bonds vary by village and phase. Two identical homes one street apart can differ." },
+              { id:"galeranch",  city:"San Ramon", name:"Gale Ranch",    cfd:"Varies by phase",      cfdAnnual:1200, hoaMonthly:185, taxRate:1.13, note:"Generally higher HOA and lower special tax than Windemere. Compare the combined total." },
+              { id:"bridges",    city:"San Ramon", name:"The Bridges",   cfd:"Varies",               cfdAnnual:1000, hoaMonthly:210, taxRate:1.13, note:"Golf community. Confirm any club-adjacent assessments in the HOA package." }
+            ];
+
+            var active = TC_PRESETS[0];
+
+            function $(id) { return document.getElementById(id); }
+            function money(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
+            function parsePrice(s) { return Number(String(s).replace(/[^0-9.]/g, "")) || 0; }
+
+            function pAndI(loan, ratePct, years) {
+              var r = ratePct / 100 / 12, n = years * 12;
+              if (r === 0) return loan / n;
+              return loan * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+            }
+
+            function line(el, label, sub, value) {
+              el.innerHTML = '<span class="l">' + label + (sub ? '<small>' + sub + '</small>' : '') + '</span><span class="v">' + value + '</span>';
+            }
+
+            function render() {
+              var price = parsePrice($("tc-price").value);
+              var down = Number($("tc-down").value) || 0;
+              var rate = Number($("tc-rate").value) || 0;
+              var taxRate = Number($("tc-taxrate").value) || 0;
+              var ins = Number($("tc-ins").value) || 0;
+              var cfdAnnual = Number($("tc-cfd").value) || 0;
+              var hoa = Number($("tc-hoa").value) || 0;
+
+              var loan = price * (1 - down / 100);
+              var pi = pAndI(loan, rate, 30);
+              var baseTax = price * (taxRate / 100) / 12;
+              var cfd = cfdAnnual / 12;
+              var advertised = pi + baseTax + ins;
+              var trueCost = advertised + cfd + hoa;
+              var hidden = cfd + hoa;
+              var hiddenPct = trueCost > 0 ? (hidden / trueCost) * 100 : 0;
+
+              var r = rate / 100 / 12, n = 360;
+              var powerLost = r > 0 ? hidden * ((Math.pow(1 + r, n) - 1) / (r * Math.pow(1 + r, n))) : hidden * n;
+
+              $("tc-hood-label").textContent = active.name + ", " + active.city;
+              line($("tc-line-pi"), "Principal and interest", money(loan) + " loan at " + rate.toFixed(2) + "%, 30-year fixed", money(pi));
+              line($("tc-line-tax"), "Base property tax", taxRate.toFixed(2) + "% of purchase price", money(baseTax));
+              line($("tc-line-ins"), "Homeowners insurance", "", money(ins));
+              $("tc-advertised").textContent = money(advertised);
+              line($("tc-line-cfd"), "Mello-Roos special tax", active.cfd + " at " + money(cfdAnnual) + " per year", money(cfd));
+              line($("tc-line-hoa"), "HOA dues", "", money(hoa));
+              $("tc-true").textContent = money(trueCost);
+              $("tc-bar-adv").style.width = (100 - hiddenPct) + "%";
+              $("tc-bar-hidden").style.width = hiddenPct + "%";
+              $("tc-adv-small").textContent = money(advertised);
+              $("tc-hidden-small").textContent = money(hidden) + "/mo (" + hiddenPct.toFixed(0) + "%)";
+              $("tc-power").textContent = "Over a year that is " + money(hidden * 12) +
+                " in costs your lender includes in your debt-to-income ratio. At this rate, it reduces your maximum loan amount by roughly " +
+                money(powerLost) + " compared with an identical home carrying no special tax or HOA.";
+              $("tc-note").innerHTML = "<strong style='color:var(--navy);'>" + active.name + ":</strong> " + active.note +
+                "<br><span style='opacity:.8;'>" + TC_VERIFIED + ". Always confirm against the current county tax bill and HOA disclosure before writing an offer.</span>";
+            }
+
+            function selectPreset(p, chipEl) {
+              active = p;
+              $("tc-cfd").value = p.cfdAnnual;
+              $("tc-hoa").value = p.hoaMonthly;
+              $("tc-taxrate").value = p.taxRate;
+              var chips = document.querySelectorAll("#tc-chips .tc-chip");
+              for (var i = 0; i < chips.length; i++) chips[i].classList.remove("active");
+              chipEl.classList.add("active");
+              render();
+            }
+
+            var chipsWrap = $("tc-chips");
+            TC_PRESETS.forEach(function (p, idx) {
+              var b = document.createElement("button");
+              b.type = "button";
+              b.className = "tc-chip" + (idx === 0 ? " active" : "");
+              b.textContent = p.name;
+              b.setAttribute("aria-label", "Load estimates for " + p.name + ", " + p.city);
+              b.addEventListener("click", function () { selectPreset(p, b); });
+              chipsWrap.appendChild(b);
+            });
+
+            ["tc-price", "tc-down", "tc-rate", "tc-taxrate", "tc-ins", "tc-cfd", "tc-hoa"].forEach(function (id) {
+              $(id).addEventListener("input", render);
+            });
+            $("tc-price").addEventListener("blur", function () {
+              var v = parsePrice(this.value);
+              if (v) this.value = "$" + v.toLocaleString("en-US");
+            });
+
+            render();
+          })();
+          </script>
         </section>
 
         <!-- Rental Yield Estimator Section -->

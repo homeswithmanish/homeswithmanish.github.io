@@ -151,6 +151,21 @@ test('Insights section has article cards', /insight-card/.test(indexHtml));
 test('Has comparison grid (Why Work With Me)', /comparison-grid/.test(indexHtml));
 test('Hero image has fetchpriority', /fetchpriority/.test(indexHtml));
 
+// --- True Cost Calculator (Mello-Roos + HOA) ---
+console.log('\n\x1b[36mTrue Cost Calculator:\x1b[0m');
+test('Has true-cost section', /id=["']true-cost["']/.test(indexHtml));
+test('Has True Cost nav link (desktop + mobile)', (indexHtml.match(/href=["']#true-cost["']/g) || []).length >= 2);
+test('Mentions Mello-Roos', /Mello-Roos/i.test(indexHtml));
+test('Has neighborhood preset chips container', /id=["']tc-chips["']/.test(indexHtml));
+test('Has home price input', /id=["']tc-price["']/.test(indexHtml));
+test('Has Mello-Roos and HOA inputs', /id=["']tc-cfd["']/.test(indexHtml) && /id=["']tc-hoa["']/.test(indexHtml));
+test('Has true monthly cost output', /id=["']tc-true["']/.test(indexHtml));
+test('Has advertised-vs-hidden bar', /id=["']tc-bar-adv["']/.test(indexHtml) && /id=["']tc-bar-hidden["']/.test(indexHtml));
+test('Has planning-estimate data disclaimer', /TC_VERIFIED/.test(indexHtml) && /planning estimates|planning only/i.test(indexHtml));
+test('Covers Dublin + San Ramon neighborhoods', /Boulevard/.test(indexHtml) && /Windemere/.test(indexHtml));
+test('True Cost CTA links to contact', /id=["']true-cost["'][\s\S]*?href=["']#contact["'][\s\S]*?<\/section>/.test(indexHtml));
+test('Uses design system in true-cost (navy/gold/off-white)', /id=["']true-cost["'][\s\S]*?var\(--navy\)[\s\S]*?<\/section>/.test(indexHtml));
+
 // --- Accessibility ---
 console.log('\n\x1b[36mAccessibility:\x1b[0m');
 test('Has ARIA labels', /aria-label/.test(indexHtml));
