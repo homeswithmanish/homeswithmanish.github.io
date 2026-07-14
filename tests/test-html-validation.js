@@ -205,25 +205,9 @@ test('Applies $750k mortgage-interest cap', /750000/.test(buyVsRent));
 test('Applies $10k SALT cap', /10000/.test(buyVsRent));
 test('Methodology notes upper-bound / itemize caveat', /upper bound/i.test(buyVsRent) && /itemize/i.test(buyVsRent));
 
-// ==================== ADMIN.HTML TESTS ====================
-console.log('\n\n\x1b[1m=== admin.html Tests ===\x1b[0m\n');
-
-const adminHtml = readFile('admin.html');
-
-console.log('\x1b[36mSecurity:\x1b[0m');
-test('Has noindex meta tag', /noindex/.test(adminHtml));
-test('Has password authentication', /password|SHA-256|crypto\.subtle/i.test(adminHtml));
-test('Does not contain plaintext password', !/HomesWithManish2026!/i.test(adminHtml));
-test('Uses sessionStorage for session', /sessionStorage/.test(adminHtml));
-test('Has session timeout', /timeout|expire|4.*hour|14400/i.test(adminHtml));
-test('Has logout functionality', /logout/i.test(adminHtml));
-
-console.log('\n\x1b[36mFunctionality:\x1b[0m');
-test('Has login form', /login/i.test(adminHtml));
-test('Has leads table', /table|leads/i.test(adminHtml));
-test('Has search/filter', /search|filter/i.test(adminHtml));
-test('Has CSV export', /csv|export/i.test(adminHtml));
-test('Has stats display', /stats|total|leads/i.test(adminHtml));
+// admin.html tests removed 2026-07-14: the page (client-side password gate on
+// a public static site) triggered a Google Safe Browsing social-engineering
+// listing on the domain and was deleted. Leads admin moves behind real auth.
 
 // ==================== CSS TESTS ====================
 console.log('\n\n\x1b[1m=== style.css Tests ===\x1b[0m\n');

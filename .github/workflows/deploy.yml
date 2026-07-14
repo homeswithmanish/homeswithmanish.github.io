@@ -33,7 +33,7 @@ jobs:
       - name: Check HTML file sizes
         run: |
           echo "=== File Size Check ==="
-          for f in index.html admin.html css/style.css; do
+          for f in index.html css/style.css; do
             if [ -f "$f" ]; then
               size=$(wc -c < "$f")
               echo "$f: ${size} bytes"
@@ -46,7 +46,7 @@ jobs:
       - name: Validate HTML structure
         run: |
           echo "=== HTML Structure Validation ==="
-          for f in index.html admin.html; do
+          for f in index.html; do
             if [ -f "$f" ]; then
               # Check for unclosed tags
               opens=$(grep -o '<div' "$f" | wc -l)
