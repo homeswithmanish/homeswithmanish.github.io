@@ -232,7 +232,6 @@ console.log('\n\n\x1b[1m=== File Structure Tests ===\x1b[0m\n');
 
 const requiredFiles = [
   'index.html',
-  'admin.html',
   'css/style.css',
   'CNAME',
   'robots.txt',
@@ -288,16 +287,7 @@ test('Has limitation of liability', /limitation.*liab|liable/i.test(termsHtml));
 test('Has governing law section', /governing law|California/i.test(termsHtml));
 test('Has contact information', /homeswithmanish|manish/i.test(termsHtml));
 
-// ==================== ADMIN CHART TESTS ====================
-console.log('\n\n\x1b[1m=== admin.html Charts & Enhancements ===\x1b[0m\n');
-
-console.log('\x1b[36mCharts:\x1b[0m');
-test('Has city chart function', /renderCityChart|cityChart/i.test(adminHtml));
-test('Has source chart function', /renderSourceChart|sourceChart/i.test(adminHtml));
-test('Has chart container', /chart/i.test(adminHtml));
-
-console.log('\n\x1b[36mQuick Actions:\x1b[0m');
-test('Has quick actions column', /quick.*action|action.*btn/i.test(adminHtml));
+// admin.html chart tests removed with the page (see note above).
 
 // ==================== GOOGLE SHEETS BACKEND TESTS ====================
 console.log('\n\n\x1b[1m=== Google_Sheets_Backend.js Tests ===\x1b[0m\n');
