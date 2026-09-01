@@ -176,7 +176,7 @@ function layout({ title, description, canonicalPath, breadcrumbs, schemas, body 
     .map((s) => `    <script type="application/ld+json">\n    ${JSON.stringify(s, null, 2).split("\n").join("\n    ")}\n    </script>`)
     .join("\n");
 
-  const seoTitle = title.includes("Manish Anand") ? title : `${title} | Manish Anand`;
+  const seoTitle = title;
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -265,7 +265,7 @@ const faqHtml = (faq) => `
 // ---------------------------------------------------------------------------
 
 function cityPage(city) {
-  const title = `Living in ${city.name}, CA — Homes, Schools & Market Guide | Homes With Manish`;
+  const title = `Living in ${city.name}, CA | Real Estate Guide`;
   const path = `/cities/${city.slug}/`;
   const schemas = [
     faqSchema(city.faq),
@@ -390,7 +390,7 @@ function citiesIndex() {
             </div>
         </section>`;
   return layout({
-    title: "East Bay City Guides — San Ramon, Pleasanton, Dublin & More | Homes With Manish",
+    title: "East Bay City Guides | Manish Anand",
     description:
       "Local guides to 8 East Bay cities: home prices, school districts, neighborhoods, commutes, and investment potential — from San Ramon to Mountain House.",
     canonicalPath: "/cities/",
@@ -466,7 +466,7 @@ ${calc.js}
         </script>`;
 
   return layout({
-    title: `${calc.title} | Homes With Manish`,
+    title: calc.title,
     description: calc.metaDescription,
     canonicalPath: path,
     breadcrumbs: [
@@ -511,7 +511,7 @@ function calculatorsIndex() {
             </div>
         </section>`;
   return layout({
-    title: "Free Real Estate Calculators for East Bay Buyers | Homes With Manish",
+    title: "Free East Bay Real Estate Calculators",
     description:
       "Free calculators for East Bay home buyers and investors: affordability, buy vs rent, closing costs, California property tax, and down payment planning.",
     canonicalPath: "/calculators/",
