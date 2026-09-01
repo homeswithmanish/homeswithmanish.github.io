@@ -60,6 +60,9 @@ test('Has Open Graph description', /property=["']og:description["']/.test(indexH
 test('Has Open Graph type', /property=["']og:type["']/.test(indexHtml));
 test('Has Twitter card meta', /twitter:card/.test(indexHtml));
 test('Has robots meta or allows indexing', !(/name=["']robots["']\s+content=["']noindex/.test(indexHtml)));
+test('Title identifies Manish Anand', /<title>[^<]*Manish Anand/i.test(indexHtml));
+test('Hero visibly identifies Manish Anand', /<h1[^>]*>[\s\S]*?Manish Anand[\s\S]*?<\/h1>/i.test(indexHtml));
+test('Meta description identifies Manish Anand', /name=["']description["'][^>]*content=["'][^"']*Manish Anand/i.test(indexHtml));
 
 // --- Schema.org Structured Data ---
 console.log('\n\x1b[36mStructured Data (AI/Search Optimization):\x1b[0m');

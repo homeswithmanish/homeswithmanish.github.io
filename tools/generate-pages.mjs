@@ -176,17 +176,20 @@ function layout({ title, description, canonicalPath, breadcrumbs, schemas, body 
     .map((s) => `    <script type="application/ld+json">\n    ${JSON.stringify(s, null, 2).split("\n").join("\n    ")}\n    </script>`)
     .join("\n");
 
+  const seoTitle = title.includes("Manish Anand") ? title : `${title} | Manish Anand`;
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${esc(title)}</title>
+    <title>${esc(seoTitle)}</title>
     <meta name="description" content="${esc(description)}">
+    <meta name="author" content="Manish Anand">
     <link rel="canonical" href="${SITE}${canonicalPath}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="${SITE}${canonicalPath}">
-    <meta property="og:title" content="${esc(title)}">
+    <meta property="og:title" content="${esc(seoTitle)}">
     <meta property="og:description" content="${esc(description)}">
     <meta property="og:image" content="${SITE}/images/logo-square.svg">
     <meta name="twitter:card" content="summary">
