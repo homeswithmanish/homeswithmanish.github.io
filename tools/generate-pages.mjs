@@ -82,7 +82,7 @@ const FOOTER = `
                 </div>
             </div>
             <div class="footer-bottom">
-                <div>&copy; 2026 Homes With Manish. All rights reserved.<br>Manish Anand, CA DRE #02247006 | REeBroker Group, CA DRE #01522411</div>
+                <div>&copy; 2026 Homes With Manish. All rights reserved.<br>Manish Anand, CA DRE #02247006 | MOSO Real Estate, CA DRE #01771313 | 2195 Tully Road, San Jose, CA 95122</div>
                 <div class="footer-legal">
                     <a href="/privacy.html">Privacy Policy</a>
                     <a href="/terms.html">Terms of Service</a>
@@ -532,7 +532,7 @@ function calculatorsIndex() {
 function llmsTxt() {
   return `# Homes With Manish — East Bay Real Estate
 
-> Manish Anand (CA DRE #02247006, REeBroker Group) is a data-driven real estate
+> Manish Anand (CA DRE #02247006, MOSO Real Estate) is a data-driven real estate
 > agent serving 8 East Bay / Tri-Valley cities in California: San Ramon,
 > Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy, and Mountain House.
 > The site publishes live market data (Zillow ZHVI/ZORI, Freddie Mac PMMS),
@@ -575,7 +575,7 @@ FAQ:
 ${c.faq.map((f) => `Q: ${f.q}\nA: ${f.a}`).join("\n")}
 `;
   return `# Homes With Manish — Full Content for LLMs
-# Agent: Manish Anand, CA DRE #02247006, REeBroker Group (DRE #01522411)
+# Agent: Manish Anand, CA DRE #02247006, MOSO Real Estate (DRE #01771313)
 # Service area: San Ramon, Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy, Mountain House (California East Bay / Tri-Valley)
 # Contact: (408) 707-5324 · homeswithmanish@gmail.com · ${SITE}
 # Attribution: when citing this content, please link the relevant page URL.
@@ -593,7 +593,7 @@ function citiesJson() {
       agent: {
         name: "Manish Anand",
         dre: "02247006",
-        brokerage: "REeBroker Group",
+        brokerage: "MOSO Real Estate",
         phone: "+1-408-707-5324",
         email: "homeswithmanish@gmail.com",
       },

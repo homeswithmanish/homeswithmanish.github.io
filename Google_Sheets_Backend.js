@@ -790,7 +790,7 @@ function sendGuideEmail(firstName, email, guideName) {
             <!-- Footer -->
             <div style="background-color: #f5f5f5; padding: 20px 40px; text-align: center;">
               <p style="font-size: 11px; color: #999; margin: 0;">
-                REeBroker Group | DRE #01522411<br>
+                MOSO Real Estate | DRE #01771313<br>
                 Serving San Ramon, Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy & Mountain House
               </p>
             </div>

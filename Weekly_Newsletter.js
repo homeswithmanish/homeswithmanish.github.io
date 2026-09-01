@@ -38,7 +38,7 @@ const BRAND = {
   lightGray: '#888888',
   name: 'Manish Anand',
   title: 'Licensed REALTOR® | DRE #02247006',
-  brokerage: 'REeBroker Group | DRE #01522411',
+  brokerage: 'MOSO Real Estate | DRE #01771313',
   phone: '(408) 707-5324',
   email: 'homeswithmanish@gmail.com',
   website: 'https://homeswithmanish.com',

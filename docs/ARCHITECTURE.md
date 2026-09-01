@@ -30,7 +30,7 @@
 - **SEO** — meta/OG/Twitter tags, canonical, sitemap.xml, robots.txt, and 7 JSON-LD blocks (RealEstateAgent, LocalBusiness, Person, WebSite+SearchAction, FAQPage ×10, BreadcrumbList, AggregateRating).
 
 ### 1.3 Identity & compliance facts
-- Manish Anand, Licensed REALTOR®, DRE #02247006, brokerage: REeBroker Group (San Marcos, CA).
+- Manish Anand, Licensed REALTOR®, DRE #02247006, brokerage: MOSO Real Estate (San Jose, CA).
 - Service area: San Ramon, Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy, Mountain House.
 - Brand: navy `#0F1B2D` / gold `#C9A96E`, Playfair Display + Inter.
 - Socials: Instagram, Facebook, YouTube (@HomesWithManish).

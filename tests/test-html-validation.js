@@ -127,7 +127,7 @@ test('Has mortgage rates section', /id=["']rates["']/.test(indexHtml));
 test('Has payment calculator section', /id=["']calculator["']/.test(indexHtml));
 test('Has rental yield section', /id=["']rental-yield["']/.test(indexHtml));
 test('Area cards are dynamic', /id=["']areas-grid["']/.test(indexHtml));
-test('Has broker info (REeBroker)', /REeBroker.*01522411|01522411.*REeBroker/.test(indexHtml));
+test('Has broker info (MOSO Real Estate)', /MOSO Real Estate.*01771313|01771313.*MOSO Real Estate/.test(indexHtml));
 test('Has Blinq QR code', /blinq-qr/.test(indexHtml));
 test('Has resources section', /id=["']resources["']/.test(indexHtml));
 test('Has Schema.org broker/worksFor', /worksFor/.test(indexHtml));

@@ -48,7 +48,7 @@ Phases are approval-gated (project charter). Status: **Phases 0 & 2 COMPLETE. Ph
 **Cost:** +$30–100/mo (IDX feed) · **Dependencies:** Phase 1 auth; D-002 verification
 
 - Client portal: per-client dashboard, transaction timeline with stage tracking, document vault (Supabase Storage + RLS), saved searches/favorites, post-close equity tracker (ZHVI-powered — pipeline already exists).
-- IDX search once MLSListings feed rights for East Bay (NorCal MLS Alliance share) + REeBroker sign-off are verified.
+- IDX search once MLSListings feed rights for East Bay (NorCal MLS Alliance share) + MOSO Real Estate sign-off are verified.
 - Mortgage-ready architecture validated (schema supports MLO product line without redesign).
 
 ---
@@ -56,5 +56,5 @@ Phases are approval-gated (project charter). Status: **Phases 0 & 2 COMPLETE. Ph
 **Action items for Manish (external, cannot be done by the agent):**
 0. **URGENT (D-010):** Apps Script deployment returns 403 "Access Denied" to anonymous requests — the live site's market data / rates / rental sections and possibly lead form POSTs may be broken for visitors. Apps Script editor → Deploy → Manage deployments → edit → Execute as *Me*, Who has access *Anyone* → Deploy. If the /exec URL changes, update it in index.html, admin.html, and the app's `APPS_SCRIPT_URL`.
 1. **Phase 1 launch checklist (~30 min):** follow `homeswithmanish-app/README.md` — create Supabase project (+ admin user, signups disabled), import repo to Vercel with env vars, add DNS CNAME `app` → `cname.vercel-dns.com`, run `prisma db push` against Supabase, run `scripts/import-leads.mjs` backfill. Then I'll add the dual-write to the marketing site forms.
-2. Contact MLSListings vendor/API program: request IDX (RESO Web API) access; ask explicitly whether NorCal MLS Alliance shared listings (Bay East/bridgeMLS coverage of Alameda, Contra Costa, San Joaquin counties) are includable in IDX display. Get REeBroker's signature on the IDX agreement.
+2. Contact MLSListings vendor/API program: request IDX (RESO Web API) access; ask explicitly whether NorCal MLS Alliance shared listings (Bay East/bridgeMLS coverage of Alameda, Contra Costa, San Joaquin counties) are includable in IDX display. Get MOSO Real Estate's signature on the IDX agreement.
 3. Create the GitHub repo for `homeswithmanish-app` and push (or tell me and I'll push once the remote exists).
