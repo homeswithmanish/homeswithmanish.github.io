@@ -215,6 +215,12 @@ function doGet(e) {
         .setMimeType(ContentService.MimeType.JSON);
     }
 
+    if (action === 'openhouse') {
+      const openHouseResponse = handleOpenHouseRequest();
+      return ContentService.createTextOutput(JSON.stringify(openHouseResponse))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
     // All other actions require API key
     const apiKey = e.parameter.key;
 
@@ -290,6 +296,92 @@ function handleMarketDataRequest() {
     lastUpdated: results.length > 0 ? results[0].lastUpdated : null,
     attribution: 'Data sourced from Redfin (www.redfin.com)'
   };
+}
+
+// ============================================================================
+// OPEN HOUSE HANDLER (PUBLIC - NO AUTH REQUIRED)
+// ============================================================================
+
+/**
+ * Returns the currently ACTIVE open-house listing as JSON.
+ *
+ * Powers the permanent A-frame QR page at /openhouse/. The printed QR never
+ * changes; you switch which home it shows by editing ONE row in the 'OpenHouse'
+ * sheet tab. Set column "active" to TRUE on exactly one row (the current home)
+ * and FALSE/blank on the rest. If none are active, the page shows a friendly
+ * "current listings / contact Manish" fallback.
+ *
+ * Column headers are read from row 1, so you can reorder columns freely.
+ * Recommended headers (run setupOpenHouseSheet() to create them):
+ *   active | address | cityState | price | beds | baths | sqft |
+ *   openHouseTimes | description | photoUrls | detailsUrl | disclosuresUrl |
+ *   scheduleUrl | financingUrl | badge
+ * (photoUrls = comma-separated image URLs; first one is used as the hero photo)
+ *
+ * @returns {Object} { success, active, listing }
+ */
+function handleOpenHouseRequest() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const sheet = ss.getSheetByName('OpenHouse');
+
+  if (!sheet || sheet.getLastRow() < 2) {
+    return { success: true, active: false, listing: null };
+  }
+
+  const values = sheet.getRange(1, 1, sheet.getLastRow(), sheet.getLastColumn()).getValues();
+  const headers = values[0].map(h => ('' + h).trim());
+  const activeIdx = headers.indexOf('active');
+
+  const isTruthy = v => {
+    const s = ('' + v).trim().toLowerCase();
+    return s === 'true' || s === 'yes' || s === 'y' || s === '1' || s === 'x' || v === true;
+  };
+
+  // First data row where "active" is truthy (fall back to first data row if no
+  // "active" column exists at all).
+  let match = null;
+  for (let r = 1; r < values.length; r++) {
+    const row = values[r];
+    if (activeIdx === -1) { match = row; break; }
+    if (isTruthy(row[activeIdx])) { match = row; break; }
+  }
+
+  if (!match) {
+    return { success: true, active: false, listing: null };
+  }
+
+  const listing = {};
+  headers.forEach((h, i) => { if (h) listing[h] = ('' + match[i]).trim(); });
+
+  return { success: true, active: true, listing: listing };
+}
+
+/**
+ * One-time setup: creates the 'OpenHouse' sheet tab with headers and a sample row.
+ * Run this once from the Apps Script editor, then edit the row(s) in the sheet.
+ */
+function setupOpenHouseSheet() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  let sheet = ss.getSheetByName('OpenHouse');
+  if (!sheet) sheet = ss.insertSheet('OpenHouse');
+
+  const headers = ['active', 'address', 'cityState', 'price', 'beds', 'baths', 'sqft',
+                   'openHouseTimes', 'description', 'photoUrls', 'detailsUrl',
+                   'disclosuresUrl', 'scheduleUrl', 'financingUrl', 'badge'];
+
+  sheet.clear();
+  sheet.getRange(1, 1, 1, headers.length).setValues([headers])
+       .setFontWeight('bold').setBackground('#12203a').setFontColor('#ffffff');
+
+  const sample = ['FALSE', '4027 Clare St', 'Dublin, CA 94568', '1025000', '3', '3.5', '1879',
+                  'Sat & Sun 1–4 PM', 'Bright, updated home in a sought-after Dublin neighborhood.',
+                  'https://homeswithmanish.com/images/placeholder-home.jpg',
+                  '', '', 'https://homeswithmanish.com/#contact',
+                  'https://homeswithmanish.com/calculators/', 'Open House Today'];
+  sheet.getRange(2, 1, 1, sample.length).setValues([sample]);
+  sheet.setFrozenRows(1);
+  sheet.autoResizeColumns(1, headers.length);
+  Logger.log('OpenHouse sheet ready. Set "active" to TRUE on the current listing.');
 }
 
 // ============================================================================
