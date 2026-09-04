@@ -546,3 +546,33 @@ function setupMarketDataTrigger() {
 
   Logger.log('Weekly market data trigger set for Mondays at 6 AM');
 }
+
+// ============================================================================
+// ONE-CLICK REFRESH + SCHEDULING
+// ============================================================================
+
+/**
+ * Run this ONCE from the Apps Script editor to fix stale data in one shot:
+ * pulls all three feeds now AND (re)establishes every auto-update trigger plus
+ * the daily staleness monitor. Safely skips any function whose file isn't in
+ * this project and reports OK / SKIP / FAIL per step in the execution log.
+ *
+ * Requires these files pasted into the same Apps Script project:
+ *   Market_Data_Fetcher, Rental_Data_Fetcher, Mortgage_Rate_Fetcher,
+ *   Data_Staleness_Monitor.
+ */
+function refreshAllData() {
+  var steps = ['fetchMarketData', 'fetchRentalData', 'fetchMortgageRates',
+               'setupMarketDataTrigger', 'setupRentalDataTrigger',
+               'setupMortgageRateTrigger', 'setupStalenessMonitor'];
+  var log = [];
+  steps.forEach(function (name) {
+    try {
+      var fn = (typeof globalThis !== 'undefined') ? globalThis[name] : this[name];
+      if (typeof fn === 'function') { fn(); log.push('OK    ' + name); }
+      else { log.push('SKIP  ' + name + ' (paste that file into this project)'); }
+    } catch (e) { log.push('FAIL  ' + name + ' -> ' + e); }
+  });
+  Logger.log('refreshAllData results:\n' + log.join('\n'));
+  return log;
+}
