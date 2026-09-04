@@ -138,6 +138,7 @@
 
     var photos=(d.photoUrls||'').split(',').map(function(s){return s.trim();}).filter(Boolean);
     var photo=$('ohPhoto');
+    photo.onerror=function(){ photo.style.display='none'; }; // hide on bad/missing URL
     if(photos[0]){ photo.src=photos[0]; photo.alt=d.address||'Open house photo'; }
     unskel(photo); if(!photos[0]) photo.style.display='none';
 
