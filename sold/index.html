@@ -28,6 +28,7 @@
   .sold-side{position:absolute;top:12px;right:12px;background:rgba(18,32,58,.82);color:#fff;font-weight:600;font-size:.72rem;padding:6px 11px;border-radius:6px}
   .sold-body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1}
   .sold-price{font-family:var(--font-display);color:var(--navy,#12203a);font-size:1.6rem;font-weight:800;line-height:1}
+  .sold-listprice{color:#8a919c;font-size:.82rem;font-weight:600;margin-top:3px}
   .sold-address{color:var(--navy,#12203a);font-weight:700;margin:8px 0 2px}
   .sold-city{color:var(--gray-600,#5b6472);font-size:.95rem}
   .sold-facts{color:var(--gray-600,#5b6472);font-size:.92rem;margin:12px 0 0;padding-top:12px;border-top:1px solid #eef0f3}
@@ -112,6 +113,8 @@
       : '<div class="noimg" style="display:flex">'+esc(t.address||'Sold')+'</div>';
     var side = t.representedSide ? '<span class="sold-side">'+esc(t.representedSide)+'</span>' : '';
     var price = money(t.soldPrice) || '';
+    var listP = t.listPrice ? money(t.listPrice) : '';
+    var showList = listP && listP !== price;
     var link = t.listingUrl
       ? '<a class="sold-link" href="'+esc(t.listingUrl)+'" target="_blank" rel="noopener nofollow">View on '+esc(siteLabel(t.listingUrl))+' →</a>'
       : '';
@@ -119,6 +122,7 @@
       + '<div class="sold-cover"><span class="sold-tag">Sold</span>'+side+cover+'</div>'
       + '<div class="sold-body">'
       +   (price?'<div class="sold-price">'+price+'</div>':'')
+      +   (showList?'<div class="sold-listprice">Listed '+listP+'</div>':'')
       +   '<div class="sold-address">'+esc(t.address||'')+'</div>'
       +   (t.cityState?'<div class="sold-city">'+esc(t.cityState)+'</div>':'')
       +   (facts.length?'<div class="sold-facts">'+facts.join(' &nbsp;•&nbsp; ')+'</div>':'')
