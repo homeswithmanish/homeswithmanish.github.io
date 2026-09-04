@@ -406,10 +406,13 @@ function setupOpenHouseSheet() {
  *
  * Column headers are read from row 1 so columns can be reordered. Recommended
  * (run setupTransactionsSheet() to create them):
- *   published | closeDate | address | cityState | soldPrice | listPrice |
- *   beds | baths | sqft | representedSide | photoUrls | testimonial |
+ *   published | status | closeDate | address | cityState | soldPrice | listPrice |
+ *   beds | baths | sqft | representedSide | photoUrls | listingUrl | testimonial |
  *   description | mlsId | featured
- * (published = TRUE to show the row; photoUrls = comma-separated, first = cover)
+ * (published = TRUE to show the row; status must be Closed to appear on /sold/ —
+ *  Pending/Off-Market/Expired/Withdrawn/Canceled are excluded so a not-sold
+ *  listing never renders as Sold; photoUrls = comma-separated, first = cover;
+ *  listingUrl = optional Redfin/Zillow link for the "View on ..." button)
  *
  * @returns {Object} { success, count, transactions:[...] }
  */
@@ -461,17 +464,21 @@ function setupTransactionsSheet() {
   let sheet = ss.getSheetByName('Transactions');
   if (!sheet) sheet = ss.insertSheet('Transactions');
 
-  const headers = ['published', 'closeDate', 'address', 'cityState', 'soldPrice', 'listPrice',
-                   'beds', 'baths', 'sqft', 'representedSide', 'photoUrls', 'testimonial',
-                   'description', 'mlsId', 'featured'];
+  // status: Closed = shows on /sold/ as "Sold". Anything else (Pending, Off-Market,
+  // Expired, Withdrawn, Canceled) is EXCLUDED from the public portfolio — a listing
+  // that went off-market without selling must never render as Sold.
+  const headers = ['published', 'status', 'closeDate', 'address', 'cityState', 'soldPrice',
+                   'listPrice', 'beds', 'baths', 'sqft', 'representedSide', 'photoUrls',
+                   'listingUrl', 'testimonial', 'description', 'mlsId', 'featured'];
 
   sheet.clear();
   sheet.getRange(1, 1, 1, headers.length).setValues([headers])
        .setFontWeight('bold').setBackground('#12203a').setFontColor('#ffffff');
 
-  const sample = ['FALSE', '2026-06-15', '1234 Example Ave', 'San Ramon, CA 94582',
+  const sample = ['FALSE', 'Closed', '2026-06-15', '1234 Example Ave', 'San Ramon, CA 94582',
                   '1350000', '1299000', '4', '3', '2450', 'Represented Buyer',
                   'https://homeswithmanish.com/images/transactions/sample-1.jpg',
+                  'https://www.redfin.com/CA/San-Ramon/1234-Example-Ave',
                   'Manish made our first purchase smooth and stress-free.',
                   'Multiple-offer win, closed on time.', '', 'TRUE'];
   sheet.getRange(2, 1, 1, sample.length).setValues([sample]);
@@ -548,6 +555,7 @@ function syncSoldFromMLS() {
     if (!id || seen[id]) return; // upsert-by-mlsId: skip ones already captured
     const rec = {
       published: 'FALSE', // review + add licensed photos before publishing
+      status: 'Closed',   // query filters to Closed only; not-sold statuses never reach here
       closeDate: (p.CloseDate || '').slice(0, 10),
       address: [p.StreetNumber, p.StreetName, p.UnitNumber].filter(Boolean).join(' '),
       cityState: [p.City, p.StateOrProvince].filter(Boolean).join(', ') + ' ' + (p.PostalCode || ''),
@@ -558,6 +566,7 @@ function syncSoldFromMLS() {
       sqft: p.LivingArea || '',
       representedSide: 'Listed', // you were the list agent in this query
       photoUrls: '', // fill with images you are licensed to publish
+      listingUrl: '', // optional Redfin/Zillow link (avoid raw MLS URLs — they expire)
       testimonial: '', description: '', mlsId: id, featured: 'FALSE'
     };
     sheet.appendRow(headers.map(h => rec[h] !== undefined ? rec[h] : ''));

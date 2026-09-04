@@ -34,6 +34,9 @@
   .sold-facts b{color:var(--navy,#12203a)}
   .sold-close{color:#8a919c;font-size:.82rem;margin-top:8px}
   .sold-quote{font-style:italic;color:#44506a;font-size:.95rem;line-height:1.6;margin:14px 0 0;padding-left:12px;border-left:3px solid var(--gold,#c9a44a)}
+  .sold-linkrow{margin-top:auto;padding-top:16px}
+  .sold-link{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.9rem;color:var(--navy,#12203a);text-decoration:none;border:1.5px solid #d7dbe2;border-radius:9px;padding:9px 14px}
+  .sold-link:hover{border-color:var(--gold,#c9a44a);color:var(--gold,#c9a44a)}
   .sold-empty{background:var(--off-white,#f4f5f7);border:1px dashed #cfd4dc;border-radius:16px;padding:44px;text-align:center;color:var(--gray-600,#5b6472)}
   .sold-skel{height:360px;border-radius:16px;background:linear-gradient(90deg,#eef0f3 25%,#e3e6ea 37%,#eef0f3 63%);background-size:400% 100%;animation:ohsh 1.3s infinite}
   @keyframes ohsh{0%{background-position:100% 0}100%{background-position:-100% 0}}
@@ -88,6 +91,15 @@
     return 'Sold '+mo+' '+p[0];
   }
   function esc(s){var d=document.createElement('div');d.textContent=(s==null?'':s);return d.innerHTML;}
+  function isClosed(t){var s=(''+(t.status||'')).trim().toLowerCase();return s===''||s==='closed'||s==='sold';}
+  function siteLabel(url){
+    var u=(''+url).toLowerCase();
+    if(u.indexOf('redfin.')>-1) return 'Redfin';
+    if(u.indexOf('zillow.')>-1) return 'Zillow';
+    if(u.indexOf('realtor.')>-1) return 'Realtor.com';
+    if(u.indexOf('compass.')>-1) return 'Compass';
+    return 'Listing';
+  }
 
   function card(t){
     var photos=(t.photoUrls||'').split(',').map(function(s){return s.trim();}).filter(Boolean);
@@ -100,6 +112,9 @@
       : '<div class="noimg" style="display:flex">'+esc(t.address||'Sold')+'</div>';
     var side = t.representedSide ? '<span class="sold-side">'+esc(t.representedSide)+'</span>' : '';
     var price = money(t.soldPrice) || '';
+    var link = t.listingUrl
+      ? '<a class="sold-link" href="'+esc(t.listingUrl)+'" target="_blank" rel="noopener nofollow">View on '+esc(siteLabel(t.listingUrl))+' →</a>'
+      : '';
     return '<article class="sold-card">'
       + '<div class="sold-cover"><span class="sold-tag">Sold</span>'+side+cover+'</div>'
       + '<div class="sold-body">'
@@ -109,6 +124,7 @@
       +   (facts.length?'<div class="sold-facts">'+facts.join(' &nbsp;•&nbsp; ')+'</div>':'')
       +   (t.closeDate?'<div class="sold-close">'+esc(closeLabel(t.closeDate))+'</div>':'')
       +   (t.testimonial?'<p class="sold-quote">“'+esc(t.testimonial)+'”</p>':'')
+      +   (link?'<div class="sold-linkrow">'+link+'</div>':'')
       + '</div></article>';
   }
 
@@ -136,7 +152,9 @@
   fetch(SCRIPT_URL+'?action=transactions')
     .then(function(r){return r.json();})
     .then(function(res){
-      var list=(res&&res.transactions)||[];
+      // Only CLOSED deals belong in the portfolio; a listing that went off-market
+      // without selling (Pending/Expired/Withdrawn/Canceled) is never shown as Sold.
+      var list=((res&&res.transactions)||[]).filter(isClosed);
       if(!list.length){ renderEmpty(); return; }
       $('soldGrid').innerHTML=list.map(card).join('');
       renderStats(list);
