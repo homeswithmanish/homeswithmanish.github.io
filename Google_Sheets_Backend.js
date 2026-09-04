@@ -221,6 +221,12 @@ function doGet(e) {
         .setMimeType(ContentService.MimeType.JSON);
     }
 
+    if (action === 'transactions') {
+      const txnResponse = handleTransactionsRequest();
+      return ContentService.createTextOutput(JSON.stringify(txnResponse))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
     // All other actions require API key
     const apiKey = e.parameter.key;
 
@@ -383,6 +389,185 @@ function setupOpenHouseSheet() {
   sheet.autoResizeColumns(1, headers.length);
   Logger.log('OpenHouse sheet ready. Set "active" to TRUE on the current listing.');
 }
+
+// ============================================================================
+// PAST TRANSACTIONS / SOLD PORTFOLIO (PUBLIC - NO AUTH REQUIRED)
+// ============================================================================
+
+/**
+ * Returns Manish's retained past-transaction records as a JSON array, newest
+ * close date first. Powers the evergreen /sold/ portfolio page.
+ *
+ * IMPORTANT (compliance): this is a RETAINED record store, NOT an IDX/MLS feed.
+ * Only include transactions Manish represented, and only photos he has the
+ * right to publish (own listings / licensed / his own photos). See docs and the
+ * syncSoldFromMLS() template below for how the factual data can be pulled from
+ * MLSListings at close — but rights to archive photos are on you to secure.
+ *
+ * Column headers are read from row 1 so columns can be reordered. Recommended
+ * (run setupTransactionsSheet() to create them):
+ *   published | closeDate | address | cityState | soldPrice | listPrice |
+ *   beds | baths | sqft | representedSide | photoUrls | testimonial |
+ *   description | mlsId | featured
+ * (published = TRUE to show the row; photoUrls = comma-separated, first = cover)
+ *
+ * @returns {Object} { success, count, transactions:[...] }
+ */
+function handleTransactionsRequest() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const sheet = ss.getSheetByName('Transactions');
+
+  if (!sheet || sheet.getLastRow() < 2) {
+    return { success: true, count: 0, transactions: [] };
+  }
+
+  const values = sheet.getRange(1, 1, sheet.getLastRow(), sheet.getLastColumn()).getValues();
+  const headers = values[0].map(h => ('' + h).trim());
+  const pubIdx = headers.indexOf('published');
+
+  const isTruthy = v => {
+    const s = ('' + v).trim().toLowerCase();
+    return s === 'true' || s === 'yes' || s === 'y' || s === '1' || s === 'x' || v === true;
+  };
+
+  const out = [];
+  for (let r = 1; r < values.length; r++) {
+    const row = values[r];
+    if (pubIdx !== -1 && !isTruthy(row[pubIdx])) continue; // only published rows
+    if (!('' + row[headers.indexOf('address')]).trim()) continue; // skip blanks
+    const rec = {};
+    headers.forEach((h, i) => {
+      if (!h) return;
+      let val = row[i];
+      // keep dates as ISO strings so the frontend can sort/format reliably
+      if (val instanceof Date) val = Utilities.formatDate(val, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+      rec[h] = ('' + val).trim();
+    });
+    out.push(rec);
+  }
+
+  // newest close date first
+  out.sort((a, b) => ('' + (b.closeDate || '')).localeCompare('' + (a.closeDate || '')));
+
+  return { success: true, count: out.length, transactions: out };
+}
+
+/**
+ * One-time setup: creates the 'Transactions' tab with headers and a sample row.
+ * Run once from the Apps Script editor, then edit rows in the sheet.
+ */
+function setupTransactionsSheet() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  let sheet = ss.getSheetByName('Transactions');
+  if (!sheet) sheet = ss.insertSheet('Transactions');
+
+  const headers = ['published', 'closeDate', 'address', 'cityState', 'soldPrice', 'listPrice',
+                   'beds', 'baths', 'sqft', 'representedSide', 'photoUrls', 'testimonial',
+                   'description', 'mlsId', 'featured'];
+
+  sheet.clear();
+  sheet.getRange(1, 1, 1, headers.length).setValues([headers])
+       .setFontWeight('bold').setBackground('#12203a').setFontColor('#ffffff');
+
+  const sample = ['FALSE', '2026-06-15', '1234 Example Ave', 'San Ramon, CA 94582',
+                  '1350000', '1299000', '4', '3', '2450', 'Represented Buyer',
+                  'https://homeswithmanish.com/images/transactions/sample-1.jpg',
+                  'Manish made our first purchase smooth and stress-free.',
+                  'Multiple-offer win, closed on time.', '', 'TRUE'];
+  sheet.getRange(2, 1, 1, sample.length).setValues([sample]);
+  sheet.setFrozenRows(1);
+  sheet.autoResizeColumns(1, headers.length);
+  Logger.log('Transactions sheet ready. Add closed deals and set "published" to TRUE. ' +
+             'Only publish transactions you represented and photos you have rights to.');
+}
+
+// ============================================================================
+// MLSLISTINGS SOLD SYNC — TEMPLATE (INACTIVE until you have a feed)
+// ============================================================================
+//
+// This function is a DOCUMENTED TEMPLATE, not wired up. It fetches YOUR closed
+// listings from a RESO Web API feed and upserts them into the Transactions
+// sheet, so factual data (price/beds/baths/close date) is captured automatically
+// at close. It stays inactive until ALL of the following are true:
+//
+//   1. You are approved for a RESO Web API feed for MLSListings — request it via
+//      your broker (MOSO Real Estate) + MLSListings, or a licensed distributor
+//      such as MLS Grid / Bridge Interactive / Trestle.
+//   2. You store the feed base URL + bearer token in Script Properties
+//      (Project Settings -> Script properties). NEVER hard-code secrets or commit
+//      them to the GitHub repo.
+//   3. You confirm with your broker/MLS what you may RETAIN and DISPLAY, and for
+//      how long. Photos are copyrighted; archiving them is only OK when you hold
+//      the rights. This template pulls DATA only and leaves photoUrls for you to
+//      fill with images you are licensed to publish.
+//
+// To activate: fill AGENT_MLS_ID, verify the field names against your feed's
+// metadata (RESO fields vary slightly per MLS), then add a time-driven trigger
+// (e.g. daily) via Triggers -> Add Trigger -> syncSoldFromMLS.
+//
+function syncSoldFromMLS() {
+  const props = PropertiesService.getScriptProperties();
+  const BASE = props.getProperty('RESO_API_BASE');   // e.g. https://api.mlsgrid.com/v2
+  const TOKEN = props.getProperty('RESO_API_TOKEN');  // bearer token from your feed provider
+  const AGENT_MLS_ID = '';                            // <-- your MLSListings agent/member ID
+
+  if (!BASE || !TOKEN || !AGENT_MLS_ID) {
+    Logger.log('syncSoldFromMLS is inactive: set RESO_API_BASE, RESO_API_TOKEN in Script ' +
+               'Properties and AGENT_MLS_ID in code once your MLSListings feed is approved.');
+    return;
+  }
+
+  // Example RESO OData query: closed listings where you were the list agent.
+  // Field names (StandardStatus, CloseDate, ListAgentMlsId, ...) follow the RESO
+  // Data Dictionary but VERIFY against your feed's $metadata before relying on them.
+  const query = "Property?$filter=StandardStatus eq 'Closed' and ListAgentMlsId eq '" +
+                AGENT_MLS_ID + "'&$orderby=CloseDate desc&$top=50";
+  const resp = UrlFetchApp.fetch(BASE + '/' + query, {
+    headers: { Authorization: 'Bearer ' + TOKEN, Accept: 'application/json' },
+    muteHttpExceptions: true
+  });
+  if (resp.getResponseCode() !== 200) {
+    Logger.log('MLS feed error ' + resp.getResponseCode() + ': ' + resp.getContentText().slice(0, 300));
+    return;
+  }
+
+  const rows = (JSON.parse(resp.getContentText()).value) || [];
+  const sheet = ss_().getSheetByName('Transactions');
+  if (!sheet) { Logger.log('Run setupTransactionsSheet() first.'); return; }
+
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  const existing = sheet.getLastRow() > 1
+    ? sheet.getRange(2, 1, sheet.getLastRow() - 1, sheet.getLastColumn()).getValues() : [];
+  const mlsIdCol = headers.indexOf('mlsId');
+  const seen = {};
+  existing.forEach(r => { if (mlsIdCol !== -1 && r[mlsIdCol]) seen['' + r[mlsIdCol]] = true; });
+
+  let added = 0;
+  rows.forEach(p => {
+    const id = '' + (p.ListingId || p.ListingKey || '');
+    if (!id || seen[id]) return; // upsert-by-mlsId: skip ones already captured
+    const rec = {
+      published: 'FALSE', // review + add licensed photos before publishing
+      closeDate: (p.CloseDate || '').slice(0, 10),
+      address: [p.StreetNumber, p.StreetName, p.UnitNumber].filter(Boolean).join(' '),
+      cityState: [p.City, p.StateOrProvince].filter(Boolean).join(', ') + ' ' + (p.PostalCode || ''),
+      soldPrice: p.ClosePrice || '',
+      listPrice: p.ListPrice || '',
+      beds: p.BedroomsTotal || '',
+      baths: p.BathroomsTotalInteger || '',
+      sqft: p.LivingArea || '',
+      representedSide: 'Listed', // you were the list agent in this query
+      photoUrls: '', // fill with images you are licensed to publish
+      testimonial: '', description: '', mlsId: id, featured: 'FALSE'
+    };
+    sheet.appendRow(headers.map(h => rec[h] !== undefined ? rec[h] : ''));
+    added++;
+  });
+  Logger.log('syncSoldFromMLS: added ' + added + ' new closed record(s) as unpublished drafts.');
+}
+
+// small helper so the template reads cleanly
+function ss_() { return SpreadsheetApp.openById(SHEET_ID); }
 
 // ============================================================================
 // ADMIN API ACTION HANDLERS
