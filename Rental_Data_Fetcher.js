@@ -19,10 +19,10 @@
 
 // Zillow ZORI CSV URLs (try multiple since Zillow changes paths)
 const ZILLOW_ZORI_URLS = [
-  'https://files.zillowstatic.com/research/public_v2/zori/City_zori_uc_sfrcondomfr_sm_month.csv',
+  // public_csvs is Zillow's current path (verified working 2026-09); public_v2 now 404s.
   'https://files.zillowstatic.com/research/public_csvs/zori/City_zori_uc_sfrcondomfr_sm_month.csv',
-  'https://files.zillowstatic.com/research/public_v2/zori/City_zori_sm_month.csv',
-  'https://files.zillowstatic.com/research/public_csvs/zori/City_zori_sm_month.csv'
+  'https://files.zillowstatic.com/research/public_csvs/zori/City_zori_uc_sfrcondomfr_sm_sa_month.csv',
+  'https://files.zillowstatic.com/research/public_v2/zori/City_zori_uc_sfrcondomfr_sm_month.csv'
 ];
 
 const RENTAL_DATA_SHEET = 'RentalData';
@@ -206,7 +206,9 @@ function parseZORIData(csvText, homeValues) {
         medianPrice: homeValue,
         grossYield: homeValue > 0 ? Math.round((monthlyRent * 12) / homeValue * 10000) / 100 : null,
         priceToRent: homeValue > 0 ? Math.round(homeValue / (monthlyRent * 12)) : null,
-        lastUpdated: latestDate,
+        // Fetch date (not the ~1-2mo-lagged ZORI data-period date) so the
+        // staleness monitor measures refresh recency, not the data's period.
+        lastUpdated: new Date().toISOString().split('T')[0],
         source: 'Zillow ZORI'
       });
 
