@@ -206,7 +206,9 @@ function parseZORIData(csvText, homeValues) {
         medianPrice: homeValue,
         grossYield: homeValue > 0 ? Math.round((monthlyRent * 12) / homeValue * 10000) / 100 : null,
         priceToRent: homeValue > 0 ? Math.round(homeValue / (monthlyRent * 12)) : null,
-        lastUpdated: latestDate,
+        // Fetch date (not the ~1-2mo-lagged ZORI data-period date) so the
+        // staleness monitor measures refresh recency, not the data's period.
+        lastUpdated: new Date().toISOString().split('T')[0],
         source: 'Zillow ZORI'
       });
 

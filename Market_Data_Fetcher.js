@@ -215,7 +215,10 @@ function parseZillowCSV(csvText) {
         daysOnMarket: getDaysOnMarketEstimate(cityName),
         inventory: null,     // Not available in ZHVI data
         priceChange: yoyChange !== null ? Math.round(yoyChange * 10) / 10 : null,
-        lastUpdated: latestDate,
+        // Stamp the actual FETCH date so the staleness monitor tracks refresh
+        // recency. (Zillow's data-period date, latestDate, lags ~1-2 months and
+        // would otherwise trip the 7-day threshold on every successful fetch.)
+        lastUpdated: new Date().toISOString().split('T')[0],
         source: 'Zillow ZHVI'
       };
 
