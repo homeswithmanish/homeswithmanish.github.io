@@ -19,10 +19,10 @@
 
 // Zillow ZORI CSV URLs (try multiple since Zillow changes paths)
 const ZILLOW_ZORI_URLS = [
-  'https://files.zillowstatic.com/research/public_v2/zori/City_zori_uc_sfrcondomfr_sm_month.csv',
+  // public_csvs is Zillow's current path (verified working 2026-09); public_v2 now 404s.
   'https://files.zillowstatic.com/research/public_csvs/zori/City_zori_uc_sfrcondomfr_sm_month.csv',
-  'https://files.zillowstatic.com/research/public_v2/zori/City_zori_sm_month.csv',
-  'https://files.zillowstatic.com/research/public_csvs/zori/City_zori_sm_month.csv'
+  'https://files.zillowstatic.com/research/public_csvs/zori/City_zori_uc_sfrcondomfr_sm_sa_month.csv',
+  'https://files.zillowstatic.com/research/public_v2/zori/City_zori_uc_sfrcondomfr_sm_month.csv'
 ];
 
 const RENTAL_DATA_SHEET = 'RentalData';

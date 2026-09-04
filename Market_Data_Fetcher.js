@@ -26,9 +26,10 @@
 // Zillow ZHVI CSV - Single Family Residences, typical tier (35th-65th percentile)
 // Zillow may change URLs periodically. If the primary fails, we try alternates.
 const ZILLOW_ZHVI_URLS = [
-  'https://files.zillowstatic.com/research/public_v2/zhvi/City_zhvi_uc_sfr_tier_0.33_0.67_sm_sa_month.csv',
+  // public_csvs is Zillow's current path (verified working 2026-09); public_v2 now 404s.
   'https://files.zillowstatic.com/research/public_csvs/zhvi/City_zhvi_uc_sfr_tier_0.33_0.67_sm_sa_month.csv',
-  'https://files.zillowstatic.com/research/public/City/City_zhvi_uc_sfr_tier_0.33_0.67_sm_sa_month.csv'
+  'https://files.zillowstatic.com/research/public_csvs/zhvi/City_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv',
+  'https://files.zillowstatic.com/research/public_v2/zhvi/City_zhvi_uc_sfr_tier_0.33_0.67_sm_sa_month.csv'
 ];
 
 // Our 8 East Bay target cities
