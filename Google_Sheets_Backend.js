@@ -231,11 +231,11 @@ function doGet(e) {
     const apiKey = e.parameter.key;
 
     if (!isValidApiKey(apiKey)) {
-      return HtmlService.createHtmlOutput(JSON.stringify({
+      return ContentService.createTextOutput(JSON.stringify({
         success: false,
         message: 'Unauthorized: Invalid API key',
         status: 401
-      })).setHeader('Content-Type', 'application/json').setHeaders(headers);
+      })).setMimeType(ContentService.MimeType.JSON);
     }
 
     let responseData;
@@ -257,16 +257,16 @@ function doGet(e) {
         };
     }
 
-    return HtmlService.createHtmlOutput(JSON.stringify(responseData))
-      .setHeader('Content-Type', 'application/json')
-      .setHeaders(headers);
+    return ContentService.createTextOutput(JSON.stringify(responseData))
+      .setMimeType(ContentService.MimeType.JSON);
 
   } catch (error) {
     Logger.log('Error in doGet: ' + error.toString());
-    return HtmlService.createHtmlOutput(JSON.stringify({
+    return ContentService.createTextOutput(JSON.stringify({
       success: false,
-      message: 'An error occurred processing your request'
-    })).setHeader('Content-Type', 'application/json');
+      message: 'An error occurred processing your request',
+      error: String(error)
+    })).setMimeType(ContentService.MimeType.JSON);
   }
 }
 
@@ -442,8 +442,13 @@ function handleTransactionsRequest() {
     headers.forEach((h, i) => {
       if (!h) return;
       let val = row[i];
-      // keep dates as ISO strings so the frontend can sort/format reliably
-      if (val instanceof Date) val = Utilities.formatDate(val, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+      // keep dates as ISO (yyyy-MM-dd) strings so the frontend can sort/format
+      // reliably — done with plain JS (no Utilities/Session, which can throw).
+      if (Object.prototype.toString.call(val) === '[object Date]' && !isNaN(val)) {
+        val = val.getFullYear() + '-' +
+              ('0' + (val.getMonth() + 1)).slice(-2) + '-' +
+              ('0' + val.getDate()).slice(-2);
+      }
       rec[h] = ('' + val).trim();
     });
     out.push(rec);
