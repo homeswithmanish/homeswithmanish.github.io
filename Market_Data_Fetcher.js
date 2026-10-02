@@ -40,7 +40,8 @@ const TARGET_CITIES_LIST = [
   { city: 'Dublin', state: 'CA', county: 'Alameda County' },
   { city: 'Livermore', state: 'CA', county: 'Alameda County' },
   { city: 'Fremont', state: 'CA', county: 'Alameda County' },
-  { city: 'Tracy', state: 'CA', county: 'San Joaquin County' }
+  { city: 'Tracy', state: 'CA', county: 'San Joaquin County' },
+  { city: 'Mountain House', state: 'CA', county: 'San Joaquin County' }
 ];
 
 const MARKET_DATA_SHEET = 'MarketData';

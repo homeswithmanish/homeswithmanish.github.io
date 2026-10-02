@@ -160,9 +160,11 @@
     {
         "@context": "https://schema.org",
         "@type": "Person",
-        "name": "Manish Anand",
+        "name": "Manish Manoharlal Anand",
+        "alternateName": "Manish Anand",
         "url": "https://homeswithmanish.com",
-        "jobTitle": "Real Estate Agent",
+        "jobTitle": ["Real Estate Agent", "Mortgage Loan Officer"],
+        "worksFor": [{"@type": "RealEstateAgent", "name": "MOSO Real Estate"}, {"@type": "Organization", "name": "LoanFactory", "url": "https://www.loanfactory.com"}],
         "email": "homeswithmanish@gmail.com",
         "telephone": "+1-408-707-5324",
         "knowsLanguage": "en",
@@ -171,6 +173,10 @@
             "propertyID": "CA DRE License",
             "value": "02247006"
         },
+        "hasCredential": [
+            {"@type": "EducationalOccupationalCredential", "credentialCategory": "license", "name": "California DRE Salesperson License #02247006"},
+            {"@type": "EducationalOccupationalCredential", "credentialCategory": "license", "name": "NMLS Mortgage Loan Originator #2873088"}
+        ],
         "sameAs": [
             "https://www.instagram.com/homeswithmanish/",
             "https://www.facebook.com/profile.php?id=61572276856121",
@@ -369,8 +375,8 @@
                             <div class="label">SFH Focus</div>
                         </div>
                         <div class="hero-stat">
-                            <div class="num">∞</div>
-                            <div class="label">Data-Driven</div>
+                            <div class="num">2</div>
+                            <div class="label">Licenses: DRE + NMLS</div>
                         </div>
                     </div>
                 </div>
@@ -2050,6 +2056,18 @@
           var data = {};
           new FormData(form).forEach(function(val, key) { data[key] = val; });
           data.source = source;
+
+          // Also queue the lead in the RealEstateAI CRM (same domain via the Cloudflare router); the
+          // Google Sheets flow below keeps sending guides and newsletters.
+          var leadName = data.fullName || [data.firstName, data.lastName].filter(Boolean).join(' ');
+          var leadNote = [data.interest && ('Goal: ' + data.interest), data.subject && ('Subject: ' + data.subject),
+                          data.message].filter(Boolean).join('\n') || 'Website form (' + source + ')';
+          fetch('/api/leads', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ full_name: leadName, email: data.email, phone: data.phone || undefined,
+                                   city: data.city || undefined, message: leadNote, source: 'homeswithmanish-' + source })
+          }).catch(function() {});
 
           fetch(SCRIPT_URL, {
             method: 'POST',
