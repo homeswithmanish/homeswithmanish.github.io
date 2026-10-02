@@ -157,7 +157,8 @@ test('Hero image has fetchpriority', /fetchpriority/.test(indexHtml));
 // --- True Cost Calculator (Mello-Roos + HOA) ---
 console.log('\n\x1b[36mTrue Cost Calculator:\x1b[0m');
 test('Has true-cost section', /id=["']true-cost["']/.test(indexHtml));
-test('Has True Cost nav link (desktop + mobile)', (indexHtml.match(/href=["']#true-cost["']/g) || []).length >= 2);
+test('True Cost section linked from the footer', /href=["']#true-cost["']/.test(indexHtml));
+test('Desktop and mobile menus have the same links', (indexHtml.match(/href="\/#home-loans"/g) || []).length >= 2);
 test('Mentions Mello-Roos', /Mello-Roos/i.test(indexHtml));
 test('Has neighborhood preset chips container', /id=["']tc-chips["']/.test(indexHtml));
 test('Has home price input', /id=["']tc-price["']/.test(indexHtml));
