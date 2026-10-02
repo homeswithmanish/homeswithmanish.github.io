@@ -165,19 +165,30 @@
     +'individual results vary and are not a guarantee of future outcomes. Manish Manoharlal Anand, CA DRE #02247006 | '
     +'MOSO Real Estate, CA DRE #01771313 | Equal Housing Opportunity.';
 
-  fetch(SCRIPT_URL+'?action=transactions')
-    .then(function(r){return r.json();})
-    .then(function(res){
-      // Only CLOSED deals belong in the portfolio; a listing that went off-market
-      // without selling (Pending/Expired/Withdrawn/Canceled) is never shown as Sold.
-      var list=((res&&res.transactions)||[]).filter(isClosed);
-      if(!list.length){ renderEmpty(); return; }
-      $('soldGrid').innerHTML=list.map(card).join('');
-      renderStats(list);
-      $('soldFine').textContent=FINE;
-      if(typeof gtag==='function') gtag('event','view_sold_portfolio',{event_category:'sold',event_label:'count_'+list.length});
-    })
-    .catch(function(){ renderEmpty(); });
+  function renderUnavailable(){
+    $('soldGrid').innerHTML='<div class="sold-empty" style="grid-column:1/-1">'
+      +'<h3 style="font-family:var(--font-display);color:var(--navy);margin:0 0 8px">Recent sales could not load</h3>'
+      +'<p style="margin:0">Please refresh in a moment, or <a href="/#contact">reach out</a> and I will send them to you.</p></div>';
+  }
+
+  // Load failures are reported as such (not as "no sales yet"), after one retry.
+  function load(retry){
+    fetch(SCRIPT_URL+'?action=transactions')
+      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+      .then(function(res){
+        if(!res||!Array.isArray(res.transactions)) throw new Error('bad response');
+        // Only CLOSED deals belong in the portfolio; a listing that went off-market
+        // without selling (Pending/Expired/Withdrawn/Canceled) is never shown as Sold.
+        var list=res.transactions.filter(isClosed);
+        if(!list.length){ renderEmpty(); return; }
+        $('soldGrid').innerHTML=list.map(card).join('');
+        renderStats(list);
+        $('soldFine').textContent=FINE;
+        if(typeof gtag==='function') gtag('event','view_sold_portfolio',{event_category:'sold',event_label:'count_'+list.length});
+      })
+      .catch(function(){ if(retry) setTimeout(function(){ load(false); }, 3000); else renderUnavailable(); });
+  }
+  load(true);
 })();
 </script>
 </body></html>
