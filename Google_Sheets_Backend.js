@@ -91,6 +91,10 @@ function doPost(e) {
       })).setHeader('Content-Type', 'application/json').setHeaders(headers);
     }
 
+    if (requestData.action === 'marketdom') {
+      return handleMarketDomPost(requestData);
+    }
+
     // Sanitize inputs
     const firstName = sanitizeInput(requestData.firstName);
     const lastName = sanitizeInput(requestData.lastName);

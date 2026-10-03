@@ -328,7 +328,12 @@ function setupMarketDataSheet() {
  */
 function writeMarketDataToSheet(sheet, data) {
   const lastRow = sheet.getLastRow();
+  // Days on market comes from Redfin via handleMarketDomPost, not Zillow, so keep it across rewrites.
+  const keptDom = {};
   if (lastRow > 1) {
+    sheet.getRange(2, 1, lastRow - 1, 5).getValues().forEach(function(row) {
+      keptDom[row[0]] = row[4];
+    });
     sheet.getRange(2, 1, lastRow - 1, 9).clear();
   }
 
@@ -338,7 +343,7 @@ function writeMarketDataToSheet(sheet, data) {
       d.medianPrice || '',
       d.pricePerSqft || '',
       d.homesSold || '',
-      d.daysOnMarket || '',
+      d.daysOnMarket || keptDom[d.city] || '',
       d.inventory || '',
       d.priceChange !== null && d.priceChange !== undefined ? d.priceChange / 100 : '',
       d.lastUpdated,
@@ -387,12 +392,55 @@ function handleMarketDataRequest() {
     return obj;
   });
 
+  let attribution = 'Home values: Zillow Home Value Index (zillow.com/research)';
+  const domPeriod = PropertiesService.getScriptProperties().getProperty('MARKET_DOM_PERIOD');
+  if (domPeriod) {
+    attribution += ' \u00B7 Days on market: Redfin (redfin.com), median for the 3 months ending ' + domPeriod;
+  }
+
   return {
     success: true,
     data: results,
     lastUpdated: results.length > 0 ? results[0].lastUpdated : null,
-    attribution: 'Data from Zillow Home Value Index (zillow.com/research)'
+    attribution: attribution
   };
+}
+
+/**
+ * Receives Redfin median days on market per city, pushed by the workbench on the home server.
+ * Body: { action: 'marketdom', token, periodEnd: 'YYYY-MM-DD', cities: [{ city, daysOnMarket }] }
+ */
+function handleMarketDomPost(data) {
+  const expected = PropertiesService.getScriptProperties().getProperty('MARKET_DOM_TOKEN');
+  if (!expected || data.token !== expected) {
+    return jsonOutput({ success: false, error: 'unauthorized' });
+  }
+
+  const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(MARKET_DATA_SHEET);
+  if (!sheet || sheet.getLastRow() < 2) {
+    return jsonOutput({ success: false, error: 'MarketData sheet is empty' });
+  }
+
+  const dom = {};
+  (data.cities || []).forEach(function(c) {
+    if (typeof c.daysOnMarket === 'number' && c.daysOnMarket >= 0) dom[c.city] = Math.round(c.daysOnMarket);
+  });
+
+  const range = sheet.getRange(2, 1, sheet.getLastRow() - 1, 5);
+  const values = range.getValues();
+  const updated = [];
+  values.forEach(function(row) {
+    row[4] = dom[row[0]] !== undefined ? dom[row[0]] : '';
+    if (row[4] !== '') updated.push(row[0]);
+  });
+  range.setValues(values);
+
+  PropertiesService.getScriptProperties().setProperty('MARKET_DOM_PERIOD', String(data.periodEnd || ''));
+  return jsonOutput({ success: true, updated: updated });
+}
+
+function jsonOutput(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
 }
 
 // ============================================================================
