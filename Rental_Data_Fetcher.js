@@ -38,17 +38,6 @@ const RENTAL_TARGET_CITIES = [
   { city: 'Tracy', state: 'CA' }
 ];
 
-// Fallback rent estimates (used if Zillow ZORI doesn't cover a city)
-const RENT_ESTIMATES = {
-  'San Ramon': 3800,
-  'Pleasanton': 3900,
-  'Danville': 4200,
-  'Dublin': 3500,
-  'Livermore': 3200,
-  'Fremont': 3600,
-  'Tracy': 2400
-};
-
 // ============================================================================
 // FETCH FUNCTION
 // ============================================================================
@@ -101,29 +90,25 @@ function fetchRentalData() {
       }
     }
 
-    var results = [];
-
-    if (csvText) {
-      results = parseZORIData(csvText, homeValues);
+    if (!csvText) {
+      throw new Error('All ZORI URLs failed. Keeping previous sheet data.');
     }
 
-    // Fill in any missing cities with estimates
+    var results = parseZORIData(csvText, homeValues);
     var foundCities = {};
     results.forEach(function(r) { foundCities[r.city] = true; });
 
     RENTAL_TARGET_CITIES.forEach(function(t) {
       if (!foundCities[t.city]) {
-        Logger.log(t.city + ' not found in ZORI data, using estimate');
-        var rent = RENT_ESTIMATES[t.city] || 3000;
-        var homeValue = homeValues[t.city] || 0;
+        Logger.log(t.city + ' not found in ZORI data');
         results.push({
           city: t.city,
-          monthlyRent: rent,
-          medianPrice: homeValue,
-          grossYield: homeValue > 0 ? Math.round((rent * 12) / homeValue * 10000) / 100 : null,
-          priceToRent: homeValue > 0 ? Math.round(homeValue / (rent * 12)) : null,
+          monthlyRent: null,
+          medianPrice: homeValues[t.city] || null,
+          grossYield: null,
+          priceToRent: null,
           lastUpdated: new Date().toISOString().split('T')[0],
-          source: 'Estimate'
+          source: 'Zillow ZORI (city not covered)'
         });
       }
     });
@@ -139,7 +124,7 @@ function fetchRentalData() {
 
   } catch (error) {
     Logger.log('Error: ' + error.toString());
-    writeRentalFallbackData(sheet, homeValues);
+    throw error;
   }
 }
 
@@ -282,22 +267,6 @@ function writeRentalDataToSheet(sheet, data) {
   Logger.log('Wrote ' + rows.length + ' rental data rows');
 }
 
-function writeRentalFallbackData(sheet, homeValues) {
-  var results = RENTAL_TARGET_CITIES.map(function(t) {
-    var rent = RENT_ESTIMATES[t.city] || 3000;
-    var homeValue = homeValues[t.city] || 0;
-    return {
-      city: t.city,
-      monthlyRent: rent,
-      medianPrice: homeValue,
-      grossYield: homeValue > 0 ? Math.round((rent * 12) / homeValue * 10000) / 100 : null,
-      priceToRent: homeValue > 0 ? Math.round(homeValue / (rent * 12)) : null,
-      lastUpdated: new Date().toISOString().split('T')[0],
-      source: 'Estimate'
-    };
-  });
-  writeRentalDataToSheet(sheet, results);
-}
 
 // ============================================================================
 // API ENDPOINT

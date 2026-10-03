@@ -96,18 +96,14 @@ function fetchMarketData() {
     }
 
     if (!csvText) {
-      Logger.log('All Zillow URLs failed. Using fallback data.');
-      writeFallbackData(sheet);
-      return;
+      throw new Error('All Zillow URLs failed. Keeping previous sheet data.');
     }
 
     // Parse the CSV
     const results = parseZillowCSV(csvText);
 
     if (results.length === 0) {
-      Logger.log('No matching cities found in CSV. Using fallback data.');
-      writeFallbackData(sheet);
-      return;
+      throw new Error('No matching cities found in CSV. Keeping previous sheet data.');
     }
 
     // Write results to sheet
@@ -116,8 +112,7 @@ function fetchMarketData() {
 
   } catch (error) {
     Logger.log('Error fetching market data: ' + error.toString());
-    Logger.log('Using fallback data.');
-    writeFallbackData(sheet);
+    throw error;
   }
 }
 
@@ -213,7 +208,7 @@ function parseZillowCSV(csvText) {
         medianPrice: currentPrice ? Math.round(currentPrice) : null,
         pricePerSqft: null, // Not available in ZHVI data
         homesSold: null,     // Not available in ZHVI data
-        daysOnMarket: getDaysOnMarketEstimate(cityName),
+        daysOnMarket: null,  // Not available in ZHVI data
         inventory: null,     // Not available in ZHVI data
         priceChange: yoyChange !== null ? Math.round(yoyChange * 10) / 10 : null,
         // Stamp the actual FETCH date so the staleness monitor tracks refresh
@@ -231,11 +226,20 @@ function parseZillowCSV(csvText) {
     }
   }
 
-  // Add fallback for any cities not found in Zillow data
   for (const key in targetSet) {
     const t = targetSet[key];
-    Logger.log(t.city + ' not found in Zillow CSV, using fallback');
-    results.push(getFallbackData(t.city));
+    Logger.log(t.city + ' not found in Zillow CSV');
+    results.push({
+      city: t.city,
+      medianPrice: null,
+      pricePerSqft: null,
+      homesSold: null,
+      daysOnMarket: null,
+      inventory: null,
+      priceChange: null,
+      lastUpdated: new Date().toISOString().split('T')[0],
+      source: 'Zillow ZHVI (city not covered)'
+    });
   }
 
   // Sort by our preferred order
@@ -273,53 +277,6 @@ function parseCSVLine(line) {
   }
   result.push(current.trim());
   return result;
-}
-
-/**
- * Estimated days on market for each city.
- * These are approximations based on recent market conditions.
- * Updated periodically with the fallback data.
- */
-function getDaysOnMarketEstimate(cityName) {
-  const estimates = {
-    'San Ramon': 18,
-    'Pleasanton': 16,
-    'Danville': 22,
-    'Dublin': 14,
-    'Livermore': 15,
-    'Fremont': 12,
-    'Tracy': 20
-  };
-  return estimates[cityName] || null;
-}
-
-/**
- * Fallback data if Zillow fetch fails entirely.
- */
-function getFallbackData(cityName) {
-  const fallback = {
-    'San Ramon': { medianPrice: 1650000, priceChange: 5.2 },
-    'Pleasanton': { medianPrice: 1750000, priceChange: 4.8 },
-    'Danville': { medianPrice: 2100000, priceChange: 3.5 },
-    'Dublin': { medianPrice: 1350000, priceChange: 6.1 },
-    'Livermore': { medianPrice: 1050000, priceChange: 5.5 },
-    'Fremont': { medianPrice: 1500000, priceChange: 4.2 },
-    'Tracy': { medianPrice: 650000, priceChange: 7.3 }
-  };
-
-  const fb = fallback[cityName] || { medianPrice: 0, priceChange: 0 };
-
-  return {
-    city: cityName,
-    medianPrice: fb.medianPrice,
-    pricePerSqft: null,
-    homesSold: null,
-    daysOnMarket: getDaysOnMarketEstimate(cityName),
-    inventory: null,
-    priceChange: fb.priceChange,
-    lastUpdated: new Date().toISOString().split('T')[0],
-    source: 'Estimate (Zillow fetch pending)'
-  };
 }
 
 // ============================================================================
@@ -396,16 +353,6 @@ function writeMarketDataToSheet(sheet, data) {
   }
 
   Logger.log('Wrote ' + rows.length + ' rows to MarketData sheet');
-}
-
-/**
- * Writes fallback data when fetch fails
- */
-function writeFallbackData(sheet) {
-  const results = TARGET_CITIES_LIST.map(function(t) {
-    return getFallbackData(t.city);
-  });
-  writeMarketDataToSheet(sheet, results);
 }
 
 // ============================================================================
