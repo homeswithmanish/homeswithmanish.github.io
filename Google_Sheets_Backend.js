@@ -231,6 +231,12 @@ function doGet(e) {
         .setMimeType(ContentService.MimeType.JSON);
     }
 
+    if (action === 'cashflow') {
+      const cfResponse = handleCashFlowRequest();
+      return ContentService.createTextOutput(JSON.stringify(cfResponse))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
     // All other actions require API key
     const apiKey = e.parameter.key;
 
@@ -1346,4 +1352,94 @@ function setupNewsletterSheet() {
   }
 
   Logger.log('Newsletter sheet setup complete');
+}
+
+/* ==================== CASH FLOW FINDER ====================
+ * Powers the /cash-flow-finder/ page. Manish maintains a sheet tab named
+ * "CashFlowDeals" with one row per screened listing (input columns only);
+ * this code computes PITI + rent/PITI server-side and serves Active rows
+ * ranked by ratio, highest first.
+ */
+var CASHFLOW_SHEET_NAME = 'CashFlowDeals';
+var CASHFLOW_HEADERS = ['Address','City','Price','Beds','Baths','SqFt','EstRent',
+  'DownPmtPct','RatePct','TaxPctYr','InsPctYr','MelloRoosYr','HOAmo',
+  'Status','ListingURL','Notes','Updated'];
+
+function setupCashFlowSheet() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(CASHFLOW_SHEET_NAME);
+  if (!sheet) {
+    sheet = ss.insertSheet(CASHFLOW_SHEET_NAME);
+    sheet.getRange(1, 1, 1, CASHFLOW_HEADERS.length).setValues([CASHFLOW_HEADERS]);
+    sheet.getRange(1, 1, 1, CASHFLOW_HEADERS.length).setFontWeight('bold');
+    sheet.setFrozenRows(1);
+    // Example row (Status != Active, so it never appears on the site)
+    sheet.appendRow(['123 Example Way','Tracy',675000,3,2,1600,2900,
+      0.20,0.0728,0.011,0.0035,0,0,'Example','','Replace with a real listing','']);
+  }
+  return sheet;
+}
+
+function cashFlowMonthlyPI(loan, annualRate) {
+  var r = annualRate / 12, n = 360;
+  if (!loan || loan <= 0) return 0;
+  if (!r) return loan / n;
+  var f = Math.pow(1 + r, n);
+  return loan * r * f / (f - 1);
+}
+
+function handleCashFlowRequest() {
+  try {
+    var sheet = setupCashFlowSheet();
+    var values = sheet.getDataRange().getValues();
+    var deals = [];
+    for (var i = 1; i < values.length; i++) {
+      var row = values[i];
+      var status = String(row[13] || '').trim().toLowerCase();
+      if (status !== 'active') continue;
+      var price = Number(row[2]) || 0;
+      var estRent = Number(row[6]) || 0;
+      if (!price || !estRent) continue;
+      var downPct = Number(row[7]) || 0.20;
+      var ratePct = Number(row[8]) || 0.0728;
+      var loan = price * (1 - downPct);
+      var pi = cashFlowMonthlyPI(loan, ratePct);
+      var taxMo = price * (Number(row[9]) || 0.011) / 12;
+      var insMo = price * (Number(row[10]) || 0.0035) / 12;
+      var mrMo = (Number(row[11]) || 0) / 12;
+      var hoaMo = Number(row[12]) || 0;
+      var total = pi + taxMo + insMo + mrMo + hoaMo;
+      if (total <= 0) continue;
+      var ratio = estRent / total;
+      deals.push({
+        address: String(row[0] || ''),
+        city: String(row[1] || ''),
+        price: Math.round(price),
+        beds: row[3] === '' ? null : Number(row[3]),
+        baths: row[4] === '' ? null : Number(row[4]),
+        sqft: row[5] === '' ? null : Number(row[5]),
+        estRent: Math.round(estRent),
+        downPmtPct: downPct,
+        ratePct: ratePct,
+        monthlyPI: Math.round(pi),
+        monthlyTax: Math.round(taxMo),
+        monthlyIns: Math.round(insMo),
+        monthlyMR: Math.round(mrMo),
+        monthlyHOA: Math.round(hoaMo),
+        totalPITI: Math.round(total),
+        ratio: Math.round(ratio * 100) / 100,
+        cashFlow: Math.round(estRent - total),
+        verdict: ratio >= 1 ? 'CASH FLOW' : (ratio >= 0.9 ? 'CLOSE' : 'NEGATIVE'),
+        listingURL: String(row[14] || ''),
+        notes: String(row[15] || ''),
+        updated: String(row[16] || '')
+      });
+    }
+    deals.sort(function(a, b) { return b.ratio - a.ratio; });
+    return { success: true, count: deals.length, deals: deals,
+             fetchedAt: new Date().toISOString() };
+  } catch (err) {
+    Logger.log('Error in handleCashFlowRequest: ' + err.toString());
+    return { success: false, message: 'Unable to load cash flow deals', count: 0, deals: [] };
+  }
 }

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <title>Cash Flow Finder: East Bay Rental Properties Where Rent Covers the Mortgage</title>
+    <meta name="description" content="Active East Bay listings screened for rental cash flow. See where estimated rent covers PITI in Tracy, Manteca, Lathrop, Mountain House and more. Updated by Manish Anand, CA DRE #02247006.">
+    <meta name="author" content="Manish Anand">
+    <link rel="canonical" href="https://homeswithmanish.com/cash-flow-finder/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://homeswithmanish.com/cash-flow-finder/">
+    <meta property="og:title" content="Cash Flow Finder: Rental Properties Where Rent Covers the Mortgage">
+    <meta property="og:description" content="I screen active East Bay listings every week for one thing: can the rent cover the full monthly cost? See this week's cash-flow deals.">
+    <meta property="og:image" content="https://homeswithmanish.com/og-image.png">
+    <meta name="twitter:card" content="summary">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+      .page-hero { background: var(--navy); color: var(--white); padding: 140px 0 64px; }
+      .page-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); margin: 12px 0; }
+      .page-hero p.tagline { color: var(--gray-400); font-size: 1.15rem; max-width: 640px; }
+      .content-section { padding: 56px 0; }
+      .content-section.alt { background: var(--off-white); }
+      .content-section h2 { font-family: var(--font-display); color: var(--navy); font-size: 1.7rem; margin-bottom: 18px; }
+      .content-section p.lead { color: var(--gray-600); line-height: 1.75; margin-bottom: 16px; max-width: 780px; }
+      .breadcrumb-bar { padding: 96px 0 0; }
+      .breadcrumb-bar ol { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; font-size: .85rem; color: var(--gray-400); }
+      .breadcrumb-bar a { color: var(--gray-600); text-decoration: none; }
+      .breadcrumb-bar li + li::before { content: "\203A"; margin-right: 6px; color: var(--gray-400); }
+      .finder-card { background: var(--white); border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,.08); padding: 32px; margin-top: 28px; }
+      .finder-filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+      .finder-filters label { display: block; font-size: .85rem; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+      .finder-filters select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-size: 1rem; background: var(--white); }
+      .deal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+      .deal-card { border: 1px solid #eee; border-radius: 14px; padding: 24px; background: var(--white); position: relative; }
+      .deal-card.top-pick { border: 2px solid var(--gold); }
+      .verdict-badge { display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .04em; padding: 6px 12px; border-radius: 999px; margin-bottom: 12px; }
+      .verdict-cash { background: #e6f4ea; color: #137333; }
+      .verdict-close { background: #fef7e0; color: #b06000; }
+      .verdict-neg { background: #fce8e6; color: #a50e0e; }
+      .deal-card h3 { color: var(--navy); font-size: 1.15rem; margin: 0 0 4px; }
+      .deal-city { color: var(--gray-600); font-size: .9rem; margin-bottom: 12px; }
+      .deal-price { font-size: 1.5rem; font-weight: 700; color: var(--navy); }
+      .deal-specs { color: var(--gray-600); font-size: .9rem; margin: 6px 0 14px; }
+      .deal-ratio { display: flex; align-items: baseline; gap: 10px; margin: 12px 0; }
+      .deal-ratio .ratio-num { font-size: 2rem; font-weight: 700; color: var(--navy); }
+      .deal-ratio .ratio-label { font-size: .85rem; color: var(--gray-600); }
+      .deal-breakdown { font-size: .88rem; color: var(--gray-600); border-top: 1px solid #f0ece4; padding-top: 12px; margin-top: 4px; }
+      .deal-breakdown .br-row { display: flex; justify-content: space-between; padding: 3px 0; }
+      .deal-breakdown .br-row.total { font-weight: 700; color: var(--navy); border-top: 1px solid #f0ece4; margin-top: 6px; padding-top: 8px; }
+      .deal-cashflow { margin-top: 10px; font-weight: 600; }
+      .cf-pos { color: #137333; } .cf-neg { color: #a50e0e; }
+      .deal-notes { font-size: .88rem; color: var(--gray-600); margin-top: 10px; font-style: italic; }
+      .deal-link { display: inline-block; margin-top: 12px; color: var(--gold); font-weight: 600; text-decoration: none; }
+      .gate-box { text-align: center; padding: 40px 24px; border: 2px dashed var(--gold); border-radius: 14px; margin-top: 20px; background: #fdfbf7; }
+      .gate-box h3 { color: var(--navy); font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 10px; }
+      .gate-box p { color: var(--gray-600); max-width: 520px; margin: 0 auto 18px; line-height: 1.65; }
+      .gate-form { display: flex; gap: 10px; max-width: 520px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+      .gate-form input { flex: 1 1 200px; padding: 12px 16px; border: 1px solid #ddd; border-radius: 10px; font-size: 1rem; }
+      .btn-gold { background: var(--gold); color: var(--white); border: 0; border-radius: 10px; padding: 12px 26px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+      .btn-gold:hover { filter: brightness(.95); }
+      .finder-status { color: var(--gray-600); font-size: .92rem; margin-bottom: 16px; }
+      .finder-empty { text-align: center; padding: 40px 20px; color: var(--gray-600); }
+      .disclaimer { font-size: .85rem; color: var(--gray-500); line-height: 1.7; background: var(--off-white); border-radius: 12px; padding: 20px 24px; margin-top: 32px; }
+      .faq-item { border-bottom: 1px solid #eee; }
+      .faq-toggle { width: 100%; background: none; border: 0; text-align: left; padding: 18px 0; font-size: 1.05rem; font-weight: 600; color: var(--navy); cursor: pointer; display: flex; justify-content: space-between; gap: 12px; }
+      .faq-answer { display: none; color: var(--gray-600); line-height: 1.7; padding-bottom: 18px; max-width: 780px; }
+      .faq-item.active .faq-answer { display: block; }
+      .cta-band { background: var(--navy); border-radius: 18px; padding: 44px 32px; text-align: center; color: var(--white); margin-top: 40px; }
+      .cta-band h2 { color: var(--white); font-family: var(--font-display); margin-bottom: 10px; }
+      .cta-band p { color: var(--gray-400); margin-bottom: 22px; }
+      .spinner { display: inline-block; width: 36px; height: 36px; border: 3px solid #eee; border-top-color: var(--gold); border-radius: 50%; animation: spin 1s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://homeswithmanish.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Cash Flow Finder", "item": "https://homeswithmanish.com/cash-flow-finder/" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What does rent divided by PITI tell me?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It tells you whether the rent covers the full monthly cost of owning: principal and interest, property tax, insurance, plus HOA and Mello-Roos where they apply. A ratio of 1.0 means the property breaks even on cash flow before vacancy and maintenance." } },
+        { "@type": "Question", "name": "Which East Bay cities actually cash flow?",
+          "acceptedAnswer": { "@type": "Answer", "text": "At current rates, the screen finds the most candidates in Tracy, Manteca, Lathrop, and Mountain House, where prices are lower relative to rents. Higher-priced markets like San Ramon or Cupertino rarely pass a cash-flow screen, though they can still be strong investments on appreciation." } },
+        { "@type": "Question", "name": "Where do the rent estimates come from?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Each listing carries a conservative market rent estimate. Estimates are a starting point, not a promise. I confirm rents with local property managers before any client makes an offer." } },
+        { "@type": "Question", "name": "How often is the list updated?",
+          "acceptedAnswer": { "@type": "Answer", "text": "I re-screen active listings every week. Leave your email on the page and you will get the new list as soon as it is refreshed." } }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Cash Flow Finder",
+      "url": "https://homeswithmanish.com/cash-flow-finder/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+</head>
+<body>
+<header class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="/" class="nav-logo" aria-label="Homes With Manish - Home">
+                    <img src="/images/logo-monogram.png" alt="Homes With Manish" height="48" width="48" style="height:48px;width:auto;">
+                </a>
+            </div>
+            <nav class="nav-links"><a href="/#about">About</a><a href="/services/home-buyers/">Buy</a><a href="/services/home-sellers/">Sell</a><a href="/#home-loans">Home Loans</a><a href="/cities/">Cities</a><a href="/sold/">Sold</a><a href="/#market">Market Data</a><a href="/calculators/">Calculators</a><a href="/blog/">Blog</a><a href="/#contact" class="nav-cta">Get Free Consultation</a></nav>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+<div class="mobile-menu" id="mobileMenu">
+        <span class="mobile-close" id="mobileClose">✕</span>
+        <a href="/#about">About</a>
+        <a href="/services/home-buyers/">Buy</a>
+        <a href="/services/home-sellers/">Sell</a>
+        <a href="/#home-loans">Home Loans</a>
+        <a href="/cities/">Cities</a>
+        <a href="/sold/">Sold</a>
+        <a href="/#market">Market Data</a>
+        <a href="/calculators/">Calculators</a>
+        <a href="/blog/">Blog</a>
+        <a href="/#contact">Get Free Consultation</a>
+    </div>
+
+    <main>
+        <div class="breadcrumb-bar">
+            <div class="container">
+                <nav aria-label="Breadcrumb"><ol>
+                    <li><a href="/">Home</a></li>
+                    <li><span aria-current="page">Cash Flow Finder</span></li>
+                </ol></nav>
+            </div>
+        </div>
+
+        <section class="page-hero">
+            <div class="container">
+                <div class="section-label" style="color:var(--gold);">FREE TOOL FOR INVESTORS</div>
+                <h1>Cash Flow Finder</h1>
+                <p class="tagline">Active East Bay listings, screened every week for one question: can the rent cover the mortgage?</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <p class="lead">Most listings will never cash flow, and that is fine. This page exists for the few that might. I screen active listings across my service area, estimate a conservative market rent for each one, and compute the full monthly cost: principal and interest, property tax, insurance, HOA, and Mello-Roos where it applies.</p>
+                <p class="lead">The number that matters is <strong>rent divided by PITI</strong>. At 1.0 or above, the rent covers the full monthly cost. Between 0.9 and 1.0, a property is close enough that a price cut or a larger down payment could push it over.</p>
+
+                <div class="finder-card">
+                    <div class="finder-filters">
+                        <div>
+                            <label for="f-city">City</label>
+                            <select id="f-city"><option value="">All cities</option></select>
+                        </div>
+                        <div>
+                            <label for="f-price">Max price</label>
+                            <select id="f-price">
+                                <option value="">No max</option>
+                                <option value="500000">Up to $500K</option>
+                                <option value="750000">Up to $750K</option>
+                                <option value="1000000">Up to $1M</option>
+                                <option value="1500000">Up to $1.5M</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="f-ratio">Min rent / PITI</label>
+                            <select id="f-ratio">
+                                <option value="0">Show everything</option>
+                                <option value="0.9" selected>0.90 and up</option>
+                                <option value="1">1.00 and up (cash flow)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="finder-status" id="finder-status"><span class="spinner"></span> Loading this week's deals...</div>
+                    <div class="deal-grid" id="deal-grid"></div>
+                    <div class="gate-box" id="gate-box" style="display:none;">
+                        <h3>See all <span id="gate-count"></span> deals</h3>
+                        <p>Enter your email and I will unlock the full ranked list, plus send you the refreshed list every week. No spam, just deals.</p>
+                        <form class="gate-form" id="gate-form">
+                            <input type="text" name="firstName" placeholder="First name" required>
+                            <input type="email" name="email" placeholder="Email address" required>
+                            <button type="submit" class="btn-gold">Unlock the list</button>
+                        </form>
+                        <p class="form-success" style="display:none; color:#137333; font-weight:600;">You are in. The full list is unlocked below.</p>
+                    </div>
+                </div>
+
+                <div class="disclaimer">
+                    <strong>A quick note on the numbers.</strong> Rent figures are conservative market estimates, not guaranteed rents. PITI is computed at 20% down and the current 30-year fixed rate unless a listing says otherwise. Vacancy, maintenance, and property management are not included. This page is for screening only and is not financial or investment advice. Talk to your CPA and confirm rents with a local property manager before making an offer.
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section alt">
+            <div class="container">
+                <h2>How the screen works</h2>
+                <p class="lead">Every listing on this page passed through the same math, so you can compare apples to apples.</p>
+                <div class="card-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:28px;">
+                    <div class="info-card" style="background:var(--white);border:1px solid #eee;border-radius:14px;padding:24px;">
+                        <h3 style="color:var(--navy);">1. Conservative rent estimate</h3>
+                        <p style="color:var(--gray-600);">I estimate what the home would actually rent for today, and I use the low end of the range on purpose.</p>
+                    </div>
+                    <div class="info-card" style="background:var(--white);border:1px solid #eee;border-radius:14px;padding:24px;">
+                        <h3 style="color:var(--navy);">2. True monthly cost</h3>
+                        <p style="color:var(--gray-600);">Principal and interest at 20% down, property tax, insurance, HOA, and Mello-Roos. No hidden costs.</p>
+                    </div>
+                    <div class="info-card" style="background:var(--white);border:1px solid #eee;border-radius:14px;padding:24px;">
+                        <h3 style="color:var(--navy);">3. Ranked by ratio</h3>
+                        <p style="color:var(--gray-600);">Deals are ranked by rent divided by PITI, highest first. Green means the rent covers everything.</p>
+                    </div>
+                </div>
+
+                <h2 style="margin-top:48px;">Common questions</h2>
+                <div class="faq-item">
+                    <button class="faq-toggle" aria-expanded="false">What does rent divided by PITI tell me? <span class="faq-icon">+</span></button>
+                    <div class="faq-answer">Whether the rent covers the full monthly cost of owning: principal and interest, property tax, insurance, plus HOA and Mello-Roos where they apply. A ratio of 1.0 means the property breaks even on cash flow before vacancy and maintenance.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-toggle" aria-expanded="false">Which East Bay cities actually cash flow? <span class="faq-icon">+</span></button>
+                    <div class="faq-answer">At current rates, the screen finds the most candidates in Tracy, Manteca, Lathrop, and Mountain House, where prices are lower relative to rents. Higher-priced markets rarely pass a cash-flow screen, though they can still be strong investments on appreciation.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-toggle" aria-expanded="false">Where do the rent estimates come from? <span class="faq-icon">+</span></button>
+                    <div class="faq-answer">Each listing carries a conservative market rent estimate. Estimates are a starting point, not a promise. I confirm rents with local property managers before any client makes an offer.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-toggle" aria-expanded="false">How often is the list updated? <span class="faq-icon">+</span></button>
+                    <div class="faq-answer">I re-screen active listings every week. Leave your email on the page and you will get the new list as soon as it is refreshed.</div>
+                </div>
+
+                <div class="cta-band">
+                    <h2>Want me to underwrite a specific property?</h2>
+                    <p>Send me any listing and I will run the full cash-flow math on it, free.</p>
+                    <a href="/#contact" class="btn-gold" style="text-decoration:none;display:inline-block;">Get Free Consultation</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="/images/logo-monogram.png" alt="Homes With Manish" height="44" width="44" style="height:44px;width:auto;margin-bottom:12px;">
+                    <p>Data-driven real estate expertise for buyers, sellers, and investors across the East Bay. Your trusted partner in finding home.</p>
+                </div>
+                <div>
+                    <h4>Explore</h4>
+                    <div class="footer-links">
+                        <a href="/#about">About</a>
+                        <a href="/cities/">City Guides</a><a href="/sold/">Sold Homes</a>
+                        <a href="/calculators/">Calculators</a>
+                        <a href="/blog/">Blog</a>
+                        <a href="/#contact">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Cities</h4>
+                    <div class="footer-links">
+                        <a href="/cities/san-ramon/">San Ramon</a>
+                        <a href="/cities/pleasanton/">Pleasanton</a>
+                        <a href="/cities/danville/">Danville</a>
+                        <a href="/cities/dublin/">Dublin</a>
+                        <a href="/cities/livermore/">Livermore</a>
+                        <a href="/cities/fremont/">Fremont</a>
+                        <a href="/cities/tracy/">Tracy</a>
+                        <a href="/cities/mountain-house/">Mountain House</a>
+                        <a href="/cities/manteca/">Manteca</a>
+                        <a href="/cities/lathrop/">Lathrop</a>
+                        <a href="/cities/san-jose/">San Jose</a>
+                        <a href="/cities/milpitas/">Milpitas</a>
+                        <a href="/cities/cupertino/">Cupertino</a>
+                        <a href="/cities/newark/">Newark</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Calculators</h4>
+                    <div class="footer-links">
+                        <a href="/calculators/affordability/">How much house can I afford?</a>
+                        <a href="/calculators/buy-vs-rent/">Should I buy or keep renting?</a>
+                        <a href="/calculators/closing-costs/">What will I pay at closing?</a>
+                        <a href="/calculators/property-tax/">What will my property taxes be?</a>
+                        <a href="/calculators/down-payment/">How long until I can buy?</a>
+                        <a href="/calculators/sell-to-net/">What should I list to net my goal?</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>&copy; 2026 Homes With Manish. All rights reserved.<br>Manish Manoharlal Anand, CA DRE #02247006 | MOSO Real Estate, CA DRE #01771313 | 2195 Tully Road, San Jose, CA 95122<br>Loan Officer, NMLS #2873088 | LoanFactory, NMLS #320841 | Equal Housing Opportunity</div>
+                <div class="footer-legal">
+                    <a href="/privacy.html">Privacy Policy</a>
+                    <a href="/terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+    (function() {
+      var navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', function() {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+      });
+      var hamburger = document.getElementById('hamburger');
+      var mobileMenu = document.getElementById('mobileMenu');
+      var mobileClose = document.getElementById('mobileClose');
+      hamburger.addEventListener('click', function() { mobileMenu.classList.add('active'); });
+      mobileClose.addEventListener('click', function() { mobileMenu.classList.remove('active'); });
+      mobileMenu.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A' || e.target === mobileMenu) { mobileMenu.classList.remove('active'); }
+      });
+      var faqs = document.querySelectorAll('.faq-toggle');
+      faqs.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var item = btn.parentElement;
+          var open = item.classList.contains('active');
+          item.classList.toggle('active', !open);
+          btn.setAttribute('aria-expanded', String(!open));
+          var icon = btn.querySelector('.faq-icon');
+          if (icon) icon.textContent = open ? '+' : '−';
+        });
+      });
+    })();
+    </script>
+    <script>
+    (function() {
+      var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby67NfkUwnxnZLnLmp5O0X278VRwPsgYHJOZrEA20SIEBEv1U8M-urD-1gOiG5yE6oebg/exec';
+      var FREE_COUNT = 3;
+      var allDeals = [];
+      var unlocked = sessionStorage.getItem('cf_unlocked') === '1';
+
+      function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+
+      function badge(v) {
+        if (v === 'CASH FLOW') return '<span class="verdict-badge verdict-cash">CASH FLOW</span>';
+        if (v === 'CLOSE') return '<span class="verdict-badge verdict-close">CLOSE</span>';
+        return '<span class="verdict-badge verdict-neg">BELOW 0.90</span>';
+      }
+
+      function card(d, topPick) {
+        var cf = d.cashFlow >= 0
+          ? '<span class="cf-pos">+' + fmt(d.cashFlow) + '/mo</span>'
+          : '<span class="cf-neg">' + fmt(d.cashFlow) + '/mo</span>';
+        var specs = [d.beds ? d.beds + ' bd' : null, d.baths ? d.baths + ' ba' : null,
+                     d.sqft ? Number(d.sqft).toLocaleString() + ' sqft' : null].filter(Boolean).join(' · ');
+        return '<article class="deal-card' + (topPick ? ' top-pick' : '') + '">' +
+          badge(d.verdict) +
+          '<h3>' + escapeHtml(d.address) + '</h3>' +
+          '<div class="deal-city">' + escapeHtml(d.city) + '</div>' +
+          '<div class="deal-price">' + fmt(d.price) + '</div>' +
+          (specs ? '<div class="deal-specs">' + specs + '</div>' : '') +
+          '<div class="deal-ratio"><span class="ratio-num">' + d.ratio.toFixed(2) + '</span>' +
+          '<span class="ratio-label">rent / PITI<br>Est. rent ' + fmt(d.estRent) + '/mo</span></div>' +
+          '<div class="deal-breakdown">' +
+            br('Principal & interest', fmt(d.monthlyPI)) +
+            br('Property tax', fmt(d.monthlyTax)) +
+            br('Insurance', fmt(d.monthlyIns)) +
+            (d.monthlyMR ? br('Mello-Roos', fmt(d.monthlyMR)) : '') +
+            (d.monthlyHOA ? br('HOA', fmt(d.monthlyHOA)) : '') +
+            '<div class="br-row total"><span>Total monthly</span><span>' + fmt(d.totalPITI) + '</span></div>' +
+          '</div>' +
+          '<div class="deal-cashflow">Cash flow: ' + cf + '</div>' +
+          (d.notes ? '<div class="deal-notes">' + escapeHtml(d.notes) + '</div>' : '') +
+          (d.listingURL ? '<a class="deal-link" href="' + escapeAttr(d.listingURL) + '" target="_blank" rel="noopener">View listing</a>' : '') +
+        '</article>';
+      }
+      function br(label, val) { return '<div class="br-row"><span>' + label + '</span><span>' + val + '</span></div>'; }
+      function escapeHtml(s) { return String(s).replace(/[&<>"']/g, function(c) {
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+      function escapeAttr(s) { return escapeHtml(s).replace(/"/g, '&quot;'); }
+
+      function filtered() {
+        var city = document.getElementById('f-city').value;
+        var maxP = parseInt(document.getElementById('f-price').value || '0', 10);
+        var minR = parseFloat(document.getElementById('f-ratio').value || '0');
+        return allDeals.filter(function(d) {
+          return (!city || d.city === city) && (!maxP || d.price <= maxP) && d.ratio >= minR;
+        });
+      }
+
+      function render() {
+        var list = filtered();
+        var grid = document.getElementById('deal-grid');
+        var status = document.getElementById('finder-status');
+        var gate = document.getElementById('gate-box');
+        if (!list.length) {
+          status.textContent = allDeals.length
+            ? 'No deals match those filters. Try widening the price or ratio.'
+            : 'No deals this week. Check back soon, new listings are screened every week.';
+          grid.innerHTML = ''; gate.style.display = 'none';
+          return;
+        }
+        status.textContent = list.length + (list.length === 1 ? ' deal' : ' deals') + ' ranked by rent / PITI.';
+        var visible = unlocked ? list : list.slice(0, FREE_COUNT);
+        grid.innerHTML = visible.map(function(d, i) { return card(d, i === 0); }).join('');
+        if (!unlocked && list.length > FREE_COUNT) {
+          gate.style.display = 'block';
+          document.getElementById('gate-count').textContent = list.length;
+        } else {
+          gate.style.display = 'none';
+        }
+      }
+
+      ['f-city','f-price','f-ratio'].forEach(function(id) {
+        document.getElementById(id).addEventListener('change', render);
+      });
+
+      document.getElementById('gate-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var form = e.target;
+        var data = {};
+        new FormData(form).forEach(function(v, k) { data[k] = v; });
+        data.interest = 'Cash Flow Finder unlock + weekly deal alerts';
+        data.source = 'cash-flow-finder';
+        fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
+        }).finally(function() {
+          unlocked = true;
+          sessionStorage.setItem('cf_unlocked', '1');
+          form.style.display = 'none';
+          form.parentElement.querySelector('.form-success').style.display = 'block';
+          render();
+          if (typeof gtag === 'function') gtag('event', 'generate_lead', { event_category: 'lead_capture', event_label: 'cash-flow-finder' });
+        });
+      });
+
+      fetch(SCRIPT_URL + '?action=cashflow')
+        .then(function(r) { return r.json(); })
+        .then(function(j) {
+          allDeals = (j && j.deals) || [];
+          var cities = [...new Set(allDeals.map(function(d) { return d.city; }).filter(Boolean))].sort();
+          var sel = document.getElementById('f-city');
+          cities.forEach(function(c) {
+            var o = document.createElement('option'); o.value = c; o.textContent = c; sel.appendChild(o);
+          });
+          render();
+        })
+        .catch(function() {
+          document.getElementById('finder-status').textContent =
+            'Could not load deals right now. Please refresh or check back shortly.';
+        });
+    })();
+    </script>
+
+</body>
+</html>
