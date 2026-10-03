@@ -85,10 +85,10 @@ function doPost(e) {
     try {
       requestData = JSON.parse(e.postData.contents);
     } catch (error) {
-      return HtmlService.createHtmlOutput(JSON.stringify({
+      return ContentService.createTextOutput(JSON.stringify({
         success: false,
         message: 'Invalid JSON format'
-      })).setHeader('Content-Type', 'application/json').setHeaders(headers);
+      })).setMimeType(ContentService.MimeType.JSON);
     }
 
     if (requestData.action === 'marketdom') {
@@ -108,27 +108,27 @@ function doPost(e) {
 
     // Validate required fields
     if (!firstName || !email) {
-      return HtmlService.createHtmlOutput(JSON.stringify({
+      return ContentService.createTextOutput(JSON.stringify({
         success: false,
         message: 'First name and email are required'
-      })).setHeader('Content-Type', 'application/json').setHeaders(headers);
+      })).setMimeType(ContentService.MimeType.JSON);
     }
 
     // Validate email format
     if (!validateEmail(email)) {
-      return HtmlService.createHtmlOutput(JSON.stringify({
+      return ContentService.createTextOutput(JSON.stringify({
         success: false,
         message: 'Invalid email format'
-      })).setHeader('Content-Type', 'application/json').setHeaders(headers);
+      })).setMimeType(ContentService.MimeType.JSON);
     }
 
     // Check rate limit
     const rateLimitStatus = rateLimitCheck(email);
     if (rateLimitStatus.limited) {
-      return HtmlService.createHtmlOutput(JSON.stringify({
+      return ContentService.createTextOutput(JSON.stringify({
         success: false,
         message: 'Too many submissions from this email. Please try again later.'
-      })).setHeader('Content-Type', 'application/json').setHeaders(headers);
+      })).setMimeType(ContentService.MimeType.JSON);
     }
 
     // Add lead to Google Sheet
@@ -163,17 +163,17 @@ function doPost(e) {
     }
 
     // Return success response
-    return HtmlService.createHtmlOutput(JSON.stringify({
+    return ContentService.createTextOutput(JSON.stringify({
       success: true,
       message: 'Thank you! Your information has been received. We will contact you shortly.'
-    })).setHeader('Content-Type', 'application/json').setHeaders(headers);
+    })).setMimeType(ContentService.MimeType.JSON);
 
   } catch (error) {
     Logger.log('Error in doPost: ' + error.toString());
-    return HtmlService.createHtmlOutput(JSON.stringify({
+    return ContentService.createTextOutput(JSON.stringify({
       success: false,
       message: 'An error occurred processing your request'
-    })).setHeader('Content-Type', 'application/json');
+    })).setMimeType(ContentService.MimeType.JSON);
   }
 }
 
