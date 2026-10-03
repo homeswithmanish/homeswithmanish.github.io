@@ -1,0 +1,1445 @@
+/*
+ * REAL ESTATE LEAD CAPTURE SYSTEM - Google Apps Script Backend
+ * ================================================================
+ *
+ * This Google Apps Script serves as the backend for a real estate website's
+ * lead capture system. It handles lead submissions, stores them in Google Sheets,
+ * sends notifications, and provides an admin API for lead management.
+ *
+ * DEPLOYMENT INSTRUCTIONS:
+ * 1. Create a new Google Sheet and note its ID
+ * 2. Create a new Google Apps Script bound to that sheet
+ * 3. Replace SHEET_ID_PLACEHOLDER below with your actual Sheet ID
+ * 4. Copy this entire script into the Apps Script editor
+ * 5. Run the setup functions:
+ *    - First, run: setAdminKey() [this generates and stores your API key]
+ *    - Then, run: createInitialSheet() [this creates the Leads sheet with headers]
+ * 6. Deploy as a web app:
+ *    - Click "Deploy" -> "New deployment"
+ *    - Type: "Web app"
+ *    - Execute as: [Your email]
+ *    - Who has access: "Anyone" (or specific domain)
+ * 7. Copy the deployment URL - this is your endpoint for lead submissions
+ * 8. The admin API key will be logged to console when setAdminKey() runs
+ *
+ * ENDPOINTS:
+ * - POST to deployment URL: Submit a new lead
+ * - GET from deployment URL?key=YOUR_API_KEY&action=list: Get all leads
+ * - GET from deployment URL?key=YOUR_API_KEY&action=update: Update a lead
+ * - GET from deployment URL?key=YOUR_API_KEY&action=stats: Get statistics
+ */
+
+// ============================================================================
+// CONFIGURATION SECTION
+// ============================================================================
+
+// Google Sheet ID - REQUIRED: Replace with your actual Sheet ID
+const SHEET_ID = '1Ee-7rplfP4rzFH28_6_0BM8s6xV2OyzVpqZSAIlY2TU';
+
+// Name of the sheet tab where leads will be stored
+const SHEET_NAME = 'Leads';
+
+// Email address where notifications will be sent
+const NOTIFICATION_EMAIL = 'homeswithmanish@gmail.com';
+
+// Rate limiting configuration
+const RATE_LIMIT_WINDOW = 86400; // 24 hours in seconds
+const RATE_LIMIT_MAX_SUBMISSIONS = 5; // Maximum submissions per email in 24 hours
+
+// Cache key prefix for rate limiting
+const CACHE_PREFIX = 'lead_submission_';
+
+// ============================================================================
+// MAIN REQUEST HANDLERS
+// ============================================================================
+
+/**
+ * Handles POST requests for new lead submissions from the website
+ *
+ * Expected JSON body:
+ * {
+ *   "firstName": "John",
+ *   "lastName": "Doe",
+ *   "email": "john@example.com",
+ *   "phone": "555-123-4567",
+ *   "city": "Austin",
+ *   "interest": "3BR Home",
+ *   "source": "hero" or "contact",
+ *   "message": "I'm interested in this property" (optional)
+ * }
+ *
+ * @param {Object} e - The event object containing POST data
+ * @returns {Object} JSON response with success status and message
+ */
+function doPost(e) {
+  try {
+    // Set CORS headers
+    const headers = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+      'Content-Type': 'application/json'
+    };
+
+    // Parse the JSON body
+    let requestData = {};
+    try {
+      requestData = JSON.parse(e.postData.contents);
+    } catch (error) {
+      return ContentService.createTextOutput(JSON.stringify({
+        success: false,
+        message: 'Invalid JSON format'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    if (requestData.action === 'marketdom') {
+      return handleMarketDomPost(requestData);
+    }
+
+    // Sanitize inputs
+    const firstName = sanitizeInput(requestData.firstName);
+    const lastName = sanitizeInput(requestData.lastName);
+    const email = sanitizeInput(requestData.email);
+    const phone = sanitizeInput(requestData.phone);
+    const city = sanitizeInput(requestData.city);
+    const interest = sanitizeInput(requestData.interest);
+    const source = sanitizeInput(requestData.source);
+    const message = sanitizeInput(requestData.message);
+    const guideRequested = sanitizeInput(requestData.guideRequested);
+
+    // Validate required fields
+    if (!firstName || !email) {
+      return ContentService.createTextOutput(JSON.stringify({
+        success: false,
+        message: 'First name and email are required'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // Validate email format
+    if (!validateEmail(email)) {
+      return ContentService.createTextOutput(JSON.stringify({
+        success: false,
+        message: 'Invalid email format'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // Check rate limit
+    const rateLimitStatus = rateLimitCheck(email);
+    if (rateLimitStatus.limited) {
+      return ContentService.createTextOutput(JSON.stringify({
+        success: false,
+        message: 'Too many submissions from this email. Please try again later.'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // Add lead to Google Sheet
+    const timestamp = new Date().toISOString();
+    const leadData = [
+      timestamp,
+      firstName,
+      lastName,
+      email,
+      phone,
+      city,
+      interest,
+      source,
+      message,
+      'New', // Status
+      ''     // Notes
+    ];
+
+    appendLeadToSheet(leadData);
+
+    // If source is newsletter, also add to Newsletter subscribers sheet
+    if (source === 'newsletter') {
+      addNewsletterSubscriber(email, firstName, lastName);
+    }
+
+    // Send notification email to admin
+    sendNotificationEmail(firstName, lastName, email, phone, city, interest, message, guideRequested);
+
+    // If a guide was requested, send the auto-response with guide link
+    if (guideRequested) {
+      sendGuideEmail(firstName, email, guideRequested);
+    }
+
+    // Return success response
+    return ContentService.createTextOutput(JSON.stringify({
+      success: true,
+      message: 'Thank you! Your information has been received. We will contact you shortly.'
+    })).setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    Logger.log('Error in doPost: ' + error.toString());
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: 'An error occurred processing your request'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+/**
+ * Handles GET requests for admin dashboard and API operations
+ * Requires valid API key as query parameter
+ *
+ * Supported actions:
+ * - list: Returns all leads as JSON array
+ * - update: Updates a lead's status or notes
+ * - stats: Returns summary statistics
+ *
+ * @param {Object} e - The event object containing query parameters
+ * @returns {Object} JSON response with requested data
+ */
+function doGet(e) {
+  try {
+    // Set CORS headers
+    const headers = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+      'Content-Type': 'application/json'
+    };
+
+    const action = e.parameter.action || 'list';
+
+    // Public endpoints (no API key required)
+    if (action === 'marketdata') {
+      const marketResponse = handleMarketDataRequest();
+      return ContentService.createTextOutput(JSON.stringify(marketResponse))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    if (action === 'mortgagerates') {
+      const ratesResponse = handleMortgageRatesRequest();
+      return ContentService.createTextOutput(JSON.stringify(ratesResponse))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    if (action === 'rentaldata') {
+      const rentalResponse = handleRentalDataRequest();
+      return ContentService.createTextOutput(JSON.stringify(rentalResponse))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    if (action === 'openhouse') {
+      const openHouseResponse = handleOpenHouseRequest();
+      return ContentService.createTextOutput(JSON.stringify(openHouseResponse))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    if (action === 'transactions') {
+      const txnResponse = handleTransactionsRequest();
+      return ContentService.createTextOutput(JSON.stringify(txnResponse))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    if (action === 'cashflow') {
+      const cfResponse = handleCashFlowRequest();
+      return ContentService.createTextOutput(JSON.stringify(cfResponse))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // All other actions require API key
+    const apiKey = e.parameter.key;
+
+    if (!isValidApiKey(apiKey)) {
+      return ContentService.createTextOutput(JSON.stringify({
+        success: false,
+        message: 'Unauthorized: Invalid API key',
+        status: 401
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    let responseData;
+
+    switch (action) {
+      case 'list':
+        responseData = handleListAction();
+        break;
+      case 'update':
+        responseData = handleUpdateAction(e.parameter);
+        break;
+      case 'stats':
+        responseData = handleStatsAction();
+        break;
+      default:
+        responseData = {
+          success: false,
+          message: 'Unknown action: ' + action
+        };
+    }
+
+    return ContentService.createTextOutput(JSON.stringify(responseData))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    Logger.log('Error in doGet: ' + error.toString());
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: 'An error occurred processing your request',
+      error: String(error)
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// ============================================================================
+// MARKET DATA HANDLER (PUBLIC - NO AUTH REQUIRED)
+// ============================================================================
+
+/**
+ * Returns market data from the MarketData sheet as JSON.
+ * Called by the website to populate the market data table dynamically.
+ */
+function handleMarketDataRequest() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const sheet = ss.getSheetByName('MarketData');
+
+  if (!sheet || sheet.getLastRow() < 2) {
+    return { success: false, error: 'No market data available' };
+  }
+
+  const data = sheet.getRange(2, 1, sheet.getLastRow() - 1, 9).getValues();
+  const headers = ['city', 'medianPrice', 'pricePerSqft', 'homesSold',
+                    'daysOnMarket', 'inventory', 'priceChange', 'lastUpdated', 'source'];
+
+  const results = data.map(row => {
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = row[i]);
+    return obj;
+  });
+
+  return {
+    success: true,
+    data: results,
+    lastUpdated: results.length > 0 ? results[0].lastUpdated : null,
+    attribution: 'Data sourced from Redfin (www.redfin.com)'
+  };
+}
+
+// ============================================================================
+// OPEN HOUSE HANDLER (PUBLIC - NO AUTH REQUIRED)
+// ============================================================================
+
+/**
+ * Returns the currently ACTIVE open-house listing as JSON.
+ *
+ * Powers the permanent A-frame QR page at /openhouse/. The printed QR never
+ * changes; you switch which home it shows by editing ONE row in the 'OpenHouse'
+ * sheet tab. Set column "active" to TRUE on exactly one row (the current home)
+ * and FALSE/blank on the rest. If none are active, the page shows a friendly
+ * "current listings / contact Manish" fallback.
+ *
+ * Column headers are read from row 1, so you can reorder columns freely.
+ * Recommended headers (run setupOpenHouseSheet() to create them):
+ *   active | address | cityState | price | beds | baths | sqft |
+ *   openHouseTimes | description | photoUrls | detailsUrl | disclosuresUrl |
+ *   scheduleUrl | financingUrl | badge
+ * (photoUrls = comma-separated image URLs; first one is used as the hero photo)
+ *
+ * @returns {Object} { success, active, listing }
+ */
+function handleOpenHouseRequest() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const sheet = ss.getSheetByName('OpenHouse');
+
+  if (!sheet || sheet.getLastRow() < 2) {
+    return { success: true, active: false, listing: null };
+  }
+
+  const values = sheet.getRange(1, 1, sheet.getLastRow(), sheet.getLastColumn()).getValues();
+  const headers = values[0].map(h => ('' + h).trim());
+  const activeIdx = headers.indexOf('active');
+
+  const isTruthy = v => {
+    const s = ('' + v).trim().toLowerCase();
+    return s === 'true' || s === 'yes' || s === 'y' || s === '1' || s === 'x' || v === true;
+  };
+
+  // First data row where "active" is truthy (fall back to first data row if no
+  // "active" column exists at all).
+  let match = null;
+  for (let r = 1; r < values.length; r++) {
+    const row = values[r];
+    if (activeIdx === -1) { match = row; break; }
+    if (isTruthy(row[activeIdx])) { match = row; break; }
+  }
+
+  if (!match) {
+    return { success: true, active: false, listing: null };
+  }
+
+  const listing = {};
+  headers.forEach((h, i) => { if (h) listing[h] = ('' + match[i]).trim(); });
+
+  return { success: true, active: true, listing: listing };
+}
+
+/**
+ * One-time setup: creates the 'OpenHouse' sheet tab with headers and a sample row.
+ * Run this once from the Apps Script editor, then edit the row(s) in the sheet.
+ */
+function setupOpenHouseSheet() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  let sheet = ss.getSheetByName('OpenHouse');
+  if (!sheet) sheet = ss.insertSheet('OpenHouse');
+
+  const headers = ['active', 'address', 'cityState', 'price', 'beds', 'baths', 'sqft',
+                   'openHouseTimes', 'description', 'photoUrls', 'detailsUrl',
+                   'disclosuresUrl', 'scheduleUrl', 'financingUrl', 'badge'];
+
+  sheet.clear();
+  sheet.getRange(1, 1, 1, headers.length).setValues([headers])
+       .setFontWeight('bold').setBackground('#12203a').setFontColor('#ffffff');
+
+  const sample = ['FALSE', '4027 Clare St', 'Dublin, CA 94568', '1025000', '3', '3.5', '1879',
+                  'Sat & Sun 1–4 PM', 'Bright, updated home in a sought-after Dublin neighborhood.',
+                  'https://homeswithmanish.com/images/placeholder-home.jpg',
+                  '', '', 'https://homeswithmanish.com/#contact',
+                  'https://homeswithmanish.com/calculators/', 'Open House Today'];
+  sheet.getRange(2, 1, 1, sample.length).setValues([sample]);
+  sheet.setFrozenRows(1);
+  sheet.autoResizeColumns(1, headers.length);
+  Logger.log('OpenHouse sheet ready. Set "active" to TRUE on the current listing.');
+}
+
+// ============================================================================
+// PAST TRANSACTIONS / SOLD PORTFOLIO (PUBLIC - NO AUTH REQUIRED)
+// ============================================================================
+
+/**
+ * Returns Manish's retained past-transaction records as a JSON array, newest
+ * close date first. Powers the evergreen /sold/ portfolio page.
+ *
+ * IMPORTANT (compliance): this is a RETAINED record store, NOT an IDX/MLS feed.
+ * Only include transactions Manish represented, and only photos he has the
+ * right to publish (own listings / licensed / his own photos). See docs and the
+ * syncSoldFromMLS() template below for how the factual data can be pulled from
+ * MLSListings at close — but rights to archive photos are on you to secure.
+ *
+ * Column headers are read from row 1 so columns can be reordered. Recommended
+ * (run setupTransactionsSheet() to create them):
+ *   published | status | closeDate | address | cityState | soldPrice | listPrice |
+ *   beds | baths | sqft | representedSide | photoUrls | listingUrl | testimonial |
+ *   description | mlsId | featured
+ * (published = TRUE to show the row; status must be Closed to appear on /sold/ —
+ *  Pending/Off-Market/Expired/Withdrawn/Canceled are excluded so a not-sold
+ *  listing never renders as Sold; photoUrls = comma-separated, first = cover;
+ *  listingUrl = optional Redfin/Zillow link for the "View on ..." button)
+ *
+ * @returns {Object} { success, count, transactions:[...] }
+ */
+function handleTransactionsRequest() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const sheet = ss.getSheetByName('Transactions');
+
+  if (!sheet || sheet.getLastRow() < 2) {
+    return { success: true, count: 0, transactions: [] };
+  }
+
+  const values = sheet.getRange(1, 1, sheet.getLastRow(), sheet.getLastColumn()).getValues();
+  const headers = values[0].map(h => ('' + h).trim());
+  const pubIdx = headers.indexOf('published');
+
+  const isTruthy = v => {
+    const s = ('' + v).trim().toLowerCase();
+    return s === 'true' || s === 'yes' || s === 'y' || s === '1' || s === 'x' || v === true;
+  };
+
+  const out = [];
+  for (let r = 1; r < values.length; r++) {
+    const row = values[r];
+    if (pubIdx !== -1 && !isTruthy(row[pubIdx])) continue; // only published rows
+    if (!('' + row[headers.indexOf('address')]).trim()) continue; // skip blanks
+    const rec = {};
+    headers.forEach((h, i) => {
+      if (!h) return;
+      let val = row[i];
+      // keep dates as ISO (yyyy-MM-dd) strings so the frontend can sort/format
+      // reliably — done with plain JS (no Utilities/Session, which can throw).
+      if (Object.prototype.toString.call(val) === '[object Date]' && !isNaN(val)) {
+        val = val.getFullYear() + '-' +
+              ('0' + (val.getMonth() + 1)).slice(-2) + '-' +
+              ('0' + val.getDate()).slice(-2);
+      }
+      rec[h] = ('' + val).trim();
+    });
+    out.push(rec);
+  }
+
+  // newest close date first
+  out.sort((a, b) => ('' + (b.closeDate || '')).localeCompare('' + (a.closeDate || '')));
+
+  return { success: true, count: out.length, transactions: out };
+}
+
+/**
+ * One-time setup: creates the 'Transactions' tab with headers and a sample row.
+ * Run once from the Apps Script editor, then edit rows in the sheet.
+ */
+function setupTransactionsSheet() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  let sheet = ss.getSheetByName('Transactions');
+  if (!sheet) sheet = ss.insertSheet('Transactions');
+
+  // status: Closed = shows on /sold/ as "Sold". Anything else (Pending, Off-Market,
+  // Expired, Withdrawn, Canceled) is EXCLUDED from the public portfolio — a listing
+  // that went off-market without selling must never render as Sold.
+  const headers = ['published', 'status', 'closeDate', 'address', 'cityState', 'soldPrice',
+                   'listPrice', 'beds', 'baths', 'sqft', 'representedSide', 'photoUrls',
+                   'listingUrl', 'testimonial', 'description', 'mlsId', 'featured'];
+
+  sheet.clear();
+  sheet.getRange(1, 1, 1, headers.length).setValues([headers])
+       .setFontWeight('bold').setBackground('#12203a').setFontColor('#ffffff');
+
+  const sample = ['FALSE', 'Closed', '2026-06-15', '1234 Example Ave', 'San Ramon, CA 94582',
+                  '1350000', '1299000', '4', '3', '2450', 'Represented Buyer',
+                  'https://homeswithmanish.com/images/transactions/sample-1.jpg',
+                  'https://www.redfin.com/CA/San-Ramon/1234-Example-Ave',
+                  'Manish made our first purchase smooth and stress-free.',
+                  'Multiple-offer win, closed on time.', '', 'TRUE'];
+  sheet.getRange(2, 1, 1, sample.length).setValues([sample]);
+  sheet.setFrozenRows(1);
+  sheet.autoResizeColumns(1, headers.length);
+  Logger.log('Transactions sheet ready. Add closed deals and set "published" to TRUE. ' +
+             'Only publish transactions you represented and photos you have rights to.');
+}
+
+// ============================================================================
+// MLSLISTINGS SOLD SYNC — TEMPLATE (INACTIVE until you have a feed)
+// ============================================================================
+//
+// This function is a DOCUMENTED TEMPLATE, not wired up. It fetches YOUR closed
+// listings from a RESO Web API feed and upserts them into the Transactions
+// sheet, so factual data (price/beds/baths/close date) is captured automatically
+// at close. It stays inactive until ALL of the following are true:
+//
+//   1. You are approved for a RESO Web API feed for MLSListings — request it via
+//      your broker (MOSO Real Estate) + MLSListings, or a licensed distributor
+//      such as MLS Grid / Bridge Interactive / Trestle.
+//   2. You store the feed base URL + bearer token in Script Properties
+//      (Project Settings -> Script properties). NEVER hard-code secrets or commit
+//      them to the GitHub repo.
+//   3. You confirm with your broker/MLS what you may RETAIN and DISPLAY, and for
+//      how long. Photos are copyrighted; archiving them is only OK when you hold
+//      the rights. This template pulls DATA only and leaves photoUrls for you to
+//      fill with images you are licensed to publish.
+//
+// To activate: fill AGENT_MLS_ID, verify the field names against your feed's
+// metadata (RESO fields vary slightly per MLS), then add a time-driven trigger
+// (e.g. daily) via Triggers -> Add Trigger -> syncSoldFromMLS.
+//
+function syncSoldFromMLS() {
+  const props = PropertiesService.getScriptProperties();
+  const BASE = props.getProperty('RESO_API_BASE');   // e.g. https://api.mlsgrid.com/v2
+  const TOKEN = props.getProperty('RESO_API_TOKEN');  // bearer token from your feed provider
+  const AGENT_MLS_ID = '';                            // <-- your MLSListings agent/member ID
+
+  if (!BASE || !TOKEN || !AGENT_MLS_ID) {
+    Logger.log('syncSoldFromMLS is inactive: set RESO_API_BASE, RESO_API_TOKEN in Script ' +
+               'Properties and AGENT_MLS_ID in code once your MLSListings feed is approved.');
+    return;
+  }
+
+  // Example RESO OData query: closed listings where you were the list agent.
+  // Field names (StandardStatus, CloseDate, ListAgentMlsId, ...) follow the RESO
+  // Data Dictionary but VERIFY against your feed's $metadata before relying on them.
+  const query = "Property?$filter=StandardStatus eq 'Closed' and ListAgentMlsId eq '" +
+                AGENT_MLS_ID + "'&$orderby=CloseDate desc&$top=50";
+  const resp = UrlFetchApp.fetch(BASE + '/' + query, {
+    headers: { Authorization: 'Bearer ' + TOKEN, Accept: 'application/json' },
+    muteHttpExceptions: true
+  });
+  if (resp.getResponseCode() !== 200) {
+    Logger.log('MLS feed error ' + resp.getResponseCode() + ': ' + resp.getContentText().slice(0, 300));
+    return;
+  }
+
+  const rows = (JSON.parse(resp.getContentText()).value) || [];
+  const sheet = ss_().getSheetByName('Transactions');
+  if (!sheet) { Logger.log('Run setupTransactionsSheet() first.'); return; }
+
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  const existing = sheet.getLastRow() > 1
+    ? sheet.getRange(2, 1, sheet.getLastRow() - 1, sheet.getLastColumn()).getValues() : [];
+  const mlsIdCol = headers.indexOf('mlsId');
+  const seen = {};
+  existing.forEach(r => { if (mlsIdCol !== -1 && r[mlsIdCol]) seen['' + r[mlsIdCol]] = true; });
+
+  let added = 0;
+  rows.forEach(p => {
+    const id = '' + (p.ListingId || p.ListingKey || '');
+    if (!id || seen[id]) return; // upsert-by-mlsId: skip ones already captured
+    const rec = {
+      published: 'FALSE', // review + add licensed photos before publishing
+      status: 'Closed',   // query filters to Closed only; not-sold statuses never reach here
+      closeDate: (p.CloseDate || '').slice(0, 10),
+      address: [p.StreetNumber, p.StreetName, p.UnitNumber].filter(Boolean).join(' '),
+      cityState: [p.City, p.StateOrProvince].filter(Boolean).join(', ') + ' ' + (p.PostalCode || ''),
+      soldPrice: p.ClosePrice || '',
+      listPrice: p.ListPrice || '',
+      beds: p.BedroomsTotal || '',
+      baths: p.BathroomsTotalInteger || '',
+      sqft: p.LivingArea || '',
+      representedSide: 'Listed', // you were the list agent in this query
+      photoUrls: '', // fill with images you are licensed to publish
+      listingUrl: '', // optional Redfin/Zillow link (avoid raw MLS URLs — they expire)
+      testimonial: '', description: '', mlsId: id, featured: 'FALSE'
+    };
+    sheet.appendRow(headers.map(h => rec[h] !== undefined ? rec[h] : ''));
+    added++;
+  });
+  Logger.log('syncSoldFromMLS: added ' + added + ' new closed record(s) as unpublished drafts.');
+}
+
+// small helper so the template reads cleanly
+function ss_() { return SpreadsheetApp.openById(SHEET_ID); }
+
+// ============================================================================
+// ADMIN API ACTION HANDLERS
+// ============================================================================
+
+/**
+ * Handles the 'list' action - returns all leads as JSON array
+ * @returns {Object} Response with leads array or error
+ */
+function handleListAction() {
+  try {
+    const leads = getLeadsData();
+    return {
+      success: true,
+      count: leads.length,
+      leads: leads
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: 'Error retrieving leads: ' + error.toString()
+    };
+  }
+}
+
+/**
+ * Handles the 'update' action - updates a lead's status or notes
+ * Query parameters: row (required), status (optional), notes (optional)
+ *
+ * @param {Object} params - Query parameters
+ * @returns {Object} Response with success status
+ */
+function handleUpdateAction(params) {
+  try {
+    const rowNumber = parseInt(params.row);
+    const newStatus = params.status;
+    const newNotes = params.notes;
+
+    if (!rowNumber || rowNumber < 2) { // Row 1 is headers
+      return {
+        success: false,
+        message: 'Invalid row number'
+      };
+    }
+
+    const sheet = getSheet();
+    const lastRow = sheet.getLastRow();
+
+    if (rowNumber > lastRow) {
+      return {
+        success: false,
+        message: 'Row number out of range'
+      };
+    }
+
+    // Update status if provided (column 10)
+    if (newStatus) {
+      sheet.getRange(rowNumber, 10).setValue(newStatus);
+    }
+
+    // Update notes if provided (column 11)
+    if (newNotes) {
+      sheet.getRange(rowNumber, 11).setValue(newNotes);
+    }
+
+    return {
+      success: true,
+      message: 'Lead updated successfully',
+      row: rowNumber
+    };
+
+  } catch (error) {
+    return {
+      success: false,
+      message: 'Error updating lead: ' + error.toString()
+    };
+  }
+}
+
+/**
+ * Handles the 'stats' action - returns summary statistics
+ * @returns {Object} Response with statistics
+ */
+function handleStatsAction() {
+  try {
+    const leads = getLeadsData();
+    const now = new Date();
+    const sevenDaysAgo = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
+
+    let stats = {
+      success: true,
+      total: leads.length,
+      newThisWeek: 0,
+      byStatus: {},
+      byCity: {},
+      bySource: {}
+    };
+
+    // Process each lead
+    leads.forEach(lead => {
+      // Count new leads this week
+      const leadDate = new Date(lead.timestamp);
+      if (leadDate >= sevenDaysAgo) {
+        stats.newThisWeek++;
+      }
+
+      // Count by status
+      const status = lead.status || 'Unknown';
+      stats.byStatus[status] = (stats.byStatus[status] || 0) + 1;
+
+      // Count by city
+      const city = lead.city || 'Not specified';
+      stats.byCity[city] = (stats.byCity[city] || 0) + 1;
+
+      // Count by source
+      const source = lead.source || 'Unknown';
+      stats.bySource[source] = (stats.bySource[source] || 0) + 1;
+    });
+
+    return stats;
+
+  } catch (error) {
+    return {
+      success: false,
+      message: 'Error generating statistics: ' + error.toString()
+    };
+  }
+}
+
+// ============================================================================
+// HELPER FUNCTIONS - INPUT VALIDATION & SANITIZATION
+// ============================================================================
+
+/**
+ * Sanitizes input by removing HTML tags and trimming whitespace
+ * Protects against XSS attacks and malformed data
+ *
+ * @param {*} input - The input to sanitize
+ * @returns {string} Sanitized string
+ */
+function sanitizeInput(input) {
+  if (!input) return '';
+
+  // Convert to string
+  let str = String(input);
+
+  // Remove HTML tags
+  str = str.replace(/<[^>]*>/g, '');
+
+  // Decode HTML entities
+  str = str.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+
+  // Trim whitespace
+  str = str.trim();
+
+  // Limit length to prevent abuse
+  if (str.length > 1000) {
+    str = str.substring(0, 1000);
+  }
+
+  return str;
+}
+
+/**
+ * Validates email format using regex pattern
+ *
+ * @param {string} email - The email to validate
+ * @returns {boolean} True if email format is valid
+ */
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+// ============================================================================
+// HELPER FUNCTIONS - RATE LIMITING
+// ============================================================================
+
+/**
+ * Checks if an email has exceeded the rate limit for lead submissions
+ * Uses Google Apps Script CacheService to track submissions
+ *
+ * @param {string} email - The email to check
+ * @returns {Object} Object with limited (boolean) and count (number) properties
+ */
+function rateLimitCheck(email) {
+  const cache = CacheService.getScriptCache();
+  const cacheKey = CACHE_PREFIX + email;
+
+  // Get current submission count
+  let count = cache.get(cacheKey);
+  count = count ? parseInt(count) + 1 : 1;
+
+  // Check if limit exceeded
+  const limited = count > RATE_LIMIT_MAX_SUBMISSIONS;
+
+  // Update cache with new count (expires after 24 hours)
+  cache.put(cacheKey, String(count), RATE_LIMIT_WINDOW);
+
+  return {
+    limited: limited,
+    count: count,
+    remaining: Math.max(0, RATE_LIMIT_MAX_SUBMISSIONS - count + 1)
+  };
+}
+
+// ============================================================================
+// HELPER FUNCTIONS - SHEET OPERATIONS
+// ============================================================================
+
+/**
+ * Gets the Leads sheet, creating it if necessary
+ *
+ * @returns {Sheet} The Leads sheet object
+ */
+function getSheet() {
+  const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
+  let sheet = spreadsheet.getSheetByName(SHEET_NAME);
+
+  if (!sheet) {
+    sheet = spreadsheet.insertSheet(SHEET_NAME);
+    createSheetHeaders(sheet);
+  }
+
+  return sheet;
+}
+
+/**
+ * Creates headers for the Leads sheet
+ *
+ * @param {Sheet} sheet - The sheet to add headers to
+ */
+function createSheetHeaders(sheet) {
+  const headers = [
+    'Timestamp',
+    'First Name',
+    'Last Name',
+    'Email',
+    'Phone',
+    'City',
+    'Interest',
+    'Source',
+    'Message',
+    'Status',
+    'Notes'
+  ];
+
+  sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+
+  // Format header row
+  const headerRange = sheet.getRange(1, 1, 1, headers.length);
+  headerRange.setFontWeight('bold');
+  headerRange.setBackground('#4285F4');
+  headerRange.setFontColor('#FFFFFF');
+
+  // Set column widths
+  sheet.setColumnWidth(1, 180); // Timestamp
+  sheet.setColumnWidth(2, 120); // First Name
+  sheet.setColumnWidth(3, 120); // Last Name
+  sheet.setColumnWidth(4, 200); // Email
+  sheet.setColumnWidth(5, 130); // Phone
+  sheet.setColumnWidth(6, 120); // City
+  sheet.setColumnWidth(7, 150); // Interest
+  sheet.setColumnWidth(8, 100); // Source
+  sheet.setColumnWidth(9, 250); // Message
+  sheet.setColumnWidth(10, 100); // Status
+  sheet.setColumnWidth(11, 200); // Notes
+
+  // Freeze header row
+  sheet.setFrozenRows(1);
+}
+
+/**
+ * Appends a new lead to the sheet
+ *
+ * @param {Array} leadData - Array of lead data matching column order
+ */
+function appendLeadToSheet(leadData) {
+  const sheet = getSheet();
+  sheet.appendRow(leadData);
+}
+
+/**
+ * Retrieves all leads from the sheet as an array of objects
+ *
+ * @returns {Array} Array of lead objects with properties from headers
+ */
+function getLeadsData() {
+  const sheet = getSheet();
+  const range = sheet.getDataRange();
+  const values = range.getValues();
+
+  if (values.length < 2) {
+    return []; // Only headers, no data
+  }
+
+  const headers = values[0];
+  const leads = [];
+
+  // Convert each row to an object
+  for (let i = 1; i < values.length; i++) {
+    const lead = {};
+    for (let j = 0; j < headers.length; j++) {
+      lead[headers[j].toLowerCase().replace(/\s+/g, '')] = values[i][j];
+    }
+    leads.push(lead);
+  }
+
+  return leads;
+}
+
+/**
+ * Updates a specific row in the sheet
+ * Wrapper function for updating individual lead records
+ *
+ * @param {number} rowNumber - The row number to update (1-based)
+ * @param {number} columnNumber - The column number to update (1-based)
+ * @param {*} value - The new value
+ */
+function updateLeadRow(rowNumber, columnNumber, value) {
+  const sheet = getSheet();
+  sheet.getRange(rowNumber, columnNumber).setValue(value);
+}
+
+// ============================================================================
+// HELPER FUNCTIONS - EMAIL NOTIFICATIONS
+// ============================================================================
+
+/**
+ * Sends a formatted notification email to the admin when a new lead is submitted
+ *
+ * @param {string} firstName - Lead's first name
+ * @param {string} lastName - Lead's last name
+ * @param {string} email - Lead's email
+ * @param {string} phone - Lead's phone number
+ * @param {string} city - Lead's city
+ * @param {string} interest - Lead's area of interest
+ * @param {string} message - Lead's optional message
+ * @param {string} guideRequested - Name of the guide requested (optional)
+ */
+function sendNotificationEmail(firstName, lastName, email, phone, city, interest, message, guideRequested) {
+  try {
+    const guideTag = guideRequested ? ' [Guide Request]' : '';
+    const subject = 'New Lead Submission: ' + firstName + ' ' + lastName + guideTag;
+
+    const htmlBody = `
+      <html>
+        <body style="font-family: Arial, sans-serif; color: #333;">
+          <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+            <h2 style="color: #4285F4; border-bottom: 2px solid #4285F4; padding-bottom: 10px;">
+              New Lead Submission${guideTag}
+            </h2>
+
+            <div style="margin: 20px 0;">
+              <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+              <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+              <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
+              <p><strong>City:</strong> ${city || 'Not provided'}</p>
+              <p><strong>Interest:</strong> ${interest || 'Not specified'}</p>
+              ${guideRequested ? `<p><strong>Guide Requested:</strong> <span style="color: #C9A96E; font-weight: bold;">${escapeHtml(guideRequested)}</span></p>` : ''}
+            </div>
+
+            ${message ? `
+              <div style="background-color: #f5f5f5; padding: 15px; border-radius: 3px; margin: 20px 0;">
+                <p><strong>Message:</strong></p>
+                <p>${escapeHtml(message)}</p>
+              </div>
+            ` : ''}
+
+            ${guideRequested ? `
+              <div style="background-color: #e8f4e8; padding: 12px; border-radius: 3px; margin: 20px 0; border-left: 4px solid #27ae60;">
+                <p style="margin: 0; font-size: 13px; color: #27ae60;"><strong>Auto-response sent:</strong> The "${escapeHtml(guideRequested)}" guide link was emailed to the lead automatically.</p>
+              </div>
+            ` : ''}
+
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center;">
+              <p style="color: #999; font-size: 12px;">
+                This is an automated message from your lead capture system.
+              </p>
+            </div>
+          </div>
+        </body>
+      </html>
+    `;
+
+    GmailApp.sendEmail(NOTIFICATION_EMAIL, subject, '', { htmlBody: htmlBody });
+    Logger.log('Notification email sent to ' + NOTIFICATION_EMAIL);
+
+  } catch (error) {
+    Logger.log('Error sending notification email: ' + error.toString());
+  }
+}
+
+// ============================================================================
+// GUIDE AUTO-EMAIL - Sends requested guide to lead
+// ============================================================================
+
+/**
+ * Map of guide names to their PDF filenames on the website
+ */
+const GUIDE_MAP = {
+  'First-Time Buyer Checklist': {
+    filename: 'First-Time-Buyer-Checklist.pdf',
+    title: 'First-Time Buyer Checklist',
+    description: 'Your complete step-by-step guide from pre-approval to closing day.'
+  },
+  'East Bay Investment Guide': {
+    filename: 'East-Bay-Investment-Guide.pdf',
+    title: 'East Bay Investment Guide',
+    description: 'Rental yields, cap rates, and cash flow projections across all East Bay cities.'
+  },
+  'Relocating to East Bay': {
+    filename: 'Relocating-to-East-Bay.pdf',
+    title: 'Relocating to East Bay Guide',
+    description: 'School districts, commute times, lifestyle, and housing costs compared.'
+  }
+};
+
+const WEBSITE_URL = 'https://homeswithmanish.com';
+
+/**
+ * Sends an auto-response email to the lead with a link to their requested guide PDF
+ *
+ * @param {string} firstName - Lead's first name
+ * @param {string} email - Lead's email address
+ * @param {string} guideName - Name of the requested guide (must match GUIDE_MAP key)
+ */
+function sendGuideEmail(firstName, email, guideName) {
+  try {
+    const guide = GUIDE_MAP[guideName];
+    if (!guide) {
+      Logger.log('Unknown guide requested: ' + guideName);
+      return;
+    }
+
+    const guideUrl = WEBSITE_URL + '/guides/' + guide.filename;
+    const subject = 'Your Free ' + guide.title + ' — Homes With Manish';
+
+    const htmlBody = `
+      <html>
+        <body style="font-family: 'Helvetica Neue', Arial, sans-serif; color: #333; margin: 0; padding: 0; background-color: #f5f5f5;">
+          <div style="max-width: 600px; margin: 0 auto; background: #ffffff;">
+
+            <!-- Header -->
+            <div style="background-color: #0F1B2D; padding: 32px 40px; text-align: center;">
+              <h1 style="color: #C9A96E; margin: 0; font-size: 22px; font-weight: 600; letter-spacing: 0.5px;">HOMES WITH MANISH</h1>
+              <p style="color: rgba(255,255,255,0.6); margin: 8px 0 0; font-size: 13px;">Your East Bay Real Estate Expert</p>
+            </div>
+
+            <!-- Body -->
+            <div style="padding: 40px;">
+              <h2 style="color: #0F1B2D; margin: 0 0 16px; font-size: 20px;">Hi ${escapeHtml(firstName)},</h2>
+              <p style="font-size: 15px; line-height: 1.6; color: #555;">
+                Thank you for your interest! Here's the guide you requested:
+              </p>
+
+              <!-- Guide Card -->
+              <div style="background: linear-gradient(135deg, #0F1B2D 0%, #1a2d47 100%); border-radius: 12px; padding: 28px; margin: 24px 0; text-align: center;">
+                <p style="color: #C9A96E; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 8px;">FREE GUIDE</p>
+                <h3 style="color: #ffffff; margin: 0 0 12px; font-size: 18px;">${escapeHtml(guide.title)}</h3>
+                <p style="color: rgba(255,255,255,0.7); font-size: 13px; margin: 0 0 20px; line-height: 1.5;">
+                  ${escapeHtml(guide.description)}
+                </p>
+                <a href="${guideUrl}" style="display: inline-block; background-color: #C9A96E; color: #0F1B2D; text-decoration: none; padding: 12px 32px; border-radius: 6px; font-weight: 600; font-size: 14px;">
+                  Download Your Guide →
+                </a>
+              </div>
+
+              <p style="font-size: 15px; line-height: 1.6; color: #555;">
+                Have questions about anything in the guide? I'm always happy to chat — just reply to this email or give me a call.
+              </p>
+
+              <!-- Other Guides -->
+              <div style="background: #f8f8f8; border-radius: 8px; padding: 20px; margin: 24px 0;">
+                <p style="font-size: 13px; font-weight: 600; color: #0F1B2D; margin: 0 0 12px;">You might also like:</p>
+                ${Object.entries(GUIDE_MAP).filter(([key]) => key !== guideName).map(([key, g]) =>
+                  '<p style="margin: 8px 0; font-size: 13px;">' +
+                  '<a href="' + WEBSITE_URL + '/guides/' + g.filename + '" style="color: #C9A96E; text-decoration: none; font-weight: 500;">' +
+                  escapeHtml(g.title) + '</a>' +
+                  ' — <span style="color: #888;">' + escapeHtml(g.description.split('.')[0]) + '</span></p>'
+                ).join('')}
+              </div>
+
+              <!-- Sign-off -->
+              <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #eee;">
+                <p style="font-size: 14px; color: #555; line-height: 1.6; margin: 0;">
+                  Best regards,<br>
+                  <strong style="color: #0F1B2D;">Manish Anand</strong><br>
+                  Licensed REALTOR® | DRE #02247006<br>
+                  <a href="tel:4087075324" style="color: #C9A96E; text-decoration: none;">(408) 707-5324</a> |
+                  <a href="mailto:homeswithmanish@gmail.com" style="color: #C9A96E; text-decoration: none;">homeswithmanish@gmail.com</a><br>
+                  <a href="${WEBSITE_URL}" style="color: #C9A96E; text-decoration: none;">homeswithmanish.com</a>
+                </p>
+              </div>
+            </div>
+
+            <!-- Footer -->
+            <div style="background-color: #f5f5f5; padding: 20px 40px; text-align: center;">
+              <p style="font-size: 11px; color: #999; margin: 0;">
+                MOSO Real Estate | DRE #01771313<br>
+                Serving San Ramon, Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy, Mountain House, Manteca, Lathrop, San Jose, Milpitas, Cupertino & Newark
+              </p>
+            </div>
+
+          </div>
+        </body>
+      </html>
+    `;
+
+    GmailApp.sendEmail(email, subject, 'Here is your free guide: ' + guideUrl, { htmlBody: htmlBody, name: 'Manish Anand — Homes With Manish', replyTo: NOTIFICATION_EMAIL });
+    Logger.log('Guide email sent to ' + email + ' for guide: ' + guideName);
+
+  } catch (error) {
+    Logger.log('Error sending guide email: ' + error.toString());
+  }
+}
+
+/**
+ * Escapes HTML special characters for safe display in emails
+ *
+ * @param {string} text - Text to escape
+ * @returns {string} Escaped text
+ */
+function escapeHtml(text) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, m => map[m]);
+}
+
+// ============================================================================
+// HELPER FUNCTIONS - SECURITY & AUTHENTICATION
+// ============================================================================
+
+/**
+ * Validates the provided API key against the stored admin key
+ *
+ * @param {string} apiKey - The API key to validate
+ * @returns {boolean} True if the key is valid
+ */
+function isValidApiKey(apiKey) {
+  if (!apiKey) return false;
+
+  const scriptProperties = PropertiesService.getScriptProperties();
+  const storedKey = scriptProperties.getProperty('ADMIN_API_KEY');
+
+  return apiKey === storedKey;
+}
+
+// ============================================================================
+// SETUP FUNCTIONS - Run these once during initial setup
+// ============================================================================
+
+/**
+ * Creates the initial Leads sheet with proper headers and formatting
+ *
+ * RUN THIS FUNCTION ONCE during setup:
+ * 1. Open the Apps Script editor
+ * 2. Select this function from the dropdown at the top
+ * 3. Click the "Run" button
+ * 4. Authorize the script when prompted
+ */
+function createInitialSheet() {
+  try {
+    const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
+    let sheet = spreadsheet.getSheetByName(SHEET_NAME);
+
+    if (!sheet) {
+      sheet = spreadsheet.insertSheet(SHEET_NAME);
+      Logger.log('Created new sheet: ' + SHEET_NAME);
+    } else {
+      Logger.log('Sheet already exists: ' + SHEET_NAME);
+      return;
+    }
+
+    createSheetHeaders(sheet);
+    Logger.log('Headers created successfully');
+
+  } catch (error) {
+    Logger.log('Error creating sheet: ' + error.toString());
+  }
+}
+
+/**
+ * Generates and stores a random admin API key in Script Properties
+ *
+ * RUN THIS FUNCTION ONCE during setup:
+ * 1. Open the Apps Script editor
+ * 2. Select this function from the dropdown at the top
+ * 3. Click the "Run" button
+ * 4. Check the "Execution log" at the bottom to see your generated API key
+ * 5. Copy this key and save it in a safe location
+ * 6. Use this key when making API requests to the doGet handler
+ *
+ * NOTE: The API key is also logged to the console for easy access
+ */
+function setAdminKey() {
+  try {
+    // Generate a random 32-character API key
+    const apiKey = generateRandomKey(32);
+
+    // Store it in Script Properties
+    const scriptProperties = PropertiesService.getScriptProperties();
+    scriptProperties.setProperty('ADMIN_API_KEY', apiKey);
+
+    Logger.log('========================================');
+    Logger.log('ADMIN API KEY GENERATED AND STORED');
+    Logger.log('========================================');
+    Logger.log('Your API Key: ' + apiKey);
+    Logger.log('========================================');
+    Logger.log('IMPORTANT: Save this key in a secure location!');
+    Logger.log('Use this key in all admin API requests: ?key=' + apiKey);
+    Logger.log('========================================');
+
+  } catch (error) {
+    Logger.log('Error setting admin key: ' + error.toString());
+  }
+}
+
+/**
+ * Generates a random alphanumeric string of specified length
+ * Used for creating secure API keys
+ *
+ * @param {number} length - Length of the key to generate
+ * @returns {string} Random alphanumeric string
+ */
+function generateRandomKey(length) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+
+  return result;
+}
+
+/**
+ * Helper function to manually reset the admin API key
+ * Useful if you need to regenerate the key for security reasons
+ *
+ * Run this function the same way as setAdminKey()
+ */
+function resetAdminKey() {
+  Logger.log('Resetting admin API key...');
+  setAdminKey();
+}
+
+// ============================================================================
+// NEWSLETTER SUBSCRIBER MANAGEMENT
+// ============================================================================
+
+const NEWSLETTER_SHEET_NAME = 'Newsletter';
+
+/**
+ * Adds a subscriber to the Newsletter sheet (deduplicates by email).
+ * Creates the sheet with headers if it doesn't exist.
+ *
+ * @param {string} email - Subscriber's email
+ * @param {string} firstName - Subscriber's first name (may be empty)
+ * @param {string} lastName - Subscriber's last name (may be empty)
+ */
+function addNewsletterSubscriber(email, firstName, lastName) {
+  try {
+    const ss = SpreadsheetApp.openById(SHEET_ID);
+    let sheet = ss.getSheetByName(NEWSLETTER_SHEET_NAME);
+
+    // Create sheet if it doesn't exist
+    if (!sheet) {
+      sheet = ss.insertSheet(NEWSLETTER_SHEET_NAME);
+      sheet.getRange(1, 1, 1, 5).setValues([['Email', 'First Name', 'Last Name', 'Subscribed Date', 'Status']]);
+      const headerRange = sheet.getRange(1, 1, 1, 5);
+      headerRange.setFontWeight('bold');
+      headerRange.setBackground('#0F1B2D');
+      headerRange.setFontColor('#FFFFFF');
+      sheet.setColumnWidth(1, 250);
+      sheet.setColumnWidth(2, 140);
+      sheet.setColumnWidth(3, 140);
+      sheet.setColumnWidth(4, 180);
+      sheet.setColumnWidth(5, 100);
+      sheet.setFrozenRows(1);
+    }
+
+    // Check for duplicate email
+    if (sheet.getLastRow() > 1) {
+      const emails = sheet.getRange(2, 1, sheet.getLastRow() - 1, 1).getValues().flat();
+      if (emails.some(e => e.toString().toLowerCase() === email.toLowerCase())) {
+        Logger.log('Newsletter subscriber already exists: ' + email);
+        return;
+      }
+    }
+
+    // Add new subscriber
+    sheet.appendRow([email, firstName || '', lastName || '', new Date().toISOString(), 'Active']);
+    Logger.log('Newsletter subscriber added: ' + email);
+
+  } catch (error) {
+    Logger.log('Error adding newsletter subscriber: ' + error.toString());
+  }
+}
+
+/**
+ * Returns all active newsletter subscribers.
+ *
+ * @returns {Array} Array of {email, firstName, lastName} objects
+ */
+function getActiveSubscribers() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const sheet = ss.getSheetByName(NEWSLETTER_SHEET_NAME);
+
+  if (!sheet || sheet.getLastRow() < 2) return [];
+
+  const data = sheet.getRange(2, 1, sheet.getLastRow() - 1, 5).getValues();
+  return data
+    .filter(row => row[4] === 'Active')
+    .map(row => ({ email: row[0], firstName: row[1], lastName: row[2] }));
+}
+
+/**
+ * Run this once to create the Newsletter sheet with headers.
+ * Also backfills existing newsletter signups from the Leads sheet.
+ */
+function setupNewsletterSheet() {
+  // Create sheet (addNewsletterSubscriber handles creation)
+  addNewsletterSubscriber('placeholder@setup.com', '', '');
+
+  // Remove the placeholder
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const sheet = ss.getSheetByName(NEWSLETTER_SHEET_NAME);
+  if (sheet.getLastRow() > 1) {
+    sheet.deleteRow(2);
+  }
+
+  // Backfill from Leads sheet
+  const leadsSheet = ss.getSheetByName(SHEET_NAME);
+  if (leadsSheet && leadsSheet.getLastRow() > 1) {
+    const leadsData = leadsSheet.getRange(2, 1, leadsSheet.getLastRow() - 1, 11).getValues();
+    let backfilled = 0;
+
+    leadsData.forEach(row => {
+      const source = row[7]; // Source column (0-indexed col 8)
+      if (source === 'newsletter') {
+        const email = row[3];  // Email
+        const firstName = row[1]; // First Name
+        const lastName = row[2];  // Last Name
+        if (email) {
+          addNewsletterSubscriber(email, firstName, lastName);
+          backfilled++;
+        }
+      }
+    });
+
+    Logger.log('Backfilled ' + backfilled + ' newsletter subscribers from Leads sheet');
+  }
+
+  Logger.log('Newsletter sheet setup complete');
+}
+
+/* ==================== CASH FLOW FINDER ====================
+ * Powers the /cash-flow-finder/ page. Manish maintains a sheet tab named
+ * "CashFlowDeals" with one row per screened listing (input columns only);
+ * this code computes PITI + rent/PITI server-side and serves Active rows
+ * ranked by ratio, highest first.
+ */
+var CASHFLOW_SHEET_NAME = 'CashFlowDeals';
+var CASHFLOW_HEADERS = ['Address','City','Price','Beds','Baths','SqFt','EstRent',
+  'DownPmtPct','RatePct','TaxPctYr','InsPctYr','MelloRoosYr','HOAmo',
+  'Status','ListingURL','Notes','Updated'];
+
+function setupCashFlowSheet() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(CASHFLOW_SHEET_NAME);
+  if (!sheet) {
+    sheet = ss.insertSheet(CASHFLOW_SHEET_NAME);
+    sheet.getRange(1, 1, 1, CASHFLOW_HEADERS.length).setValues([CASHFLOW_HEADERS]);
+    sheet.getRange(1, 1, 1, CASHFLOW_HEADERS.length).setFontWeight('bold');
+    sheet.setFrozenRows(1);
+    // Example row (Status != Active, so it never appears on the site)
+    sheet.appendRow(['123 Example Way','Tracy',675000,3,2,1600,2900,
+      0.20,0.0728,0.011,0.0035,0,0,'Example','','Replace with a real listing','']);
+  }
+  return sheet;
+}
+
+function cashFlowMonthlyPI(loan, annualRate) {
+  var r = annualRate / 12, n = 360;
+  if (!loan || loan <= 0) return 0;
+  if (!r) return loan / n;
+  var f = Math.pow(1 + r, n);
+  return loan * r * f / (f - 1);
+}
+
+function handleCashFlowRequest() {
+  try {
+    var sheet = setupCashFlowSheet();
+    var values = sheet.getDataRange().getValues();
+    var deals = [];
+    for (var i = 1; i < values.length; i++) {
+      var row = values[i];
+      var status = String(row[13] || '').trim().toLowerCase();
+      if (status !== 'active') continue;
+      var price = Number(row[2]) || 0;
+      var estRent = Number(row[6]) || 0;
+      if (!price || !estRent) continue;
+      var downPct = Number(row[7]) || 0.20;
+      var ratePct = Number(row[8]) || 0.0728;
+      var loan = price * (1 - downPct);
+      var pi = cashFlowMonthlyPI(loan, ratePct);
+      var taxMo = price * (Number(row[9]) || 0.011) / 12;
+      var insMo = price * (Number(row[10]) || 0.0035) / 12;
+      var mrMo = (Number(row[11]) || 0) / 12;
+      var hoaMo = Number(row[12]) || 0;
+      var total = pi + taxMo + insMo + mrMo + hoaMo;
+      if (total <= 0) continue;
+      var ratio = estRent / total;
+      deals.push({
+        address: String(row[0] || ''),
+        city: String(row[1] || ''),
+        price: Math.round(price),
+        beds: row[3] === '' ? null : Number(row[3]),
+        baths: row[4] === '' ? null : Number(row[4]),
+        sqft: row[5] === '' ? null : Number(row[5]),
+        estRent: Math.round(estRent),
+        downPmtPct: downPct,
+        ratePct: ratePct,
+        monthlyPI: Math.round(pi),
+        monthlyTax: Math.round(taxMo),
+        monthlyIns: Math.round(insMo),
+        monthlyMR: Math.round(mrMo),
+        monthlyHOA: Math.round(hoaMo),
+        totalPITI: Math.round(total),
+        ratio: Math.round(ratio * 100) / 100,
+        cashFlow: Math.round(estRent - total),
+        verdict: ratio >= 1 ? 'CASH FLOW' : (ratio >= 0.9 ? 'CLOSE' : 'NEGATIVE'),
+        listingURL: String(row[14] || ''),
+        notes: String(row[15] || ''),
+        updated: String(row[16] || '')
+      });
+    }
+    deals.sort(function(a, b) { return b.ratio - a.ratio; });
+    return { success: true, count: deals.length, deals: deals,
+             fetchedAt: new Date().toISOString() };
+  } catch (err) {
+    Logger.log('Error in handleCashFlowRequest: ' + err.toString());
+    return { success: false, message: 'Unable to load cash flow deals', count: 0, deals: [] };
+  }
+}
