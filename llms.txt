@@ -1,8 +1,9 @@
 # Homes With Manish — East Bay Real Estate
 
 > Manish Anand (CA DRE #02247006, MOSO Real Estate) is a data-driven real estate
-> agent serving 8 East Bay / Tri-Valley cities in California: San Ramon,
-> Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy, and Mountain House.
+> agent serving 14 East Bay and South Bay cities in California: San Ramon,
+> Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy, Mountain House,
+> Manteca, Lathrop, San Jose, Milpitas, Cupertino, and Newark.
 > The site publishes live market data (Zillow ZHVI/ZORI, Freddie Mac PMMS),
 > hyperlocal city guides, and free calculators. Contact: (408) 707-5324,
 > homeswithmanish@gmail.com.
