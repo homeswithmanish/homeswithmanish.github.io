@@ -1086,7 +1086,7 @@ function sendGuideEmail(firstName, email, guideName) {
             <div style="background-color: #f5f5f5; padding: 20px 40px; text-align: center;">
               <p style="font-size: 11px; color: #999; margin: 0;">
                 MOSO Real Estate | DRE #01771313<br>
-                Serving San Ramon, Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy & Mountain House
+                Serving San Ramon, Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy, Mountain House, Manteca, Lathrop, San Jose, Milpitas, Cupertino & Newark
               </p>
             </div>
 

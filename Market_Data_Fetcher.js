@@ -3,7 +3,7 @@
  * ================================================================
  *
  * Fetches real housing market data from Zillow's official public CSV
- * for 8 East Bay cities and stores it in the "MarketData" sheet.
+ * for 14 East Bay and South Bay cities and stores it in the "MarketData" sheet.
  *
  * DATA SOURCE: Zillow Home Value Index (ZHVI) - Single Family Homes
  * https://www.zillow.com/research/data/
@@ -32,7 +32,7 @@ const ZILLOW_ZHVI_URLS = [
   'https://files.zillowstatic.com/research/public_v2/zhvi/City_zhvi_uc_sfr_tier_0.33_0.67_sm_sa_month.csv'
 ];
 
-// Our 8 East Bay target cities
+// Our 14 East Bay and South Bay target cities
 const TARGET_CITIES_LIST = [
   { city: 'San Ramon', state: 'CA', county: 'Contra Costa County' },
   { city: 'Pleasanton', state: 'CA', county: 'Alameda County' },
@@ -41,7 +41,13 @@ const TARGET_CITIES_LIST = [
   { city: 'Livermore', state: 'CA', county: 'Alameda County' },
   { city: 'Fremont', state: 'CA', county: 'Alameda County' },
   { city: 'Tracy', state: 'CA', county: 'San Joaquin County' },
-  { city: 'Mountain House', state: 'CA', county: 'San Joaquin County' }
+  { city: 'Mountain House', state: 'CA', county: 'San Joaquin County' },
+  { city: 'Manteca', state: 'CA', county: 'San Joaquin County' },
+  { city: 'Lathrop', state: 'CA', county: 'San Joaquin County' },
+  { city: 'San Jose', state: 'CA', county: 'Santa Clara County' },
+  { city: 'Milpitas', state: 'CA', county: 'Santa Clara County' },
+  { city: 'Cupertino', state: 'CA', county: 'Santa Clara County' },
+  { city: 'Newark', state: 'CA', county: 'Alameda County' }
 ];
 
 const MARKET_DATA_SHEET = 'MarketData';

@@ -7,7 +7,7 @@
     "phone": "+1-408-707-5324",
     "email": "homeswithmanish@gmail.com"
   },
-  "updated": "2026-07-03",
+  "updated": "2026-10-03",
   "note": "Price bands reflect recent Zillow ZHVI ranges; live figures at https://homeswithmanish.com/#market",
   "cities": [
     {
@@ -476,6 +476,359 @@
         {
           "q": "Mountain House or Tracy?",
           "a": "Mountain House: newer, master-planned, village schools, higher taxes (CFD). Tracy: lower entry prices, more housing variety, established downtown. I help buyers compare total monthly cost side by side."
+        }
+      ]
+    },
+    {
+      "slug": "manteca",
+      "name": "Manteca",
+      "url": "https://homeswithmanish.com/cities/manteca/",
+      "tagline": "Altamont-adjacent value where the Central Valley begins",
+      "medianPriceBand": "$560K–$610K",
+      "schools": {
+        "district": "Manteca Unified School District (MUSD)",
+        "blurb": "MUSD is the primary district serving Manteca (a small eastern slice falls under Ripon USD). Quality varies school by school — standouts like Sierra High and Veritas Elementary outperform the district average considerably, so check boundaries for your specific neighborhood.",
+        "notable": [
+          "Sierra High School",
+          "East Union High School",
+          "Manteca High School",
+          "Veritas Elementary School"
+        ]
+      },
+      "commute": {
+        "blurb": "Manteca sits at the CA-99/CA-120/I-205 corridor with ACE rail service — a commuter city by design, with the Altamont Pass as the main trade-off.",
+        "points": [
+          "ACE train from Lathrop/Manteca station to San Jose via Tracy and Fremont",
+          "Dublin/Pleasanton BART: ~40–45 min drive over the Altamont",
+          "San Jose: ~1h15 in typical traffic; San Francisco up to 2h at peak",
+          "I-5 a short drive west via Lathrop for north-south travel"
+        ]
+      },
+      "neighborhoods": [
+        {
+          "blurb": "Historic cottages and midcentury ranches around Main Street and Library Park — the most walkable part of town.",
+          "name": "Downtown Manteca"
+        },
+        {
+          "blurb": "Newer master-planned area with spacious modern homes, popular with families for schools and highway access.",
+          "name": "Union Ranch"
+        },
+        {
+          "blurb": "55+ active-adult community with resort-style amenities: clubhouse, pools, and tennis/pickleball.",
+          "name": "Del Webb at Woodbridge"
+        }
+      ],
+      "investorView": "Manteca is a cash-flow-forward market in 2026, not an appreciation play: entry prices in the high $500s against stable rents of $1,800–$2,400, with a buyer's market (rising inventory, 40–50 days on market) favoring patient negotiators. Best suited to buy-and-hold investors rather than flippers — expect slow equity growth until Bay Area demand spills over more aggressively.",
+      "faq": [
+        {
+          "q": "How much does a home cost in Manteca?",
+          "a": "The typical median single-family home runs $560K–$610K as of 2026 — well under half of Bay Area medians — with townhomes available lower and larger new-build homes above $650K."
+        },
+        {
+          "q": "Are Manteca schools good?",
+          "a": "Manteca Unified is the main district and quality varies school by school: Sierra High and Veritas Elementary perform well above the district average, while the district overall ranks below the state average. Check attendance boundaries against school ratings for the specific neighborhood you're considering."
+        },
+        {
+          "q": "Can I commute to the Bay Area from Manteca?",
+          "a": "Yes, with planning: ACE commuter rail runs peak-hour trains from the Lathrop/Manteca station to San Jose, and Dublin/Pleasanton BART is a 40–45 minute drive over the Altamont. Expect about 1h15 to San Jose and up to 2 hours to San Francisco in rush-hour traffic."
+        },
+        {
+          "q": "Is Manteca a good place to invest?",
+          "a": "Entry prices in the high $500s combined with stable rents make it one of the more cash-flow-friendly options within Bay Area commuting distance. It's a buyer's market with soft near-term appreciation — best for buy-and-hold investors, not flippers."
+        }
+      ]
+    },
+    {
+      "slug": "lathrop",
+      "name": "Lathrop",
+      "url": "https://homeswithmanish.com/cities/lathrop/",
+      "tagline": "Master-planned value on the Bay Area's eastern doorstep",
+      "medianPriceBand": "$650K–$750K",
+      "schools": {
+        "district": "Manteca Unified & Banta Unified School Districts",
+        "blurb": "Most of Lathrop falls under Manteca Unified, while the River Islands area is served by Banta Unified — home to the well-regarded River Islands charter academies. Verify which district serves any specific address.",
+        "notable": [
+          "Lathrop High School",
+          "River Islands Technology Academy",
+          "River Islands High School",
+          "Mossdale Elementary School"
+        ]
+      },
+      "commute": {
+        "blurb": "I-5 and I-205 run through Lathrop, with ACE rail at the Lathrop/Manteca station and a second North Lathrop station planned.",
+        "points": [
+          "ACE train from Lathrop/Manteca station to Fremont, Santa Clara, and San Jose (~2 hrs)",
+          "Dublin/Pleasanton BART: ~35–45 min via I-205/I-580",
+          "Pleasanton/Dublin: ~40–50 min drive; Stockton: ~15–20 min",
+          "North Lathrop ACE/Valley Rail station planned, plus proposed Valley Link to BART"
+        ]
+      },
+      "neighborhoods": [
+        {
+          "blurb": "The flagship: ~4,800 acres with 11 lakes, the Boathouse Restaurant, and charter academies — building toward ~11,000 homes.",
+          "name": "River Islands"
+        },
+        {
+          "blurb": "Planned community west of I-5 along the river, built around a pedestrian village center with parks and trails.",
+          "name": "Mossdale Village"
+        },
+        {
+          "blurb": "The city's newest growth zone — home to Lathrop High School with newer subdivisions going in.",
+          "name": "Central Lathrop"
+        }
+      ],
+      "investorView": "Entry prices are the lowest of any Bay-adjacent city and rental demand is strong from commuters and logistics workers, so cash flow pencils better here than in most of the greater Bay Area. Favor resales over new builds to avoid Community Facilities District (Mello-Roos) special taxes on carrying costs, and target 3–4 bedroom family homes near the charter schools and commuter corridors.",
+      "faq": [
+        {
+          "q": "How much does a home cost in Lathrop?",
+          "a": "Typical single-family homes sell between about $650K and $750K in 2026. New construction in River Islands runs higher, often into the $800Ks, while older homes east of I-5 tend to price lower."
+        },
+        {
+          "q": "Is Lathrop good for first-time buyers?",
+          "a": "Yes — it's one of the most reachable entry points into the Bay Area orbit, with mostly newer housing stock and family-oriented charter schools. Check whether the home sits in a Mello-Roos district, since the special tax affects the monthly payment."
+        },
+        {
+          "q": "What is the commute from Lathrop to the Bay Area?",
+          "a": "Most commuters drive: about 40–50 minutes to Pleasanton/Dublin, roughly an hour to San Jose off-peak (longer over the Altamont at rush hour). The ACE train at Lathrop/Manteca station offers a car-free option to Fremont, Santa Clara, and San Jose."
+        },
+        {
+          "q": "Is Lathrop a good place to invest?",
+          "a": "Cash flow works better here than in most of the greater Bay Area thanks to low entry prices and strong rental demand. Favor resales over new builds to avoid special-tax burdens, and expect steady rather than explosive appreciation tied to Bay Area spillover."
+        }
+      ]
+    },
+    {
+      "slug": "san-jose",
+      "name": "San Jose",
+      "url": "https://homeswithmanish.com/cities/san-jose/",
+      "tagline": "South Bay schools, bigger lots, and one last price break before the Peninsula",
+      "medianPriceBand": "$1.5M–$2.5M",
+      "schools": {
+        "district": "Evergreen, Oak Grove, East Side Union & San Jose Unified",
+        "blurb": "School boundaries here are split: Evergreen pairs Evergreen SD (K-8) with East Side Union HSD; Blossom Valley pairs Oak Grove SD with East Side Union HSD; Almaden Valley is mostly San Jose Unified. Evergreen Valley High and Leland High are the headliners — always verify a specific address's assignment.",
+        "notable": [
+          "Evergreen Valley High School",
+          "Leland High School",
+          "Oak Grove High School",
+          "Graystone Elementary School"
+        ]
+      },
+      "commute": {
+        "blurb": "South San Jose has the Bay Area's full transit menu: BART, Caltrain, VTA light rail, and five freeways.",
+        "points": [
+          "Berryessa/North San Jose BART (opened 2020) with East Bay service; Phase II extension in early construction",
+          "Caltrain at Blossom Hill, Capitol, and Diridon; VTA Blue Line through South San Jose",
+          "US-101, I-680, I-280, CA-87, and CA-85 serve all three focus areas",
+          "Palo Alto/Santa Clara campuses: ~25–35 min; San Francisco: ~50–70 min off-peak"
+        ]
+      },
+      "neighborhoods": [
+        {
+          "blurb": "Master-planned hillside community in the southeast foothills — newer homes, Evergreen Valley High, and Evergreen Valley College.",
+          "name": "Evergreen"
+        },
+        {
+          "blurb": "Established mid-century ranch neighborhoods in South San Jose with Oak Grove schools and strong VTA Blue Line access.",
+          "name": "Blossom Valley"
+        },
+        {
+          "blurb": "Affluent southwest valley with Leland High schools, larger lots, and Almaden Quicksilver trails — the premium tier at $2.3M–$2.5M.",
+          "name": "Almaden Valley"
+        }
+      ],
+      "investorView": "Cash flow is thin at these price-to-rent ratios — South San Jose is an appreciation-and-stability play, not a cash-flow market. Tenant demand is deep and durable, driven by Silicon Valley tech employment within commuting range, with Almaden commanding premium rents and Evergreen/Blossom Valley offering more accessible entry points. Historically, San Jose homes have roughly doubled each decade over the last 40 years.",
+      "faq": [
+        {
+          "q": "What does it cost to buy in South/East San Jose?",
+          "a": "As of 2026, typical median single-family values run about $1.5M in Blossom Valley, $1.5–$1.6M in Evergreen, and $2.3–$2.5M in Almaden Valley. Renovated homes in top Leland or Evergreen Valley school zones run well above those figures."
+        },
+        {
+          "q": "Are the schools actually good?",
+          "a": "Yes — schools are the main draw. Evergreen Valley High and Leland High both rank among the Bay Area's top public high schools. Verify your specific address's assignment, since districts split across Evergreen, Oak Grove, East Side Union, and San Jose Unified boundaries."
+        },
+        {
+          "q": "How is the commute to tech jobs?",
+          "a": "Strong by Bay Area standards: most Santa Clara County campuses are 25–35 minutes away, VTA's Blue Line serves South San Jose directly, and Caltrain plus future BART connect through Diridon."
+        },
+        {
+          "q": "Is South San Jose a good investment?",
+          "a": "For appreciation, historically yes — with steady tech-driven rental demand. Expect positive long-term appreciation rather than strong monthly cash flow. Almaden offers the most premium tenant pool; Evergreen and Blossom Valley give a lower entry point with solid school-driven demand."
+        }
+      ]
+    },
+    {
+      "slug": "milpitas",
+      "name": "Milpitas",
+      "url": "https://homeswithmanish.com/cities/milpitas/",
+      "tagline": "Silicon Valley's front door — commuter-friendly prices at the Bay Area's crossroads",
+      "medianPriceBand": "$1.2M–$1.5M",
+      "schools": {
+        "district": "Milpitas Unified School District",
+        "blurb": "Milpitas USD serves almost the entire city and ranks in the top 10% of California districts with roughly a 94% graduation rate — so most buyers get Milpitas USD schools without attendance-boundary surprises.",
+        "notable": [
+          "Milpitas High School",
+          "Thomas Russell Middle School",
+          "John Sinnott Elementary School",
+          "Marshall Pomeroy Elementary School"
+        ]
+      },
+      "commute": {
+        "blurb": "Milpitas has genuine multi-modal transit: BART, VTA light rail, and three freeways.",
+        "points": [
+          "Milpitas BART station (Berryessa Extension, opened 2020) on the Green and Orange lines",
+          "VTA Orange Line light rail to Sunnyvale and Mountain View via the Transit Center",
+          "I-880, I-680, and CA-237 all serve the city",
+          "Downtown San Jose ~15–20 min; Fremont ~15 min; Santa Clara corridor ~20 min"
+        ]
+      },
+      "neighborhoods": [
+        {
+          "blurb": "Central Milpitas along Main Street — older homes mixed with newer mixed-use infill under the Gateway-Main Street plan.",
+          "name": "Midtown"
+        },
+        {
+          "blurb": "Hillside east side around Calaveras Road — larger lots and rural-leaning properties near Ed Levin County Park.",
+          "name": "Calaveras Ridge"
+        },
+        {
+          "blurb": "Transit-oriented development around BART and the Great Mall — condos and townhomes popular with commuters.",
+          "name": "Great Mall / Transit Area"
+        }
+      ],
+      "investorView": "Cash flow is tight on long-term holds at a $1.2–$1.5M entry, so most investors are playing appreciation and 1031-exchange leverage rather than immediate yield. Tenant demand is durable: Milpitas sits between the Great Mall corridor employers and north San Jose tech campuses, with BART/VTA access drawing deep tech-renter demand — plus strong resale liquidity from first-time-buyer families priced out of San Jose and Cupertino.",
+      "faq": [
+        {
+          "q": "How much does a home cost in Milpitas?",
+          "a": "Typical single-family homes trade in the $1.2M–$1.5M range in 2026, with condos and townhomes starting closer to the high $800s–$1M."
+        },
+        {
+          "q": "Are Milpitas schools good?",
+          "a": "Yes — Milpitas Unified is a top-10%-of-California district with a 94% graduation rate, and it serves almost the entire city, so most buyers get these schools without boundary surprises."
+        },
+        {
+          "q": "What's the commute like from Milpitas?",
+          "a": "Strong: the Milpitas BART station (opened 2020) connects to the Bay Area rail network, VTA light rail runs west to Sunnyvale/Mountain View, and I-880/I-680/CA-237 give fast highway access to San Jose (~15–20 min) and Fremont (~15 min)."
+        },
+        {
+          "q": "Is Milpitas a good investment?",
+          "a": "It's an appreciation play more than a cash-flow play at current prices. Expect thin initial yields, but tenant demand is steady from nearby tech employment and transit, and the lower entry point versus Silicon Valley peers supports liquidity and long-term upside."
+        }
+      ]
+    },
+    {
+      "slug": "cupertino",
+      "name": "Cupertino",
+      "url": "https://homeswithmanish.com/cities/cupertino/",
+      "tagline": "Silicon Valley's school-first hometown, anchored by Apple",
+      "medianPriceBand": "$2.9M–$3.4M",
+      "schools": {
+        "district": "Cupertino Union (K-8) & Fremont Union HSD (9-12)",
+        "blurb": "Cupertino is served by Cupertino Union School District for K-8 and Fremont Union High School District for 9-12 — both among California's top performers. Monta Vista High and Cupertino High regularly rank among the state's best public schools. Always verify attendance boundaries for a specific address.",
+        "notable": [
+          "Monta Vista High School",
+          "Cupertino High School",
+          "Homestead High School"
+        ]
+      },
+      "commute": {
+        "blurb": "Cupertino is car-central: I-280 and CA-85 ring the city, with Apple campuses in-town and no Caltrain station of its own.",
+        "points": [
+          "Apple Park and Infinite Loop headquarters inside the city",
+          "I-280 along the northern edge; CA-85 through the west side",
+          "No Caltrain station in Cupertino — VTA buses and Via-Cupertino shuttle reach Sunnyvale/Mountain View stations",
+          "Palo Alto ~15–20 min; Mountain View ~10–15 min; downtown San Jose ~15–20 min (off-peak)"
+        ]
+      },
+      "neighborhoods": [
+        {
+          "blurb": "The prestigious western foothills — valley views, large lots, the coveted Monta Vista High zone, McClellan Ranch Preserve.",
+          "name": "Monta Vista"
+        },
+        {
+          "blurb": "Established east-side neighborhood of 1950s–60s ranches (many remodeled) — a relatively approachable entry near Apple Park.",
+          "name": "Rancho Rinconada"
+        },
+        {
+          "blurb": "Central, walkable neighborhood of well-kept single-family homes near top schools and the city center.",
+          "name": "Garden Gate"
+        }
+      ],
+      "investorView": "Cupertino is an appreciation play, not a cash-flow one: at ~$3M entry prices, rents won't cover a mortgage, and sale-to-list ratios above 100% show relentless buyer demand. Tenant demand is deep and resilient, driven by Apple employees and families paying premiums for Fremont Union HSD schools — making long-term buy-and-hold the winning strategy on a 10-year horizon, not cap rate.",
+      "faq": [
+        {
+          "q": "What does a typical house cost in Cupertino?",
+          "a": "Expect around $2.9M–$3.4M for a typical single-family home in 2026. Even condos and townhomes run well over $1M, and homes routinely sell above asking, so budget accordingly."
+        },
+        {
+          "q": "Are Cupertino schools really that good?",
+          "a": "Yes. Cupertino Union (K-8) and Fremont Union HSD (9-12) are among the top districts in California, and the schools are the primary driver of home values. Always verify attendance boundaries for a specific address."
+        },
+        {
+          "q": "What's the commute like from Cupertino?",
+          "a": "By car it's central: ~15–20 minutes to Palo Alto, ~10–15 to Mountain View, ~15–20 to downtown San Jose off-peak. Public transit relies on VTA buses and the Via-Cupertino shuttle to nearby Caltrain stations."
+        },
+        {
+          "q": "Is Cupertino a good investment?",
+          "a": "For appreciation, yes; for cash flow, no. Decades of steady demand from Apple workers and school-driven buyers have made Cupertino one of Silicon Valley's most durable long-term bets — think 10-year horizon, not cap rate."
+        }
+      ]
+    },
+    {
+      "slug": "newark",
+      "name": "Newark",
+      "url": "https://homeswithmanish.com/cities/newark/",
+      "tagline": "Bridge-side value with Peninsula paychecks",
+      "medianPriceBand": "$1.30M–$1.45M",
+      "schools": {
+        "district": "Newark Unified School District",
+        "blurb": "Newark Unified is a solid mid-tier district anchored by Newark Memorial High. The district has consolidated several campuses in recent years, so check current boundaries when house-hunting — families seeking top-ranked schools often compare across the border into Fremont.",
+        "notable": [
+          "Newark Memorial High School",
+          "Newark Middle School",
+          "Coyote Hills Elementary School",
+          "Lincoln Elementary School"
+        ]
+      },
+      "commute": {
+        "blurb": "Newark's commute is built around the Dumbarton Bridge — ideal for Peninsula workers, workable for everyone else via I-880.",
+        "points": [
+          "Dumbarton Bridge (CA-84) in-town: Palo Alto ~20–30 min off-peak (toll bridge)",
+          "No BART in Newark — Fremont BART ~10 min, Union City BART ~10–15 min",
+          "Dumbarton Express buses from Fremont/Union City BART to Palo Alto and Stanford Research Park",
+          "I-880 along the eastern edge: San Jose ~20–25 min; central Newark to Fremont ~10 min"
+        ]
+      },
+      "neighborhoods": [
+        {
+          "blurb": "The historic core around Thornton Ave and Newark Blvd — older homes, small shops, and civic buildings.",
+          "name": "Old Town Newark"
+        },
+        {
+          "blurb": "Established 1960s–80s suburb with tree-lined streets, Birch Grove Park, and Birch Grove Primary.",
+          "name": "Birch Grove"
+        },
+        {
+          "blurb": "Gated condo/townhome community near NewPark — popular with commuters for low-maintenance living near I-880 and CA-84.",
+          "name": "Shelter Creek"
+        }
+      ],
+      "investorView": "Newark prices run $200K–$400K below neighboring Fremont while pulling the same tech-commuter tenant pool via the Dumbarton Bridge, supporting median rents near $3,500. Cash flow is tight at current rates given the ~$1.35M entry point, so this is an appreciation-and-rent-growth play backed by chronically low inventory — not a cash-flow market.",
+      "faq": [
+        {
+          "q": "How much does it cost to buy a home in Newark?",
+          "a": "Typical single-family homes land in the $1.30M–$1.45M band. Townhomes and condos in communities like Shelter Creek run lower, often under $1M."
+        },
+        {
+          "q": "Are Newark schools good?",
+          "a": "Newark Unified is a solid mid-tier district anchored by Newark Memorial High; the district has consolidated campuses recently, so check current boundaries. Families seeking top-ranked schools often compare across the border into Fremont."
+        },
+        {
+          "q": "What's the commute like from Newark?",
+          "a": "Excellent for Peninsula workers: the Dumbarton Bridge is right in town and Palo Alto is roughly 20–30 minutes off-peak. There's no BART station — you'll drive 10–15 minutes to Fremont or Union City BART, or take the Dumbarton Express bus."
+        },
+        {
+          "q": "Is Newark a good investment?",
+          "a": "Tenant demand is strong from Peninsula and Silicon Valley commuters with median rents around $3,500. Cash flow is thin at current prices, so investors typically buy for long-term appreciation, steady rent growth, and low vacancy rather than day-one cash flow."
         }
       ]
     }

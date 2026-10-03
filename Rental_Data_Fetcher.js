@@ -35,7 +35,13 @@ const RENTAL_TARGET_CITIES = [
   { city: 'Dublin', state: 'CA' },
   { city: 'Livermore', state: 'CA' },
   { city: 'Fremont', state: 'CA' },
-  { city: 'Tracy', state: 'CA' }
+  { city: 'Tracy', state: 'CA' },
+  { city: 'Manteca', state: 'CA' },
+  { city: 'Lathrop', state: 'CA' },
+  { city: 'San Jose', state: 'CA' },
+  { city: 'Milpitas', state: 'CA' },
+  { city: 'Cupertino', state: 'CA' },
+  { city: 'Newark', state: 'CA' }
 ];
 
 // ============================================================================
