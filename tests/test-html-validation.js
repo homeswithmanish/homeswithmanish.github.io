@@ -345,6 +345,9 @@ const NEIGHBORHOOD_PAGES = [
   'cities/pleasanton/ruby-hill/index.html',
   'cities/danville/blackhawk/index.html',
   'cities/fremont/mission-san-jose/index.html',
+  'cities/dublin/wallis-ranch/index.html',
+  'cities/tracy/tracy-hills/index.html',
+  'cities/pleasanton/vintage-hills/index.html',
 ];
 
 console.log('\x1b[36mNeighborhood guides:\x1b[0m');
@@ -403,6 +406,37 @@ test('Generated hero H1 is white on navy (was invisible)', /\.page-hero h1 \{[^}
 test('City page title targets realtor intent', /San Ramon Real Estate Agent/.test(readFile('cities/san-ramon/index.html')));
 test('City page links its neighborhood guide', readFile('cities/san-ramon/index.html').includes('/cities/san-ramon/dougherty-valley/'));
 test('No "costs you nothing" buyer-comp phrasing in generated data', !/costs you nothing/i.test(readFile('cities/mountain-house/index.html')));
+
+console.log('\n\x1b[36mBlog E-E-A-T & URL consistency:\x1b[0m');
+const blogPosts = fs.readdirSync(path.join(ROOT, 'blog')).filter((f) => f.endsWith('.html') && f !== 'index.html');
+for (const f of blogPosts) {
+  const html = readFile(`blog/${f}`);
+  const slug = f.replace(/\.html$/, '');
+  const url = `https://homeswithmanish.com/blog/${slug}`;
+  test(`blog/${f} canonical is extensionless`, html.includes(`rel="canonical" href="${url}"`));
+  test(`blog/${f} in sitemap under canonical URL`, sitemapLocs.has(url));
+  test(`blog/${f} author tied to entity @id`, html.includes('"@id": "https://homeswithmanish.com/#manish-anand"'));
+  test(`blog/${f} publisher tied to business @id`, html.includes('"publisher": {"@id": "https://homeswithmanish.com/#business"}'));
+  test(`blog/${f} has BreadcrumbList schema`, /"@type": "BreadcrumbList"/.test(html));
+  test(`blog/${f} byline links to about page`, html.includes('href="/about-manish-anand/" rel="author"'));
+}
+test('Sitemap has no .html blog URLs (canonicals are extensionless)', ![...sitemapLocs].some((u) => /\/blog\/.+\.html$/.test(u)));
+const staleBlogLinks = allPages.filter((f) => /\/blog\/[a-z0-9-]+\.html/.test(fs.readFileSync(f, 'utf8'))).map((f) => path.relative(ROOT, f));
+test('No internal links to .html blog URLs', staleBlogLinks.length === 0, staleBlogLinks.join(', '));
+const blogIndexUrls = [...readFile('blog/index.html').matchAll(/https:\/\/homeswithmanish\.com\/blog\/([a-z0-9-]+)"/g)].map((m) => m[1]);
+test('Blog index schema URLs all resolve to real posts', blogIndexUrls.length > 0 && blogIndexUrls.every((s) => blogPosts.includes(`${s}.html`)), blogIndexUrls.join(', '));
+test('llms.txt lists every blog post', blogPosts.every((f) => llms.includes(`/blog/${f.replace(/\.html$/, '')})`)));
+
+console.log('\n\x1b[36mTruthful advertising (licensed 2024-10-11):\x1b[0m');
+const experienceClaim = /over a decade|\d+\+? years of experience|helped (dozens|hundreds)|spent years helping|many of my clients/i;
+const claimPages = allPages.filter((f) => experienceClaim.test(fs.readFileSync(f, 'utf8'))).map((f) => path.relative(ROOT, f));
+test('No inflated experience or client-count claims', claimPages.length === 0, claimPages.join(', '));
+test('llms-full.txt has no inflated experience claims', !experienceClaim.test(llmsFull));
+
+console.log('\n\x1b[36mIndexNow & entity profiles:\x1b[0m');
+const indexNowKey = (readFile('tools/indexnow.mjs').match(/const KEY = "([0-9a-f]{32})"/) || [])[1];
+test('IndexNow key file deployed at site root and matches script', !!indexNowKey && fs.existsSync(path.join(ROOT, `${indexNowKey}.txt`)) && readFile(`${indexNowKey}.txt`).trim() === indexNowKey);
+test('Person sameAs includes MLSListings profile', indexHtml.includes('https://www.mlslistings.com/FindAnAgent/Profile/02247006'));
 
 // ==================== SUMMARY ====================
 console.log('\n' + '='.repeat(50));

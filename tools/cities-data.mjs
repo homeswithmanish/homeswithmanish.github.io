@@ -48,9 +48,9 @@ export const CITIES = [
       { q: "How is the commute from San Ramon to San Francisco?", a: "Most commuters drive ~15 minutes to Dublin/Pleasanton BART and ride ~40 minutes to downtown SF, or take express buses. Door to door, plan on roughly an hour." },
     ],
     related: [
-      { href: "/blog/san-ramon-home-prices-2026.html", label: "San Ramon Home Prices in 2026" },
-      { href: "/blog/first-time-home-buyer-san-ramon.html", label: "First-Time Buyer Guide: San Ramon" },
-      { href: "/blog/dublin-vs-san-ramon-for-families.html", label: "Dublin vs San Ramon for Families" },
+      { href: "/blog/san-ramon-home-prices-2026", label: "San Ramon Home Prices in 2026" },
+      { href: "/blog/first-time-home-buyer-san-ramon", label: "First-Time Buyer Guide: San Ramon" },
+      { href: "/blog/dublin-vs-san-ramon-for-families", label: "Dublin vs San Ramon for Families" },
     ],
   },
   {
@@ -95,11 +95,11 @@ export const CITIES = [
       { q: "How much does a house cost in Pleasanton?", a: "Median single-family values often approach or exceed $2M, among the highest in the Tri-Valley. The live market table on my homepage shows the current Zillow ZHVI figure." },
       { q: "Amador Valley or Foothill — does it matter for home values?", a: "Both are excellent high schools, and both zones command premiums. Specific boundaries matter more to individual buyers than to values overall — verify zoning per address." },
       { q: "Is Pleasanton walkable?", a: "Downtown Pleasanton is one of the most walkable town centers in the East Bay. Most residential neighborhoods are suburban in layout, but downtown-adjacent streets carry a premium for that walkability." },
-      { q: "How does Pleasanton compare to San Ramon?", a: "Pleasanton offers a historic downtown and established neighborhoods; San Ramon offers newer master-planned housing stock. Schools are top-tier in both. Many of my clients tour both before deciding." },
+      { q: "How does Pleasanton compare to San Ramon?", a: "Pleasanton offers a historic downtown and established neighborhoods; San Ramon offers newer master-planned housing stock. Schools are top-tier in both. Many buyers tour both before deciding." },
     ],
     related: [
-      { href: "/blog/best-neighborhoods-pleasanton.html", label: "Best Neighborhoods in Pleasanton" },
-      { href: "/blog/how-to-buy-a-home-in-california.html", label: "How to Buy a Home in California" },
+      { href: "/blog/best-neighborhoods-pleasanton", label: "Best Neighborhoods in Pleasanton" },
+      { href: "/blog/how-to-buy-a-home-in-california", label: "How to Buy a Home in California" },
     ],
   },
   {
@@ -147,8 +147,8 @@ export const CITIES = [
       { q: "How is Danville's commute?", a: "It's an I-680 drive commute; Walnut Creek BART is about 15–20 minutes away. Many Danville buyers work hybrid schedules or at Bishop Ranch nearby." },
     ],
     related: [
-      { href: "/blog/dublin-vs-san-ramon-for-families.html", label: "Dublin vs San Ramon for Families" },
-      { href: "/blog/how-to-buy-a-home-in-california.html", label: "How to Buy a Home in California" },
+      { href: "/blog/dublin-vs-san-ramon-for-families", label: "Dublin vs San Ramon for Families" },
+      { href: "/blog/how-to-buy-a-home-in-california", label: "How to Buy a Home in California" },
     ],
   },
   {
@@ -193,11 +193,11 @@ export const CITIES = [
       { q: "How much does a house cost in Dublin?", a: "Median single-family values typically range $1.5M–$1.8M — East Dublin new construction trends higher, West Dublin established homes lower. Live ZHVI figures are on my homepage." },
       { q: "Dublin or San Ramon — which is better for families?", a: "San Ramon's SRVUSD has the longer track record; Dublin offers newer homes, BART, and strong (and improving) schools at a somewhat lower price point. I wrote a full comparison — see the related articles below." },
       { q: "Is East Dublin or West Dublin better?", a: "East Dublin: newer homes, new schools, HOA amenities. West Dublin: larger lots, no/low HOA, faster BART access. It depends on what you're optimizing for." },
-      { q: "Do Dublin homes have Mello-Roos?", a: "Many newer East Dublin communities carry community facilities district (CFD) assessments that raise the effective tax rate. I review the exact tax bill on every home my clients consider — try my property tax calculator for estimates." },
+      { q: "Do Dublin homes have Mello-Roos?", a: "Many newer East Dublin communities carry community facilities district (CFD) assessments that raise the effective tax rate. I review the exact tax bill on any home a client is considering — try my property tax calculator for estimates." },
     ],
     related: [
-      { href: "/blog/best-schools-in-dublin.html", label: "Best Schools in Dublin" },
-      { href: "/blog/dublin-vs-san-ramon-for-families.html", label: "Dublin vs San Ramon for Families" },
+      { href: "/blog/best-schools-in-dublin", label: "Best Schools in Dublin" },
+      { href: "/blog/dublin-vs-san-ramon-for-families", label: "Dublin vs San Ramon for Families" },
     ],
   },
   {
@@ -245,7 +245,7 @@ export const CITIES = [
       { q: "What's the Livermore commute like?", a: "ACE train to Silicon Valley, ~20 minutes to BART, and I-580 access. It's the longest Tri-Valley commute to SF, which is priced into homes here." },
     ],
     related: [
-      { href: "/blog/how-to-buy-a-home-in-california.html", label: "How to Buy a Home in California" },
+      { href: "/blog/how-to-buy-a-home-in-california", label: "How to Buy a Home in California" },
     ],
   },
   {
@@ -291,10 +291,10 @@ export const CITIES = [
       { q: "How much does a house cost in Fremont?", a: "Citywide medians typically run $1.4M–$1.6M, but Mission San Jose neighborhoods often exceed $2M. My homepage market table shows the live citywide ZHVI figure." },
       { q: "Why is Mission San Jose so expensive?", a: "The Mission San Jose school feeder pattern — anchored by one of California's top-performing high schools — draws sustained demand from families across the Bay Area." },
       { q: "Is Fremont better for Peninsula or South Bay commutes?", a: "Both work: Dumbarton Bridge serves Menlo Park/Palo Alto, I-880 serves San Jose, and BART covers the East Bay and SF. Ardenwood suits Peninsula commuters; Warm Springs suits South Bay." },
-      { q: "Is Fremont in the Tri-Valley?", a: "No — Fremont is in southern Alameda County along I-880. I serve it alongside the Tri-Valley because many of my clients compare both when optimizing for schools and commutes." },
+      { q: "Is Fremont in the Tri-Valley?", a: "No — Fremont is in southern Alameda County along I-880. I serve it alongside the Tri-Valley because many Tri-Valley buyers compare both when optimizing for schools and commutes." },
     ],
     related: [
-      { href: "/blog/how-to-buy-a-home-in-california.html", label: "How to Buy a Home in California" },
+      { href: "/blog/how-to-buy-a-home-in-california", label: "How to Buy a Home in California" },
     ],
   },
   {
@@ -342,8 +342,8 @@ export const CITIES = [
       { q: "How bad is the Tracy commute really?", a: "Driving the Altamont at peak is tough — that's the honest trade. The ACE train, hybrid schedules, and growing local jobs are why many buyers make it work." },
     ],
     related: [
-      { href: "/blog/first-time-home-buyer-san-ramon.html", label: "First-Time Buyer Guide (Tri-Valley)" },
-      { href: "/blog/how-to-buy-a-home-in-california.html", label: "How to Buy a Home in California" },
+      { href: "/blog/first-time-home-buyer-san-ramon", label: "First-Time Buyer Guide (Tri-Valley)" },
+      { href: "/blog/how-to-buy-a-home-in-california", label: "How to Buy a Home in California" },
     ],
   },
   {
@@ -390,8 +390,8 @@ export const CITIES = [
       { q: "Mountain House or Tracy?", a: "Mountain House: newer, master-planned, village schools, higher taxes (CFD). Tracy: lower entry prices, more housing variety, established downtown. I help buyers compare total monthly cost side by side." },
     ],
     related: [
-      { href: "/blog/first-time-home-buyer-san-ramon.html", label: "First-Time Buyer Guide (Tri-Valley)" },
-      { href: "/blog/how-to-buy-a-home-in-california.html", label: "How to Buy a Home in California" },
+      { href: "/blog/first-time-home-buyer-san-ramon", label: "First-Time Buyer Guide (Tri-Valley)" },
+      { href: "/blog/how-to-buy-a-home-in-california", label: "How to Buy a Home in California" },
     ],
   },
 ];
