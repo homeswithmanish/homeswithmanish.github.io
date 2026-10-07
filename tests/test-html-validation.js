@@ -439,6 +439,7 @@ test('llms-full.txt has no inflated experience claims', !experienceClaim.test(ll
 console.log('\n\x1b[36mIndexNow & entity profiles:\x1b[0m');
 const indexNowKey = (readFile('tools/indexnow.mjs').match(/const KEY = "([0-9a-f]{32})"/) || [])[1];
 test('IndexNow key file deployed at site root and matches script', !!indexNowKey && fs.existsSync(path.join(ROOT, `${indexNowKey}.txt`)) && readFile(`${indexNowKey}.txt`).trim() === indexNowKey);
+test('Visible hours match schema hours (10am-4pm daily)', indexHtml.includes('Available daily, 10am-4pm PT') && indexHtml.includes('"opens": "10:00", "closes": "16:00"') && !/M-F, 8am|"closes": "20:00"/.test(indexHtml));
 test('Person sameAs includes Zillow profile', indexHtml.includes('"https://www.zillow.com/profile/homeswithmanish"]'));
 test('Zillow profile linked visibly on homepage', (indexHtml.match(/href="https:\/\/www\.zillow\.com\/profile\/homeswithmanish" class="social-link"/g) || []).length === 2);
 test('Never links the namesake Zillow profile mkanand', !allPages.some((f) => fs.readFileSync(f, 'utf8').includes('zillow.com/profile/mkanand')));
