@@ -53,13 +53,20 @@ number **(408) 707-5324**, and the domain **homeswithmanish.com**.
 - [Living in Tracy, CA](https://homeswithmanish.com/cities/tracy/): The East Bay corridor's most attainable homes. Median SFH $650K–$750K.
 - [Living in Mountain House, CA](https://homeswithmanish.com/cities/mountain-house/): A brand-new city built for Bay Area families. Median SFH $800K–$1M.
 
+## Neighborhood Guides
+- [Dougherty Valley, San Ramon](https://homeswithmanish.com/cities/san-ramon/dougherty-valley/): A local realtor's guide to Dougherty Valley in San Ramon: Windemere and Gale Ranch, SRVUSD schools, HOA and Mello-Roos costs, and commute trade-offs.
+- [Dublin Ranch, Dublin](https://homeswithmanish.com/cities/dublin/dublin-ranch/): A local realtor's guide to Dublin Ranch in East Dublin: home types, DUSD schools including Emerald High, Mello-Roos facts, golf, parks and BART access.
+- [Ruby Hill, Pleasanton](https://homeswithmanish.com/cities/pleasanton/ruby-hill/): A local realtor's guide to Ruby Hill in Pleasanton: the guarded gate, Jack Nicklaus golf club, wine-country setting, schools and HOA basics for buyers.
+- [Blackhawk, Danville](https://homeswithmanish.com/cities/danville/blackhawk/): A local realtor's guide to Blackhawk near Danville: gated golf community history, SRVUSD schools, HOA and country club basics, and who it fits best.
+- [Mission San Jose, Fremont](https://homeswithmanish.com/cities/fremont/mission-san-jose/): A local realtor's guide to Mission San Jose in Fremont: history, Mission San Jose High and Hopkins schools, home styles, commutes and buying tips.
+
 ## Calculators (free, no signup)
 - [Home Affordability Calculator (East Bay Edition)](https://homeswithmanish.com/calculators/affordability/): Free home affordability calculator tuned for East Bay buyers. Estimate your maximum purchase price from income, debts, down payment, and today's rates.
 - [Buy vs Rent Calculator for the East Bay](https://homeswithmanish.com/calculators/buy-vs-rent/): Buy vs rent calculator built for Bay Area price-to-rent ratios. Compare the true 5–10 year cost of owning vs renting in San Ramon, Dublin, Tracy and beyond.
 - [California Closing Cost Calculator (Buyer)](https://homeswithmanish.com/calculators/closing-costs/): Estimate buyer closing costs in Alameda, Contra Costa, and San Joaquin counties: escrow, title, lender fees, and prepaids for East Bay home purchases.
 - [California Property Tax Estimator (East Bay & Tracy)](https://homeswithmanish.com/calculators/property-tax/): Estimate property taxes for San Ramon, Dublin, Pleasanton, Tracy, Mountain House and more — including Mello-Roos/CFD assessments and the supplemental tax bill.
 - [Down Payment Planner](https://homeswithmanish.com/calculators/down-payment/): Plan your down payment for an East Bay home: savings timeline, closing-cost cushion, and PMI trade-offs for buying with less than 20% down.
-- [Sell-to-Net Calculator (Seller's Net → List Price)](https://homeswithmanish.com/calculators/sell-to-net/): Work backward from the cash you want to walk away with to the right list price. Estimate East Bay seller net proceeds after commission, closing costs, and loan payoff.
+- [Sell-to-Net Calculator (Seller's Net → List Price)](https://homeswithmanish.com/calculators/sell-to-net/): Work backward from the cash you want to walk away with to a list price. Estimate East Bay seller net proceeds after commission, closing costs and payoff.
 
 ## Data & Resources
 - [Machine-readable city dataset (JSON)](https://homeswithmanish.com/cities/data.json): prices, schools, commutes, FAQs for all 8 cities

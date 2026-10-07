@@ -290,7 +290,7 @@ export const CALCULATORS = [
     title: "Sell-to-Net Calculator (Seller's Net → List Price)",
     short: "What should I list to net my goal?",
     metaDescription:
-      "Work backward from the cash you want to walk away with to the right list price. Estimate East Bay seller net proceeds after commission, closing costs, and loan payoff.",
+      "Work backward from the cash you want to walk away with to a list price. Estimate East Bay seller net proceeds after commission, closing costs and payoff.",
     intro: [
       "Most seller calculators ask for a price and tell you what's left. This one runs the other direction: start with the cash you want in your pocket, and it solves for the sale price you need after commission, closing costs, and paying off your loan.",
       "It's the fastest way to pressure-test a list price against a real goal — a 1031 exchange target, the down payment on your next home, or simply the number that makes moving worth it.",

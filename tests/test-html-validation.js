@@ -321,6 +321,89 @@ test('Allows ClaudeBot', /ClaudeBot/.test(robotsTxt));
 test('Allows Google-Extended', /Google-Extended/.test(robotsTxt));
 test('Allows PerplexityBot', /PerplexityBot/.test(robotsTxt));
 
+
+// ==================== GENERATED PAGES / SEO HYGIENE ====================
+console.log('\n\n\x1b[1m=== Generated Pages & SEO Hygiene ===\x1b[0m\n');
+
+const ROOT = path.join(__dirname, '..');
+function walkHtml(dir, out = []) {
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (e.name.startsWith('.') || e.name === 'node_modules') continue;
+    const full = path.join(dir, e.name);
+    if (e.isDirectory()) walkHtml(full, out);
+    else if (e.name.endsWith('.html')) out.push(full);
+  }
+  return out;
+}
+const decode = (t) => t.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+const sitemapXml = readFile('sitemap.xml');
+const sitemapLocs = new Set([...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]));
+
+const NEIGHBORHOOD_PAGES = [
+  'cities/san-ramon/dougherty-valley/index.html',
+  'cities/dublin/dublin-ranch/index.html',
+  'cities/pleasanton/ruby-hill/index.html',
+  'cities/danville/blackhawk/index.html',
+  'cities/fremont/mission-san-jose/index.html',
+];
+
+console.log('\x1b[36mNeighborhood guides:\x1b[0m');
+for (const rel of NEIGHBORHOOD_PAGES) {
+  const exists = fs.existsSync(path.join(ROOT, rel));
+  test(`${rel} exists`, exists);
+  if (!exists) continue;
+  const html = readFile(rel);
+  const url = 'https://homeswithmanish.com/' + rel.replace(/index\.html$/, '');
+  test(`${rel} in sitemap`, sitemapLocs.has(url));
+  test(`${rel} has Place schema`, /"@type": "Place"/.test(html));
+  test(`${rel} has FAQPage schema`, /"@type": "FAQPage"/.test(html));
+  test(`${rel} links to parent city guide`, html.includes(`href="/${rel.split('/').slice(0, 2).join('/')}/"`));
+  test(`${rel} shows DRE number`, html.includes('02247006'));
+  test(`${rel} has a sources section`, />Sources</.test(html));
+  const bodyText = html.split('<main>')[1] || '';
+  test(`${rel} body copy has no em dashes`, !/—/.test(bodyText.replace(/<footer[\s\S]*$/, '')));
+}
+
+console.log('\n\x1b[36mSite-wide head checks:\x1b[0m');
+const allPages = walkHtml(ROOT).filter((f) => !/DEPLOYMENT_GUIDE|404\.html|openhouse/.test(f));
+const seenTitles = new Map();
+let badJson = [];
+let longTitles = [];
+let longDescs = [];
+let svgOg = [];
+for (const f of allPages) {
+  const html = fs.readFileSync(f, 'utf8');
+  const rel = path.relative(ROOT, f);
+  const t = decode((html.match(/<title>([^<]*)<\/title>/) || [, ''])[1]);
+  const d = decode((html.match(/name="description" content="([^"]*)"/) || [, ''])[1]);
+  if (t.length > 65) longTitles.push(`${rel} (${t.length})`);
+  if (d.length > 165) longDescs.push(`${rel} (${d.length})`);
+  if (seenTitles.has(t)) seenTitles.get(t).push(rel); else seenTitles.set(t, [rel]);
+  if (/og:image" content="[^"]+\.svg"/.test(html)) svgOg.push(rel);
+  for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+    try { JSON.parse(m[1]); } catch (e) { badJson.push(rel); }
+  }
+}
+const dupTitles = [...seenTitles.entries()].filter(([, v]) => v.length > 1).map(([k, v]) => `${k}: ${v.join(', ')}`);
+test('All JSON-LD blocks parse', badJson.length === 0, badJson.join(', '));
+test('No titles over 65 characters', longTitles.length === 0, longTitles.join(', '));
+test('No meta descriptions over 165 characters', longDescs.length === 0, longDescs.join(', '));
+test('No duplicate titles', dupTitles.length === 0, dupTitles.join(' | '));
+test('No SVG og:image (unsupported by social platforms)', svgOg.length === 0, svgOg.join(', '));
+
+console.log('\n\x1b[36mGenerator is source of truth:\x1b[0m');
+const llms = readFile('llms.txt');
+const llmsFull = readFile('llms-full.txt');
+test('llms.txt keeps entity facts block', /Who Manish Anand is \(entity facts\)/.test(llms));
+test('llms.txt keeps disambiguation list', /Disambiguation/.test(llms));
+test('llms-full.txt keeps entity facts block', /Who Manish Anand is \(entity facts\)/.test(llmsFull));
+test('llms.txt lists neighborhood guides', /## Neighborhood Guides/.test(llms));
+test('Generated city pages link Sold Homes in footer', readFile('cities/san-ramon/index.html').includes('href="/sold/">Sold Homes'));
+test('Generated hero H1 is white on navy (was invisible)', /\.page-hero h1 \{[^}]*color: var\(--white\)/.test(readFile('cities/san-ramon/index.html')));
+test('City page title targets realtor intent', /San Ramon Real Estate Agent/.test(readFile('cities/san-ramon/index.html')));
+test('City page links its neighborhood guide', readFile('cities/san-ramon/index.html').includes('/cities/san-ramon/dougherty-valley/'));
+test('No "costs you nothing" buyer-comp phrasing in generated data', !/costs you nothing/i.test(readFile('cities/mountain-house/index.html')));
+
 // ==================== SUMMARY ====================
 console.log('\n' + '='.repeat(50));
 console.log(`\x1b[1mResults: ${passed} passed, ${failed} failed, ${passed + failed} total\x1b[0m`);

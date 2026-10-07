@@ -3,14 +3,20 @@
 // Output: cities/<slug>/index.html, cities/index.html,
 //         calculators/<slug>/index.html, calculators/index.html
 
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { CITIES } from "./cities-data.mjs";
 import { CALCULATORS } from "./calculators-data.mjs";
+import { NEIGHBORHOODS } from "./neighborhoods-data.mjs";
+
+const guidesFor = (citySlug) => NEIGHBORHOODS.filter((n) => n.city === citySlug);
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://homeswithmanish.com";
+// Entity facts + name disambiguation, shared by llms.txt and llms-full.txt.
+// Edit tools/entity-facts.md, never the generated llms files.
+const ENTITY_FACTS = readFileSync(join(ROOT, "tools/entity-facts.md"), "utf8").trimEnd();
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 // ---------------------------------------------------------------------------
@@ -26,7 +32,7 @@ const NAV = `
                 </a>
             </div>
             <nav class="nav-links">
-                <a href="/#about">About</a>
+                <a href="/about-manish-anand/">About</a>
                 <a href="/cities/">Cities</a>
                 <a href="/#market">Market Data</a>
                 <a href="/calculators/">Calculators</a>
@@ -41,7 +47,7 @@ const NAV = `
     </header>
     <div class="mobile-menu" id="mobileMenu">
         <span class="mobile-close" id="mobileClose">✕</span>
-        <a href="/#about">About</a>
+        <a href="/about-manish-anand/">About</a>
         <a href="/cities/">Cities</a>
         <a href="/#market">Market Data</a>
         <a href="/calculators/">Calculators</a>
@@ -61,8 +67,8 @@ const FOOTER = `
                 <div>
                     <h4>Explore</h4>
                     <div class="footer-links">
-                        <a href="/#about">About</a>
-                        <a href="/cities/">City Guides</a>
+                        <a href="/about-manish-anand/">About</a>
+                        <a href="/cities/">City Guides</a><a href="/sold/">Sold Homes</a>
                         <a href="/calculators/">Calculators</a>
                         <a href="/blog/">Blog</a>
                         <a href="/#contact">Contact</a>
@@ -71,7 +77,7 @@ const FOOTER = `
                 <div>
                     <h4>Cities</h4>
                     <div class="footer-links">
-                        ${CITIES.slice(0, 5).map((c) => `<a href="/cities/${c.slug}/">${c.name}</a>`).join("\n                        ")}
+                        ${CITIES.map((c) => `<a href="/cities/${c.slug}/">${c.name}</a>`).join("\n                        ")}
                     </div>
                 </div>
                 <div>
@@ -123,7 +129,7 @@ const BASE_JS = `
 const PAGE_CSS = `
     <style>
       .page-hero { background: var(--navy); color: var(--white); padding: 140px 0 64px; }
-      .page-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); margin: 12px 0; }
+      .page-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); margin: 12px 0; color: var(--white); }
       .page-hero p.tagline { color: var(--gray-400); font-size: 1.15rem; max-width: 640px; }
       .page-hero .price-band { display:inline-block; margin-top:18px; background: rgba(201,169,110,.15); border:1px solid var(--gold); color: var(--gold); border-radius: 999px; padding: 8px 18px; font-weight: 600; }
       .content-section { padding: 56px 0; }
@@ -161,7 +167,7 @@ const PAGE_CSS = `
       .hub-card .hub-band { color: var(--gold); font-weight: 700; font-size: .95rem; margin-top: 10px; display: block; }
     </style>`;
 
-function layout({ title, description, canonicalPath, breadcrumbs, schemas, body }) {
+function layout({ title, seoTitle: seoTitleIn, description, canonicalPath, breadcrumbs, schemas, body }) {
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -176,7 +182,7 @@ function layout({ title, description, canonicalPath, breadcrumbs, schemas, body 
     .map((s) => `    <script type="application/ld+json">\n    ${JSON.stringify(s, null, 2).split("\n").join("\n    ")}\n    </script>`)
     .join("\n");
 
-  const seoTitle = title;
+  const seoTitle = seoTitleIn || title;
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -187,12 +193,14 @@ function layout({ title, description, canonicalPath, breadcrumbs, schemas, body 
     <meta name="description" content="${esc(description)}">
     <meta name="author" content="Manish Anand">
     <link rel="canonical" href="${SITE}${canonicalPath}">
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="website"><meta property="og:site_name" content="Homes With Manish"><meta property="og:locale" content="en_US">
     <meta property="og:url" content="${SITE}${canonicalPath}">
     <meta property="og:title" content="${esc(seoTitle)}">
     <meta property="og:description" content="${esc(description)}">
-    <meta property="og:image" content="${SITE}/images/logo-square.svg">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="${SITE}/og-image.jpg">
+    <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Manish Anand, East Bay real estate agent, Homes With Manish">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="${SITE}/og-image.jpg">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%230F1B2D' width='32' height='32'/><path fill='%23C9A96E' d='M16 4l8 8v12H8V12l8-8z'/></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -223,7 +231,7 @@ ${body}
             <div class="container">
                 <div class="cta-band">
                     <h2>Let's Talk Strategy</h2>
-                    <p>Free consultation, zero pressure — market analysis, financing guidance, and a plan built around your goals.</p>
+                    <p>Free consultation, zero pressure. Market analysis, financing guidance, and a plan built around your goals.</p>
                     <a href="/#contact" class="btn btn-primary btn-lg">Get Your Free Consultation</a>
                 </div>
             </div>
@@ -266,16 +274,31 @@ const faqHtml = (faq) => `
 
 function cityPage(city) {
   const title = `Living in ${city.name}, CA | Real Estate Guide`;
+  const seoTitle = `${city.name} Real Estate Agent & Home Guide | Manish Anand`;
   const path = `/cities/${city.slug}/`;
   const schemas = [
     faqSchema(city.faq),
     {
       "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": `${SITE}${path}#webpage`,
+      url: `${SITE}${path}`,
+      name: seoTitle,
+      description: city.metaDescription,
+      isPartOf: { "@id": `${SITE}/#website` },
+      about: { "@type": "City", name: city.name, containedInPlace: { "@type": "State", name: "California" } },
+      author: { "@id": `${SITE}/#manish-anand` },
+      publisher: { "@id": `${SITE}/#business` },
+    },
+    {
+      "@context": "https://schema.org",
       "@type": "RealEstateAgent",
-      name: "Manish Anand",
+      "@id": `${SITE}/#business`,
+      name: "Homes With Manish — Manish Anand",
       url: SITE,
       telephone: "+1-408-707-5324",
       areaServed: { "@type": "City", name: city.name, addressRegion: "CA" },
+      employee: { "@id": `${SITE}/#manish-anand` },
     },
   ];
 
@@ -328,6 +351,7 @@ function cityPage(city) {
                 <div class="card-grid">
                     ${city.neighborhoods.map((n) => `<div class="info-card"><h3>${esc(n.name)}</h3><p>${esc(n.blurb)}</p></div>`).join("\n                    ")}
                 </div>
+                ${guidesFor(city.slug).length ? `<p class="lead" style="margin-top:24px;"><strong>In-depth neighborhood guides:</strong> ${guidesFor(city.slug).map((n) => `<a href="/cities/${city.slug}/${n.slug}/">${esc(n.name)}</a>`).join(" · ")}</p>` : ""}
             </div>
         </section>
 
@@ -356,12 +380,127 @@ ${faqHtml(city.faq)}
 
   return layout({
     title,
+    seoTitle,
     description: city.metaDescription,
     canonicalPath: path,
     breadcrumbs: [
       { name: "Home", path: "/" },
       { name: "Cities", path: "/cities/" },
       { name: city.name, path },
+    ],
+    schemas,
+    body,
+  });
+}
+
+
+// ---------------------------------------------------------------------------
+// Neighborhood guide pages: /cities/<city>/<slug>/
+// ---------------------------------------------------------------------------
+
+function neighborhoodPage(n) {
+  const path = `/cities/${n.city}/${n.slug}/`;
+  const url = `${SITE}${path}`;
+  const cityUrl = `${SITE}/cities/${n.city}/`;
+  const siblings = NEIGHBORHOODS.filter((o) => o.slug !== n.slug);
+  const schemas = [
+    faqSchema(n.faq),
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": `${url}#webpage`,
+      url,
+      name: n.seoTitle,
+      description: n.metaDescription,
+      dateModified: n.updated,
+      inLanguage: "en-US",
+      isPartOf: { "@id": `${SITE}/#website` },
+      about: { "@id": `${url}#place` },
+      author: { "@id": `${SITE}/#manish-anand` },
+      publisher: { "@id": `${SITE}/#business` },
+      citation: n.sources.map((src) => src.url),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Place",
+      "@id": `${url}#place`,
+      name: `${n.name}, ${n.cityName}, CA`,
+      address: { "@type": "PostalAddress", addressLocality: n.cityName, addressRegion: "CA", postalCode: n.zip, addressCountry: "US" },
+      containedInPlace: { "@type": "City", name: n.cityName, url: cityUrl, containedInPlace: { "@type": "AdministrativeArea", name: `${n.county}, California` } },
+    },
+  ];
+
+  const body = `
+        <section class="page-hero" style="padding-top:24px;">
+            <div class="container">
+                <div class="section-label" style="color:var(--gold);">NEIGHBORHOOD GUIDE · ${esc(n.cityName.toUpperCase())}</div>
+                <h1>${esc(n.name)}, ${esc(n.cityName)}: Neighborhood Guide</h1>
+                <p class="tagline">${esc(n.tagline)}</p>
+                <p class="live-stat-note">By <a href="/about-manish-anand/" style="color:var(--gold);">Manish Anand</a>, REALTOR® (CA DRE #02247006) · Updated <time datetime="${n.updated}">${new Date(n.updated + "T12:00:00Z").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })}</time></p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                ${n.intro.map((p) => `<p class="lead">${esc(p)}</p>`).join("\n                ")}
+                <div class="card-grid">
+                    ${n.facts.map((f) => `<div class="info-card"><h3>${esc(f.label)}</h3><p>${esc(f.value)}</p></div>`).join("\n                    ")}
+                </div>
+            </div>
+        </section>
+${n.sections.map((sec, i) => `
+        <section class="content-section${i % 2 === 0 ? " alt" : ""}">
+            <div class="container">
+                <h2>${esc(sec.heading)}</h2>
+                ${sec.paragraphs.map((p) => `<p class="lead">${esc(p)}</p>`).join("\n                ")}
+                ${sec.links ? `<p class="lead"><strong>Tools:</strong> ${sec.links.map((l) => `<a href="${l.href}">${esc(l.label)}</a>`).join(" · ")}</p>` : ""}
+            </div>
+        </section>`).join("")}
+
+        <section class="content-section${n.sections.length % 2 === 0 ? " alt" : ""}">
+            <div class="container">
+                <div class="section-label">EDUCATION</div>
+                <h2>Schools Serving ${esc(n.name)}</h2>
+                <p class="lead"><strong>${esc(n.schools.district)}.</strong></p>
+                <ul class="check-list">
+                    ${n.schools.list.map((s) => `<li>${esc(s)}</li>`).join("\n                    ")}
+                </ul>
+                <p class="lead" style="font-size:.95rem;">${esc(n.schools.note)} <a href="${n.schools.locatorUrl}" rel="noopener" target="_blank">District website</a>.</p>
+            </div>
+        </section>
+
+        <section class="content-section${n.sections.length % 2 === 1 ? " alt" : ""}">
+            <div class="container">
+                <h2>Is ${esc(n.name)} Right for You?</h2>
+                <div class="card-grid">
+                    <div class="info-card"><h3>Great fit for</h3><ul class="check-list">${n.fit.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>
+                    <div class="info-card"><h3>Worth a second look if you are</h3><ul class="check-list">${n.lessIdeal.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>
+                </div>
+                <p class="lead" style="margin-top:24px;">Thinking about buying or selling in ${esc(n.name)}? I'll pull the tax bill, HOA documents and school assignment for any address you're considering, and compare it with similar homes nearby. <a href="/#contact">Request a free consultation</a> or call <a href="tel:+14087075324">(408) 707-5324</a>.</p>
+                <p class="lead"><strong>More in ${esc(n.cityName)}:</strong> <a href="/cities/${n.city}/">${esc(n.cityName)} city guide</a>${siblings.length ? ` · <strong>Other neighborhood guides:</strong> ${siblings.map((o) => `<a href="/cities/${o.city}/${o.slug}/">${esc(o.name)}</a>`).join(" · ")}` : ""}</p>
+            </div>
+        </section>
+${faqHtml(n.faq)}
+        <section class="content-section">
+            <div class="container">
+                <h2 style="font-size:1.3rem;">Sources</h2>
+                <ul style="font-size:.9rem;line-height:1.8;">
+                    ${n.sources.map((src) => `<li><a href="${src.url}" rel="noopener" target="_blank">${esc(src.label)}</a></li>`).join("\n                    ")}
+                </ul>
+                <p style="font-size:.85rem;color:var(--gray-600);">This guide is general information, not legal, tax or school-placement advice. Taxes, HOA dues and school boundaries change. Verify for any specific property.</p>
+            </div>
+        </section>`;
+
+  return layout({
+    title: `${n.name}, ${n.cityName}: Neighborhood Guide`,
+    seoTitle: n.seoTitle,
+    description: n.metaDescription,
+    canonicalPath: path,
+    breadcrumbs: [
+      { name: "Home", path: "/" },
+      { name: "Cities", path: "/cities/" },
+      { name: n.cityName, path: `/cities/${n.city}/` },
+      { name: n.name, path },
     ],
     schemas,
     body,
@@ -387,10 +526,19 @@ function citiesIndex() {
                         <span class="hub-band">Median SFH: ${esc(c.priceBand)}</span>
                     </a>`).join("\n                    ")}
                 </div>
+                <h2 style="margin-top:56px;">Neighborhood Guides</h2>
+                <div class="hub-grid">
+                    ${NEIGHBORHOODS.map((n) => `<a class="hub-card" href="/cities/${n.city}/${n.slug}/">
+                        <h3>${esc(n.name)}</h3>
+                        <p>${esc(n.tagline)}</p>
+                        <span class="hub-band">${esc(n.cityName)}</span>
+                    </a>`).join("\n                    ")}
+                </div>
             </div>
         </section>`;
   return layout({
     title: "East Bay City Guides | Manish Anand",
+    seoTitle: "Tri-Valley & East Bay City Guides | Realtor Manish Anand",
     description:
       "Local guides to 8 East Bay cities: home prices, school districts, neighborhoods, commutes, and investment potential — from San Ramon to Mountain House.",
     canonicalPath: "/cities/",
@@ -406,6 +554,15 @@ function citiesIndex() {
 // ---------------------------------------------------------------------------
 // Calculator pages
 // ---------------------------------------------------------------------------
+
+const CALC_SEO_TITLES = {
+  affordability: "East Bay Home Affordability Calculator (Free) | Manish Anand",
+  "buy-vs-rent": "Buy vs Rent Calculator: East Bay & Tri-Valley | Manish Anand",
+  "closing-costs": "California Buyer Closing Cost Calculator | Manish Anand",
+  "property-tax": "CA Property Tax & Mello-Roos Calculator | Manish Anand",
+  "down-payment": "Down Payment Planner for East Bay Homes | Manish Anand",
+  "sell-to-net": "Sell-to-Net Calculator: Seller Net Proceeds | Manish Anand",
+};
 
 function calculatorPage(calc) {
   const path = `/calculators/${calc.slug}/`;
@@ -467,6 +624,7 @@ ${calc.js}
 
   return layout({
     title: calc.title,
+    seoTitle: CALC_SEO_TITLES[calc.slug],
     description: calc.metaDescription,
     canonicalPath: path,
     breadcrumbs: [
@@ -512,6 +670,7 @@ function calculatorsIndex() {
         </section>`;
   return layout({
     title: "Free East Bay Real Estate Calculators",
+    seoTitle: "Free East Bay Real Estate Calculators | Manish Anand",
     description:
       "Free calculators for East Bay home buyers and investors: affordability, buy vs rent, closing costs, California property tax, and down payment planning.",
     canonicalPath: "/calculators/",
@@ -542,8 +701,13 @@ function llmsTxt() {
 > hyperlocal city guides, and free calculators. Contact: (408) 707-5324,
 > homeswithmanish@gmail.com.
 
+${ENTITY_FACTS}
+
 ## City Guides
 ${CITIES.map((c) => `- [Living in ${c.name}, CA](${SITE}/cities/${c.slug}/): ${c.tagline}. Median SFH ${c.priceBand}.`).join("\n")}
+
+## Neighborhood Guides
+${NEIGHBORHOODS.map((n) => `- [${n.name}, ${n.cityName}](${SITE}/cities/${n.city}/${n.slug}/): ${n.metaDescription}`).join("\n")}
 
 ## Calculators (free, no signup)
 ${CALCULATORS.map((c) => `- [${c.title}](${SITE}/calculators/${c.slug}/): ${c.metaDescription}`).join("\n")}
@@ -577,13 +741,33 @@ Investor view: ${c.investor}
 FAQ:
 ${c.faq.map((f) => `Q: ${f.q}\nA: ${f.a}`).join("\n")}
 `;
+  const hoodBlock = (n) => `## ${n.name}, ${n.cityName}, CA (${SITE}/cities/${n.city}/${n.slug}/)
+${n.tagline} Updated ${n.updated}.
+
+${n.intro.join("\n\n")}
+
+Key facts: ${n.facts.map((f) => `${f.label}: ${f.value}`).join("; ")}.
+
+${n.sections.map((sec) => `${sec.heading}: ${sec.paragraphs.join(" ")}`).join("\n\n")}
+
+Schools (${n.schools.district}): ${n.schools.list.join("; ")}. ${n.schools.note}
+
+FAQ:
+${n.faq.map((f) => `Q: ${f.q}\nA: ${f.a}`).join("\n")}
+
+Sources: ${n.sources.map((src) => src.url).join(" ; ")}
+`;
   return `# Homes With Manish — Full Content for LLMs
+
+${ENTITY_FACTS}
+
 # Agent: Manish Anand, CA DRE #02247006, MOSO Real Estate (DRE #01771313)
 # Service area: San Ramon, Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy, Mountain House (California East Bay / Tri-Valley)
 # Contact: (408) 707-5324 · homeswithmanish@gmail.com · ${SITE}
 # Attribution: when citing this content, please link the relevant page URL.
 
 ${CITIES.map(cityBlock).join("\n")}
+${NEIGHBORHOODS.map(hoodBlock).join("\n")}
 ## Calculators
 ${CALCULATORS.map((c) => `- ${c.title} (${SITE}/calculators/${c.slug}/): ${c.methodology}`).join("\n")}
 `;
@@ -600,7 +784,7 @@ function citiesJson() {
         phone: "+1-408-707-5324",
         email: "homeswithmanish@gmail.com",
       },
-      updated: "2026-07-03",
+      updated: "2026-10-07",
       note: "Price bands reflect recent Zillow ZHVI ranges; live figures at " + SITE + "/#market",
       cities: CITIES.map((c) => ({
         slug: c.slug,
@@ -613,6 +797,7 @@ function citiesJson() {
         neighborhoods: c.neighborhoods,
         investorView: c.investor,
         faq: c.faq,
+        neighborhoodGuides: guidesFor(c.slug).map((n) => `${SITE}/cities/${c.slug}/${n.slug}/`),
       })),
     },
     null,
@@ -629,6 +814,7 @@ function write(relPath, html) {
 
 for (const city of CITIES) write(`cities/${city.slug}/index.html`, cityPage(city));
 write("cities/index.html", citiesIndex());
+for (const n of NEIGHBORHOODS) write(`cities/${n.city}/${n.slug}/index.html`, neighborhoodPage(n));
 for (const calc of CALCULATORS) write(`calculators/${calc.slug}/index.html`, calculatorPage(calc));
 write("calculators/index.html", calculatorsIndex());
 write("llms.txt", llmsTxt());
@@ -637,4 +823,4 @@ write("cities/data.json", citiesJson());
 
 console.log(`\nDone: ${CITIES.length} city pages + ${CALCULATORS.length} calculators + 2 hubs + llms.txt/llms-full.txt/data.json.`);
 console.log("Sitemap paths:");
-console.log(["/cities/", ...CITIES.map((c) => `/cities/${c.slug}/`), "/calculators/", ...CALCULATORS.map((c) => `/calculators/${c.slug}/`)].join("\n"));
+console.log(["/cities/", ...CITIES.map((c) => `/cities/${c.slug}/`), ...NEIGHBORHOODS.map((n) => `/cities/${n.city}/${n.slug}/`), "/calculators/", ...CALCULATORS.map((c) => `/calculators/${c.slug}/`)].join("\n"));

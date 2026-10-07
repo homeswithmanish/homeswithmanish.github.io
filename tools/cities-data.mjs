@@ -10,7 +10,7 @@ export const CITIES = [
     tagline: "Top schools, master-planned living, and Bishop Ranch careers",
     priceBand: "$1.5M–$1.8M",
     metaDescription:
-      "Living in San Ramon, CA: home prices, San Ramon Valley Unified schools, Dougherty Valley neighborhoods, commute times, and buying tips from a local East Bay Realtor.",
+      "San Ramon realtor Manish Anand's local guide: home prices, SRVUSD schools, Dougherty Valley and Gale Ranch neighborhoods, and commutes.",
     intro: [
       "San Ramon is the East Bay's flagship family market: a master-planned city anchored by the San Ramon Valley Unified School District, the Bishop Ranch business park, and City Center Bishop Ranch. Median single-family prices typically run in the $1.5M–$1.8M range, with newer Dougherty Valley homes commanding a premium.",
       "Buyers here are usually competing for two things — school boundaries and floor plans. Homes zoned for the most sought-after schools routinely draw multiple offers, so preparation and pricing strategy matter more in San Ramon than almost anywhere else in the Tri-Valley.",
@@ -60,7 +60,7 @@ export const CITIES = [
     tagline: "Historic downtown charm with top-5% schools",
     priceBand: "$1.6M–$2.1M",
     metaDescription:
-      "Living in Pleasanton, CA: home prices, Pleasanton Unified schools, Ruby Hill and Vintage Hills neighborhoods, ACE train commute, and local buying advice.",
+      "Pleasanton realtor Manish Anand's local guide: home prices, PUSD schools, Ruby Hill, Vintage Hills and Birdland neighborhoods, and BART/ACE commutes.",
     intro: [
       "Pleasanton blends a genuinely walkable historic downtown with one of California's strongest school districts. Median single-family values often approach or exceed $2M, reflecting sustained demand from families and relocating tech professionals.",
       "Unlike newer master-planned neighbors, much of Pleasanton's housing stock is established — mature trees, larger lots, and neighborhoods with real character. Homes near downtown and in top school zones move fastest.",
@@ -109,7 +109,7 @@ export const CITIES = [
     tagline: "The Tri-Valley's premier luxury market",
     priceBand: "$2M+",
     metaDescription:
-      "Living in Danville, CA: luxury home prices, San Ramon Valley Unified schools, Blackhawk and Westside neighborhoods, and expert guidance for East Bay buyers.",
+      "Danville realtor Manish Anand's local guide: luxury home prices, SRVUSD schools, Blackhawk and Westside neighborhoods, and downtown living.",
     intro: [
       "Danville is the Tri-Valley's luxury anchor: median single-family values typically exceed $2M, and estates in Blackhawk and on the Westside range well beyond. The draw is a combination of top-ranked SRVUSD schools, a charming walkable downtown, and larger lots than almost any neighboring city.",
       "Danville transactions often involve unique properties — view lots, custom builds, gated communities — where comps require real judgment. Pricing discipline matters on both sides of the deal here.",
@@ -158,7 +158,7 @@ export const CITIES = [
     tagline: "New construction, BART access, and rising schools",
     priceBand: "$1.4M–$1.7M",
     metaDescription:
-      "Living in Dublin, CA: home prices, Dublin Unified schools, East Dublin new construction, BART commute times, and buying strategy from a local Realtor.",
+      "Dublin, CA realtor Manish Anand's local guide: home prices, DUSD schools, East Dublin new construction, Mello-Roos costs and BART commutes.",
     intro: [
       "Dublin is the Tri-Valley's growth story: two BART stations, the newest housing stock in the region, and a school district that has invested heavily alongside the city's expansion. Median single-family values typically run $1.5M–$1.8M, generally a step below San Ramon and Pleasanton.",
       "East Dublin communities like Jordan Ranch, Wallis Ranch, and Boulevard offer 2010s-and-newer homes that are hard to find elsewhere in the East Bay — a major draw for buyers who want modern floor plans without a renovation project.",
@@ -207,7 +207,7 @@ export const CITIES = [
     tagline: "Wine country value on the Tri-Valley's east edge",
     priceBand: "$1.2M–$1.5M",
     metaDescription:
-      "Living in Livermore, CA: home prices, Livermore Valley schools, wine country lifestyle, ACE train commute, and investment potential in the East Bay.",
+      "Livermore realtor Manish Anand's local guide: home prices, LVJUSD schools, neighborhoods, wine country living, ACE train commutes and rental yields.",
     intro: [
       "Livermore delivers the Tri-Valley lifestyle at a meaningful discount: median single-family values typically run $1.2M–$1.5M, and buyers get a revitalized downtown, 50+ wineries, and a genuine sense of community.",
       "It's also a two-sided market — families upgrading within the Tri-Valley on one side, and investors chasing the area's better rental yields on the other. South Livermore near the vineyards commands the premium.",
@@ -255,7 +255,7 @@ export const CITIES = [
     tagline: "Silicon Valley access with legendary Mission schools",
     priceBand: "$1.4M–$2M+",
     metaDescription:
-      "Living in Fremont, CA: home prices by neighborhood, Mission San Jose schools, Tesla and Silicon Valley commutes, and expert buying guidance.",
+      "Fremont realtor Manish Anand's local guide: home prices by neighborhood, Mission San Jose schools, BART and Silicon Valley commutes.",
     intro: [
       "Fremont is the East Bay's direct line to Silicon Valley: Tesla's factory, Warm Springs BART, and bridges to the Peninsula make it the shortest big-tech commute on this side of the Bay. Median values vary more by neighborhood than any other city I serve — Mission San Jose commands a large premium over the citywide range.",
       "For many buyers the decision is school-driven: Mission San Jose High's reputation pulls families from across the Bay Area, and homes in its boundary are priced accordingly.",
@@ -304,7 +304,7 @@ export const CITIES = [
     tagline: "The East Bay corridor's most attainable homes",
     priceBand: "$650K–$750K",
     metaDescription:
-      "Living in Tracy, CA: affordable home prices, new construction at Tracy Hills, ACE train commute, rental yields, and first-time buyer guidance.",
+      "Tracy realtor Manish Anand's local guide: affordable home prices, Tracy Hills new construction, Mello-Roos, ACE train commutes and rental yields.",
     intro: [
       "Tracy is where Bay Area homeownership math still works: median single-family values around $650K–$750K buy a house that would cost double or triple over the Altamont. That affordability makes Tracy the region's strongest first-time-buyer and cash-flow market.",
       "The trade is the commute — but the ACE train, growing local employment, and hybrid work have steadily shifted that equation in Tracy's favor.",
@@ -353,7 +353,7 @@ export const CITIES = [
     tagline: "A brand-new city built for Bay Area families",
     priceBand: "$800K–$1M",
     metaDescription:
-      "Living in Mountain House, CA: new-community home prices, Lammersville Unified schools, commute options, and why Bay Area families are moving here.",
+      "Mountain House realtor Manish Anand's local guide: home prices, Lammersville Unified schools, Mello-Roos and HOA costs, and Bay Area commutes.",
     intro: [
       "Mountain House is the Bay Area corridor's newest city — a fully master-planned community that incorporated in 2024, where nearly every home, school, and park was built this century. Typical single-family prices sit under $1M, buying new construction that would cost far more anywhere in the Tri-Valley.",
       "The community was designed village by village, each with its own K-8 school at its center — a structure that has made Mountain House disproportionately popular with young families leaving denser Bay Area cities.",
@@ -380,7 +380,7 @@ export const CITIES = [
     },
     neighborhoods: [
       { name: "The Villages", blurb: "Wicklund, Bethany, Altamont, Questa, Hansen, Cordes and newer villages — each with its own K-8 school and park network." },
-      { name: "New releases", blurb: "Active builder communities continue releasing phases; buyer representation on new construction costs you nothing and protects you in negotiations." },
+      { name: "New releases", blurb: "Active builder communities continue releasing phases; having your own agent on new construction protects you in negotiations, and we agree in writing up front on how I'm paid (builders often cover buyer-agent compensation)." },
     ],
     investor: "Mountain House rents briskly to Bay Area commuter families, and CFD (Mello-Roos) assessments are the key underwriting detail — model the full tax load before committing.",
     faq: [
