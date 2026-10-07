@@ -69,7 +69,7 @@ it off the public record, you can change it to the business address through DRE 
 | 9 | HomeLight | **Unclaimed stub**: homelight.com/agents/manish-anand-ca-02247006 (shows HomeLight's phone, not yours) | Claim if HomeLight allows; otherwise leave it. Not added to `sameAs` | homelight.com/agents |
 | 10 | Experience.com | Not found; its unclaimed agent pages rank for "realtor San Ramon" | Create a profile; a good place to collect reviews later | experience.com |
 | 11 | Nextdoor Business | Not confirmed | Business page with San Ramon / Danville neighborhoods | business.nextdoor.com |
-| 12 | SCCAOR member directory | Member (confirmed 2026-10-07) | Make sure your SCCAOR member profile shows the site, phone and hours; link it here once public | sccaor.com member portal |
+| 12 | SCCAOR member directory | **Live**: https://go.sccaor.com/realtordirectory/Details/manish-anand-4887209 (in site `sameAs` and About page) | Remove the residential address (5575 Wells Ln) so only 2195 Tully Rd shows; add homeswithmanish.com as the website; align service areas with the 8 cities | sccaor.com member portal |
 | 13 | Facebook | Exists (profile.php?id=…) | Set a vanity username (facebook.com/homeswithmanish), then tell me so the site links update | Page settings |
 | 14 | Brokerage site | No agent roster found on loanfactory.com | Ask the broker for an agent page linking to homeswithmanish.com | Broker |
 
