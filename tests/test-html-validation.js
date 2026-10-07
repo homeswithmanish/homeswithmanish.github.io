@@ -440,6 +440,8 @@ console.log('\n\x1b[36mIndexNow & entity profiles:\x1b[0m');
 const indexNowKey = (readFile('tools/indexnow.mjs').match(/const KEY = "([0-9a-f]{32})"/) || [])[1];
 test('IndexNow key file deployed at site root and matches script', !!indexNowKey && fs.existsSync(path.join(ROOT, `${indexNowKey}.txt`)) && readFile(`${indexNowKey}.txt`).trim() === indexNowKey);
 test('Visible hours match schema hours (10am-4pm daily)', indexHtml.includes('Available daily, 10am-4pm PT') && indexHtml.includes('"opens": "10:00", "closes": "16:00"') && !/M-F, 8am|"closes": "20:00"/.test(indexHtml));
+test('Person schema lists SCCAOR membership (backs REALTOR® usage)', /"memberOf": \{[^}]*SCCAOR/.test(indexHtml) && /"memberOf": \{[^}]*SCCAOR/.test(readFile('about-manish-anand/index.html')));
+test('No "100% SFH / no condos" absolutes', !/no condos|100% focused/.test(indexHtml));
 test('Person sameAs includes Realtor.com profile', indexHtml.includes('"https://www.realtor.com/realestateagents/678d0ba8952d380c787c3b0f"]'));
 test('Realtor.com profile linked visibly on homepage', (indexHtml.match(/href="https:\/\/www\.realtor\.com\/realestateagents\/678d0ba8952d380c787c3b0f" class="social-link"/g) || []).length === 2);
 test('Person sameAs includes Zillow profile', /"sameAs": \[[^\]]*"https:\/\/www\.zillow\.com\/profile\/homeswithmanish"/.test(indexHtml));
