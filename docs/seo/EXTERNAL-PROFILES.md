@@ -17,6 +17,7 @@ Once a profile is live, send me its URL: it gets added to the `sameAs` arrays in
 | Business / brand | Homes With Manish |
 | Title | REALTOR® · Real Estate Agent |
 | License | CA DRE #02247006 |
+| Association | Santa Clara County Association of REALTORS® (SCCAOR) |
 | Brokerage | MOSO Real Estate (Loan Factory, Inc., CA DRE #01771313) |
 | Office address | 2195 Tully Road, San Jose, CA 95122 (MOSO main office; confirmed 2026-10-07) |
 | Phone | (408) 707-5324 |
@@ -68,7 +69,7 @@ it off the public record, you can change it to the business address through DRE 
 | 9 | HomeLight | **Unclaimed stub**: homelight.com/agents/manish-anand-ca-02247006 (shows HomeLight's phone, not yours) | Claim if HomeLight allows; otherwise leave it. Not added to `sameAs` | homelight.com/agents |
 | 10 | Experience.com | Not found; its unclaimed agent pages rank for "realtor San Ramon" | Create a profile; a good place to collect reviews later | experience.com |
 | 11 | Nextdoor Business | Not confirmed | Business page with San Ramon / Danville neighborhoods | business.nextdoor.com |
-| 12 | Bay East Association directory | Not confirmed | Make sure your member profile shows the site + phone | bayeast.org member portal |
+| 12 | SCCAOR member directory | Member (confirmed 2026-10-07) | Make sure your SCCAOR member profile shows the site, phone and hours; link it here once public | sccaor.com member portal |
 | 13 | Facebook | Exists (profile.php?id=…) | Set a vanity username (facebook.com/homeswithmanish), then tell me so the site links update | Page settings |
 | 14 | Brokerage site | No agent roster found on loanfactory.com | Ask the broker for an agent page linking to homeswithmanish.com | Broker |
 
