@@ -100,10 +100,29 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      # Publish only the website. Internal docs, generator/test code and the
+      # Apps Script sources stay in the repo but are not served on the domain.
+      - name: Assemble site
+        run: |
+          mkdir _site
+          rsync -a ./ _site/ \
+            --exclude='.git' --exclude='.github' --exclude='.claude' --exclude='_site' \
+            --exclude='/docs' --exclude='/tools' --exclude='/tests' --exclude='node_modules' \
+            --exclude='/*.js' --exclude='*.md' --exclude='/package.json' \
+            --exclude='/DEPLOYMENT_GUIDE.html' --exclude='.gitignore' --exclude='.DS_Store'
+          for f in index.html CNAME robots.txt sitemap.xml llms.txt llms-full.txt og-image.jpg cities/data.json; do
+            test -f "_site/$f" || { echo "MISSING $f"; exit 1; }
+          done
+          ls _site/*.txt | grep -qE '/[0-9a-f]{32}\.txt$' || { echo "MISSING IndexNow key file"; exit 1; }
+          for f in Google_Sheets_Backend.js DEPLOYMENT_GUIDE.html docs tools tests package.json; do
+            test ! -e "_site/$f" || { echo "LEAKED $f"; exit 1; }
+          done
+          echo "Site files: $(find _site -type f | wc -l)"
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
