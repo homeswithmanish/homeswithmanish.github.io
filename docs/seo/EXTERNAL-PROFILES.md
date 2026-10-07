@@ -22,6 +22,7 @@ Once a profile is live, send me its URL: it gets added to the `sameAs` arrays in
 | Phone | (408) 707-5324 |
 | Email | homeswithmanish@gmail.com |
 | Website | https://homeswithmanish.com |
+| Hours | Every day, 10:00 am - 4:00 pm Pacific |
 | Service area | San Ramon, Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy, Mountain House |
 | Primary category | Real estate agent |
 
