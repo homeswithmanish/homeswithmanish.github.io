@@ -57,7 +57,7 @@ it off the public record, you can change it to the business address through DRE 
 | # | Platform | Status (2026-10-07) | Action | Where |
 |---|---|---|---|---|
 | 1 | Google Business Profile | Not confirmed | Create/verify as a service-area business; category *Real estate agent*; long bio; 8 cities; photos; weekly post. Full steps in `docs/GROWTH-PLAYBOOK.md` §1 | business.google.com/create |
-| 2 | Zillow agent profile | Not confirmed | Search Zillow for DRE 02247006 first. Claim or create; medium bio; add service areas + website. **Do not touch `zillow.com/profile/mkanand`; that's a different person** | zillow.com/agent-resources |
+| 2 | Zillow agent profile | **Live**: https://www.zillow.com/profile/homeswithmanish (in site `sameAs`, footer and contact links) | Keep NAP matching §1; add service areas and a website link. Don't confuse it with `zillow.com/profile/mkanand` (a different person) | zillow.com/agent-resources |
 | 3 | Realtor.com | Not confirmed (an MLS-fed stub likely exists) | Find yourself under "Find a REALTOR®" → claim; medium bio + website | realtor.com/realestateagents |
 | 4 | MLSListings | **Found**: mlslistings.com/FindAnAgent/Profile/02247006 (already in site `sameAs`) | Change the office address from 639 Tully Rd Ste C to 2195 Tully Rd; add Instagram/Facebook links (only YouTube is listed) | MLSListings member portal |
 | 5 | Homes.com | Not confirmed (other MOSO agents are listed) | Search by name → claim | homes.com/real-estate-agents |
