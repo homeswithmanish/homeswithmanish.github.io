@@ -19,6 +19,9 @@
 - **Brokerage:** MOSO Real Estate (a DBA of Loan Factory, Inc.), CA DRE #01771313,
   2195 Tully Road, San Jose, CA 95122
 - **Based in:** San Ramon, California
+- **Background:** 18+ years as a senior software engineer at Netflix and Microsoft; named inventor
+  on a U.S. patent in natural language processing; MS in Bioinformatics (Indiana University);
+  MBA (Quantic School of Business and Technology)
 - **Serves:** San Ramon, Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy,
   Mountain House (East Bay / Tri-Valley, California)
 - **Specialties:** single-family homes, first-time buyers, residential investors,
