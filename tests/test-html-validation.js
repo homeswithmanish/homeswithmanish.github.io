@@ -430,6 +430,9 @@ test('llms.txt lists every blog post', blogPosts.every((f) => llms.includes(`/bl
 console.log('\n\x1b[36mTruthful advertising (licensed 2024-10-11):\x1b[0m');
 const experienceClaim = /over a decade|\d+\+? years of experience|helped (dozens|hundreds)|spent years helping|many of my clients/i;
 const claimPages = allPages.filter((f) => experienceClaim.test(fs.readFileSync(f, 'utf8'))).map((f) => path.relative(ROOT, f));
+const responsePromise = /within (1-2|2|two) hours|\b2-hour response|responds in 2 hours|response guarantee/i;
+const promisePages = allPages.filter((f) => responsePromise.test(fs.readFileSync(f, 'utf8'))).map((f) => path.relative(ROOT, f));
+test('No response-time guarantees (not a promise Manish can keep)', promisePages.length === 0, promisePages.join(', '));
 test('No inflated experience or client-count claims', claimPages.length === 0, claimPages.join(', '));
 test('llms-full.txt has no inflated experience claims', !experienceClaim.test(llmsFull));
 
