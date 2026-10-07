@@ -7,7 +7,7 @@
     "phone": "+1-408-707-5324",
     "email": "homeswithmanish@gmail.com"
   },
-  "updated": "2026-07-03",
+  "updated": "2026-10-07",
   "note": "Price bands reflect recent Zillow ZHVI ranges; live figures at https://homeswithmanish.com/#market",
   "cities": [
     {
@@ -67,6 +67,9 @@
           "q": "How is the commute from San Ramon to San Francisco?",
           "a": "Most commuters drive ~15 minutes to Dublin/Pleasanton BART and ride ~40 minutes to downtown SF, or take express buses. Door to door, plan on roughly an hour."
         }
+      ],
+      "neighborhoodGuides": [
+        "https://homeswithmanish.com/cities/san-ramon/dougherty-valley/"
       ]
     },
     {
@@ -126,6 +129,9 @@
           "q": "How does Pleasanton compare to San Ramon?",
           "a": "Pleasanton offers a historic downtown and established neighborhoods; San Ramon offers newer master-planned housing stock. Schools are top-tier in both. Many of my clients tour both before deciding."
         }
+      ],
+      "neighborhoodGuides": [
+        "https://homeswithmanish.com/cities/pleasanton/ruby-hill/"
       ]
     },
     {
@@ -185,6 +191,9 @@
           "q": "How is Danville's commute?",
           "a": "It's an I-680 drive commute; Walnut Creek BART is about 15–20 minutes away. Many Danville buyers work hybrid schedules or at Bishop Ranch nearby."
         }
+      ],
+      "neighborhoodGuides": [
+        "https://homeswithmanish.com/cities/danville/blackhawk/"
       ]
     },
     {
@@ -244,6 +253,9 @@
           "q": "Do Dublin homes have Mello-Roos?",
           "a": "Many newer East Dublin communities carry community facilities district (CFD) assessments that raise the effective tax rate. I review the exact tax bill on every home my clients consider — try my property tax calculator for estimates."
         }
+      ],
+      "neighborhoodGuides": [
+        "https://homeswithmanish.com/cities/dublin/dublin-ranch/"
       ]
     },
     {
@@ -303,7 +315,8 @@
           "q": "What's the Livermore commute like?",
           "a": "ACE train to Silicon Valley, ~20 minutes to BART, and I-580 access. It's the longest Tri-Valley commute to SF, which is priced into homes here."
         }
-      ]
+      ],
+      "neighborhoodGuides": []
     },
     {
       "slug": "fremont",
@@ -366,6 +379,9 @@
           "q": "Is Fremont in the Tri-Valley?",
           "a": "No — Fremont is in southern Alameda County along I-880. I serve it alongside the Tri-Valley because many of my clients compare both when optimizing for schools and commutes."
         }
+      ],
+      "neighborhoodGuides": [
+        "https://homeswithmanish.com/cities/fremont/mission-san-jose/"
       ]
     },
     {
@@ -424,7 +440,8 @@
           "q": "How bad is the Tracy commute really?",
           "a": "Driving the Altamont at peak is tough — that's the honest trade. The ACE train, hybrid schedules, and growing local jobs are why many buyers make it work."
         }
-      ]
+      ],
+      "neighborhoodGuides": []
     },
     {
       "slug": "mountain-house",
@@ -456,7 +473,7 @@
         },
         {
           "name": "New releases",
-          "blurb": "Active builder communities continue releasing phases; buyer representation on new construction costs you nothing and protects you in negotiations."
+          "blurb": "Active builder communities continue releasing phases; having your own agent on new construction protects you in negotiations, and we agree in writing up front on how I'm paid (builders often cover buyer-agent compensation)."
         }
       ],
       "investorView": "Mountain House rents briskly to Bay Area commuter families, and CFD (Mello-Roos) assessments are the key underwriting detail — model the full tax load before committing.",
@@ -477,7 +494,8 @@
           "q": "Mountain House or Tracy?",
           "a": "Mountain House: newer, master-planned, village schools, higher taxes (CFD). Tracy: lower entry prices, more housing variety, established downtown. I help buyers compare total monthly cost side by side."
         }
-      ]
+      ],
+      "neighborhoodGuides": []
     }
   ]
 }
