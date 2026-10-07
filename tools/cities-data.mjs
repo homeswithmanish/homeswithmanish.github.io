@@ -29,10 +29,10 @@ export const CITIES = [
     commute: {
       blurb: "San Ramon sits on the I-680 corridor with no BART station of its own — most commuters drive to Dublin/Pleasanton or West Dublin BART, use express buses, or work locally at Bishop Ranch.",
       points: [
-        "Dublin/Pleasanton BART: ~15 min drive, then ~40 min to downtown SF",
+        "Dublin/Pleasanton BART: ~15 min drive, then ~45 min to downtown SF",
         "San Jose / Silicon Valley: ~45–60 min via I-680 South",
         "Oakland: ~35–45 min via I-680/CA-24",
-        "Bishop Ranch: in-town employer with 30,000+ jobs",
+        "Bishop Ranch: in-town business park with hundreds of employers",
       ],
     },
     neighborhoods: [
@@ -45,7 +45,7 @@ export const CITIES = [
       { q: "How much does a house cost in San Ramon?", a: "Median single-family home values typically range from $1.5M to $1.8M, with newer Dougherty Valley homes often higher. See the live market table on my homepage for the current Zillow ZHVI figure, updated monthly." },
       { q: "Are San Ramon schools really that good?", a: "San Ramon Valley Unified consistently ranks among California's top districts, and schools like Dougherty Valley High are a primary reason families relocate here. Boundaries vary by address, so verify zoning for any specific home." },
       { q: "Is San Ramon a good investment?", a: "For appreciation, yes — school demand supports long-term growth. For rental cash flow, gross yields are lower than Tracy or Livermore. The right choice depends on your strategy; I run the numbers on every deal." },
-      { q: "How is the commute from San Ramon to San Francisco?", a: "Most commuters drive ~15 minutes to Dublin/Pleasanton BART and ride ~40 minutes to downtown SF, or take express buses. Door to door, plan on roughly an hour." },
+      { q: "How is the commute from San Ramon to San Francisco?", a: "Most commuters drive ~15 minutes to Dublin/Pleasanton BART and ride ~45 minutes to downtown SF, or take express buses. Door to door, plan on roughly an hour." },
     ],
     related: [
       { href: "/blog/san-ramon-home-prices-2026", label: "San Ramon Home Prices in 2026" },
@@ -57,12 +57,12 @@ export const CITIES = [
     slug: "pleasanton",
     name: "Pleasanton",
     emoji: "🍇",
-    tagline: "Historic downtown charm with top-5% schools",
-    priceBand: "$1.6M–$2.1M",
+    tagline: "Historic downtown charm with top-rated schools",
+    priceBand: "$1.5M–$1.8M",
     metaDescription:
       "Pleasanton realtor Manish Anand's local guide: home prices, PUSD schools, Ruby Hill, Vintage Hills and Birdland neighborhoods, and BART/ACE commutes.",
     intro: [
-      "Pleasanton blends a genuinely walkable historic downtown with one of California's strongest school districts. Median single-family values often approach or exceed $2M, reflecting sustained demand from families and relocating tech professionals.",
+      "Pleasanton blends a genuinely walkable historic downtown with one of California's strongest school districts. Median single-family values typically run $1.5M–$1.8M, reflecting sustained demand from families and relocating tech professionals.",
       "Unlike newer master-planned neighbors, much of Pleasanton's housing stock is established — mature trees, larger lots, and neighborhoods with real character. Homes near downtown and in top school zones move fastest.",
     ],
     highlights: [
@@ -79,7 +79,7 @@ export const CITIES = [
     commute: {
       blurb: "Pleasanton commuters have real options: BART from Dublin/Pleasanton or West Dublin stations, the ACE train from downtown to Silicon Valley, and the I-580/I-680 interchange.",
       points: [
-        "Dublin/Pleasanton BART: ~40 min to downtown SF",
+        "Dublin/Pleasanton BART: ~45 min to downtown SF",
         "ACE train from downtown Pleasanton to San Jose (Silicon Valley)",
         "San Jose: ~40–55 min via I-680 South",
         "Hacienda Business Park: in-town employment center",
@@ -92,7 +92,7 @@ export const CITIES = [
     ],
     investor: "Pleasanton behaves like San Ramon for investors: modest gross yields but durable, school-driven appreciation and deep buyer demand on resale.",
     faq: [
-      { q: "How much does a house cost in Pleasanton?", a: "Median single-family values often approach or exceed $2M, among the highest in the Tri-Valley. The live market table on my homepage shows the current Zillow ZHVI figure." },
+      { q: "How much does a house cost in Pleasanton?", a: "Median single-family values typically run $1.5M–$1.8M, among the highest in the Tri-Valley. The live market table on my homepage shows the current Zillow ZHVI figure." },
       { q: "Amador Valley or Foothill — does it matter for home values?", a: "Both are excellent high schools, and both zones command premiums. Specific boundaries matter more to individual buyers than to values overall — verify zoning per address." },
       { q: "Is Pleasanton walkable?", a: "Downtown Pleasanton is one of the most walkable town centers in the East Bay. Most residential neighborhoods are suburban in layout, but downtown-adjacent streets carry a premium for that walkability." },
       { q: "How does Pleasanton compare to San Ramon?", a: "Pleasanton offers a historic downtown and established neighborhoods; San Ramon offers newer master-planned housing stock. Schools are top-tier in both. Many buyers tour both before deciding." },
@@ -107,11 +107,11 @@ export const CITIES = [
     name: "Danville",
     emoji: "🏡",
     tagline: "The Tri-Valley's premier luxury market",
-    priceBand: "$2M+",
+    priceBand: "$1.8M–$2M",
     metaDescription:
       "Danville realtor Manish Anand's local guide: luxury home prices, SRVUSD schools, Blackhawk and Westside neighborhoods, and downtown living.",
     intro: [
-      "Danville is the Tri-Valley's luxury anchor: median single-family values typically exceed $2M, and estates in Blackhawk and on the Westside range well beyond. The draw is a combination of top-ranked SRVUSD schools, a charming walkable downtown, and larger lots than almost any neighboring city.",
+      "Danville is the Tri-Valley's luxury anchor: median single-family values typically run $1.8M–$2M, and estates in Blackhawk and on the Westside range well beyond. The draw is a combination of top-ranked SRVUSD schools, a charming walkable downtown, and larger lots than almost any neighboring city.",
       "Danville transactions often involve unique properties — view lots, custom builds, gated communities — where comps require real judgment. Pricing discipline matters on both sides of the deal here.",
     ],
     highlights: [
@@ -135,13 +135,13 @@ export const CITIES = [
       ],
     },
     neighborhoods: [
-      { name: "Blackhawk", blurb: "Gated golf-course estates east of town — the East Bay's best-known luxury enclave." },
+      { name: "Blackhawk", blurb: "Gated golf-course estates in unincorporated Blackhawk, east of town; one of the East Bay's best-known luxury enclaves." },
       { name: "Westside Danville", blurb: "Custom homes on larger lots near downtown and Las Trampas; top-dollar per square foot." },
       { name: "Sycamore / Greenbrook", blurb: "Established family neighborhoods with strong schools and HOA pools and greenbelts." },
     ],
     investor: "Danville is rarely a yield play. It suits buyers seeking long-term wealth preservation in a supply-constrained luxury market with enduring school-driven demand.",
     faq: [
-      { q: "How much does a house cost in Danville?", a: "Median single-family values often exceed $2M, with Blackhawk and Westside estates ranging significantly higher. Live figures are on my homepage market table." },
+      { q: "How much does a house cost in Danville?", a: "Median single-family values typically run $1.8M–$2M, with Blackhawk and Westside estates ranging significantly higher. Live figures are on my homepage market table." },
       { q: "Is Blackhawk a good buy?", a: "Blackhawk offers gated golf-course living at prices that, per square foot, can compare favorably to smaller homes elsewhere in Danville. HOA costs and property specifics matter — I analyze each case individually." },
       { q: "What schools serve Danville?", a: "San Ramon Valley Unified — Monte Vista High and San Ramon Valley High are the two main high schools, both highly ranked statewide." },
       { q: "How is Danville's commute?", a: "It's an I-680 drive commute; Walnut Creek BART is about 15–20 minutes away. Many Danville buyers work hybrid schedules or at Bishop Ranch nearby." },
@@ -156,11 +156,11 @@ export const CITIES = [
     name: "Dublin",
     emoji: "☘️",
     tagline: "New construction, BART access, and rising schools",
-    priceBand: "$1.4M–$1.7M",
+    priceBand: "$1.3M–$1.5M",
     metaDescription:
       "Dublin, CA realtor Manish Anand's local guide: home prices, DUSD schools, East Dublin new construction, Mello-Roos costs and BART commutes.",
     intro: [
-      "Dublin is the Tri-Valley's growth story: two BART stations, the newest housing stock in the region, and a school district that has invested heavily alongside the city's expansion. Median single-family values typically run $1.5M–$1.8M, generally a step below San Ramon and Pleasanton.",
+      "Dublin is the Tri-Valley's growth story: two BART stations, the newest housing stock in the region, and a school district that has invested heavily alongside the city's expansion. Median single-family values typically run $1.3M–$1.5M, generally a step below San Ramon and Pleasanton.",
       "East Dublin communities like Jordan Ranch, Wallis Ranch, and Boulevard offer 2010s-and-newer homes that are hard to find elsewhere in the East Bay — a major draw for buyers who want modern floor plans without a renovation project.",
     ],
     highlights: [
@@ -177,7 +177,7 @@ export const CITIES = [
     commute: {
       blurb: "Dublin sits at the I-580/I-680 interchange with two BART stations — the strongest commute profile in the Tri-Valley.",
       points: [
-        "Dublin/Pleasanton BART: ~40 min to downtown SF",
+        "Dublin/Pleasanton BART: ~45 min to downtown SF",
         "West Dublin/Pleasanton BART: second in-town station",
         "Silicon Valley: ~45–60 min via I-680 South",
         "Livermore Lab / Hacienda: 10–20 min",
@@ -190,7 +190,7 @@ export const CITIES = [
     ],
     investor: "Dublin balances appreciation and rentability better than most Tri-Valley cities: newer stock rents easily to tech tenants, and BART access supports long-term demand.",
     faq: [
-      { q: "How much does a house cost in Dublin?", a: "Median single-family values typically range $1.5M–$1.8M — East Dublin new construction trends higher, West Dublin established homes lower. Live ZHVI figures are on my homepage." },
+      { q: "How much does a house cost in Dublin?", a: "Median single-family values typically range $1.3M–$1.5M; East Dublin new construction trends higher, West Dublin established homes lower. Live ZHVI figures are on my homepage." },
       { q: "Dublin or San Ramon — which is better for families?", a: "San Ramon's SRVUSD has the longer track record; Dublin offers newer homes, BART, and strong (and improving) schools at a somewhat lower price point. I wrote a full comparison — see the related articles below." },
       { q: "Is East Dublin or West Dublin better?", a: "East Dublin: newer homes, new schools, HOA amenities. West Dublin: larger lots, no/low HOA, faster BART access. It depends on what you're optimizing for." },
       { q: "Do Dublin homes have Mello-Roos?", a: "Many newer East Dublin communities carry community facilities district (CFD) assessments that raise the effective tax rate. I review the exact tax bill on any home a client is considering — try my property tax calculator for estimates." },
@@ -205,18 +205,18 @@ export const CITIES = [
     name: "Livermore",
     emoji: "🍷",
     tagline: "Wine country value on the Tri-Valley's east edge",
-    priceBand: "$1.2M–$1.5M",
+    priceBand: "$1.1M–$1.3M",
     metaDescription:
       "Livermore realtor Manish Anand's local guide: home prices, LVJUSD schools, neighborhoods, wine country living, ACE train commutes and rental yields.",
     intro: [
-      "Livermore delivers the Tri-Valley lifestyle at a meaningful discount: median single-family values typically run $1.2M–$1.5M, and buyers get a revitalized downtown, 50+ wineries, and a genuine sense of community.",
+      "Livermore delivers the Tri-Valley lifestyle at a meaningful discount: median single-family values typically run $1.1M–$1.3M, and buyers get a revitalized downtown, 50+ wineries, and a genuine sense of community.",
       "It's also a two-sided market — families upgrading within the Tri-Valley on one side, and investors chasing the area's better rental yields on the other. South Livermore near the vineyards commands the premium.",
     ],
     highlights: [
       { title: "Value", text: "Meaningfully more attainable than Pleasanton or San Ramon while staying inside the Tri-Valley." },
       { title: "Wine country", text: "50+ wineries in the Livermore Valley AVA, plus a lively renovated downtown." },
       { title: "Employers", text: "Lawrence Livermore and Sandia national labs anchor thousands of stable, high-paying jobs." },
-      { title: "Yields", text: "Among the better gross rental yields in the Tri-Valley — a frequent pick for my investor clients." },
+      { title: "Yields", text: "Among the better gross rental yields in the Tri-Valley — a frequent pick for cash-flow-minded investors." },
     ],
     schools: {
       district: "Livermore Valley Joint Unified School District (LVJUSD)",
@@ -239,7 +239,7 @@ export const CITIES = [
     ],
     investor: "Livermore pairs Tri-Valley appreciation with gross yields that often beat San Ramon and Pleasanton — a practical middle path between cash flow and growth.",
     faq: [
-      { q: "How much does a house cost in Livermore?", a: "Median single-family values typically range $1.2M–$1.5M — check my homepage market table for the live Zillow ZHVI figure." },
+      { q: "How much does a house cost in Livermore?", a: "Median single-family values typically range $1.1M–$1.3M — check my homepage market table for the live Zillow ZHVI figure." },
       { q: "Is Livermore a good place to invest?", a: "It offers some of the better gross yields in the Tri-Valley plus solid appreciation. Tracy yields more cash flow; San Ramon appreciates faster; Livermore sits usefully between." },
       { q: "How are Livermore schools?", a: "Livermore Valley Joint Unified performs solidly — not as high-ranked as SRVUSD or Pleasanton, but strong relative to the home-price discount, which is exactly the trade many families choose." },
       { q: "What's the Livermore commute like?", a: "ACE train to Silicon Valley, ~20 minutes to BART, and I-580 access. It's the longest Tri-Valley commute to SF, which is priced into homes here." },
@@ -253,7 +253,7 @@ export const CITIES = [
     name: "Fremont",
     emoji: "🌁",
     tagline: "Silicon Valley access with legendary Mission schools",
-    priceBand: "$1.4M–$2M+",
+    priceBand: "$1.3M–$2M+",
     metaDescription:
       "Fremont realtor Manish Anand's local guide: home prices by neighborhood, Mission San Jose schools, BART and Silicon Valley commutes.",
     intro: [
@@ -269,7 +269,7 @@ export const CITIES = [
     schools: {
       district: "Fremont Unified School District (FUSD)",
       blurb: "FUSD is large and varies by attendance area. The Mission San Jose feeder pattern is nationally known; American, Irvington, and Washington serve other strong neighborhoods.",
-      notable: ["Mission San Jose High School", "American High School", "Irvington High School", "Hopkins Junior High"],
+      notable: ["Mission San Jose High School", "American High School", "Irvington High School", "Hopkins Middle School"],
     },
     commute: {
       blurb: "Fremont has the South Bay's best East Bay commute: two BART stations, I-880, and the Dumbarton Bridge to the Peninsula.",
@@ -313,7 +313,7 @@ export const CITIES = [
       { title: "Affordability", text: "The most attainable single-family prices in the corridor — often half the Tri-Valley equivalent." },
       { title: "New construction", text: "Tracy Hills and Ellis are delivering new homes at prices impossible closer in." },
       { title: "Yields", text: "The highest gross rental yields among my 8 cities — the go-to market for cash-flow investors." },
-      { title: "ACE train", text: "Direct rail from downtown Tracy toward the Tri-Valley and Silicon Valley." },
+      { title: "ACE train", text: "Direct rail from Tracy's ACE station toward the Tri-Valley and Silicon Valley." },
     ],
     schools: {
       district: "Tracy Unified School District (plus Jefferson School District in south Tracy)",
@@ -323,7 +323,7 @@ export const CITIES = [
     commute: {
       blurb: "Tracy is a commuter city by design: ACE rail, I-205/I-580, and a fast-growing local logistics employment base.",
       points: [
-        "ACE train from downtown Tracy to Pleasanton/Santa Clara",
+        "ACE train from the Tracy station (south Tracy) to Pleasanton/Santa Clara",
         "Dublin/Pleasanton BART: ~35–45 min drive over the Altamont",
         "Local employment: distribution and logistics hubs in town",
         "San Jose: ~60–75 min in commute hours",
@@ -386,7 +386,7 @@ export const CITIES = [
     faq: [
       { q: "How much does a house cost in Mountain House?", a: "Typical single-family prices run in the $800K–$1M range depending on village, size, and builder phase — new construction that would cost significantly more in the Tri-Valley." },
       { q: "Does Mountain House have Mello-Roos?", a: "Yes — community facilities district assessments raise the effective property tax rate meaningfully. Use my property tax calculator for an estimate and I'll pull the exact tax bill for any specific home." },
-      { q: "How are Mountain House schools?", a: "Lammersville Unified anchors a K-8 school in each village and performs well; Mountain House High serves the whole community. Schools are the #1 reason families choose it." },
+      { q: "How are Mountain House schools?", a: "Lammersville Unified anchors a K-8 school in each village and performs well; Mountain House High serves the whole community. Schools are a major reason many families choose it." },
       { q: "Mountain House or Tracy?", a: "Mountain House: newer, master-planned, village schools, higher taxes (CFD). Tracy: lower entry prices, more housing variety, established downtown. I help buyers compare total monthly cost side by side." },
     ],
     related: [
