@@ -18,16 +18,15 @@ Once a profile is live, send me its URL: it gets added to the `sameAs` arrays in
 | Title | REALTOR® · Real Estate Agent |
 | License | CA DRE #02247006 |
 | Brokerage | MOSO Real Estate (Loan Factory, Inc., CA DRE #01771313) |
-| Office address | 2195 Tully Road, San Jose, CA 95122 ⚠️ see open question |
+| Office address | 2195 Tully Road, San Jose, CA 95122 (MOSO main office; confirmed 2026-10-07) |
 | Phone | (408) 707-5324 |
 | Email | homeswithmanish@gmail.com |
 | Website | https://homeswithmanish.com |
 | Service area | San Ramon, Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy, Mountain House |
 | Primary category | Real estate agent |
 
-**Open question: the office address.** The website and DRE record use **2195 Tully Road**.
-MLSListings shows **639 Tully Road, Suite C**. Ask the broker which one is the office of
-record, then make MLSListings and the site match. For Google / Bing / Apple, register as a
+**Office of record: 2195 Tully Road** (MOSO main office, confirmed 2026-10-07). It matches the
+website and the DRE record. MLSListings still shows **639 Tully Road, Suite C**, so update it there. For Google / Bing / Apple, register as a
 **service-area business** and hide the street address unless clients can visit it.
 Never use the San Ramon mailing address on the DRE record; it's residential. If you want
 it off the public record, you can change it to the business address through DRE eLicensing.
@@ -60,7 +59,7 @@ it off the public record, you can change it to the business address through DRE 
 | 1 | Google Business Profile | Not confirmed | Create/verify as a service-area business; category *Real estate agent*; long bio; 8 cities; photos; weekly post. Full steps in `docs/GROWTH-PLAYBOOK.md` §1 | business.google.com/create |
 | 2 | Zillow agent profile | Not confirmed | Search Zillow for DRE 02247006 first. Claim or create; medium bio; add service areas + website. **Do not touch `zillow.com/profile/mkanand`; that's a different person** | zillow.com/agent-resources |
 | 3 | Realtor.com | Not confirmed (an MLS-fed stub likely exists) | Find yourself under "Find a REALTOR®" → claim; medium bio + website | realtor.com/realestateagents |
-| 4 | MLSListings | **Found**: mlslistings.com/FindAnAgent/Profile/02247006 (already in site `sameAs`) | Fix the office address (see the open question in §1); add Instagram/Facebook links (only YouTube is listed) | MLSListings member portal |
+| 4 | MLSListings | **Found**: mlslistings.com/FindAnAgent/Profile/02247006 (already in site `sameAs`) | Change the office address from 639 Tully Rd Ste C to 2195 Tully Rd; add Instagram/Facebook links (only YouTube is listed) | MLSListings member portal |
 | 5 | Homes.com | Not confirmed (other MOSO agents are listed) | Search by name → claim | homes.com/real-estate-agents |
 | 6 | LinkedIn | Not confirmed | Headline: "REALTOR® · CA DRE #02247006 · MOSO Real Estate · Homes With Manish"; website field; medium bio | linkedin.com |
 | 7 | Bing Places | Not confirmed | Import from Google Business Profile once it's verified (feeds Copilot + ChatGPT search) | bingplaces.com |
