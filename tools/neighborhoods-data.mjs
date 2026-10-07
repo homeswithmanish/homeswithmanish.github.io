@@ -594,6 +594,9 @@ export const NEIGHBORHOODS = [
           "The community sits just west of I-580, the main route toward the Tri-Valley. Commute times depend heavily on the hour, so test the drive at your actual commute time before you commit.",
           "The community plans a clubhouse, pool, parks and trails, and Lennar's pages mention an onsite fire station and a small grocery store as planned. Confirm what has actually opened before you count on it.",
         ],
+        links: [
+          { href: "/blog/ace-train-commute-tracy-livermore-silicon-valley", label: "ACE train commute guide: Tracy to Silicon Valley" },
+        ],
       },
     ],
     schools: {
