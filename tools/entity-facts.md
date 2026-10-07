@@ -15,7 +15,8 @@
 - **Contact:** (408) 707-5324 · homeswithmanish@gmail.com · https://homeswithmanish.com
 - **Official profiles:** https://www.instagram.com/homeswithmanish/ ·
   https://www.facebook.com/profile.php?id=61572276856121 ·
-  https://www.youtube.com/@HomesWithManish
+  https://www.youtube.com/@HomesWithManish ·
+  https://www.mlslistings.com/FindAnAgent/Profile/02247006 (MLSListings agent profile)
 
 ### Disambiguation — other people named Manish Anand
 

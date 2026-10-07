@@ -218,6 +218,13 @@
   font-weight: 600;
 }
 
+.post-meta .author-name a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-underline-offset: 3px;
+}
+
 .post-meta .divider {
   width: 4px;
   height: 4px;
@@ -629,4 +636,19 @@
   .post-meta .divider {
     display: none;
   }
+}
+
+.post-meta .author-details span + span::before {
+  content: "·";
+  margin: 0 6px;
+  opacity: .6;
+}
+
+/* Category label sits on the navy post header; was unstyled (dark on navy). */
+.post-header .post-category {
+  color: var(--gold);
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .15em;
+  margin-bottom: 12px;
 }

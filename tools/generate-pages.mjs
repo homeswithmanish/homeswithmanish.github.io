@@ -3,7 +3,7 @@
 // Output: cities/<slug>/index.html, cities/index.html,
 //         calculators/<slug>/index.html, calculators/index.html
 
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { CITIES } from "./cities-data.mjs";
@@ -17,6 +17,29 @@ const SITE = "https://homeswithmanish.com";
 // Entity facts + name disambiguation, shared by llms.txt and llms-full.txt.
 // Edit tools/entity-facts.md, never the generated llms files.
 const ENTITY_FACTS = readFileSync(join(ROOT, "tools/entity-facts.md"), "utf8").trimEnd();
+// Blog posts are hand-written HTML in /blog/. Read their headline, meta
+// description and FAQ schema so the llms files always list what's published.
+const BLOG_POSTS = readdirSync(join(ROOT, "blog"))
+  .filter((f) => f.endsWith(".html") && f !== "index.html")
+  .sort()
+  .map((f) => {
+    const html = readFileSync(join(ROOT, "blog", f), "utf8");
+    const pick = (re) => (html.match(re) || [])[1] || "";
+    const decode = (t) => t.replace(/&amp;/g, "&").replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/\s+-\s+/g, " - ").trim();
+    const faq = [];
+    for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+      try {
+        const data = JSON.parse(m[1]);
+        if (data["@type"] === "FAQPage") for (const q of data.mainEntity) faq.push({ q: q.name, a: q.acceptedAnswer.text.replace(/\s+-\s+/g, " - ") });
+      } catch {}
+    }
+    return {
+      url: `${SITE}/blog/${f.replace(/\.html$/, "")}`,
+      title: decode(pick(/<h1[^>]*>([^<]+)<\/h1>/)),
+      description: decode(pick(/<meta name="description" content="([^"]*)"/)),
+      faq,
+    };
+  });
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 // ---------------------------------------------------------------------------
@@ -709,6 +732,9 @@ ${CITIES.map((c) => `- [Living in ${c.name}, CA](${SITE}/cities/${c.slug}/): ${c
 ## Neighborhood Guides
 ${NEIGHBORHOODS.map((n) => `- [${n.name}, ${n.cityName}](${SITE}/cities/${n.city}/${n.slug}/): ${n.metaDescription}`).join("\n")}
 
+## Blog Posts
+${BLOG_POSTS.map((p) => `- [${p.title}](${p.url}): ${p.description}`).join("\n")}
+
 ## Calculators (free, no signup)
 ${CALCULATORS.map((c) => `- [${c.title}](${SITE}/calculators/${c.slug}/): ${c.metaDescription}`).join("\n")}
 
@@ -768,6 +794,9 @@ ${ENTITY_FACTS}
 
 ${CITIES.map(cityBlock).join("\n")}
 ${NEIGHBORHOODS.map(hoodBlock).join("\n")}
+${BLOG_POSTS.map((p) => `## Blog: ${p.title} (${p.url})
+${p.description}
+${p.faq.length ? `\nFAQ:\n${p.faq.map((f) => `Q: ${f.q}\nA: ${f.a}`).join("\n")}\n` : ""}`).join("\n")}
 ## Calculators
 ${CALCULATORS.map((c) => `- ${c.title} (${SITE}/calculators/${c.slug}/): ${c.methodology}`).join("\n")}
 `;

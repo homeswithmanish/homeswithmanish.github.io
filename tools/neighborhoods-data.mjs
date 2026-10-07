@@ -445,4 +445,288 @@ export const NEIGHBORHOODS = [
       { label: "Fremont, California (Wikipedia)", url: "https://en.wikipedia.org/wiki/Fremont,_California" },
     ],
   },
+  {
+    slug: "wallis-ranch",
+    city: "dublin",
+    cityName: "Dublin",
+    name: "Wallis Ranch",
+    zip: "94568",
+    county: "Alameda County",
+    seoTitle: "Wallis Ranch, Dublin CA: Homes, Schools & Costs Guide",
+    metaDescription:
+      "A local realtor's guide to Wallis Ranch in East Dublin: Trumark-developed homes, the Kindred House amenity center, Dublin Unified schools and costs to check.",
+    tagline: "East Dublin's compact, newer-construction community, built in eight neighborhoods around a central amenity center.",
+    updated: "2026-10-07",
+    intro: [
+      "Wallis Ranch is a newer master-planned community in East Dublin, built on roughly 184 acres. Trumark Communities and its partners acquired the site in 2014, and the first homes opened in 2016. Trumark divided the land into eight neighborhoods and sold most of them to other builders, including Warmington Residential, PulteGroup, Taylor Morrison, KB Home and D.R. Horton.",
+      "At build-out the community includes about 800 single-family homes and townhomes in a range of sizes. For buyers, that means 2010s-era construction, modern floor plans and a central clubhouse, in a smaller footprint than Dublin's larger master-planned areas. The trade-off is that costs vary by neighborhood and builder, so each home needs its own cost check.",
+    ],
+    facts: [
+      { label: "City", value: "Dublin, CA 94568" },
+      { label: "County", value: "Alameda" },
+      { label: "School district", value: "Dublin Unified (DUSD)" },
+      { label: "Developer", value: "Trumark Communities and partners (site acquired 2014)" },
+      { label: "Size", value: "About 184 acres, roughly 800 homes planned" },
+      { label: "Amenity center", value: "Kindred House (about 17,000 sq. ft.)" },
+    ],
+    sections: [
+      {
+        heading: "Eight neighborhoods, several builders",
+        paragraphs: [
+          "Because Trumark sold most of the eight neighborhoods to different builders, Wallis Ranch is not one uniform product. Home size, architecture, lot layout and finish level differ from neighborhood to neighborhood, and published descriptions of the community cite homes ranging from about 1,700 to about 4,100 square feet.",
+          "Single-family homes and townhomes are both part of the plan. When I compare two Wallis Ranch homes, I look at the builder, the neighborhood within the community and the specific floor plan, since those drive the differences more than the community name does.",
+        ],
+      },
+      {
+        heading: "Kindred House and daily life",
+        paragraphs: [
+          "The community's centerpiece is Kindred House, an amenity center of more than 17,000 square feet with indoor and outdoor space for fitness, meetings, dining and relaxation, centrally located to all eight neighborhoods.",
+          "Wallis Ranch sits on the east side of Dublin, near Tassajara Road. Shopping, dining and the BART station are covered in more detail on my Dublin city page.",
+        ],
+        links: [
+          { href: "/cities/dublin/", label: "Dublin city guide" },
+        ],
+      },
+      {
+        heading: "What to verify on the cost side",
+        paragraphs: [
+          "Many newer East Dublin parcels carry special taxes, from City community facilities districts, school facilities districts or both. Whether a particular Wallis Ranch home carries one, and how much, depends on the parcel, so the Alameda County tax bill and the seller's special tax disclosure are the documents to read.",
+          "Expect homeowners association dues tied to the community and its amenities, and read the HOA budget and CC&Rs before you offer. The True Monthly Cost Calculator on the homepage lets you add HOA and special tax line items to see the real monthly payment.",
+        ],
+        links: [
+          { href: "/#true-cost", label: "True Monthly Cost Calculator" },
+          { href: "/calculators/property-tax/", label: "Property tax and Mello-Roos calculator" },
+        ],
+      },
+    ],
+    schools: {
+      district: "Dublin Unified School District",
+      list: [
+        "Wallis Ranch homes are listed as part of Dublin Unified",
+        "Nearby DUSD schools named in listings include John Green Elementary, Eleanor Murray Fallon Middle School and Emerald High School",
+      ],
+      note: "Listing sites often show nearby schools that are not the assigned ones, and DUSD has opened new schools and adjusted boundaries as East Dublin has grown. Confirm the elementary, middle and high school assignment for any specific address with Dublin Unified before you rely on it.",
+      locatorUrl: "https://www.dublinusd.org/",
+    },
+    fit: [
+      "Buyers who want 2010s-era construction and modern floor plans in Dublin",
+      "Buyers who value a central amenity center within the community",
+      "Households that want a choice between single-family homes and townhomes in the same area",
+    ],
+    lessIdeal: [
+      "Buyers who want large lots or an established, tree-lined neighborhood (look at West Dublin or Pleasanton)",
+      "Anyone who wants to avoid HOA dues entirely",
+    ],
+    faq: [
+      {
+        q: "Who built Wallis Ranch?",
+        a: "Trumark Communities and its partners acquired the site in 2014 and developed the infrastructure. Trumark sold most of the eight neighborhoods to other builders, including Warmington Residential, PulteGroup, Taylor Morrison, KB Home and D.R. Horton.",
+      },
+      {
+        q: "Does Wallis Ranch have Mello-Roos?",
+        a: "It depends on the parcel. Many newer East Dublin homes carry special taxes from City or school facilities districts, so read the Alameda County tax bill and the special tax disclosure for the specific home before you offer.",
+      },
+      {
+        q: "What school district is Wallis Ranch in?",
+        a: "Wallis Ranch homes are in Dublin Unified. Attendance areas change as the district grows, so verify the schools for a specific address with DUSD.",
+      },
+      {
+        q: "What is Kindred House?",
+        a: "Kindred House is the community's amenity center, more than 17,000 square feet with indoor and outdoor space for fitness, meetings, dining and relaxation, located centrally among the eight neighborhoods.",
+      },
+    ],
+    sources: [
+      { label: "City of Dublin: CFD administration reports", url: "https://dublin.ca.gov/2682" },
+      { label: "Builder: Farmhouse-Style Clubhouse Is at the Heart of Wallis Ranch", url: "https://www.builderonline.com/design/projects/farmhouse-style-clubhouse-is-at-the-heart-of-wallis-ranch_o/" },
+      { label: "GlobeSt: Trumark homes to build at Wallis Ranch (2014)", url: "https://globest.com/2014/02/19/trumark-homes-to-build-at-wallis-ranch/" },
+      { label: "Dublin Unified School District", url: "https://www.dublinusd.org/" },
+    ],
+  },
+
+  {
+    slug: "tracy-hills",
+    city: "tracy",
+    cityName: "Tracy",
+    name: "Tracy Hills",
+    zip: "95377",
+    county: "San Joaquin County",
+    seoTitle: "Tracy Hills, Tracy CA: New Homes, CFD Taxes & Schools",
+    metaDescription:
+      "A local realtor's guide to Tracy Hills in Tracy: new-construction villages, city CFD special taxes, Corral Hollow Elementary and Jefferson district schools.",
+    tagline: "Tracy's largest planned expansion: new construction on the hills west of I-580, with special taxes you need to read before you offer.",
+    updated: "2026-10-07",
+    intro: [
+      "Tracy Hills is a large master-planned community on the hillside west of I-580, near Corral Hollow and Lammers roads. Developer Integral Communities describes it as about 1,850 acres planned for roughly 5,100 single-family homes, with the City's approved specific plan allowing up to 5,499 residential units. Grading and infrastructure work began around 2016, and CBS13 called it the largest single planned expansion in the city's history.",
+      "Builders such as Lennar have opened villages in phases, and the community plans a clubhouse, parks and trails, with a Jefferson district school already open. The trade-off is the cost structure: Tracy Hills sits inside City of Tracy community facilities districts, so special taxes are part of the monthly picture and vary by tract and phase.",
+    ],
+    facts: [
+      { label: "City", value: "Tracy, CA 95377" },
+      { label: "County", value: "San Joaquin" },
+      { label: "Developer", value: "Integral Communities" },
+      { label: "Planned size", value: "About 1,850 acres, roughly 5,100 homes" },
+      { label: "Typical extras", value: "City CFD special taxes and HOA dues" },
+      { label: "School district", value: "Jefferson Elementary (K-8), Tracy Unified for high school; verify by address" },
+    ],
+    sections: [
+      {
+        heading: "New construction, built in phases",
+        paragraphs: [
+          "Tracy Hills is being built in phases, with different builders opening villages at different times. Lennar's Amethyst neighborhood, for example, was described as the ninth and final village in Phase 1, and Lennar has since opened further villages in the community. The larger Phase 2 area lies on the hillside west of I-580.",
+          "Because construction is ongoing, what you see on a visit today may change: nearby lots may be graded or under construction, and planned amenities and commercial space may not all be open yet. Ask for the current site plan and phasing schedule for the specific tract.",
+        ],
+      },
+      {
+        heading: "Special taxes: read them before you offer",
+        paragraphs: [
+          "The City of Tracy explains that its community facilities districts were formed before new homes were built to finance infrastructure up front, and the cost is repaid through an annual charge on the property tax bill. Tracy Hills is covered by CFD 2016-1, which has separate improvement areas, and part of the community is also covered by CFD 2018-1, which funds items such as landscape and park maintenance and public services.",
+          "Which improvement area a home sits in affects what it pays, and the amount differs by tract. I pull the actual tax bill and the CFD disclosure for the specific address before any offer, rather than relying on a neighborhood average. The calculators below let you add CFD and HOA line items to a payment estimate.",
+        ],
+        links: [
+          { href: "/#true-cost", label: "True Monthly Cost Calculator" },
+          { href: "/calculators/property-tax/", label: "Property tax and Mello-Roos calculator" },
+          { href: "/cities/tracy/", label: "Tracy city guide" },
+          { href: "/blog/mello-roos-mountain-house-tracy-hills", label: "Mello-Roos in Mountain House and Tracy Hills" },
+        ],
+      },
+      {
+        heading: "Commute and daily life",
+        paragraphs: [
+          "The community sits just west of I-580, the main route toward the Tri-Valley. Commute times depend heavily on the hour, so test the drive at your actual commute time before you commit.",
+          "The community plans a clubhouse, pool, parks and trails, and Lennar's pages mention an onsite fire station and a small grocery store as planned. Confirm what has actually opened before you count on it.",
+        ],
+      },
+    ],
+    schools: {
+      district: "Jefferson Elementary School District (K-8); high school through Tracy Unified",
+      list: [
+        "Corral Hollow Elementary (TK-8, opened August 2024), on Coriander Street in Tracy Hills",
+        "Jefferson is a K-8 district, so high school students are served by Tracy Unified; the high school for a given address should be confirmed",
+      ],
+      note: "A new school is being built out as the community grows, and attendance areas for new Tracy Hills tracts can change as construction proceeds. Corral Hollow Elementary's own page says it serves Tracy Hills families but does not define boundaries. Confirm the school assignment for a specific address with Jefferson Elementary and Tracy Unified before you rely on it.",
+      locatorUrl: "https://www.jeffersonschooldistrict.com/",
+    },
+    fit: [
+      "Buyers who want new construction and are comfortable with an ongoing build-out around them",
+      "Households that want a newer home with community amenities and a new neighborhood school",
+      "Buyers who will run the numbers on special taxes and HOA dues before choosing a tract",
+    ],
+    lessIdeal: [
+      "Buyers who want the lowest possible monthly carrying cost",
+      "Anyone who wants an established neighborhood with mature trees and finished surroundings",
+    ],
+    faq: [
+      {
+        q: "Does Tracy Hills have Mello-Roos?",
+        a: "Yes. Tracy Hills is covered by City of Tracy community facilities districts, including CFD 2016-1 and, for part of the community, CFD 2018-1. The amount varies by tract and improvement area, so check the specific parcel's tax bill and CFD disclosure.",
+      },
+      {
+        q: "What school district is Tracy Hills in?",
+        a: "Corral Hollow Elementary, a Jefferson Elementary School District campus in Tracy Hills, serves the area's families, and high school is through Tracy Unified. Boundaries for new tracts can change, so verify the assignment for a specific address with both districts.",
+      },
+      {
+        q: "Is Tracy Hills finished building out?",
+        a: "No. Tracy Hills is being built in phases, with about 5,100 homes planned. Expect ongoing construction nearby and ask which amenities and commercial space are open versus planned.",
+      },
+      {
+        q: "Who is the developer of Tracy Hills?",
+        a: "Integral Communities is the master developer. Builders such as Lennar have opened individual villages within the community.",
+      },
+    ],
+    sources: [
+      { label: "City of Tracy: Assessment Districts, CFDs and LMDs", url: "https://www.cityoftracy.org/our-city/departments/finance-department/taxes/assessment-districts-cfds-lmds" },
+      { label: "City of Tracy: CFD 2016-1 Improvement Area 2 fiscal status report (FY 2023-24)", url: "https://www.cityoftracy.org/home/showpublisheddocument/19210/638675360473200000" },
+      { label: "Builder: Lennar opens Amethyst at Integral Communities' Tracy Hills", url: "https://builderonline.com/land/development/lennar-opens-amethyst-neighborhood-at-integral-communities-tracy-hills-master-plan_o" },
+      { label: "CBS13: More than 5,000 homes under construction in new Tracy development", url: "https://www.cbsnews.com/amp/sacramento/news/tracy-development-5000-homes" },
+      { label: "California CEQAnet: Tracy Hills Elementary School No. 2 (SCH 2013102053)", url: "https://ceqanet.lci.ca.gov/Project/2013102053" },
+      { label: "Corral Hollow Elementary School: Our School", url: "https://ches.jeffersonschooldistrict.com/our-school" },
+    ],
+  },
+
+  {
+    slug: "vintage-hills",
+    city: "pleasanton",
+    cityName: "Pleasanton",
+    name: "Vintage Hills",
+    zip: "94566",
+    county: "Alameda County",
+    seoTitle: "Vintage Hills, Pleasanton: Homes, Schools & Local Guide",
+    metaDescription:
+      "A local realtor's guide to Vintage Hills in Pleasanton: an established 1970s-era neighborhood east of downtown, Vintage Hills Elementary and PUSD school basics.",
+    tagline: "An established Pleasanton neighborhood east of downtown, with its own elementary school and park.",
+    updated: "2026-10-07",
+    intro: [
+      "Vintage Hills is an established residential neighborhood in east Pleasanton, close to downtown. The subdivision, Tract 2802, went through City rezoning in 1965, and the neighborhood's park and elementary school followed in the late 1970s and 1980. Listing records show many homes dating to the 1970s.",
+      "The name nods to the area's grape-growing past: a Pleasanton Weekly entry on the school's name notes the school overlooks land planted in vineyards in the late 1800s. Today it is a neighborhood of mature streets and established homes, which is a different proposition from the newer master-planned areas elsewhere in the Tri-Valley.",
+    ],
+    facts: [
+      { label: "City", value: "Pleasanton, CA 94566" },
+      { label: "County", value: "Alameda" },
+      { label: "School district", value: "Pleasanton Unified (PUSD)" },
+      { label: "Built", value: "Subdivided in the mid-1960s; many homes date to the 1970s" },
+      { label: "Neighborhood school", value: "Vintage Hills Elementary (K-5, opened 1980)" },
+      { label: "Park", value: "Vintage Hills Park (master plan approved 1976)" },
+    ],
+    sections: [
+      {
+        heading: "An established neighborhood",
+        paragraphs: [
+          "Vintage Hills was planned as a conventional subdivision, so expect individual lots and a mix of original and updated homes rather than a master-planned community with a single builder. Because most homes are several decades old, condition and remodel level vary widely, and an inspection and permit history matter more here than in newer areas.",
+          "Listings sometimes use labels such as Vintage Heights or Vintage Hills II for parts of the area, so the name on a listing is not always a reliable boundary. I confirm the exact location of a home against the neighborhood and its school boundaries rather than relying on the label.",
+        ],
+      },
+      {
+        heading: "Location and daily life",
+        paragraphs: [
+          "The neighborhood sits east of downtown Pleasanton, and listings frequently mention nearby parks, shopping and a short trip to downtown. Vintage Hills Elementary, at 1125 Concord Street, anchors the neighborhood.",
+          "As with any neighborhood around an elementary school, visit at drop-off and commute times before you decide.",
+        ],
+        links: [
+          { href: "/cities/pleasanton/", label: "Pleasanton city guide" },
+          { href: "/calculators/property-tax/", label: "Property tax and Mello-Roos calculator" },
+        ],
+      },
+    ],
+    schools: {
+      district: "Pleasanton Unified School District",
+      list: [
+        "Vintage Hills Elementary (K-5, 1125 Concord Street)",
+        "Middle and high school assignment depends on the address and the district's current boundaries",
+      ],
+      note: "PUSD revised its elementary, middle and high school boundaries in recent years, including a 2024 high school boundary adjustment. Confirm the current assignment for any specific address with Pleasanton Unified before you rely on it.",
+      locatorUrl: "https://www.pleasantonusd.net/",
+    },
+    fit: [
+      "Buyers who want an established Pleasanton neighborhood close to downtown",
+      "Families who want a neighborhood elementary school and park nearby",
+      "Buyers comfortable with an older home and a remodel or update plan",
+    ],
+    lessIdeal: [
+      "Buyers who want new construction or a community clubhouse (look at East Dublin or Tracy Hills)",
+      "Anyone who wants a gated or amenity-heavy setting (look at Ruby Hill)",
+    ],
+    faq: [
+      {
+        q: "Where is Vintage Hills in Pleasanton?",
+        a: "Vintage Hills is an established neighborhood in east Pleasanton in ZIP 94566, east of downtown. Check the specific address on a map, since listings sometimes label nearby areas differently.",
+      },
+      {
+        q: "When was Vintage Hills built?",
+        a: "City records show the Vintage Hills subdivision was rezoned in the mid-1960s, the Vintage Hills Park master plan was approved in 1976, and the elementary school opened in 1980. Many homes in listings date to the 1970s.",
+      },
+      {
+        q: "What school serves Vintage Hills?",
+        a: "Vintage Hills Elementary, a K-5 Pleasanton Unified school at 1125 Concord Street, is in the neighborhood. Assignment depends on the address, and PUSD has revised its boundaries, so confirm with the district.",
+      },
+      {
+        q: "Does Vintage Hills have an HOA?",
+        a: "Vintage Hills was developed as a conventional subdivision, but individual homes can vary. Check each property's disclosures to see whether any association applies.",
+      },
+    ],
+    sources: [
+      { label: "Pleasanton Weekly: school names (2001), on the Vintage Hills name", url: "https://www.pleasantonweekly.com/morgue/2001/2001_07_27.sdbr27.html" },
+      { label: "Ed-Data: Vintage Hills Elementary", url: "https://www.ed-data.org/school/alameda/pleasanton-unified/vintage-hills-elementary" },
+      { label: "City of Pleasanton records: Tract 2802 (Vintage Hills) planning and Vintage Hills Park master plan", url: "https://weblink.cityofpleasantonca.gov/WebLink/0/doc/12893/Page2.aspx" },
+      { label: "Pleasanton Weekly: PUSD approves new high school boundary adjustment (2024)", url: "https://www.pleasantonweekly.com/education/2024/02/06/pusd-approves-new-high-school-boundary-adjustment/" },
+    ],
+  },
 ];

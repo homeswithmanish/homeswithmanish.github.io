@@ -127,11 +127,12 @@
         },
         {
           "q": "How does Pleasanton compare to San Ramon?",
-          "a": "Pleasanton offers a historic downtown and established neighborhoods; San Ramon offers newer master-planned housing stock. Schools are top-tier in both. Many of my clients tour both before deciding."
+          "a": "Pleasanton offers a historic downtown and established neighborhoods; San Ramon offers newer master-planned housing stock. Schools are top-tier in both. Many buyers tour both before deciding."
         }
       ],
       "neighborhoodGuides": [
-        "https://homeswithmanish.com/cities/pleasanton/ruby-hill/"
+        "https://homeswithmanish.com/cities/pleasanton/ruby-hill/",
+        "https://homeswithmanish.com/cities/pleasanton/vintage-hills/"
       ]
     },
     {
@@ -251,11 +252,12 @@
         },
         {
           "q": "Do Dublin homes have Mello-Roos?",
-          "a": "Many newer East Dublin communities carry community facilities district (CFD) assessments that raise the effective tax rate. I review the exact tax bill on every home my clients consider — try my property tax calculator for estimates."
+          "a": "Many newer East Dublin communities carry community facilities district (CFD) assessments that raise the effective tax rate. I review the exact tax bill on any home a client is considering — try my property tax calculator for estimates."
         }
       ],
       "neighborhoodGuides": [
-        "https://homeswithmanish.com/cities/dublin/dublin-ranch/"
+        "https://homeswithmanish.com/cities/dublin/dublin-ranch/",
+        "https://homeswithmanish.com/cities/dublin/wallis-ranch/"
       ]
     },
     {
@@ -377,7 +379,7 @@
         },
         {
           "q": "Is Fremont in the Tri-Valley?",
-          "a": "No — Fremont is in southern Alameda County along I-880. I serve it alongside the Tri-Valley because many of my clients compare both when optimizing for schools and commutes."
+          "a": "No — Fremont is in southern Alameda County along I-880. I serve it alongside the Tri-Valley because many Tri-Valley buyers compare both when optimizing for schools and commutes."
         }
       ],
       "neighborhoodGuides": [
@@ -441,7 +443,9 @@
           "a": "Driving the Altamont at peak is tough — that's the honest trade. The ACE train, hybrid schedules, and growing local jobs are why many buyers make it work."
         }
       ],
-      "neighborhoodGuides": []
+      "neighborhoodGuides": [
+        "https://homeswithmanish.com/cities/tracy/tracy-hills/"
+      ]
     },
     {
       "slug": "mountain-house",
