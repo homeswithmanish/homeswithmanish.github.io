@@ -427,6 +427,10 @@ const blogIndexUrls = [...readFile('blog/index.html').matchAll(/https:\/\/homesw
 test('Blog index schema URLs all resolve to real posts', blogIndexUrls.length > 0 && blogIndexUrls.every((s) => blogPosts.includes(`${s}.html`)), blogIndexUrls.join(', '));
 test('llms.txt lists every blog post', blogPosts.every((f) => llms.includes(`/blog/${f.replace(/\.html$/, '')})`)));
 
+const hubPages = allPages.filter((f) => /[\\/](cities|calculators)[\\/]/.test(f)).map((f) => fs.readFileSync(f, 'utf8')).join('\n');
+const orphanPosts = blogPosts.filter((f) => !hubPages.includes(`href="/blog/${f.replace(/\.html$/, '')}"`));
+test('Every blog post is linked from a city, neighborhood or calculator page', orphanPosts.length === 0, orphanPosts.join(', '));
+
 console.log('\n\x1b[36mTruthful advertising (licensed 2024-10-11):\x1b[0m');
 const experienceClaim = /over a decade|\d+\+? years of experience|helped (dozens|hundreds)|spent years helping|many of my clients/i;
 const claimPages = allPages.filter((f) => experienceClaim.test(fs.readFileSync(f, 'utf8'))).map((f) => path.relative(ROOT, f));

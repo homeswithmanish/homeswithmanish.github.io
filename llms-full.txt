@@ -530,6 +530,23 @@ A: Both districts are highly regarded. SRVUSD (San Ramon Valley Unified) has a l
 Q: Does Dublin have BART? What about San Ramon?
 A: Dublin has the Dublin/Pleasanton BART station, offering direct access to San Francisco and the Peninsula. San Ramon does not have BART but has excellent freeway access via I-680 and Bishop Ranch employment center. Dublin wins for public transit; San Ramon offers shorter commutes to many local employers.
 
+## Blog: East Dublin vs West Dublin: Where Should You Buy? (https://homeswithmanish.com/blog/east-dublin-vs-west-dublin)
+East Dublin vs West Dublin compared: older tract homes vs newer master-planned communities, special taxes, BART access, schools by address, and how to choose.
+
+FAQ:
+Q: What is the difference between East Dublin and West Dublin?
+A: West Dublin is the older part of the city, where the first housing tracts were built starting in 1960. East Dublin is the Eastern Dublin Specific Plan area, a planned expansion east of Camp Parks that has been built out in master-planned communities such as Wallis Ranch. There is no official dividing line, so ask any agent or listing where they draw it.
+Q: Is East Dublin or West Dublin better to live in?
+A: Neither is better for everyone. West Dublin tends to suit buyers who want an established neighborhood and are comfortable with an older home. East Dublin tends to suit buyers who want newer construction and community amenities and are comfortable with HOA dues and, on some parcels, special taxes. Compare specific addresses, not areas.
+Q: Do East Dublin homes have Mello-Roos?
+A: Some newer Dublin developments do. The City of Dublin lists several Community Facilities Districts, including Dublin Crossing, East Ranch and Dublin Centre, and each adds a separate line item to the county property tax bill. Whether a particular home is in one is parcel by parcel, so read the tax bill and the title report before you write an offer.
+Q: Which Dublin schools will my child attend?
+A: Dublin Unified assigns schools by home address through its School Locator, and boundaries can change. Dublin has two comprehensive high schools, Dublin High and Emerald High, so the same neighborhood label can mean different schools. Confirm the assignment for a specific address with the district before you buy.
+Q: Which part of Dublin is closer to BART?
+A: It depends on the address. Dublin has two stations on I-580, Dublin/Pleasanton and West Dublin/Pleasanton, and the West Dublin/Pleasanton station is near the I-580 and I-680 interchange. Check the distance from a specific home to the station you would use rather than assuming by area.
+Q: What do homes cost in Dublin, and is East or West more expensive?
+A: Zillow's typical single-family home value for ZIP 94568, which covers all of Dublin, was about $1,317,044 in August 2026. Because the whole city shares one ZIP code, that data cannot split East from West. Newer East Dublin homes often come with HOA dues and sometimes special taxes, so compare total monthly cost, not price alone.
+
 ## Blog: First-Time Home Buyer in San Ramon: Your Step-by-Step Guide (https://homeswithmanish.com/blog/first-time-home-buyer-san-ramon)
 Buying your first home in San Ramon? Learn about mortgages, loan programs, neighborhoods and each step from preapproval to closing.
 
@@ -602,6 +619,25 @@ Q: What makes San Ramon's real estate market attractive?
 A: San Ramon is home to highly-rated San Ramon Valley Unified School District (SRVUSD), proximity to the Bishop Ranch business park (major employment hub), excellent quality of life, low crime rates, and strong community amenities. These fundamentals have historically driven demand despite higher price points compared to neighboring cities.
 Q: Is now a good time to buy in San Ramon?
 A: In 2026, San Ramon has been a more balanced market for buyers, with values softening from their 2022 peak. Inventory levels are healthier than 2021-2023, giving buyers more negotiating power. Interest rates remain elevated, which has cooled some demand. For buyers planning to stay 5+ years and who are financially prepared, the market offers better conditions than the peak frenzy of recent years, though prices remain at elevated levels.
+
+## Blog: Tri-Valley & East Bay Home Prices by City (2026) (https://homeswithmanish.com/blog/tri-valley-east-bay-home-prices-by-city-2026)
+Typical single-family home values, Aug 2026: Danville $1.88M, San Ramon $1.59M, Dublin $1.32M, Livermore $1.11M, Tracy $675K.
+
+FAQ:
+Q: How much is a house in Dublin, CA in 2026?
+A: Zillow's typical single-family home value for Dublin, CA was about $1,316,900 in August 2026, down about 5.9% from about $1,400,142 in August 2025. This is an index of typical values, not a median sale price or a quote for any specific listing.
+Q: How much are homes in Pleasanton in 2026?
+A: The Zillow Home Value Index put the typical single-family home in Pleasanton at about $1,578,137 in August 2026, down about 3.7% from August 2025. Actual sale prices vary widely by neighborhood, size and condition.
+Q: What is the cheapest city in the Tri-Valley?
+A: Of the Tri-Valley cities compared here, Livermore has the lowest typical single-family home value at about $1,106,336 (Zillow, August 2026), compared with $1,316,900 in Dublin, $1,552,225 in Fremont, $1,578,137 in Pleasanton and $1,587,275 in San Ramon. Tracy ($675,203) and Mountain House ($863,749) are lower still but are in San Joaquin County, not the Tri-Valley.
+Q: What is the most expensive city in the Tri-Valley and East Bay?
+A: Among the eight places compared, Danville has the highest typical single-family home value at about $1,877,539 in August 2026. San Ramon ($1,587,275) and Pleasanton ($1,578,137) follow.
+Q: Are home prices going up or down in the Tri-Valley?
+A: Down over the past year in all eight places. Between August 2025 and August 2026 the typical value changed by -0.4% in Danville, -1.9% in Fremont, -2.8% in Livermore, -3.4% in San Ramon, -3.7% in Pleasanton, -4.4% in Tracy, -5.9% in Dublin and -8.0% in Mountain House (ZIP 95391). Past trends do not predict future prices.
+Q: Is Mountain House or Tracy cheaper?
+A: Tracy. Zillow's typical single-family home value was about $675,203 in Tracy and about $863,749 in Mountain House (ZIP 95391) in August 2026. Both are in San Joaquin County.
+Q: What is the loan limit in these cities in 2026?
+A: Per FHFA's 2026 limits, the high-balance conforming loan limit is $1,249,125 in Alameda and Contra Costa counties and $832,750 in San Joaquin County. Loans above the limit are generally jumbo loans, which can have different rates and requirements.
 
 ## Calculators
 - Home Affordability Calculator (East Bay Edition) (https://homeswithmanish.com/calculators/affordability/): Conservative scenario caps housing costs at 28% of gross monthly income and total debts at 36%; the stretch scenario allows up to 43% back-end DTI (common for strong files). Payment estimates include principal, interest, ~1.1% property tax, and ~0.35% insurance. Actual qualification depends on credit, reserves, loan program, and lender overlays — get pre-approved for a real number.

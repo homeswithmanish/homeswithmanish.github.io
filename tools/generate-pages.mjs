@@ -623,6 +623,7 @@ ${calc.resultsHtml}
                 <h2>Methodology &amp; Assumptions</h2>
                 <p class="lead">${esc(calc.methodology)}</p>
                 <p class="lead"><strong>More tools:</strong> ${CALCULATORS.filter((c) => c.slug !== calc.slug).map((c) => `<a href="/calculators/${c.slug}/">${esc(c.short)}</a>`).join(" · ")}</p>
+                ${calc.related?.length ? `<p class="lead"><strong>Related reading:</strong> ${calc.related.map((r) => `<a href="${r.href}">${esc(r.label)}</a>`).join(" · ")}</p>` : ""}
             </div>
         </section>
 ${faqHtml(calc.faq)}
