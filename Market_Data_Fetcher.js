@@ -26,9 +26,10 @@
 // Zillow ZHVI CSV - Single Family Residences, typical tier (35th-65th percentile)
 // Zillow may change URLs periodically. If the primary fails, we try alternates.
 const ZILLOW_ZHVI_URLS = [
-  'https://files.zillowstatic.com/research/public_v2/zhvi/City_zhvi_uc_sfr_tier_0.33_0.67_sm_sa_month.csv',
+  // public_csvs is Zillow's current path (verified working 2026-09); public_v2 now 404s.
   'https://files.zillowstatic.com/research/public_csvs/zhvi/City_zhvi_uc_sfr_tier_0.33_0.67_sm_sa_month.csv',
-  'https://files.zillowstatic.com/research/public/City/City_zhvi_uc_sfr_tier_0.33_0.67_sm_sa_month.csv'
+  'https://files.zillowstatic.com/research/public_csvs/zhvi/City_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv',
+  'https://files.zillowstatic.com/research/public_v2/zhvi/City_zhvi_uc_sfr_tier_0.33_0.67_sm_sa_month.csv'
 ];
 
 // Our 8 East Bay target cities
@@ -214,7 +215,10 @@ function parseZillowCSV(csvText) {
         daysOnMarket: getDaysOnMarketEstimate(cityName),
         inventory: null,     // Not available in ZHVI data
         priceChange: yoyChange !== null ? Math.round(yoyChange * 10) / 10 : null,
-        lastUpdated: latestDate,
+        // Stamp the actual FETCH date so the staleness monitor tracks refresh
+        // recency. (Zillow's data-period date, latestDate, lags ~1-2 months and
+        // would otherwise trip the 7-day threshold on every successful fetch.)
+        lastUpdated: new Date().toISOString().split('T')[0],
         source: 'Zillow ZHVI'
       };
 
@@ -544,4 +548,34 @@ function setupMarketDataTrigger() {
     .create();
 
   Logger.log('Weekly market data trigger set for Mondays at 6 AM');
+}
+
+// ============================================================================
+// ONE-CLICK REFRESH + SCHEDULING
+// ============================================================================
+
+/**
+ * Run this ONCE from the Apps Script editor to fix stale data in one shot:
+ * pulls all three feeds now AND (re)establishes every auto-update trigger plus
+ * the daily staleness monitor. Safely skips any function whose file isn't in
+ * this project and reports OK / SKIP / FAIL per step in the execution log.
+ *
+ * Requires these files pasted into the same Apps Script project:
+ *   Market_Data_Fetcher, Rental_Data_Fetcher, Mortgage_Rate_Fetcher,
+ *   Data_Staleness_Monitor.
+ */
+function refreshAllData() {
+  var steps = ['fetchMarketData', 'fetchRentalData', 'fetchMortgageRates',
+               'setupMarketDataTrigger', 'setupRentalDataTrigger',
+               'setupMortgageRateTrigger', 'setupStalenessMonitor'];
+  var log = [];
+  steps.forEach(function (name) {
+    try {
+      var fn = (typeof globalThis !== 'undefined') ? globalThis[name] : this[name];
+      if (typeof fn === 'function') { fn(); log.push('OK    ' + name); }
+      else { log.push('SKIP  ' + name + ' (paste that file into this project)'); }
+    } catch (e) { log.push('FAIL  ' + name + ' -> ' + e); }
+  });
+  Logger.log('refreshAllData results:\n' + log.join('\n'));
+  return log;
 }

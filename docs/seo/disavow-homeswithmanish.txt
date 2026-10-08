@@ -1,0 +1,121 @@
+# Google disavow file — homeswithmanish.com
+# Generated 2026-10-03 from Semrush referring-domain export (144 referring domains, Authority Score 2).
+#
+# CONTEXT: The referring-domain profile is ~99% automated spam (casino/gambling networks,
+# pharma, "Fiverr SEO" doorway sites, expired-domain farms, and a Moldova-hosted link farm
+# on 195.20.19.178). The ONLY legitimate referring domain found was mlslistings.com.
+# No legitimate link is disavowed below.
+#
+# BEFORE UPLOADING: Google ignores most automated spam on its own, and a disavow cannot be
+# partially undone quickly. Export the authoritative list from Search Console
+# (Links > External links > Top linking sites > Export) and reconcile against this file first.
+# Upload at: https://search.google.com/search-console/disavow-links
+#
+# --- gambling / casino networks ---
+domain:007eaglegaze.online
+domain:agentbetting.online
+domain:bestirishcasinoonline.online
+domain:bestnz-poker-casinoslot.com
+domain:bestonlinecasinogamescanada.online
+domain:bestonlinecasinomexico.online
+domain:betwinnermirror.com
+domain:casinooftheking.com
+domain:casinoonlinecrazytime.online
+domain:casinopopular.online
+domain:hotonlinegaming.com
+domain:m98ufa.com
+domain:canlisohbethatlari.online
+# --- pharma spam ---
+domain:doxycycline100mg.store
+domain:erythromycinonline.site
+domain:exotichealths.com
+domain:irisdiagnosis.net
+# --- "Fiverr SEO" doorway network ---
+domain:fiverr-affordable-seo-services.site
+domain:fiverr-cost-effective-seo.site
+domain:fiverr-quality-seo-at-affordable-rates.site
+domain:fiverr-seo-for-business-growth.site
+domain:fiverr-seo-for-small-businesses.site
+domain:best-seo-domains.com
+domain:backlinks-checker.com
+domain:digitalseotool.com
+domain:newblogerseo.com
+domain:mediaboooster.com
+domain:blogerreviewers.com
+# --- expired-domain / TLD farms (domraider.*, ggmap.*) ---
+domain:domraider.br.com
+domain:domraider.de.com
+domain:domraider.eu.com
+domain:domraider.gb.net
+domain:domraider.it.com
+domain:domraider.uk.com
+domain:domraider.uk.net
+domain:domraider.us.com
+domain:ggmap.co.com
+domain:ggmap.us.com
+# --- Moldova link farm (195.20.19.178) ---
+domain:blogsphere.top
+domain:buzzshrink.website
+domain:analyticshaven.top
+domain:bye.fyi
+domain:byteshort.xyz
+domain:creativeposts.top
+domain:dailymusings.top
+domain:metamagic.top
+# --- generated throwaway .shop network ---
+domain:burpio.shop
+domain:cinto.shop
+domain:connectedcannabis.shop
+domain:cralto.shop
+domain:crinto.shop
+domain:drobo.shop
+domain:fioro.shop
+domain:flenro.shop
+domain:junip.shop
+domain:lemvi.shop
+domain:luminko.shop
+domain:matrivo.shop
+domain:mertio.shop
+domain:mervi.shop
+domain:nelpa.shop
+domain:nimbra.shop
+domain:nimpa.shop
+domain:nivira.shop
+# --- miscellaneous scraper / low-quality ---
+domain:8coint.com
+domain:aloysionunes.com
+domain:archive-hu.com
+domain:betulcrime.com
+domain:breachviews.com
+domain:cgpa2percentag.com
+domain:chordmp3.net
+domain:cindylaup.com
+domain:cmocheatsheets.com
+domain:coruzants.com
+domain:cvillico.com
+domain:daechul.co.com
+domain:dailyfolknews.com
+domain:digitalchatni.com
+domain:dupurgeniefr.com
+domain:fashionclothingnews.com
+domain:fastlifesite.com
+domain:fletcherrld.com
+domain:gladeflowers.com
+domain:juaralaundry.com
+domain:kkinsider.com
+domain:lawyerinjeddah.com
+domain:libyanatravel.com
+domain:marinasone.com
+domain:masihnyata.com
+domain:missburrg.com
+domain:mymarketpost.com
+domain:onlineshoppingidea.com
+domain:royaldb.us.com
+domain:toplikevideo.com
+# --- real-estate scraper mirrors (review before disavowing; may carry minor value) ---
+# domain:clifflisting.com
+# domain:lydiaroyrealestate.com
+# domain:mylisthero.com
+# domain:homesforsaleoldgreenwichct.com
+#
+# NOT disavowed (legitimate): mlslistings.com

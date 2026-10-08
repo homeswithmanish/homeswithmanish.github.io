@@ -12,19 +12,20 @@ const selectField = (id, label, options) =>
 export const CALCULATORS = [
   {
     slug: "affordability",
+    related: [{ href: "/blog/tri-valley-east-bay-home-prices-by-city-2026", label: "Home Prices by City (2026)" }],
     title: "Home Affordability Calculator (East Bay Edition)",
     short: "How much house can I afford?",
     metaDescription:
       "Free home affordability calculator tuned for East Bay buyers. Estimate your maximum purchase price from income, debts, down payment, and today's rates.",
     intro: [
       "How much house can you actually afford in the East Bay? Lenders qualify you on debt-to-income (DTI) ratios — this calculator applies the same 28/36 framework (with a stretch scenario up to 43% back-end DTI) to translate your income into a realistic price range.",
-      "In markets like San Ramon and Dublin where medians run well past $1.5M, knowing your true ceiling before you tour homes saves weeks of wasted searching — and prevents heartbreak offers.",
+      "In markets like San Ramon and Pleasanton where medians run past $1.5M, knowing your true ceiling before you tour homes saves weeks of wasted searching — and prevents heartbreak offers.",
     ],
     formHtml: `
       ${field("aff-income", "Gross Annual Household Income", 'type="text" inputmode="numeric" placeholder="$250,000"')}
       ${field("aff-debts", "Monthly Debt Payments (cars, loans, cards)", 'type="text" inputmode="numeric" placeholder="$800"')}
       ${field("aff-down", "Down Payment Available", 'type="text" inputmode="numeric" placeholder="$300,000"')}
-      ${field("aff-rate", "Interest Rate (%)", 'type="number" step="0.01" value="6.5"')}
+      ${field("aff-rate", "Interest Rate (%)", 'type="number" step="0.01" value="7.25"')}
       ${selectField("aff-term", "Loan Term", '<option value="30">30-Year Fixed</option><option value="15">15-Year Fixed</option>')}`,
     resultsHtml: `
       <div class="calc-result-row"><span>Conservative (28/36 DTI)</span><strong id="aff-conservative">—</strong></div>
@@ -62,26 +63,27 @@ export const CALCULATORS = [
     methodology:
       "Conservative scenario caps housing costs at 28% of gross monthly income and total debts at 36%; the stretch scenario allows up to 43% back-end DTI (common for strong files). Payment estimates include principal, interest, ~1.1% property tax, and ~0.35% insurance. Actual qualification depends on credit, reserves, loan program, and lender overlays — get pre-approved for a real number.",
     faq: [
-      { q: "What income do I need for a $1.5M house in the East Bay?", a: "As a rough rule with 20% down and mid-6% rates, plan on roughly $280K–$330K of household income under conservative DTI guidelines — less if you carry no debts or put more down. Run your own numbers above, then verify with a pre-approval." },
+      { q: "What income do I need for a $1.5M house in the East Bay?", a: "As a rough rule with 20% down and rates near 7.25%, the 28% housing-cost guideline used above implies roughly $430K of household income, or about $335K at a 36% total-debt ratio with no other debts — less if you carry no debts or put more down. Run your own numbers above, then verify with a pre-approval." },
       { q: "What DTI do lenders actually allow?", a: "Conventional loans commonly allow up to ~43–50% back-end DTI with strong compensating factors, but qualifying at the maximum leaves no margin. I encourage clients to shop at their comfortable payment, not their maximum approval." },
       { q: "Does this calculator include HOA or Mello-Roos?", a: "No — those vary per property. In communities like East Dublin, Tracy Hills, or Mountain House, add HOA dues and CFD assessments to the payment estimate. I model exact carrying costs on any home you're considering." },
     ],
   },
   {
     slug: "buy-vs-rent",
+    related: [{ href: "/blog/rent-vs-buy-san-ramon-2026", label: "Renting vs Buying in San Ramon: The 2026 Math" }],
     title: "Buy vs Rent Calculator for the East Bay",
     short: "Should I buy or keep renting?",
     metaDescription:
       "Buy vs rent calculator built for Bay Area price-to-rent ratios. Compare the true 5–10 year cost of owning vs renting in San Ramon, Dublin, Tracy and beyond.",
     intro: [
-      "East Bay price-to-rent ratios typically run 25–35x annual rent — among the highest in the country — which means renting is often cheaper month to month, while buying builds equity and locks in your housing cost. The right answer depends almost entirely on how long you'll stay.",
+      "Price-to-rent ratios in the cities I serve run roughly 21x to 41x annual rent (Zillow ZHVI and ZORI, August 2026), which means renting is often cheaper month to month, while buying builds equity and locks in your housing cost. The right answer depends almost entirely on how long you'll stay.",
       "This calculator compares the full cost of each path over your time horizon: rent growth on one side; mortgage interest, taxes, maintenance, selling costs, and price appreciation on the other.",
     ],
     formHtml: `
       ${field("bvr-rent", "Current / Comparable Monthly Rent", 'type="text" inputmode="numeric" placeholder="$4,200"')}
       ${field("bvr-price", "Home Purchase Price", 'type="text" inputmode="numeric" placeholder="$1,200,000"')}
       ${field("bvr-down", "Down Payment (%)", 'type="number" value="20" min="0" max="100"')}
-      ${field("bvr-rate", "Interest Rate (%)", 'type="number" step="0.01" value="6.5"')}
+      ${field("bvr-rate", "Interest Rate (%)", 'type="number" step="0.01" value="7.25"')}
       ${field("bvr-years", "Years You Plan to Stay", 'type="number" value="7" min="1" max="30"')}
       ${field("bvr-appr", "Annual Home Appreciation (%)", 'type="number" step="0.1" value="4"')}
       ${field("bvr-rentgrowth", "Annual Rent Increase (%)", 'type="number" step="0.1" value="3"')}
@@ -132,11 +134,11 @@ export const CALCULATORS = [
         show();
       }`,
     methodology:
-      "Owning costs include down payment, principal & interest (30-yr), ~1.1% property tax + ~0.35% insurance, and 1%/yr maintenance; the projected sale nets out remaining loan balance and 6% selling costs at your appreciation assumption. Renting compounds your rent at the growth rate you set. Tax savings value your deductible mortgage interest (on the first $750k of loan balance) plus property tax (capped at the $10k SALT limit) at the marginal rate you enter — this assumes you itemize and exceed the standard deduction, so treat it as an upper bound. Investment opportunity cost on the down payment and PMI are excluded. A framing tool, not a forecast — and not tax advice.",
+      "Owning costs include down payment, principal & interest (30-yr), ~1.1% property tax + ~0.35% insurance, and 1%/yr maintenance; the projected sale nets out remaining loan balance and 6% selling costs at your appreciation assumption. Renting compounds your rent at the growth rate you set. Tax savings value your deductible mortgage interest (on the first $750k of loan balance) plus property tax (conservatively capped at $10k; the 2026 federal SALT cap is $40,400 for most filers, phases down toward $10,000 at higher incomes and is shared with your California income tax) at the marginal rate you enter — this assumes you itemize and exceed the standard deduction, so treat it as an upper bound. Investment opportunity cost on the down payment and PMI are excluded. A framing tool, not a forecast — and not tax advice.",
     faq: [
       { q: "How long do I need to stay for buying to win in the Bay Area?", a: "With typical East Bay price-to-rent ratios, buying usually needs a 5+ year horizon to overcome transaction costs — longer when appreciation is slow, shorter when rents are rising quickly. Run your own scenario above." },
-      { q: "Why does the calculator ask about appreciation?", a: "Because it dominates the outcome. East Bay cities have historically appreciated strongly, but no rate is guaranteed — try conservative (2–3%) and historical (5–8%) scenarios to see the range." },
-      { q: "How does the tax savings figure work?", a: "It values your deductible mortgage interest and property tax at your marginal rate, but it assumes you itemize and clear the standard deduction — and it applies the $750k mortgage-interest cap and the $10k SALT cap. Many buyers get less than the full figure; confirm your situation with a CPA before relying on it." },
+      { q: "Why does the calculator ask about appreciation?", a: "Because it dominates the outcome. East Bay cities have appreciated over the long run, but no rate is guaranteed. Try conservative (2–3%) and longer-run (about 4–5%, roughly the 10-year Zillow ZHVI pace for these cities) scenarios to see the range." },
+      { q: "How does the tax savings figure work?", a: "It values your deductible mortgage interest and property tax at your marginal rate, but it assumes you itemize and clear the standard deduction — and it applies the $750k mortgage-interest cap and conservatively limits property tax to $10k (the 2026 SALT cap is higher for many filers but is shared with state income tax). Many buyers get less than the full figure; confirm your situation with a CPA before relying on it." },
       { q: "Does renting ever make more sense?", a: "Absolutely — short time horizons, career uncertainty, or a market you may leave all favor renting. My job is honest math, not pushing a purchase." },
     ],
   },
@@ -187,12 +189,13 @@ export const CALCULATORS = [
       "Estimates use typical Northern California pricing: escrow ≈ $1,500 base + $1/1,000; combined owner's + lender's title ≈ 0.28% of price; lender/appraisal/credit ≈ $2,950 on financed deals; prepaids assume ~6 months of property tax impounds, first-year insurance, and 15 days of interest. Actual fees vary by escrow/title company, lender, and closing date — your Loan Estimate and estimated settlement statement are the authoritative numbers.",
     faq: [
       { q: "Who pays transfer tax in Alameda and Contra Costa counties?", a: "By local custom the seller pays the $1.10/$1,000 county documentary transfer tax in Alameda, Contra Costa, and San Joaquin counties. It's negotiable in the contract, but seller-paid is the default expectation." },
-      { q: "Can closing costs be rolled into my loan?", a: "On a purchase, generally no — but seller credits negotiated in the offer can cover some or all closing costs, and lender credits can trade a slightly higher rate for lower cash-to-close. Both are strategies I use regularly." },
+      { q: "Can closing costs be rolled into my loan?", a: "On a purchase, generally no — but seller credits negotiated in the offer can cover some or all closing costs, and lender credits can trade a slightly higher rate for lower cash-to-close. Both are worth discussing with your lender and me before you write an offer." },
       { q: "Why are prepaids so large?", a: "California semiannual property taxes plus a year of insurance get collected up front (especially with an impound account). It's not a fee — it's your own future expenses funded at closing." },
     ],
   },
   {
     slug: "property-tax",
+    related: [{ href: "/blog/mello-roos-mountain-house-tracy-hills", label: "Mello-Roos in Mountain House and Tracy Hills" }, { href: "/cities/san-ramon/dougherty-valley/", label: "Dougherty Valley guide (HOA and CFD costs)" }],
     title: "California Property Tax Estimator (East Bay & Tracy)",
     short: "What will my property taxes be?",
     metaDescription:
@@ -245,7 +248,7 @@ export const CALCULATORS = [
     metaDescription:
       "Plan your down payment for an East Bay home: savings timeline, closing-cost cushion, and PMI trade-offs for buying with less than 20% down.",
     intro: [
-      "The down payment is the biggest hurdle for most East Bay buyers — but 20% is a benchmark, not a rule. Conventional loans start at 3–5% down, and buying with PMI sooner is sometimes cheaper than renting while you save toward a rising target.",
+      "The down payment is the biggest hurdle for most East Bay buyers — but 20% is a benchmark, not a rule. Conventional loans can start at 3–5% down (3% programs carry first-time-buyer or income rules and loan-size limits), and buying with PMI sooner is sometimes cheaper than renting while you save toward a rising target.",
       "This planner turns your target home price and monthly savings into a concrete timeline, including the closing-cost cushion buyers often forget.",
     ],
     formHtml: `
@@ -280,8 +283,8 @@ export const CALCULATORS = [
     methodology:
       "The plan targets your chosen down payment plus a ~2% closing-cost cushion. It doesn't model home-price appreciation working against you while you save, investment returns on your savings, or PMI trade-offs of buying sooner with less down — all three are worth a real conversation, because in appreciating markets waiting to reach 20% can cost more than PMI would.",
     faq: [
-      { q: "Do I really need 20% down in the Bay Area?", a: "No. Conventional loans allow as little as 3–5% down (with PMI), and strong buyers win offers at 10% down regularly. 20% avoids PMI and strengthens offers, but waiting years to reach it in an appreciating market has its own cost." },
-      { q: "What about jumbo loans?", a: "Most Tri-Valley purchases exceed conforming limits and use jumbo financing, which typically wants 10–20% down and stronger reserves. Tracy and Mountain House often fit within conforming/high-balance limits — one reason first-time buyers start there." },
+      { q: "Do I really need 20% down in the Bay Area?", a: "No. Conventional loans allow as little as 3–5% down (with PMI), and buyers can and do compete with 10% down. 20% avoids PMI and strengthens offers, but waiting years to reach it in an appreciating market has its own cost." },
+      { q: "What about jumbo loans?", a: "Many Tri-Valley loan amounts exceed the 2026 high-balance conforming limit ($1,249,125 in Alameda and Contra Costa counties) and use jumbo financing, which typically wants 10–20% down and stronger reserves. Tracy and Mountain House often fit within the baseline conforming limit ($832,750 in San Joaquin County for 2026) — one reason first-time buyers start there." },
       { q: "Can I use gift funds or RSUs?", a: "Gift funds from family are broadly allowed with documentation, and lenders increasingly count vested RSU income for tech buyers. Both need to be papered correctly — connect with a lender early (I can introduce you)." },
     ],
   },
@@ -290,7 +293,7 @@ export const CALCULATORS = [
     title: "Sell-to-Net Calculator (Seller's Net → List Price)",
     short: "What should I list to net my goal?",
     metaDescription:
-      "Work backward from the cash you want to walk away with to the right list price. Estimate East Bay seller net proceeds after commission, closing costs, and loan payoff.",
+      "Work backward from the cash you want to walk away with to a list price. Estimate East Bay seller net proceeds after commission, closing costs and payoff.",
     intro: [
       "Most seller calculators ask for a price and tell you what's left. This one runs the other direction: start with the cash you want in your pocket, and it solves for the sale price you need after commission, closing costs, and paying off your loan.",
       "It's the fastest way to pressure-test a list price against a real goal — a 1031 exchange target, the down payment on your next home, or simply the number that makes moving worth it.",

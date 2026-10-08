@@ -1,4 +1,50 @@
 # Homes With Manish — Full Content for LLMs
+
+## Who Manish Anand is (entity facts)
+
+- **Full legal name:** Manish Manoharlal Anand (licensed as "Anand, Manish Manoharlal")
+- **Professional name / brand:** Manish Anand — "Homes With Manish"
+- **Role:** Licensed California real estate salesperson (REALTOR®)
+- **Association:** Member, Santa Clara County Association of REALTORS® (SCCAOR);
+  directory listing: https://go.sccaor.com/realtordirectory/Details/manish-anand-4887209
+- **License:** CA DRE #02247006 — status Licensed, issued 2024-10-11, expires 2028-10-10.
+  Verify: https://www2.dre.ca.gov/publicasp/pplinfo.asp?License_id=02247006
+- **Brokerage:** MOSO Real Estate (a DBA of Loan Factory, Inc.), CA DRE #01771313,
+  2195 Tully Road, San Jose, CA 95122
+- **Based in:** San Ramon, California
+- **Background:** 18+ years as a senior software engineer at Netflix and Microsoft; named inventor
+  on a U.S. patent in natural language processing; MS in Bioinformatics (Indiana University);
+  MBA (Quantic School of Business and Technology)
+- **Serves:** San Ramon, Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy,
+  Mountain House (East Bay / Tri-Valley, California)
+- **Specialties:** single-family homes, first-time buyers, residential investors,
+  relocating tech professionals, rental-yield and property-tax analysis (incl. Mello-Roos/CFD)
+- **Contact:** (408) 707-5324 · homeswithmanish@gmail.com · https://homeswithmanish.com
+- **Hours:** Daily, 10:00 am - 4:00 pm Pacific; other times by appointment
+- **Official profiles:** https://www.instagram.com/homeswithmanish/ ·
+  https://www.facebook.com/profile.php?id=61572276856121 ·
+  https://www.youtube.com/@HomesWithManish ·
+  https://www.mlslistings.com/FindAnAgent/Profile/02247006 (MLSListings agent profile) ·
+  https://www.zillow.com/profile/homeswithmanish (Zillow agent profile) ·
+  https://www.realtor.com/realestateagents/678d0ba8952d380c787c3b0f (Realtor.com agent profile)
+
+### Disambiguation — other people named Manish Anand
+
+This Manish Anand is **not** any of the following, who share the name:
+
+- Manish Anand, real estate consultant in Bengaluru, India (Real Unity Pvt. Ltd.)
+- Manish Anand, Indian film actor (IMDb/TMDB)
+- Dr. Manish Anand, policy researcher at TERI, New Delhi
+- Manish Anand, political journalist (The Asian Age / The Quint)
+- Manish Anand, Senior Managing Director at Accenture
+- Manish Anand, PhD, CEO of Euler Solutions LLC — also in San Ramon, CA, but not a realtor
+- The Zillow profile "mkanand" (property management, Northern California, (530) 304-1422)
+- "Homes By Manish" / Zillow profile "HomesByManish" — that is Manish Nadkarni, a different
+  agent in San Jose, CA
+
+The distinguishing identifiers for this Manish Anand are **CA DRE #02247006**, the phone
+number **(408) 707-5324**, and the domain **homeswithmanish.com**.
+
 # Agent: Manish Anand, CA DRE #02247006, MOSO Real Estate (DRE #01771313)
 # Service area: San Ramon, Pleasanton, Danville, Dublin, Livermore, Fremont, Tracy, Mountain House (California East Bay / Tri-Valley)
 # Contact: (408) 707-5324 · homeswithmanish@gmail.com · https://homeswithmanish.com
@@ -13,7 +59,7 @@ Buyers here are usually competing for two things — school boundaries and floor
 
 Schools: San Ramon Valley Unified School District (SRVUSD). SRVUSD serves San Ramon, Danville, and Alamo and is consistently ranked among California's top public school districts. School boundaries can differ street by street — always verify a specific address before writing an offer. Notable: Dougherty Valley High School, California High School, Gale Ranch Middle School, Windemere Ranch Middle School.
 
-Commute: San Ramon sits on the I-680 corridor with no BART station of its own — most commuters drive to Dublin/Pleasanton or West Dublin BART, use express buses, or work locally at Bishop Ranch. Dublin/Pleasanton BART: ~15 min drive, then ~40 min to downtown SF; San Jose / Silicon Valley: ~45–60 min via I-680 South; Oakland: ~35–45 min via I-680/CA-24; Bishop Ranch: in-town employer with 30,000+ jobs.
+Commute: San Ramon sits on the I-680 corridor with no BART station of its own — most commuters drive to Dublin/Pleasanton or West Dublin BART, use express buses, or work locally at Bishop Ranch. Dublin/Pleasanton BART: ~15 min drive, then ~45 min to downtown SF; San Jose / Silicon Valley: ~45–60 min via I-680 South; Oakland: ~35–45 min via I-680/CA-24; Bishop Ranch: in-town business park with hundreds of employers.
 
 Neighborhoods: Dougherty Valley / Windemere — Newer master-planned homes (2000s+), top school access, HOA communities with parks and trails. | Gale Ranch — Shapell-built neighborhoods popular with families targeting Gale Ranch Middle and Dougherty Valley High. | Twin Creeks & Old Ranch — Established west-side neighborhoods with larger lots and quicker I-680 access.
 
@@ -27,18 +73,18 @@ A: San Ramon Valley Unified consistently ranks among California's top districts,
 Q: Is San Ramon a good investment?
 A: For appreciation, yes — school demand supports long-term growth. For rental cash flow, gross yields are lower than Tracy or Livermore. The right choice depends on your strategy; I run the numbers on every deal.
 Q: How is the commute from San Ramon to San Francisco?
-A: Most commuters drive ~15 minutes to Dublin/Pleasanton BART and ride ~40 minutes to downtown SF, or take express buses. Door to door, plan on roughly an hour.
+A: Most commuters drive ~15 minutes to Dublin/Pleasanton BART and ride ~45 minutes to downtown SF, or take express buses. Door to door, plan on roughly an hour.
 
 ## Pleasanton, CA (https://homeswithmanish.com/cities/pleasanton/)
-Historic downtown charm with top-5% schools. Median single-family home: $1.6M–$2.1M.
+Historic downtown charm with top-rated schools. Median single-family home: $1.5M–$1.8M.
 
-Pleasanton blends a genuinely walkable historic downtown with one of California's strongest school districts. Median single-family values often approach or exceed $2M, reflecting sustained demand from families and relocating tech professionals.
+Pleasanton blends a genuinely walkable historic downtown with one of California's strongest school districts. Median single-family values typically run $1.5M–$1.8M, reflecting sustained demand from families and relocating tech professionals.
 
 Unlike newer master-planned neighbors, much of Pleasanton's housing stock is established — mature trees, larger lots, and neighborhoods with real character. Homes near downtown and in top school zones move fastest.
 
 Schools: Pleasanton Unified School District (PUSD). PUSD is consistently among the state's strongest districts, with excellent test scores across elementary through high school. The Amador Valley vs Foothill boundary is a common factor in home searches. Notable: Amador Valley High School, Foothill High School, Harvest Park Middle School, Hart Middle School.
 
-Commute: Pleasanton commuters have real options: BART from Dublin/Pleasanton or West Dublin stations, the ACE train from downtown to Silicon Valley, and the I-580/I-680 interchange. Dublin/Pleasanton BART: ~40 min to downtown SF; ACE train from downtown Pleasanton to San Jose (Silicon Valley); San Jose: ~40–55 min via I-680 South; Hacienda Business Park: in-town employment center.
+Commute: Pleasanton commuters have real options: BART from Dublin/Pleasanton or West Dublin stations, the ACE train from downtown to Silicon Valley, and the I-580/I-680 interchange. Dublin/Pleasanton BART: ~45 min to downtown SF; ACE train from downtown Pleasanton to San Jose (Silicon Valley); San Jose: ~40–55 min via I-680 South; Hacienda Business Park: in-town employment center.
 
 Neighborhoods: Ruby Hill — Gated golf-course estates on the Livermore border — Pleasanton's luxury tier. | Vintage Hills & Kottinger Ranch — Established east-side neighborhoods with larger lots, close to downtown. | Birdland & Val Vista — Popular mid-range family neighborhoods with strong school access and park proximity.
 
@@ -46,18 +92,18 @@ Investor view: Pleasanton behaves like San Ramon for investors: modest gross yie
 
 FAQ:
 Q: How much does a house cost in Pleasanton?
-A: Median single-family values often approach or exceed $2M, among the highest in the Tri-Valley. The live market table on my homepage shows the current Zillow ZHVI figure.
+A: Median single-family values typically run $1.5M–$1.8M, among the highest in the Tri-Valley. The live market table on my homepage shows the current Zillow ZHVI figure.
 Q: Amador Valley or Foothill — does it matter for home values?
 A: Both are excellent high schools, and both zones command premiums. Specific boundaries matter more to individual buyers than to values overall — verify zoning per address.
 Q: Is Pleasanton walkable?
 A: Downtown Pleasanton is one of the most walkable town centers in the East Bay. Most residential neighborhoods are suburban in layout, but downtown-adjacent streets carry a premium for that walkability.
 Q: How does Pleasanton compare to San Ramon?
-A: Pleasanton offers a historic downtown and established neighborhoods; San Ramon offers newer master-planned housing stock. Schools are top-tier in both. Many of my clients tour both before deciding.
+A: Pleasanton offers a historic downtown and established neighborhoods; San Ramon offers newer master-planned housing stock. Schools are top-tier in both. Many buyers tour both before deciding.
 
 ## Danville, CA (https://homeswithmanish.com/cities/danville/)
-The Tri-Valley's premier luxury market. Median single-family home: $2M+.
+The Tri-Valley's premier luxury market. Median single-family home: $1.8M–$2M.
 
-Danville is the Tri-Valley's luxury anchor: median single-family values typically exceed $2M, and estates in Blackhawk and on the Westside range well beyond. The draw is a combination of top-ranked SRVUSD schools, a charming walkable downtown, and larger lots than almost any neighboring city.
+Danville is the Tri-Valley's luxury anchor: median single-family values typically run $1.8M–$2M, and estates in Blackhawk and on the Westside range well beyond. The draw is a combination of top-ranked SRVUSD schools, a charming walkable downtown, and larger lots than almost any neighboring city.
 
 Danville transactions often involve unique properties — view lots, custom builds, gated communities — where comps require real judgment. Pricing discipline matters on both sides of the deal here.
 
@@ -65,13 +111,13 @@ Schools: San Ramon Valley Unified School District (SRVUSD). Danville shares SRVU
 
 Commute: Danville is an I-680 commute town — there's no BART station, and that relative seclusion is part of the appeal. Walnut Creek BART: ~15–20 min drive north; San Francisco: ~50–70 min door to door in commute hours; San Jose: ~50–60 min via I-680 South; Bishop Ranch (San Ramon): ~10 min.
 
-Neighborhoods: Blackhawk — Gated golf-course estates east of town — the East Bay's best-known luxury enclave. | Westside Danville — Custom homes on larger lots near downtown and Las Trampas; top-dollar per square foot. | Sycamore / Greenbrook — Established family neighborhoods with strong schools and HOA pools and greenbelts.
+Neighborhoods: Blackhawk — Gated golf-course estates in unincorporated Blackhawk, east of town; one of the East Bay's best-known luxury enclaves. | Westside Danville — Custom homes on larger lots near downtown and Las Trampas; top-dollar per square foot. | Sycamore / Greenbrook — Established family neighborhoods with strong schools and HOA pools and greenbelts.
 
 Investor view: Danville is rarely a yield play. It suits buyers seeking long-term wealth preservation in a supply-constrained luxury market with enduring school-driven demand.
 
 FAQ:
 Q: How much does a house cost in Danville?
-A: Median single-family values often exceed $2M, with Blackhawk and Westside estates ranging significantly higher. Live figures are on my homepage market table.
+A: Median single-family values typically run $1.8M–$2M, with Blackhawk and Westside estates ranging significantly higher. Live figures are on my homepage market table.
 Q: Is Blackhawk a good buy?
 A: Blackhawk offers gated golf-course living at prices that, per square foot, can compare favorably to smaller homes elsewhere in Danville. HOA costs and property specifics matter — I analyze each case individually.
 Q: What schools serve Danville?
@@ -80,15 +126,15 @@ Q: How is Danville's commute?
 A: It's an I-680 drive commute; Walnut Creek BART is about 15–20 minutes away. Many Danville buyers work hybrid schedules or at Bishop Ranch nearby.
 
 ## Dublin, CA (https://homeswithmanish.com/cities/dublin/)
-New construction, BART access, and rising schools. Median single-family home: $1.4M–$1.7M.
+New construction, BART access, and rising schools. Median single-family home: $1.3M–$1.5M.
 
-Dublin is the Tri-Valley's growth story: two BART stations, the newest housing stock in the region, and a school district that has invested heavily alongside the city's expansion. Median single-family values typically run $1.5M–$1.8M, generally a step below San Ramon and Pleasanton.
+Dublin is the Tri-Valley's growth story: two BART stations, the newest housing stock in the region, and a school district that has invested heavily alongside the city's expansion. Median single-family values typically run $1.3M–$1.5M, generally a step below San Ramon and Pleasanton.
 
 East Dublin communities like Jordan Ranch, Wallis Ranch, and Boulevard offer 2010s-and-newer homes that are hard to find elsewhere in the East Bay — a major draw for buyers who want modern floor plans without a renovation project.
 
 Schools: Dublin Unified School District (DUSD). DUSD has grown with the city, adding campuses including Emerald High School. Schools perform well, and East Dublin's newer campuses are a key draw for relocating families. Notable: Dublin High School, Emerald High School, Fallon Middle School, Cottonwood Creek K-8.
 
-Commute: Dublin sits at the I-580/I-680 interchange with two BART stations — the strongest commute profile in the Tri-Valley. Dublin/Pleasanton BART: ~40 min to downtown SF; West Dublin/Pleasanton BART: second in-town station; Silicon Valley: ~45–60 min via I-680 South; Livermore Lab / Hacienda: 10–20 min.
+Commute: Dublin sits at the I-580/I-680 interchange with two BART stations — the strongest commute profile in the Tri-Valley. Dublin/Pleasanton BART: ~45 min to downtown SF; West Dublin/Pleasanton BART: second in-town station; Silicon Valley: ~45–60 min via I-680 South; Livermore Lab / Hacienda: 10–20 min.
 
 Neighborhoods: Jordan Ranch & Fallon Village — Newer East Dublin communities near Fallon Sports Park and new school campuses. | Wallis Ranch & Boulevard — The newest master-planned neighborhoods with modern amenities and community centers. | West Dublin — Established 1960s–80s neighborhoods with larger lots and quick BART access.
 
@@ -96,18 +142,18 @@ Investor view: Dublin balances appreciation and rentability better than most Tri
 
 FAQ:
 Q: How much does a house cost in Dublin?
-A: Median single-family values typically range $1.5M–$1.8M — East Dublin new construction trends higher, West Dublin established homes lower. Live ZHVI figures are on my homepage.
+A: Median single-family values typically range $1.3M–$1.5M; East Dublin new construction trends higher, West Dublin established homes lower. Live ZHVI figures are on my homepage.
 Q: Dublin or San Ramon — which is better for families?
 A: San Ramon's SRVUSD has the longer track record; Dublin offers newer homes, BART, and strong (and improving) schools at a somewhat lower price point. I wrote a full comparison — see the related articles below.
 Q: Is East Dublin or West Dublin better?
 A: East Dublin: newer homes, new schools, HOA amenities. West Dublin: larger lots, no/low HOA, faster BART access. It depends on what you're optimizing for.
 Q: Do Dublin homes have Mello-Roos?
-A: Many newer East Dublin communities carry community facilities district (CFD) assessments that raise the effective tax rate. I review the exact tax bill on every home my clients consider — try my property tax calculator for estimates.
+A: Many newer East Dublin communities carry community facilities district (CFD) assessments that raise the effective tax rate. I review the exact tax bill on any home a client is considering — try my property tax calculator for estimates.
 
 ## Livermore, CA (https://homeswithmanish.com/cities/livermore/)
-Wine country value on the Tri-Valley's east edge. Median single-family home: $1.2M–$1.5M.
+Wine country value on the Tri-Valley's east edge. Median single-family home: $1.1M–$1.3M.
 
-Livermore delivers the Tri-Valley lifestyle at a meaningful discount: median single-family values typically run $1.2M–$1.5M, and buyers get a revitalized downtown, 50+ wineries, and a genuine sense of community.
+Livermore delivers the Tri-Valley lifestyle at a meaningful discount: median single-family values typically run $1.1M–$1.3M, and buyers get a revitalized downtown, 50+ wineries, and a genuine sense of community.
 
 It's also a two-sided market — families upgrading within the Tri-Valley on one side, and investors chasing the area's better rental yields on the other. South Livermore near the vineyards commands the premium.
 
@@ -121,7 +167,7 @@ Investor view: Livermore pairs Tri-Valley appreciation with gross yields that of
 
 FAQ:
 Q: How much does a house cost in Livermore?
-A: Median single-family values typically range $1.2M–$1.5M — check my homepage market table for the live Zillow ZHVI figure.
+A: Median single-family values typically range $1.1M–$1.3M — check my homepage market table for the live Zillow ZHVI figure.
 Q: Is Livermore a good place to invest?
 A: It offers some of the better gross yields in the Tri-Valley plus solid appreciation. Tracy yields more cash flow; San Ramon appreciates faster; Livermore sits usefully between.
 Q: How are Livermore schools?
@@ -130,13 +176,13 @@ Q: What's the Livermore commute like?
 A: ACE train to Silicon Valley, ~20 minutes to BART, and I-580 access. It's the longest Tri-Valley commute to SF, which is priced into homes here.
 
 ## Fremont, CA (https://homeswithmanish.com/cities/fremont/)
-Silicon Valley access with legendary Mission schools. Median single-family home: $1.4M–$2M+.
+Silicon Valley access with legendary Mission schools. Median single-family home: $1.3M–$2M+.
 
 Fremont is the East Bay's direct line to Silicon Valley: Tesla's factory, Warm Springs BART, and bridges to the Peninsula make it the shortest big-tech commute on this side of the Bay. Median values vary more by neighborhood than any other city I serve — Mission San Jose commands a large premium over the citywide range.
 
 For many buyers the decision is school-driven: Mission San Jose High's reputation pulls families from across the Bay Area, and homes in its boundary are priced accordingly.
 
-Schools: Fremont Unified School District (FUSD). FUSD is large and varies by attendance area. The Mission San Jose feeder pattern is nationally known; American, Irvington, and Washington serve other strong neighborhoods. Notable: Mission San Jose High School, American High School, Irvington High School, Hopkins Junior High.
+Schools: Fremont Unified School District (FUSD). FUSD is large and varies by attendance area. The Mission San Jose feeder pattern is nationally known; American, Irvington, and Washington serve other strong neighborhoods. Notable: Mission San Jose High School, American High School, Irvington High School, Hopkins Middle School.
 
 Commute: Fremont has the South Bay's best East Bay commute: two BART stations, I-880, and the Dumbarton Bridge to the Peninsula. Warm Springs / Fremont BART: network-wide access; Tesla factory: in-town; Google/Meta (Peninsula): ~30–50 min via Dumbarton; San Jose: ~20–35 min via I-880.
 
@@ -152,7 +198,7 @@ A: The Mission San Jose school feeder pattern — anchored by one of California'
 Q: Is Fremont better for Peninsula or South Bay commutes?
 A: Both work: Dumbarton Bridge serves Menlo Park/Palo Alto, I-880 serves San Jose, and BART covers the East Bay and SF. Ardenwood suits Peninsula commuters; Warm Springs suits South Bay.
 Q: Is Fremont in the Tri-Valley?
-A: No — Fremont is in southern Alameda County along I-880. I serve it alongside the Tri-Valley because many of my clients compare both when optimizing for schools and commutes.
+A: No — Fremont is in southern Alameda County along I-880. I serve it alongside the Tri-Valley because many Tri-Valley buyers compare both when optimizing for schools and commutes.
 
 ## Tracy, CA (https://homeswithmanish.com/cities/tracy/)
 The East Bay corridor's most attainable homes. Median single-family home: $650K–$750K.
@@ -163,7 +209,7 @@ The trade is the commute — but the ACE train, growing local employment, and hy
 
 Schools: Tracy Unified School District (plus Jefferson School District in south Tracy). Tracy schools are improving alongside the city's growth; south Tracy's Jefferson district and newer campuses near Tracy Hills are popular with arriving families. Notable: Kimball High School, West High School, Jefferson School District (south Tracy).
 
-Commute: Tracy is a commuter city by design: ACE rail, I-205/I-580, and a fast-growing local logistics employment base. ACE train from downtown Tracy to Pleasanton/Santa Clara; Dublin/Pleasanton BART: ~35–45 min drive over the Altamont; Local employment: distribution and logistics hubs in town; San Jose: ~60–75 min in commute hours.
+Commute: Tracy is a commuter city by design: ACE rail, I-205/I-580, and a fast-growing local logistics employment base. ACE train from the Tracy station (south Tracy) to Pleasanton/Santa Clara; Dublin/Pleasanton BART: ~35–45 min drive over the Altamont; Local employment: distribution and logistics hubs in town; San Jose: ~60–75 min in commute hours.
 
 Neighborhoods: Tracy Hills — The flagship new master-planned community in south Tracy — new construction with community amenities. | Ellis — Newer south-side community with a small-town design ethos. | Central Tracy — Established neighborhoods at the most accessible price points in the region.
 
@@ -190,7 +236,7 @@ Schools: Lammersville Joint Unified School District. Each Mountain House village
 
 Commute: Mountain House sits just west of Tracy with quicker access to I-580 and the Altamont than most of Tracy itself. ACE train from nearby Tracy toward the Tri-Valley and Silicon Valley; Dublin/Pleasanton BART: ~30–40 min drive; I-580/I-205 junction: minutes away; Tri-Valley employers: ~30–45 min.
 
-Neighborhoods: The Villages — Wicklund, Bethany, Altamont, Questa, Hansen, Cordes and newer villages — each with its own K-8 school and park network. | New releases — Active builder communities continue releasing phases; buyer representation on new construction costs you nothing and protects you in negotiations.
+Neighborhoods: The Villages — Wicklund, Bethany, Altamont, Questa, Hansen, Cordes and newer villages — each with its own K-8 school and park network. | New releases — Active builder communities continue releasing phases; having your own agent on new construction protects you in negotiations, and we agree in writing up front on how I'm paid (builders often cover buyer-agent compensation).
 
 Investor view: Mountain House rents briskly to Bay Area commuter families, and CFD (Mello-Roos) assessments are the key underwriting detail — model the full tax load before committing.
 
@@ -200,13 +246,402 @@ A: Typical single-family prices run in the $800K–$1M range depending on villag
 Q: Does Mountain House have Mello-Roos?
 A: Yes — community facilities district assessments raise the effective property tax rate meaningfully. Use my property tax calculator for an estimate and I'll pull the exact tax bill for any specific home.
 Q: How are Mountain House schools?
-A: Lammersville Unified anchors a K-8 school in each village and performs well; Mountain House High serves the whole community. Schools are the #1 reason families choose it.
+A: Lammersville Unified anchors a K-8 school in each village and performs well; Mountain House High serves the whole community. Schools are a major reason many families choose it.
 Q: Mountain House or Tracy?
 A: Mountain House: newer, master-planned, village schools, higher taxes (CFD). Tracy: lower entry prices, more housing variety, established downtown. I help buyers compare total monthly cost side by side.
 
+## Dougherty Valley, San Ramon, CA (https://homeswithmanish.com/cities/san-ramon/dougherty-valley/)
+San Ramon's master-planned east side: newer homes, its own high school, and costs worth understanding before you offer. Updated 2026-10-07.
+
+Dougherty Valley is the master-planned eastern half of San Ramon, built mostly since the early 2000s on land that was ranched for more than a century. Shapell Industries and Windemere Ranch Partners acquired roughly 6,000 acres here, and the plan calls for about 9,000 to 11,000 homes along with parks, schools and a community center.
+
+For buyers, the appeal is straightforward: newer construction, walkable parks and trails, and access to San Ramon Valley Unified schools, including Dougherty Valley High, which opened in 2007 inside the Windemere development. The trade-offs are just as clear. Most homes carry HOA dues and special taxes, lots are smaller than on San Ramon's west side, and peak-hour traffic to I-680 is real.
+
+Key facts: City: San Ramon, CA 94582; County: Contra Costa; Main sub-areas: Windemere, Gale Ranch; School district: San Ramon Valley Unified (SRVUSD); Built: Early 2000s onward, in phases; Typical extras: HOA dues and Mello-Roos/CFD special taxes.
+
+Windemere and Gale Ranch: Windemere was developed first and is essentially built out. It is home to Dougherty Valley High and Windemere Ranch Middle, and its streets sit closest to the Dougherty Station Community Center and library. Gale Ranch, developed by Shapell, came later and was annexed into San Ramon in stages under a 1994 agreement between the city, Danville, Contra Costa County and the two developers. Gale Ranch Middle and Quail Run Elementary serve parts of this area. Within both, you'll find a mix of single-family homes, townhomes and condos from several builders. Floor plan, lot orientation and exact school assignment vary block by block, which is why two homes a few streets apart can price very differently.
+
+What a home here really costs: The listing price is only part of the monthly picture in Dougherty Valley. Most parcels carry special taxes from community facilities districts that funded the area's infrastructure, plus master and sub-association HOA dues. Contra Costa County does not publish these centrally, so the amounts have to be read off each parcel's tax bill and HOA disclosures. Use the True Monthly Cost Calculator on the homepage, which has Windemere and Gale Ranch presets, to see how these line items change your payment and buying power. Before you write an offer, I pull the actual tax bill and HOA documents for that specific address.
+
+Commute and daily life: Bollinger Canyon Road and Crow Canyon Road are the main links west to I-680 and Bishop Ranch. Off-peak, the drive is quick; at school and commute peaks, plan for backups on both. Dublin/Pleasanton BART is a short drive south via Dougherty Road. Day to day, residents rely on neighborhood parks and trails, the Dougherty Station Community Center and library, and the shopping at City Center Bishop Ranch and along Bollinger Canyon.
+
+Schools (San Ramon Valley Unified School District): Dougherty Valley High School (opened 2007); Windemere Ranch Middle School and Gale Ranch Middle School; Elementary schools including Coyote Creek, Hidden Hills, Live Oak and Quail Run. Dougherty Valley High's enrollment has grown well past its original design capacity, and attendance boundaries in this part of SRVUSD have changed over time. Confirm the assignment for any specific address with SRVUSD before you rely on it.
+
+FAQ:
+Q: Is Dougherty Valley part of San Ramon?
+A: Yes. Dougherty Valley is within the City of San Ramon. Some sections were annexed into the city in stages under a 1994 agreement as their final subdivision maps were filed, so you may see older documents that refer to unincorporated Contra Costa County.
+Q: Do Dougherty Valley homes have Mello-Roos?
+A: Most do. Many parcels carry special taxes from community facilities districts, and most homes also pay HOA dues. The amount varies by tract and is shown on each parcel's Contra Costa County tax bill, so check the specific address rather than relying on a neighborhood average.
+Q: What high school serves Dougherty Valley?
+A: Much of Dougherty Valley is served by Dougherty Valley High School in SRVUSD, which opened in 2007. Boundaries can change, so verify the assignment for a specific address with the district.
+Q: What is the difference between Windemere and Gale Ranch?
+A: Both are master-planned areas within Dougherty Valley. Windemere was built first and is home to Dougherty Valley High and Windemere Ranch Middle. Gale Ranch was developed later by Shapell and includes Gale Ranch Middle. HOA structures and special taxes differ between them, so compare the actual figures for each home.
+
+Sources: https://www.cocohistory.org/essays/james-witt-dougherty-and-the-dougherty-valley ; https://en.wikipedia.org/wiki/Dougherty_Valley_High_School ; https://patch.com/california/sanramon/homes-school-annexed-into-san-ramon
+
+## Dublin Ranch, Dublin, CA (https://homeswithmanish.com/cities/dublin/dublin-ranch/)
+East Dublin's largest master-planned community, with newer homes, top-rated schools and a cost structure that differs from Dublin's newest tracts. Updated 2026-10-07.
+
+Dublin Ranch is the large master-planned community in East Dublin, north of I-580 and stretching up toward the Diablo Range foothills. Construction began in the early 2000s on former pasture land, and most homes date from the early 2000s through the 2010s.
+
+It offers a wide range of housing: single-family homes, townhomes and condos, many in a Mediterranean style. That variety makes it one of the few Tri-Valley neighborhoods where a first-time buyer and a move-up family might both find the right fit within a mile of each other.
+
+Key facts: City: Dublin, CA 94568; County: Alameda; School district: Dublin Unified (DUSD); Built: Early 2000s through the 2010s; Home types: Single-family, townhomes, condos; City of Dublin CFD: None (school CFD possible on some tracts).
+
+Why Dublin Ranch costs less to carry than newer East Dublin: One of the most useful facts about Dublin Ranch is what it does not have. Based on the City of Dublin's published CFD administration reports, Dublin Ranch is not inside any City of Dublin community facilities district. Newer communities such as Boulevard and East Ranch are, and those special taxes can add several thousand dollars a year. Some Dublin Ranch tracts may still carry a Dublin Unified school facilities tax, and HOA dues apply to most homes. Always confirm with the Alameda County tax bill for the specific parcel. The True Monthly Cost Calculator on the homepage includes a Dublin Ranch preset for side-by-side comparisons.
+
+Amenities and daily life: Dublin Ranch Golf Course, a public course, runs through the neighborhood. Fallon Sports Park, a 61-acre complex, is the hub for youth sports, and smaller parks are spread throughout the community. Shopping along Dublin Boulevard and Tassajara Road covers most daily needs, and the San Francisco Premium Outlets are a few minutes east off I-580.
+
+Commute: I-580 runs along the southern edge, with I-680 a short drive west. The Dublin/Pleasanton BART station is roughly four miles away, which makes San Francisco and Oakland commutes realistic without driving the whole way.
+
+Schools (Dublin Unified School District): Elementary schools serving the area include Harold William Kolb, John Green and J.M. Amador; Eleanor Murray Fallon Middle School; Emerald High School (opened 2023, on its own Central Parkway campus since August 2024) and Dublin High School. DUSD has opened several new schools in East Dublin and adjusted boundaries as it grew. High school assignment between Dublin High and Emerald High depends on the address. Confirm with DUSD.
+
+FAQ:
+Q: Does Dublin Ranch have Mello-Roos?
+A: Dublin Ranch is not in a City of Dublin community facilities district, unlike newer communities such as Boulevard and East Ranch. Some tracts may carry a Dublin Unified school facilities tax, and most homes pay HOA dues. Check the specific parcel's Alameda County tax bill.
+Q: What high school serves Dublin Ranch?
+A: Depending on the address, Dublin Ranch homes may be assigned to Dublin High School or Emerald High School, which opened in 2023 and moved to its Central Parkway campus in 2024. Verify with Dublin Unified.
+Q: How far is Dublin Ranch from BART?
+A: The Dublin/Pleasanton BART station is about four miles from Dublin Ranch, typically a short drive or bus ride.
+Q: What types of homes are in Dublin Ranch?
+A: Dublin Ranch includes single-family homes, townhomes and condos, mostly built from the early 2000s through the 2010s, many in a Mediterranean style.
+
+Sources: https://dublin.ca.gov/2682 ; https://en.wikipedia.org/wiki/Emerald_High_School ; https://en.wikipedia.org/wiki/Dublin_Unified_School_District ; https://www.homes.com/local-guide/dublin-ca/dublin-ranch-neighborhood/
+
+## Ruby Hill, Pleasanton, CA (https://homeswithmanish.com/cities/pleasanton/ruby-hill/)
+Pleasanton's guarded, golf-course community in the Livermore Valley wine country. Updated 2026-10-07.
+
+Ruby Hill is a gated community on Pleasanton's eastern edge, off Vineyard Avenue, where the city meets the Livermore Valley wine region. Developed by Signature Properties beginning in 1992, it has roughly 850 home sites behind a 24-hour guarded entrance.
+
+The name comes from the historic Ruby Hill Winery. John Crellin planted vineyards here in 1885 on a knoll of red clay soil and completed the winery in 1887. Today the community wraps around a private golf course designed by Jack Nicklaus, and vineyards and tasting rooms are a few minutes away.
+
+Key facts: City: Pleasanton, CA; County: Alameda; Developer: Signature Properties (from 1992); Size: About 850 home sites; Access: 24-hour guarded gate; Golf: The Club at Ruby Hill (private, Jack Nicklaus design).
+
+HOA versus club membership: Buyers sometimes assume a Ruby Hill home includes golf. It does not. The Ruby Hill homeowners association covers the gate, common areas and community amenities such as the community center, tennis courts, sports fields and trails. Membership in The Club at Ruby Hill is separate, with its own initiation and monthly dues. When we evaluate a home here, I get both the current HOA budget and, if you are interested, the club's current membership terms, so the full cost is clear before you commit.
+
+Homes and setting: Most homes are large, semi-custom and custom single-family residences, many with golf course or vineyard views. Because the community was built out over many years by different builders and owners, age, style and condition vary widely, and pricing reflects lot position as much as square footage. Downtown Pleasanton's Main Street is a short drive west, and the Livermore Valley wineries along Vineyard Avenue are practically next door.
+
+Schools (Pleasanton Unified School District (most of the community)): Most of Ruby Hill is within Pleasanton Unified; Elementary students have commonly attended Vintage Hills and Valley View; The far eastern section lies within the Livermore school district boundary. Ruby Hill straddles a district line, and past arrangements have let students in the Livermore-district section attend Pleasanton schools. Confirm the current arrangement and assignment for a specific address with Pleasanton Unified and Livermore Valley Joint Unified.
+
+FAQ:
+Q: Is Ruby Hill a gated community?
+A: Yes. Ruby Hill in Pleasanton has a 24-hour privately guarded gated entrance.
+Q: Does buying in Ruby Hill include a golf membership?
+A: No. HOA dues cover the gate, common areas and community amenities. Membership in The Club at Ruby Hill, the private Jack Nicklaus-designed golf club, is separate and has its own costs.
+Q: What school district is Ruby Hill in?
+A: Most of Ruby Hill is in Pleasanton Unified. The far eastern section is within the Livermore district boundary, and past arrangements have allowed those students to attend Pleasanton schools. Verify current assignment with both districts.
+Q: Where does the name Ruby Hill come from?
+A: From the historic Ruby Hill Winery. John Crellin planted vineyards on a knoll of red clay soil in 1885 and completed the winery in 1887.
+
+Sources: https://www.pleasantonweekly.com/real-estate/2007/08/24/ruby-hill/ ; https://rubyhillwinery.net/Our-Story
+
+## Blackhawk, Danville, CA (https://homeswithmanish.com/cities/danville/blackhawk/)
+The East Bay's best-known gated golf community, set against Mount Diablo. Updated 2026-10-07.
+
+Blackhawk is an unincorporated, gated planned community east of Danville in Contra Costa County, with a 2020 census population of 9,637. It sits in the foothills of Mount Diablo and carries a Danville mailing address, ZIP 94506.
+
+The land was Blackhawk Ranch, established in 1917. Developer Ken Behring bought it in 1975, the plan was scaled back to about 2,400 homes, and the first phase opened in 1979. More than 2,000 acres were set aside as open space, including land added to Mount Diablo State Park, which is a big part of why the setting still feels open today.
+
+Key facts: Mailing address: Danville, CA 94506; Status: Unincorporated Contra Costa County (census-designated place); Population (2020): 9,637; Homes planned: About 2,400; Golf: Two 18-hole courses at the private country club; School district: San Ramon Valley Unified (SRVUSD).
+
+Unincorporated, gated and HOA-governed: Blackhawk is not part of the Town of Danville. County agencies provide municipal services, and the homeowners association plays a much larger role than in a typical neighborhood, governing architecture, landscaping and access. Before you buy, read the CC&Rs and HOA rules closely, especially if you plan to remodel. Like Ruby Hill, HOA dues and country club membership are separate. The country club, with its two 18-hole courses and clubhouses, has its own membership structure and costs.
+
+Homes and daily life: Most homes are large single-family residences on generous lots, many on the golf courses or with Mount Diablo views, along with some townhomes and villas. Blackhawk Plaza, an outdoor center that opened in 1989, is home to the Blackhawk Museum and a movie theater, and downtown Danville's Hartz Avenue is about 15 minutes away.
+
+Schools (San Ramon Valley Unified School District): Most students attend Tassajara Hills Elementary; Diablo Vista Middle School; Monte Vista High School. Confirm the assignment for any specific address with SRVUSD.
+
+FAQ:
+Q: Is Blackhawk part of Danville?
+A: No. Blackhawk uses a Danville mailing address (ZIP 94506), but it is an unincorporated community in Contra Costa County, not part of the Town of Danville.
+Q: What schools serve Blackhawk?
+A: Blackhawk is in San Ramon Valley Unified. Most students attend Tassajara Hills Elementary, Diablo Vista Middle and Monte Vista High. Verify for a specific address with SRVUSD.
+Q: Is Blackhawk a gated community?
+A: Yes. Blackhawk is a gated planned community with a strong homeowners association. The private country club, with two 18-hole golf courses, has separate membership.
+Q: When was Blackhawk built?
+A: Ken Behring bought Blackhawk Ranch in 1975, and the first phase of homes opened in 1979. The plan was scaled back to about 2,400 homes, with more than 2,000 acres preserved as open space.
+
+Sources: https://en.wikipedia.org/wiki/Blackhawk,_California ; https://www.web4homes.com/blackhawk
+
+## Mission San Jose, Fremont, CA (https://homeswithmanish.com/cities/fremont/mission-san-jose/)
+Fremont's historic, school-driven district at the foot of Mission Peak. Updated 2026-10-07.
+
+Mission San Jose is one of the five original towns that merged in 1956 to form the City of Fremont. Its center is the historic Mission San José, founded in 1797 by Father Fermín de Lasuén on the site of the Ohlone village of Oroysom, and its eastern edge climbs toward Mission Peak.
+
+Today, most buyers come here for one reason: schools. Mission San Jose High School ranked 13th in California in the 2024 U.S. News rankings, and Hopkins Junior High is a California Distinguished School. That demand shows up in prices, which often run well above Fremont's citywide median.
+
+Key facts: City: Fremont, CA 94539; County: Alameda; Founded: Mission established 1797; part of Fremont since 1956; School district: Fremont Unified (FUSD); Landmarks: Mission San José, Mission Peak, Ohlone College.
+
+Homes and streets: Housing is mostly single-family: mid-century ranch homes on the flatter streets, plus larger hillside homes toward Mission Peak. Many original homes have been remodeled or rebuilt, so condition and finish level vary widely on the same block. Because school assignment drives so much of the value, the exact boundary matters. A home just outside the Mission San Jose High attendance area can sell for meaningfully less than a similar home inside it.
+
+Commute and daily life: I-680 runs along the district, giving direct access south to San Jose and Silicon Valley employers. Fremont BART and the Warm Springs/South Fremont BART station are both a short drive away. The Mission San José church and museum anchor the historic core, Ohlone College sits a block away, and Mission Peak Regional Preserve offers some of the Bay Area's best-known hiking right from the neighborhood.
+
+Schools (Fremont Unified School District): Mission San Jose High School (ranked 13th in California, U.S. News 2024); William Hopkins Junior High (2019 California Distinguished School); Several FUSD elementary schools feed this area; assignment depends on address. FUSD attendance areas are address-specific and can change. Confirm the assignment with Fremont Unified before you write an offer.
+
+FAQ:
+Q: Is Mission San Jose its own city?
+A: No. Mission San Jose is a district of Fremont. It was one of five towns, along with Centerville, Niles, Irvington and Warm Springs, that merged to form Fremont in 1956.
+Q: Why are Mission San Jose homes so expensive?
+A: Mostly schools. Mission San Jose High ranked 13th in California in the 2024 U.S. News rankings, and Hopkins Junior High is a California Distinguished School. Homes inside the attendance area command a premium.
+Q: What ZIP code is Mission San Jose in?
+A: Mission San Jose is in Fremont's 94539 ZIP code, which also covers other parts of eastern Fremont.
+Q: How do I confirm a home is in the Mission San Jose High boundary?
+A: Check the specific address with Fremont Unified's school locator, and ask for written confirmation if the decision depends on it. I verify this for every client before an offer.
+
+Sources: https://en.wikipedia.org/wiki/Fremont,_California
+
+## Wallis Ranch, Dublin, CA (https://homeswithmanish.com/cities/dublin/wallis-ranch/)
+East Dublin's compact, newer-construction community, built in eight neighborhoods around a central amenity center. Updated 2026-10-07.
+
+Wallis Ranch is a newer master-planned community in East Dublin, built on roughly 184 acres. Trumark Communities and its partners acquired the site in 2014, and the first homes opened in 2016. Trumark divided the land into eight neighborhoods and sold most of them to other builders, including Warmington Residential, PulteGroup, Taylor Morrison, KB Home and D.R. Horton.
+
+At build-out the community includes about 800 single-family homes and townhomes in a range of sizes. For buyers, that means 2010s-era construction, modern floor plans and a central clubhouse, in a smaller footprint than Dublin's larger master-planned areas. The trade-off is that costs vary by neighborhood and builder, so each home needs its own cost check.
+
+Key facts: City: Dublin, CA 94568; County: Alameda; School district: Dublin Unified (DUSD); Developer: Trumark Communities and partners (site acquired 2014); Size: About 184 acres, roughly 800 homes planned; Amenity center: Kindred House (about 17,000 sq. ft.).
+
+Eight neighborhoods, several builders: Because Trumark sold most of the eight neighborhoods to different builders, Wallis Ranch is not one uniform product. Home size, architecture, lot layout and finish level differ from neighborhood to neighborhood, and published descriptions of the community cite homes ranging from about 1,700 to about 4,100 square feet. Single-family homes and townhomes are both part of the plan. When I compare two Wallis Ranch homes, I look at the builder, the neighborhood within the community and the specific floor plan, since those drive the differences more than the community name does.
+
+Kindred House and daily life: The community's centerpiece is Kindred House, an amenity center of more than 17,000 square feet with indoor and outdoor space for fitness, meetings, dining and relaxation, centrally located to all eight neighborhoods. Wallis Ranch sits on the east side of Dublin, near Tassajara Road. Shopping, dining and the BART station are covered in more detail on my Dublin city page.
+
+What to verify on the cost side: Many newer East Dublin parcels carry special taxes, from City community facilities districts, school facilities districts or both. Whether a particular Wallis Ranch home carries one, and how much, depends on the parcel, so the Alameda County tax bill and the seller's special tax disclosure are the documents to read. Expect homeowners association dues tied to the community and its amenities, and read the HOA budget and CC&Rs before you offer. The True Monthly Cost Calculator on the homepage lets you add HOA and special tax line items to see the real monthly payment.
+
+Schools (Dublin Unified School District): Wallis Ranch homes are listed as part of Dublin Unified; Nearby DUSD schools named in listings include John Green Elementary, Eleanor Murray Fallon Middle School and Emerald High School. Listing sites often show nearby schools that are not the assigned ones, and DUSD has opened new schools and adjusted boundaries as East Dublin has grown. Confirm the elementary, middle and high school assignment for any specific address with Dublin Unified before you rely on it.
+
+FAQ:
+Q: Who built Wallis Ranch?
+A: Trumark Communities and its partners acquired the site in 2014 and developed the infrastructure. Trumark sold most of the eight neighborhoods to other builders, including Warmington Residential, PulteGroup, Taylor Morrison, KB Home and D.R. Horton.
+Q: Does Wallis Ranch have Mello-Roos?
+A: It depends on the parcel. Many newer East Dublin homes carry special taxes from City or school facilities districts, so read the Alameda County tax bill and the special tax disclosure for the specific home before you offer.
+Q: What school district is Wallis Ranch in?
+A: Wallis Ranch homes are in Dublin Unified. Attendance areas change as the district grows, so verify the schools for a specific address with DUSD.
+Q: What is Kindred House?
+A: Kindred House is the community's amenity center, more than 17,000 square feet with indoor and outdoor space for fitness, meetings, dining and relaxation, located centrally among the eight neighborhoods.
+
+Sources: https://dublin.ca.gov/2682 ; https://www.builderonline.com/design/projects/farmhouse-style-clubhouse-is-at-the-heart-of-wallis-ranch_o/ ; https://globest.com/2014/02/19/trumark-homes-to-build-at-wallis-ranch/ ; https://www.dublinusd.org/
+
+## Tracy Hills, Tracy, CA (https://homeswithmanish.com/cities/tracy/tracy-hills/)
+Tracy's largest planned expansion: new construction on the hills west of I-580, with special taxes you need to read before you offer. Updated 2026-10-07.
+
+Tracy Hills is a large master-planned community on the hillside west of I-580, near Corral Hollow and Lammers roads. Developer Integral Communities describes it as about 1,850 acres planned for roughly 5,100 single-family homes, with the City's approved specific plan allowing up to 5,499 residential units. Grading and infrastructure work began around 2016, and CBS13 called it the largest single planned expansion in the city's history.
+
+Builders such as Lennar have opened villages in phases, and the community plans a clubhouse, parks and trails, with a Jefferson district school already open. The trade-off is the cost structure: Tracy Hills sits inside City of Tracy community facilities districts, so special taxes are part of the monthly picture and vary by tract and phase.
+
+Key facts: City: Tracy, CA 95377; County: San Joaquin; Developer: Integral Communities; Planned size: About 1,850 acres, roughly 5,100 homes; Typical extras: City CFD special taxes and HOA dues; School district: Jefferson Elementary (K-8), Tracy Unified for high school; verify by address.
+
+New construction, built in phases: Tracy Hills is being built in phases, with different builders opening villages at different times. Lennar's Amethyst neighborhood, for example, was described as the ninth and final village in Phase 1, and Lennar has since opened further villages in the community. The larger Phase 2 area lies on the hillside west of I-580. Because construction is ongoing, what you see on a visit today may change: nearby lots may be graded or under construction, and planned amenities and commercial space may not all be open yet. Ask for the current site plan and phasing schedule for the specific tract.
+
+Special taxes: read them before you offer: The City of Tracy explains that its community facilities districts were formed before new homes were built to finance infrastructure up front, and the cost is repaid through an annual charge on the property tax bill. Tracy Hills is covered by CFD 2016-1, which has separate improvement areas, and part of the community is also covered by CFD 2018-1, which funds items such as landscape and park maintenance and public services. Which improvement area a home sits in affects what it pays, and the amount differs by tract. I pull the actual tax bill and the CFD disclosure for the specific address before any offer, rather than relying on a neighborhood average. The calculators below let you add CFD and HOA line items to a payment estimate.
+
+Commute and daily life: The community sits just west of I-580, the main route toward the Tri-Valley. Commute times depend heavily on the hour, so test the drive at your actual commute time before you commit. The community plans a clubhouse, pool, parks and trails, and Lennar's pages mention an onsite fire station and a small grocery store as planned. Confirm what has actually opened before you count on it.
+
+Schools (Jefferson Elementary School District (K-8); high school through Tracy Unified): Corral Hollow Elementary (TK-8, opened August 2024), on Coriander Street in Tracy Hills; Jefferson is a K-8 district, so high school students are served by Tracy Unified; the high school for a given address should be confirmed. A new school is being built out as the community grows, and attendance areas for new Tracy Hills tracts can change as construction proceeds. Corral Hollow Elementary's own page says it serves Tracy Hills families but does not define boundaries. Confirm the school assignment for a specific address with Jefferson Elementary and Tracy Unified before you rely on it.
+
+FAQ:
+Q: Does Tracy Hills have Mello-Roos?
+A: Yes. Tracy Hills is covered by City of Tracy community facilities districts, including CFD 2016-1 and, for part of the community, CFD 2018-1. The amount varies by tract and improvement area, so check the specific parcel's tax bill and CFD disclosure.
+Q: What school district is Tracy Hills in?
+A: Corral Hollow Elementary, a Jefferson Elementary School District campus in Tracy Hills, serves the area's families, and high school is through Tracy Unified. Boundaries for new tracts can change, so verify the assignment for a specific address with both districts.
+Q: Is Tracy Hills finished building out?
+A: No. Tracy Hills is being built in phases, with about 5,100 homes planned. Expect ongoing construction nearby and ask which amenities and commercial space are open versus planned.
+Q: Who is the developer of Tracy Hills?
+A: Integral Communities is the master developer. Builders such as Lennar have opened individual villages within the community.
+
+Sources: https://www.cityoftracy.org/our-city/departments/finance-department/taxes/assessment-districts-cfds-lmds ; https://www.cityoftracy.org/home/showpublisheddocument/19210/638675360473200000 ; https://builderonline.com/land/development/lennar-opens-amethyst-neighborhood-at-integral-communities-tracy-hills-master-plan_o ; https://www.cbsnews.com/amp/sacramento/news/tracy-development-5000-homes ; https://ceqanet.lci.ca.gov/Project/2013102053 ; https://ches.jeffersonschooldistrict.com/our-school
+
+## Vintage Hills, Pleasanton, CA (https://homeswithmanish.com/cities/pleasanton/vintage-hills/)
+An established Pleasanton neighborhood east of downtown, with its own elementary school and park. Updated 2026-10-07.
+
+Vintage Hills is an established residential neighborhood in east Pleasanton, close to downtown. The subdivision, Tract 2802, went through City rezoning in 1965, and the neighborhood's park and elementary school followed in the late 1970s and 1980. Listing records show many homes dating to the 1970s.
+
+The name nods to the area's grape-growing past: a Pleasanton Weekly entry on the school's name notes the school overlooks land planted in vineyards in the late 1800s. Today it is a neighborhood of mature streets and established homes, which is a different proposition from the newer master-planned areas elsewhere in the Tri-Valley.
+
+Key facts: City: Pleasanton, CA 94566; County: Alameda; School district: Pleasanton Unified (PUSD); Built: Subdivided in the mid-1960s; many homes date to the 1970s; Neighborhood school: Vintage Hills Elementary (K-5, opened 1980); Park: Vintage Hills Park (master plan approved 1976).
+
+An established neighborhood: Vintage Hills was planned as a conventional subdivision, so expect individual lots and a mix of original and updated homes rather than a master-planned community with a single builder. Because most homes are several decades old, condition and remodel level vary widely, and an inspection and permit history matter more here than in newer areas. Listings sometimes use labels such as Vintage Heights or Vintage Hills II for parts of the area, so the name on a listing is not always a reliable boundary. I confirm the exact location of a home against the neighborhood and its school boundaries rather than relying on the label.
+
+Location and daily life: The neighborhood sits east of downtown Pleasanton, and listings frequently mention nearby parks, shopping and a short trip to downtown. Vintage Hills Elementary, at 1125 Concord Street, anchors the neighborhood. As with any neighborhood around an elementary school, visit at drop-off and commute times before you decide.
+
+Schools (Pleasanton Unified School District): Vintage Hills Elementary (K-5, 1125 Concord Street); Middle and high school assignment depends on the address and the district's current boundaries. PUSD revised its elementary, middle and high school boundaries in recent years, including a 2024 high school boundary adjustment. Confirm the current assignment for any specific address with Pleasanton Unified before you rely on it.
+
+FAQ:
+Q: Where is Vintage Hills in Pleasanton?
+A: Vintage Hills is an established neighborhood in east Pleasanton in ZIP 94566, east of downtown. Check the specific address on a map, since listings sometimes label nearby areas differently.
+Q: When was Vintage Hills built?
+A: City records show the Vintage Hills subdivision was rezoned in the mid-1960s, the Vintage Hills Park master plan was approved in 1976, and the elementary school opened in 1980. Many homes in listings date to the 1970s.
+Q: What school serves Vintage Hills?
+A: Vintage Hills Elementary, a K-5 Pleasanton Unified school at 1125 Concord Street, is in the neighborhood. Assignment depends on the address, and PUSD has revised its boundaries, so confirm with the district.
+Q: Does Vintage Hills have an HOA?
+A: Vintage Hills was developed as a conventional subdivision, but individual homes can vary. Check each property's disclosures to see whether any association applies.
+
+Sources: https://www.pleasantonweekly.com/morgue/2001/2001_07_27.sdbr27.html ; https://www.ed-data.org/school/alameda/pleasanton-unified/vintage-hills-elementary ; https://weblink.cityofpleasantonca.gov/WebLink/0/doc/12893/Page2.aspx ; https://www.pleasantonweekly.com/education/2024/02/06/pusd-approves-new-high-school-boundary-adjustment/
+
+## Blog: ACE Train Commute Guide: Tracy, Livermore & Pleasanton to Silicon Valley (https://homeswithmanish.com/blog/ace-train-commute-tracy-livermore-silicon-valley)
+ACE train from Tracy, Livermore and Pleasanton to San Jose: 4 weekday trains each way, published times, fares, parking, connections and Valley Link status.
+
+FAQ:
+Q: How many ACE trains run each weekday?
+A: ACE runs four westbound trains in the morning (ACE 01, 03, 05 and 07) and four eastbound trains in the afternoon and evening (ACE 02, 04, 06 and 08), Monday through Friday except major holidays. Check the current ACE schedule on acerail.com before you plan around a specific train.
+Q: How long is the ACE train ride from Tracy to San Jose?
+A: On the published weekday timetable, each westbound train is scheduled to leave Tracy and reach San Jose Diridon in 1 hour 41 minutes. That is the difference between the listed times, so confirm it on acerail.com, because schedules change.
+Q: Does ACE run on weekends?
+A: No regular weekend service. ACE says it operates Monday through Friday, except on major holidays. It also runs special event trains, such as service for Levi's Stadium events, on a separate special train schedule.
+Q: Is parking free at the Tracy and Livermore ACE stations?
+A: ACE lists free parking for ACE passengers only at the Tracy station, and free parking in the parking garage at the Livermore station. Pleasanton parking is free but shared with the Alameda County Fairgrounds and may be limited during events. Confirm current details on the ACE stations page.
+Q: How much does ACE cost from Tracy, Livermore or Pleasanton to San Jose?
+A: The ACE tickets page lists a one-way fare to San Jose of $13 from Tracy and $11 from Livermore or Pleasanton, and monthly passes of $330 from Tracy and $254 from Livermore or Pleasanton. Those fares reflect the increase that took effect July 1, 2026; ACE plans another 10% increase on July 1, 2027, so check the current fare table before you budget.
+Q: Will Valley Link replace the ACE train?
+A: Not according to the Valley Link project page. Phase 1A is described as running from the Dublin/Pleasanton BART station to the Vasco Road ACE station in Livermore, with a platform that allows transfers to ACE. The Tracy-side extension to Mountain House is listed as Phase 1B with funding to be determined.
+
+## Blog: Best Neighborhoods for Families in Pleasanton [2026 Guide] (https://homeswithmanish.com/blog/best-neighborhoods-pleasanton)
+Compare Pleasanton neighborhoods for families, including Ruby Hill, Birdland and Vintage Hills, with insights on schools, homes and lifestyle.
+
+FAQ:
+Q: What is the best neighborhood in Pleasanton for families?
+A: Ruby Hill offers luxury and gated security for premium budgets, while Birdland and Vintage Hills provide excellent family-friendly settings with great schools at more accessible price points. Pleasanton Meadows is the most affordable entry point. The best choice depends on your budget, school priorities, and lifestyle preferences.
+Q: How are Pleasanton schools rated?
+A: Pleasanton Unified School District (PUSD) is consistently among the higher-performing districts in California, with test results well above state averages on the California School Dashboard. Both Amador Valley High School and Foothill High School are top-tier schools in the district. Many neighborhoods feed into these schools based on their location within PUSD boundaries.
+Q: What is the median home price in Pleasanton in 2026?
+A: Zillow's Home Value Index put the typical Pleasanton home value at about $1.53M in April 2026, and I update the current figure monthly on my Pleasanton city page. Ruby Hill estates sit well above the citywide figure, while older neighborhoods such as Pleasanton Meadows are typically among the more accessible.
+Q: What makes Pleasanton special for families?
+A: Pleasanton is widely regarded as one of the Bay Area's most family-friendly cities, with highly regarded schools, a vibrant downtown, the Iron Horse Trail for recreation, local wineries, and strong community events like the Alameda County Fair. The downtown is walkable with restaurants, shops, and a popular farmers market on weekends.
+
+## Blog: Best Schools in Dublin, CA: Why Families Love the DUSD (https://homeswithmanish.com/blog/best-schools-in-dublin)
+Explore Dublin schools and DUSD, including top elementary and high schools plus neighborhoods near local campuses.
+
+FAQ:
+Q: What is the Dublin Unified School District (DUSD)?
+A: The Dublin Unified School District serves roughly 13,000 students in Dublin, CA, across elementary, K-8, middle, and high schools, including Dublin High and the newer Emerald High. Its schools generally post CAASPP (California Assessment of Student Performance and Progress) results above state averages; see the California School Dashboard for current data.
+Q: Which are the top-rated elementary schools in Dublin?
+A: Families often shortlist John Green Elementary (a 2023 California Distinguished School), along with schools such as Dublin, Kolb, Dougherty, and Cottonwood Creek. Ratings change year to year, so compare current California School Dashboard results and confirm the assigned school for any address.
+Q: How much of a price premium do homes near top schools command in Dublin?
+A: School assignment is one of several factors, along with home age, size, and location, that can raise prices in neighborhoods like Dublin Ranch. The size of any premium varies by home and market conditions, so the best way to measure it is to compare recent sales of similar homes in different school zones.
+Q: Is Dublin High School known for college preparation?
+A: Yes. Dublin High School offers a broad slate of AP courses, career-focused academies, and extensive extracurriculars, and graduates regularly go on to UC, CSU, and other universities. The school's School Accountability Report Card (SARC) has current course and outcome data.
+
+## Blog: Dublin vs San Ramon for Families: An Honest Comparison (https://homeswithmanish.com/blog/dublin-vs-san-ramon-for-families)
+Compare Dublin and San Ramon for families by home prices, schools, commutes, neighborhoods and lifestyle.
+
+FAQ:
+Q: Is Dublin or San Ramon better for families?
+A: Both are excellent for families - it depends on your priorities. Choose Dublin if you want newer development, more affordable entry prices, and BART access. Choose San Ramon if you prefer established neighborhoods, the highest-rated schools, and a more suburban feel. Both offer strong schools, safety, and quality of life.
+Q: What's the price difference between Dublin and San Ramon?
+A: In April 2026, Zillow's Home Value Index put typical values at about $1.26M in Dublin and about $1.48M in San Ramon, so San Ramon ran roughly 17% higher. Both vary significantly by neighborhood: Dublin Ranch and Dougherty Valley sit at the upper end, while older west Dublin and established San Ramon neighborhoods offer better entry points.
+Q: Which city has better schools  -  Dublin or San Ramon?
+A: Both districts are highly regarded. SRVUSD (San Ramon Valley Unified) has a longer track record of top results, while DUSD (Dublin Unified) has grown quickly and opened new schools, including Emerald High. Compare specific schools on the California School Dashboard and verify the assigned schools for any address.
+Q: Does Dublin have BART? What about San Ramon?
+A: Dublin has the Dublin/Pleasanton BART station, offering direct access to San Francisco and the Peninsula. San Ramon does not have BART but has excellent freeway access via I-680 and Bishop Ranch employment center. Dublin wins for public transit; San Ramon offers shorter commutes to many local employers.
+
+## Blog: East Dublin vs West Dublin: Where Should You Buy? (https://homeswithmanish.com/blog/east-dublin-vs-west-dublin)
+East Dublin vs West Dublin compared: older tract homes vs newer master-planned communities, special taxes, BART access, schools by address, and how to choose.
+
+FAQ:
+Q: What is the difference between East Dublin and West Dublin?
+A: West Dublin is the older part of the city, where the first housing tracts were built starting in 1960. East Dublin is the Eastern Dublin Specific Plan area, a planned expansion east of Camp Parks that has been built out in master-planned communities such as Wallis Ranch. There is no official dividing line, so ask any agent or listing where they draw it.
+Q: Is East Dublin or West Dublin better to live in?
+A: Neither is better for everyone. West Dublin tends to suit buyers who want an established neighborhood and are comfortable with an older home. East Dublin tends to suit buyers who want newer construction and community amenities and are comfortable with HOA dues and, on some parcels, special taxes. Compare specific addresses, not areas.
+Q: Do East Dublin homes have Mello-Roos?
+A: Some newer Dublin developments do. The City of Dublin lists several Community Facilities Districts, including Dublin Crossing, East Ranch and Dublin Centre, and each adds a separate line item to the county property tax bill. Whether a particular home is in one is parcel by parcel, so read the tax bill and the title report before you write an offer.
+Q: Which Dublin schools will my child attend?
+A: Dublin Unified assigns schools by home address through its School Locator, and boundaries can change. Dublin has two comprehensive high schools, Dublin High and Emerald High, so the same neighborhood label can mean different schools. Confirm the assignment for a specific address with the district before you buy.
+Q: Which part of Dublin is closer to BART?
+A: It depends on the address. Dublin has two stations on I-580, Dublin/Pleasanton and West Dublin/Pleasanton, and the West Dublin/Pleasanton station is near the I-580 and I-680 interchange. Check the distance from a specific home to the station you would use rather than assuming by area.
+Q: What do homes cost in Dublin, and is East or West more expensive?
+A: Zillow's typical single-family home value for ZIP 94568, which covers all of Dublin, was about $1,317,044 in August 2026. Because the whole city shares one ZIP code, that data cannot split East from West. Newer East Dublin homes often come with HOA dues and sometimes special taxes, so compare total monthly cost, not price alone.
+
+## Blog: First-Time Home Buyer in San Ramon: Your Step-by-Step Guide (https://homeswithmanish.com/blog/first-time-home-buyer-san-ramon)
+Buying your first home in San Ramon? Learn about mortgages, loan programs, neighborhoods and each step from preapproval to closing.
+
+FAQ:
+Q: How much money do I need to buy a home in San Ramon as a first-time buyer?
+A: It depends on price and loan type. FHA and conforming loans in Contra Costa County are capped at $1,249,125 in 2026, so most San Ramon single-family purchases need a larger down payment or a jumbo loan, while condos and townhomes may fit low-down-payment programs. Budget roughly 2-3% of the price for closing costs on top of the down payment, and use my down payment and closing cost calculators to model your own numbers.
+Q: What credit score do I need to buy a home in San Ramon?
+A: FHA loans accept credit scores as low as 580, though 650+ is ideal. Many lenders still look for 620+ on conventional loans, although Fannie Mae and Freddie Mac no longer set a hard minimum for automated underwriting, and pricing improves at 700+. San Ramon lenders are competitive and work with first-time buyers across the credit spectrum - but the higher your score, the lower your interest rate and monthly payment.
+Q: Which neighborhoods in San Ramon are best for first-time buyers?
+A: Canyon Lakes and other established areas with condos and townhomes are usually the most accessible entry points, while newer single-family homes in Dougherty Valley (including Windemere and Gale Ranch) sit at the higher end of the market. For first-timers, Canyon Lakes balances affordability, quality, and strong appreciation.
+Q: How long does it take to buy a home in San Ramon?
+A: From starting your search to closing, plan for 2-4 months. Once your offer is accepted, escrow typically takes 30-45 days. The standard California purchase agreement sets default contingency periods (commonly 17 days for inspections), and they can be shortened or extended by agreement. In competitive situations, these timelines can tighten.
+
+## Blog: How to Buy a Home in California: A Step-by-Step Guide for 2026 (https://homeswithmanish.com/blog/how-to-buy-a-home-in-california)
+Learn how to buy a California home, from mortgage preapproval and down payments to making an offer and closing.
+
+FAQ:
+Q: How much do I need to buy a home in California?
+A: Low-down-payment loans start at 3% to 3.5% down, but FHA and conforming loans are capped (up to $1,249,125 in high-cost Bay Area counties in 2026), so many Tri-Valley single-family purchases need a larger down payment or a jumbo loan. Plan on roughly 2-3% of the price for closing costs, and 20% down to avoid private mortgage insurance (PMI) on a conventional loan.
+Q: Can I buy a home in California with no money down?
+A: Yes, if you're a veteran eligible for a VA loan. Some CalHFA programs also offer down payment assistance that can significantly reduce your upfront costs. Talk to a lender about your options.
+Q: How long does it take to buy a home in California?
+A: From starting your search to closing, most buyers take 2-4 months. The actual escrow period (offer to keys) is typically 30-45 days.
+Q: Is 2026 a good time to buy in California?
+A: The Tri-Valley market has become more balanced, with prices softening from their 2022 peak and buyers regaining negotiating room. For Tri-Valley cities, the fundamentals remain strong: excellent schools, growing employment centers, and high quality of life. If you're financially ready and plan to stay 5+ years, the timing looks favorable.
+
+## Blog: Mello-Roos in Mountain House & Tracy Hills: What Buyers Actually Pay (https://homeswithmanish.com/blog/mello-roos-mountain-house-tracy-hills)
+What Mello-Roos (CFD special taxes) costs in Mountain House and Tracy Hills: official 2026/27 school CFD rates, the tax bill, and how to check a specific home.
+
+FAQ:
+Q: Do all homes in Mountain House have Mello-Roos?
+A: Generally, yes for newer homes. Lammersville Unified School District states that, generally speaking, all new residential development in Mountain House is within one of its school facilities CFDs. Resales are covered too, because the special tax stays with the parcel until the district's final year, so confirm the specific parcel before you write an offer.
+Q: How much is Mello-Roos in Mountain House?
+A: For fiscal year 2026/27, Lammersville Unified lists school CFD special taxes of $2,122.50 or $1,537.48 (CFD 2002, 2007-1 and 2014-1) and $2,607.52 or $2,017.10 (CFD 2019-1 and 2024-1), depending on whether a single-family lot is 6,000 square feet or larger. These are examples that vary by parcel, and other charges can appear on the same bill.
+Q: How much is Mello-Roos in Tracy Hills?
+A: It varies by parcel, improvement area and home size, so there is no single number. Tracy Hills is covered by City of Tracy CFDs, including CFD 2016-1 (infrastructure bonds) and CFD 2018-1 (maintenance and public services). The Notice of Special Tax for the specific parcel states the maximum rate, escalator and end date.
+Q: How long does Mello-Roos last?
+A: It depends on the district. Lammersville Unified lists final fiscal years from 2050-51 to 2075-76 for its five Mountain House school CFDs. Tracy Hills terms are set in each district's rate and method of apportionment, so check the Notice of Special Tax for the parcel.
+Q: Is Mello-Roos tax deductible?
+A: Often not, at least not fully. Special taxes that fund specific local improvements are generally treated differently from value-based property tax, and the answer depends on how the district's tax is structured. Ask a tax professional and the district for a breakdown before claiming anything.
+Q: How do I find the Mello-Roos on a specific home?
+A: Look at the county secured tax bill for the parcel (line items labeled CFD or Community Facilities District), request the seller's Mello-Roos disclosure and the Notice of Special Tax, and review the preliminary title report. For Mountain House school CFDs, Lammersville Unified lists a consultant contact for CFD questions.
+
+## Blog: Rent vs Buy in San Ramon: The 2026 Math (https://homeswithmanish.com/blog/rent-vs-buy-san-ramon-2026)
+Renting vs buying in San Ramon in 2026: typical home value $1.45M vs typical rent $3,246. Worked monthly cost at 7.28%, price-to-rent ratio, and what it omits.
+
+FAQ:
+Q: Is it cheaper to rent or buy in San Ramon in 2026?
+A: Renting is cheaper month to month by a wide margin. Using Zillow data for August 2026, the typical San Ramon home value is about $1,451,174 and the typical asking rent is about $3,246 per month. With 20% down at a 7.28% rate (Freddie Mac, October 1, 2026) and illustrative tax, insurance and maintenance assumptions, owning costs roughly $10,853 per month. Buying is a long-horizon wealth decision, not a monthly savings play.
+Q: What is the price-to-rent ratio in San Ramon?
+A: About 37. The typical home value of $1,451,174 divided by a year of typical rent ($3,246 x 12 = $38,953) is roughly 37.3. Ratios well above 20 generally favor renting on a pure monthly cash basis, though the ratio ignores appreciation, taxes and how long you stay.
+Q: How much is rent in San Ramon?
+A: The Zillow Observed Rent Index put typical asking rent in San Ramon at about $3,246 per month in August 2026, up about 4.1% from about $3,119 in August 2025. This index blends single-family homes, condos and apartments, so a comparable single-family house will usually rent for more.
+Q: How long do I need to stay for buying to beat renting in San Ramon?
+A: There is no single number. With a gap of several thousand dollars per month between owning and renting at current rates, buying generally needs a long holding period, steady appreciation or meaningful rent growth to catch up. Run your own numbers in the buy vs rent calculator before deciding.
+Q: Are San Ramon home values going up or down?
+A: Down over the past year. Zillow's typical home value for San Ramon was about $1,451,174 in August 2026 versus about $1,505,490 in August 2025, a decline of about 3.6%. Past trends do not predict future prices.
+Q: What is the property tax rate in San Ramon?
+A: The base California rate is about 1% of assessed value under Proposition 13, plus voter-approved local levies, so the total varies by parcel. Newer areas such as Dougherty Valley can also carry Mello-Roos (community facilities district) special taxes. Check the specific parcel's tax bill; this article uses 1.2% only as a clearly labeled illustration.
+
+## Blog: San Ramon Home Prices in 2026: What Buyers Need to Know (https://homeswithmanish.com/blog/san-ramon-home-prices-2026)
+Explore 2026 San Ramon home prices, neighborhood differences and market trends to plan your next home purchase.
+
+FAQ:
+Q: What is the median home price in San Ramon?
+A: As of April 2026, Zillow's Home Value Index put the typical San Ramon home value at roughly $1.48 million, and I update the current figure monthly on my San Ramon city page. However, prices vary significantly by neighborhood - newer Dougherty Valley homes generally sit at the upper end of the city's range, while older condos and townhomes, including many around Canyon Lakes, are usually the most accessible entry point. School district quality, location within the city, and home age all influence neighborhood pricing.
+Q: How have San Ramon home prices changed from 2024 to 2026?
+A: According to Zillow's Home Value Index, typical San Ramon home values were about 4% lower in April 2026 than in January 2024, and they remain below the mid-2022 peak. Interest rate adjustments, increased inventory, and broader economic conditions have stabilized the market. Year over year, values were down rather than up through 2026; my San Ramon city page shows the latest monthly change.
+Q: What makes San Ramon's real estate market attractive?
+A: San Ramon is home to highly-rated San Ramon Valley Unified School District (SRVUSD), proximity to the Bishop Ranch business park (major employment hub), excellent quality of life, low crime rates, and strong community amenities. These fundamentals have historically driven demand despite higher price points compared to neighboring cities.
+Q: Is now a good time to buy in San Ramon?
+A: In 2026, San Ramon has been a more balanced market for buyers, with values softening from their 2022 peak. Inventory levels are healthier than 2021-2023, giving buyers more negotiating power. Interest rates remain elevated, which has cooled some demand. For buyers planning to stay 5+ years and who are financially prepared, the market offers better conditions than the peak frenzy of recent years, though prices remain at elevated levels.
+
+## Blog: Tri-Valley & East Bay Home Prices by City (2026) (https://homeswithmanish.com/blog/tri-valley-east-bay-home-prices-by-city-2026)
+Typical single-family home values, Aug 2026: Danville $1.88M, San Ramon $1.59M, Dublin $1.32M, Livermore $1.11M, Tracy $675K.
+
+FAQ:
+Q: How much is a house in Dublin, CA in 2026?
+A: Zillow's typical single-family home value for Dublin, CA was about $1,316,900 in August 2026, down about 5.9% from about $1,400,142 in August 2025. This is an index of typical values, not a median sale price or a quote for any specific listing.
+Q: How much are homes in Pleasanton in 2026?
+A: The Zillow Home Value Index put the typical single-family home in Pleasanton at about $1,578,137 in August 2026, down about 3.7% from August 2025. Actual sale prices vary widely by neighborhood, size and condition.
+Q: What is the cheapest city in the Tri-Valley?
+A: Of the Tri-Valley cities compared here, Livermore has the lowest typical single-family home value at about $1,106,336 (Zillow, August 2026), compared with $1,316,900 in Dublin, $1,552,225 in Fremont, $1,578,137 in Pleasanton and $1,587,275 in San Ramon. Tracy ($675,203) and Mountain House ($863,749) are lower still but are in San Joaquin County, not the Tri-Valley.
+Q: What is the most expensive city in the Tri-Valley and East Bay?
+A: Among the eight places compared, Danville has the highest typical single-family home value at about $1,877,539 in August 2026. San Ramon ($1,587,275) and Pleasanton ($1,578,137) follow.
+Q: Are home prices going up or down in the Tri-Valley?
+A: Down over the past year in all eight places. Between August 2025 and August 2026 the typical value changed by -0.4% in Danville, -1.9% in Fremont, -2.8% in Livermore, -3.4% in San Ramon, -3.7% in Pleasanton, -4.4% in Tracy, -5.9% in Dublin and -8.0% in Mountain House (ZIP 95391). Past trends do not predict future prices.
+Q: Is Mountain House or Tracy cheaper?
+A: Tracy. Zillow's typical single-family home value was about $675,203 in Tracy and about $863,749 in Mountain House (ZIP 95391) in August 2026. Both are in San Joaquin County.
+Q: What is the loan limit in these cities in 2026?
+A: Per FHFA's 2026 limits, the high-balance conforming loan limit is $1,249,125 in Alameda and Contra Costa counties and $832,750 in San Joaquin County. Loans above the limit are generally jumbo loans, which can have different rates and requirements.
+
 ## Calculators
 - Home Affordability Calculator (East Bay Edition) (https://homeswithmanish.com/calculators/affordability/): Conservative scenario caps housing costs at 28% of gross monthly income and total debts at 36%; the stretch scenario allows up to 43% back-end DTI (common for strong files). Payment estimates include principal, interest, ~1.1% property tax, and ~0.35% insurance. Actual qualification depends on credit, reserves, loan program, and lender overlays — get pre-approved for a real number.
-- Buy vs Rent Calculator for the East Bay (https://homeswithmanish.com/calculators/buy-vs-rent/): Owning costs include down payment, principal & interest (30-yr), ~1.1% property tax + ~0.35% insurance, and 1%/yr maintenance; the projected sale nets out remaining loan balance and 6% selling costs at your appreciation assumption. Renting compounds your rent at the growth rate you set. Tax savings value your deductible mortgage interest (on the first $750k of loan balance) plus property tax (capped at the $10k SALT limit) at the marginal rate you enter — this assumes you itemize and exceed the standard deduction, so treat it as an upper bound. Investment opportunity cost on the down payment and PMI are excluded. A framing tool, not a forecast — and not tax advice.
+- Buy vs Rent Calculator for the East Bay (https://homeswithmanish.com/calculators/buy-vs-rent/): Owning costs include down payment, principal & interest (30-yr), ~1.1% property tax + ~0.35% insurance, and 1%/yr maintenance; the projected sale nets out remaining loan balance and 6% selling costs at your appreciation assumption. Renting compounds your rent at the growth rate you set. Tax savings value your deductible mortgage interest (on the first $750k of loan balance) plus property tax (conservatively capped at $10k; the 2026 federal SALT cap is $40,400 for most filers, phases down toward $10,000 at higher incomes and is shared with your California income tax) at the marginal rate you enter — this assumes you itemize and exceed the standard deduction, so treat it as an upper bound. Investment opportunity cost on the down payment and PMI are excluded. A framing tool, not a forecast — and not tax advice.
 - California Closing Cost Calculator (Buyer) (https://homeswithmanish.com/calculators/closing-costs/): Estimates use typical Northern California pricing: escrow ≈ $1,500 base + $1/1,000; combined owner's + lender's title ≈ 0.28% of price; lender/appraisal/credit ≈ $2,950 on financed deals; prepaids assume ~6 months of property tax impounds, first-year insurance, and 15 days of interest. Actual fees vary by escrow/title company, lender, and closing date — your Loan Estimate and estimated settlement statement are the authoritative numbers.
 - California Property Tax Estimator (East Bay & Tracy) (https://homeswithmanish.com/calculators/property-tax/): Rates shown are typical effective rates (1% Prop 13 base + local bonds, plus representative CFD/Mello-Roos where noted) and vary parcel by parcel — two streets in the same city can differ meaningfully. Before you write an offer, I pull the actual tax bill and any special assessments for the specific parcel. Also budget for the one-time supplemental tax bill: the county reassesses at your purchase price and bills you for the difference from the seller's old assessed value, prorated for your first year — it arrives months after closing and is NOT paid by your impound account by default.
 - Down Payment Planner (https://homeswithmanish.com/calculators/down-payment/): The plan targets your chosen down payment plus a ~2% closing-cost cushion. It doesn't model home-price appreciation working against you while you save, investment returns on your savings, or PMI trade-offs of buying sooner with less down — all three are worth a real conversation, because in appreciating markets waiting to reach 20% can cost more than PMI would.

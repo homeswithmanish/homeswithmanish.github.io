@@ -7,7 +7,7 @@
     "phone": "+1-408-707-5324",
     "email": "homeswithmanish@gmail.com"
   },
-  "updated": "2026-07-03",
+  "updated": "2026-10-07",
   "note": "Price bands reflect recent Zillow ZHVI ranges; live figures at https://homeswithmanish.com/#market",
   "cities": [
     {
@@ -29,10 +29,10 @@
       "commute": {
         "blurb": "San Ramon sits on the I-680 corridor with no BART station of its own — most commuters drive to Dublin/Pleasanton or West Dublin BART, use express buses, or work locally at Bishop Ranch.",
         "points": [
-          "Dublin/Pleasanton BART: ~15 min drive, then ~40 min to downtown SF",
+          "Dublin/Pleasanton BART: ~15 min drive, then ~45 min to downtown SF",
           "San Jose / Silicon Valley: ~45–60 min via I-680 South",
           "Oakland: ~35–45 min via I-680/CA-24",
-          "Bishop Ranch: in-town employer with 30,000+ jobs"
+          "Bishop Ranch: in-town business park with hundreds of employers"
         ]
       },
       "neighborhoods": [
@@ -65,16 +65,19 @@
         },
         {
           "q": "How is the commute from San Ramon to San Francisco?",
-          "a": "Most commuters drive ~15 minutes to Dublin/Pleasanton BART and ride ~40 minutes to downtown SF, or take express buses. Door to door, plan on roughly an hour."
+          "a": "Most commuters drive ~15 minutes to Dublin/Pleasanton BART and ride ~45 minutes to downtown SF, or take express buses. Door to door, plan on roughly an hour."
         }
+      ],
+      "neighborhoodGuides": [
+        "https://homeswithmanish.com/cities/san-ramon/dougherty-valley/"
       ]
     },
     {
       "slug": "pleasanton",
       "name": "Pleasanton",
       "url": "https://homeswithmanish.com/cities/pleasanton/",
-      "tagline": "Historic downtown charm with top-5% schools",
-      "medianPriceBand": "$1.6M–$2.1M",
+      "tagline": "Historic downtown charm with top-rated schools",
+      "medianPriceBand": "$1.5M–$1.8M",
       "schools": {
         "district": "Pleasanton Unified School District (PUSD)",
         "blurb": "PUSD is consistently among the state's strongest districts, with excellent test scores across elementary through high school. The Amador Valley vs Foothill boundary is a common factor in home searches.",
@@ -88,7 +91,7 @@
       "commute": {
         "blurb": "Pleasanton commuters have real options: BART from Dublin/Pleasanton or West Dublin stations, the ACE train from downtown to Silicon Valley, and the I-580/I-680 interchange.",
         "points": [
-          "Dublin/Pleasanton BART: ~40 min to downtown SF",
+          "Dublin/Pleasanton BART: ~45 min to downtown SF",
           "ACE train from downtown Pleasanton to San Jose (Silicon Valley)",
           "San Jose: ~40–55 min via I-680 South",
           "Hacienda Business Park: in-town employment center"
@@ -112,7 +115,7 @@
       "faq": [
         {
           "q": "How much does a house cost in Pleasanton?",
-          "a": "Median single-family values often approach or exceed $2M, among the highest in the Tri-Valley. The live market table on my homepage shows the current Zillow ZHVI figure."
+          "a": "Median single-family values typically run $1.5M–$1.8M, among the highest in the Tri-Valley. The live market table on my homepage shows the current Zillow ZHVI figure."
         },
         {
           "q": "Amador Valley or Foothill — does it matter for home values?",
@@ -124,8 +127,12 @@
         },
         {
           "q": "How does Pleasanton compare to San Ramon?",
-          "a": "Pleasanton offers a historic downtown and established neighborhoods; San Ramon offers newer master-planned housing stock. Schools are top-tier in both. Many of my clients tour both before deciding."
+          "a": "Pleasanton offers a historic downtown and established neighborhoods; San Ramon offers newer master-planned housing stock. Schools are top-tier in both. Many buyers tour both before deciding."
         }
+      ],
+      "neighborhoodGuides": [
+        "https://homeswithmanish.com/cities/pleasanton/ruby-hill/",
+        "https://homeswithmanish.com/cities/pleasanton/vintage-hills/"
       ]
     },
     {
@@ -133,7 +140,7 @@
       "name": "Danville",
       "url": "https://homeswithmanish.com/cities/danville/",
       "tagline": "The Tri-Valley's premier luxury market",
-      "medianPriceBand": "$2M+",
+      "medianPriceBand": "$1.8M–$2M",
       "schools": {
         "district": "San Ramon Valley Unified School District (SRVUSD)",
         "blurb": "Danville shares SRVUSD with San Ramon and Alamo. Monte Vista High and San Ramon Valley High anchor two strong feeder patterns.",
@@ -156,7 +163,7 @@
       "neighborhoods": [
         {
           "name": "Blackhawk",
-          "blurb": "Gated golf-course estates east of town — the East Bay's best-known luxury enclave."
+          "blurb": "Gated golf-course estates in unincorporated Blackhawk, east of town; one of the East Bay's best-known luxury enclaves."
         },
         {
           "name": "Westside Danville",
@@ -171,7 +178,7 @@
       "faq": [
         {
           "q": "How much does a house cost in Danville?",
-          "a": "Median single-family values often exceed $2M, with Blackhawk and Westside estates ranging significantly higher. Live figures are on my homepage market table."
+          "a": "Median single-family values typically run $1.8M–$2M, with Blackhawk and Westside estates ranging significantly higher. Live figures are on my homepage market table."
         },
         {
           "q": "Is Blackhawk a good buy?",
@@ -185,6 +192,9 @@
           "q": "How is Danville's commute?",
           "a": "It's an I-680 drive commute; Walnut Creek BART is about 15–20 minutes away. Many Danville buyers work hybrid schedules or at Bishop Ranch nearby."
         }
+      ],
+      "neighborhoodGuides": [
+        "https://homeswithmanish.com/cities/danville/blackhawk/"
       ]
     },
     {
@@ -192,7 +202,7 @@
       "name": "Dublin",
       "url": "https://homeswithmanish.com/cities/dublin/",
       "tagline": "New construction, BART access, and rising schools",
-      "medianPriceBand": "$1.4M–$1.7M",
+      "medianPriceBand": "$1.3M–$1.5M",
       "schools": {
         "district": "Dublin Unified School District (DUSD)",
         "blurb": "DUSD has grown with the city, adding campuses including Emerald High School. Schools perform well, and East Dublin's newer campuses are a key draw for relocating families.",
@@ -206,7 +216,7 @@
       "commute": {
         "blurb": "Dublin sits at the I-580/I-680 interchange with two BART stations — the strongest commute profile in the Tri-Valley.",
         "points": [
-          "Dublin/Pleasanton BART: ~40 min to downtown SF",
+          "Dublin/Pleasanton BART: ~45 min to downtown SF",
           "West Dublin/Pleasanton BART: second in-town station",
           "Silicon Valley: ~45–60 min via I-680 South",
           "Livermore Lab / Hacienda: 10–20 min"
@@ -230,7 +240,7 @@
       "faq": [
         {
           "q": "How much does a house cost in Dublin?",
-          "a": "Median single-family values typically range $1.5M–$1.8M — East Dublin new construction trends higher, West Dublin established homes lower. Live ZHVI figures are on my homepage."
+          "a": "Median single-family values typically range $1.3M–$1.5M; East Dublin new construction trends higher, West Dublin established homes lower. Live ZHVI figures are on my homepage."
         },
         {
           "q": "Dublin or San Ramon — which is better for families?",
@@ -242,8 +252,12 @@
         },
         {
           "q": "Do Dublin homes have Mello-Roos?",
-          "a": "Many newer East Dublin communities carry community facilities district (CFD) assessments that raise the effective tax rate. I review the exact tax bill on every home my clients consider — try my property tax calculator for estimates."
+          "a": "Many newer East Dublin communities carry community facilities district (CFD) assessments that raise the effective tax rate. I review the exact tax bill on any home a client is considering — try my property tax calculator for estimates."
         }
+      ],
+      "neighborhoodGuides": [
+        "https://homeswithmanish.com/cities/dublin/dublin-ranch/",
+        "https://homeswithmanish.com/cities/dublin/wallis-ranch/"
       ]
     },
     {
@@ -251,7 +265,7 @@
       "name": "Livermore",
       "url": "https://homeswithmanish.com/cities/livermore/",
       "tagline": "Wine country value on the Tri-Valley's east edge",
-      "medianPriceBand": "$1.2M–$1.5M",
+      "medianPriceBand": "$1.1M–$1.3M",
       "schools": {
         "district": "Livermore Valley Joint Unified School District (LVJUSD)",
         "blurb": "LVJUSD performs solidly, with Granada and Livermore High anchoring two feeder patterns. School quality is strong relative to the price discount versus neighboring districts.",
@@ -289,7 +303,7 @@
       "faq": [
         {
           "q": "How much does a house cost in Livermore?",
-          "a": "Median single-family values typically range $1.2M–$1.5M — check my homepage market table for the live Zillow ZHVI figure."
+          "a": "Median single-family values typically range $1.1M–$1.3M — check my homepage market table for the live Zillow ZHVI figure."
         },
         {
           "q": "Is Livermore a good place to invest?",
@@ -303,14 +317,15 @@
           "q": "What's the Livermore commute like?",
           "a": "ACE train to Silicon Valley, ~20 minutes to BART, and I-580 access. It's the longest Tri-Valley commute to SF, which is priced into homes here."
         }
-      ]
+      ],
+      "neighborhoodGuides": []
     },
     {
       "slug": "fremont",
       "name": "Fremont",
       "url": "https://homeswithmanish.com/cities/fremont/",
       "tagline": "Silicon Valley access with legendary Mission schools",
-      "medianPriceBand": "$1.4M–$2M+",
+      "medianPriceBand": "$1.3M–$2M+",
       "schools": {
         "district": "Fremont Unified School District (FUSD)",
         "blurb": "FUSD is large and varies by attendance area. The Mission San Jose feeder pattern is nationally known; American, Irvington, and Washington serve other strong neighborhoods.",
@@ -318,7 +333,7 @@
           "Mission San Jose High School",
           "American High School",
           "Irvington High School",
-          "Hopkins Junior High"
+          "Hopkins Middle School"
         ]
       },
       "commute": {
@@ -364,8 +379,11 @@
         },
         {
           "q": "Is Fremont in the Tri-Valley?",
-          "a": "No — Fremont is in southern Alameda County along I-880. I serve it alongside the Tri-Valley because many of my clients compare both when optimizing for schools and commutes."
+          "a": "No — Fremont is in southern Alameda County along I-880. I serve it alongside the Tri-Valley because many Tri-Valley buyers compare both when optimizing for schools and commutes."
         }
+      ],
+      "neighborhoodGuides": [
+        "https://homeswithmanish.com/cities/fremont/mission-san-jose/"
       ]
     },
     {
@@ -386,7 +404,7 @@
       "commute": {
         "blurb": "Tracy is a commuter city by design: ACE rail, I-205/I-580, and a fast-growing local logistics employment base.",
         "points": [
-          "ACE train from downtown Tracy to Pleasanton/Santa Clara",
+          "ACE train from the Tracy station (south Tracy) to Pleasanton/Santa Clara",
           "Dublin/Pleasanton BART: ~35–45 min drive over the Altamont",
           "Local employment: distribution and logistics hubs in town",
           "San Jose: ~60–75 min in commute hours"
@@ -424,6 +442,9 @@
           "q": "How bad is the Tracy commute really?",
           "a": "Driving the Altamont at peak is tough — that's the honest trade. The ACE train, hybrid schedules, and growing local jobs are why many buyers make it work."
         }
+      ],
+      "neighborhoodGuides": [
+        "https://homeswithmanish.com/cities/tracy/tracy-hills/"
       ]
     },
     {
@@ -456,7 +477,7 @@
         },
         {
           "name": "New releases",
-          "blurb": "Active builder communities continue releasing phases; buyer representation on new construction costs you nothing and protects you in negotiations."
+          "blurb": "Active builder communities continue releasing phases; having your own agent on new construction protects you in negotiations, and we agree in writing up front on how I'm paid (builders often cover buyer-agent compensation)."
         }
       ],
       "investorView": "Mountain House rents briskly to Bay Area commuter families, and CFD (Mello-Roos) assessments are the key underwriting detail — model the full tax load before committing.",
@@ -471,13 +492,14 @@
         },
         {
           "q": "How are Mountain House schools?",
-          "a": "Lammersville Unified anchors a K-8 school in each village and performs well; Mountain House High serves the whole community. Schools are the #1 reason families choose it."
+          "a": "Lammersville Unified anchors a K-8 school in each village and performs well; Mountain House High serves the whole community. Schools are a major reason many families choose it."
         },
         {
           "q": "Mountain House or Tracy?",
           "a": "Mountain House: newer, master-planned, village schools, higher taxes (CFD). Tracy: lower entry prices, more housing variety, established downtown. I help buyers compare total monthly cost side by side."
         }
-      ]
+      ],
+      "neighborhoodGuides": []
     }
   ]
 }

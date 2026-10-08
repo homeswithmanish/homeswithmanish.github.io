@@ -321,6 +321,140 @@ test('Allows ClaudeBot', /ClaudeBot/.test(robotsTxt));
 test('Allows Google-Extended', /Google-Extended/.test(robotsTxt));
 test('Allows PerplexityBot', /PerplexityBot/.test(robotsTxt));
 
+
+// ==================== GENERATED PAGES / SEO HYGIENE ====================
+console.log('\n\n\x1b[1m=== Generated Pages & SEO Hygiene ===\x1b[0m\n');
+
+const ROOT = path.join(__dirname, '..');
+function walkHtml(dir, out = []) {
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (e.name.startsWith('.') || e.name === 'node_modules') continue;
+    const full = path.join(dir, e.name);
+    if (e.isDirectory()) walkHtml(full, out);
+    else if (e.name.endsWith('.html')) out.push(full);
+  }
+  return out;
+}
+const decode = (t) => t.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+const sitemapXml = readFile('sitemap.xml');
+const sitemapLocs = new Set([...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]));
+
+const NEIGHBORHOOD_PAGES = [
+  'cities/san-ramon/dougherty-valley/index.html',
+  'cities/dublin/dublin-ranch/index.html',
+  'cities/pleasanton/ruby-hill/index.html',
+  'cities/danville/blackhawk/index.html',
+  'cities/fremont/mission-san-jose/index.html',
+  'cities/dublin/wallis-ranch/index.html',
+  'cities/tracy/tracy-hills/index.html',
+  'cities/pleasanton/vintage-hills/index.html',
+];
+
+console.log('\x1b[36mNeighborhood guides:\x1b[0m');
+for (const rel of NEIGHBORHOOD_PAGES) {
+  const exists = fs.existsSync(path.join(ROOT, rel));
+  test(`${rel} exists`, exists);
+  if (!exists) continue;
+  const html = readFile(rel);
+  const url = 'https://homeswithmanish.com/' + rel.replace(/index\.html$/, '');
+  test(`${rel} in sitemap`, sitemapLocs.has(url));
+  test(`${rel} has Place schema`, /"@type": "Place"/.test(html));
+  test(`${rel} has FAQPage schema`, /"@type": "FAQPage"/.test(html));
+  test(`${rel} links to parent city guide`, html.includes(`href="/${rel.split('/').slice(0, 2).join('/')}/"`));
+  test(`${rel} shows DRE number`, html.includes('02247006'));
+  test(`${rel} has a sources section`, />Sources</.test(html));
+  const bodyText = html.split('<main>')[1] || '';
+  test(`${rel} body copy has no em dashes`, !/—/.test(bodyText.replace(/<footer[\s\S]*$/, '')));
+}
+
+console.log('\n\x1b[36mSite-wide head checks:\x1b[0m');
+const allPages = walkHtml(ROOT).filter((f) => !/DEPLOYMENT_GUIDE|404\.html|openhouse/.test(f));
+const seenTitles = new Map();
+let badJson = [];
+let longTitles = [];
+let longDescs = [];
+let svgOg = [];
+for (const f of allPages) {
+  const html = fs.readFileSync(f, 'utf8');
+  const rel = path.relative(ROOT, f);
+  const t = decode((html.match(/<title>([^<]*)<\/title>/) || [, ''])[1]);
+  const d = decode((html.match(/name="description" content="([^"]*)"/) || [, ''])[1]);
+  if (t.length > 65) longTitles.push(`${rel} (${t.length})`);
+  if (d.length > 165) longDescs.push(`${rel} (${d.length})`);
+  if (seenTitles.has(t)) seenTitles.get(t).push(rel); else seenTitles.set(t, [rel]);
+  if (/og:image" content="[^"]+\.svg"/.test(html)) svgOg.push(rel);
+  for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+    try { JSON.parse(m[1]); } catch (e) { badJson.push(rel); }
+  }
+}
+const dupTitles = [...seenTitles.entries()].filter(([, v]) => v.length > 1).map(([k, v]) => `${k}: ${v.join(', ')}`);
+test('All JSON-LD blocks parse', badJson.length === 0, badJson.join(', '));
+test('No titles over 65 characters', longTitles.length === 0, longTitles.join(', '));
+test('No meta descriptions over 165 characters', longDescs.length === 0, longDescs.join(', '));
+test('No duplicate titles', dupTitles.length === 0, dupTitles.join(' | '));
+test('No SVG og:image (unsupported by social platforms)', svgOg.length === 0, svgOg.join(', '));
+
+console.log('\n\x1b[36mGenerator is source of truth:\x1b[0m');
+const llms = readFile('llms.txt');
+const llmsFull = readFile('llms-full.txt');
+test('llms.txt keeps entity facts block', /Who Manish Anand is \(entity facts\)/.test(llms));
+test('llms.txt keeps disambiguation list', /Disambiguation/.test(llms));
+test('llms-full.txt keeps entity facts block', /Who Manish Anand is \(entity facts\)/.test(llmsFull));
+test('llms.txt lists neighborhood guides', /## Neighborhood Guides/.test(llms));
+test('Generated city pages link Sold Homes in footer', readFile('cities/san-ramon/index.html').includes('href="/sold/">Sold Homes'));
+test('Generated hero H1 is white on navy (was invisible)', /\.page-hero h1 \{[^}]*color: var\(--white\)/.test(readFile('cities/san-ramon/index.html')));
+test('City page title targets realtor intent', /San Ramon Real Estate Agent/.test(readFile('cities/san-ramon/index.html')));
+test('City page links its neighborhood guide', readFile('cities/san-ramon/index.html').includes('/cities/san-ramon/dougherty-valley/'));
+test('No "costs you nothing" buyer-comp phrasing in generated data', !/costs you nothing/i.test(readFile('cities/mountain-house/index.html')));
+
+console.log('\n\x1b[36mBlog E-E-A-T & URL consistency:\x1b[0m');
+const blogPosts = fs.readdirSync(path.join(ROOT, 'blog')).filter((f) => f.endsWith('.html') && f !== 'index.html');
+for (const f of blogPosts) {
+  const html = readFile(`blog/${f}`);
+  const slug = f.replace(/\.html$/, '');
+  const url = `https://homeswithmanish.com/blog/${slug}`;
+  test(`blog/${f} canonical is extensionless`, html.includes(`rel="canonical" href="${url}"`));
+  test(`blog/${f} in sitemap under canonical URL`, sitemapLocs.has(url));
+  test(`blog/${f} author tied to entity @id`, html.includes('"@id": "https://homeswithmanish.com/#manish-anand"'));
+  test(`blog/${f} publisher tied to business @id`, html.includes('"publisher": {"@id": "https://homeswithmanish.com/#business"}'));
+  test(`blog/${f} has BreadcrumbList schema`, /"@type": "BreadcrumbList"/.test(html));
+  test(`blog/${f} byline links to about page`, html.includes('href="/about-manish-anand/" rel="author"'));
+}
+test('Sitemap has no .html blog URLs (canonicals are extensionless)', ![...sitemapLocs].some((u) => /\/blog\/.+\.html$/.test(u)));
+const staleBlogLinks = allPages.filter((f) => /\/blog\/[a-z0-9-]+\.html/.test(fs.readFileSync(f, 'utf8'))).map((f) => path.relative(ROOT, f));
+test('No internal links to .html blog URLs', staleBlogLinks.length === 0, staleBlogLinks.join(', '));
+const blogIndexUrls = [...readFile('blog/index.html').matchAll(/https:\/\/homeswithmanish\.com\/blog\/([a-z0-9-]+)"/g)].map((m) => m[1]);
+test('Blog index schema URLs all resolve to real posts', blogIndexUrls.length > 0 && blogIndexUrls.every((s) => blogPosts.includes(`${s}.html`)), blogIndexUrls.join(', '));
+test('llms.txt lists every blog post', blogPosts.every((f) => llms.includes(`/blog/${f.replace(/\.html$/, '')})`)));
+
+const hubPages = allPages.filter((f) => /[\\/](cities|calculators)[\\/]/.test(f)).map((f) => fs.readFileSync(f, 'utf8')).join('\n');
+const orphanPosts = blogPosts.filter((f) => !hubPages.includes(`href="/blog/${f.replace(/\.html$/, '')}"`));
+test('Every blog post is linked from a city, neighborhood or calculator page', orphanPosts.length === 0, orphanPosts.join(', '));
+
+console.log('\n\x1b[36mTruthful advertising (licensed 2024-10-11):\x1b[0m');
+const experienceClaim = /over a decade|\d+\+? years of experience|helped (dozens|hundreds)|spent years helping|many of my clients/i;
+const claimPages = allPages.filter((f) => experienceClaim.test(fs.readFileSync(f, 'utf8'))).map((f) => path.relative(ROOT, f));
+const responsePromise = /within (1-2|2|two) hours|\b2-hour response|responds in 2 hours|response guarantee/i;
+const promisePages = allPages.filter((f) => responsePromise.test(fs.readFileSync(f, 'utf8'))).map((f) => path.relative(ROOT, f));
+test('No response-time guarantees (not a promise Manish can keep)', promisePages.length === 0, promisePages.join(', '));
+test('No inflated experience or client-count claims', claimPages.length === 0, claimPages.join(', '));
+test('llms-full.txt has no inflated experience claims', !experienceClaim.test(llmsFull));
+
+console.log('\n\x1b[36mIndexNow & entity profiles:\x1b[0m');
+const indexNowKey = (readFile('tools/indexnow.mjs').match(/const KEY = "([0-9a-f]{32})"/) || [])[1];
+test('IndexNow key file deployed at site root and matches script', !!indexNowKey && fs.existsSync(path.join(ROOT, `${indexNowKey}.txt`)) && readFile(`${indexNowKey}.txt`).trim() === indexNowKey);
+test('Visible hours match schema hours (10am-4pm daily)', indexHtml.includes('Available daily, 10am-4pm PT') && indexHtml.includes('"opens": "10:00", "closes": "16:00"') && !/M-F, 8am|"closes": "20:00"/.test(indexHtml));
+test('Person sameAs includes SCCAOR directory listing', /"sameAs": \[[^\]]*"https:\/\/go\.sccaor\.com\/realtordirectory\/Details\/manish-anand-4887209"/.test(indexHtml) && readFile('about-manish-anand/index.html').includes('href="https://go.sccaor.com/realtordirectory/Details/manish-anand-4887209"'));
+test('About page states tech background (Netflix/Microsoft) in text and schema', /senior software engineer at Netflix and Microsoft/.test(readFile('about-manish-anand/index.html')) && /"alumniOf": \[[^\]]*Indiana University/.test(readFile('about-manish-anand/index.html')));
+test('Person schema lists SCCAOR membership (backs REALTOR® usage)', /"memberOf": \{[^}]*SCCAOR/.test(indexHtml) && /"memberOf": \{[^}]*SCCAOR/.test(readFile('about-manish-anand/index.html')));
+test('No "100% SFH / no condos" absolutes', !/no condos|100% focused/.test(indexHtml));
+test('Person sameAs includes Realtor.com profile', /"sameAs": \[[^\]]*"https:\/\/www\.realtor\.com\/realestateagents\/678d0ba8952d380c787c3b0f"/.test(indexHtml));
+test('Realtor.com profile linked visibly on homepage', (indexHtml.match(/href="https:\/\/www\.realtor\.com\/realestateagents\/678d0ba8952d380c787c3b0f" class="social-link"/g) || []).length === 2);
+test('Person sameAs includes Zillow profile', /"sameAs": \[[^\]]*"https:\/\/www\.zillow\.com\/profile\/homeswithmanish"/.test(indexHtml));
+test('Zillow profile linked visibly on homepage', (indexHtml.match(/href="https:\/\/www\.zillow\.com\/profile\/homeswithmanish" class="social-link"/g) || []).length === 2);
+test('Never links the namesake Zillow profile mkanand', !allPages.some((f) => fs.readFileSync(f, 'utf8').includes('zillow.com/profile/mkanand')));
+test('Person sameAs includes MLSListings profile', indexHtml.includes('https://www.mlslistings.com/FindAnAgent/Profile/02247006'));
+
 // ==================== SUMMARY ====================
 console.log('\n' + '='.repeat(50));
 console.log(`\x1b[1mResults: ${passed} passed, ${failed} failed, ${passed + failed} total\x1b[0m`);

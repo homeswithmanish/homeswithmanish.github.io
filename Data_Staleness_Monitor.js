@@ -37,8 +37,8 @@ const MONITORED_SHEETS = [
     sheetName: 'MarketData',
     dateColumn: 8,            // Column H = lastUpdated (1-indexed)
     dateFormat: 'datestring',  // Dates stored as strings like "2026-03-28" or Date objects
-    requiredColumns: [1, 2, 3], // City, MedianPrice, PricePerSqft must not be blank
-    requiredColumnNames: ['City', 'Median Price', 'Price/SqFt'],
+    requiredColumns: [1, 2], // City, MedianPrice (Price/SqFt is not provided by Zillow ZHVI — always blank)
+    requiredColumnNames: ['City', 'Median Price'],
     description: 'Market Data (home prices, inventory, days on market)'
   },
   {
@@ -51,7 +51,7 @@ const MONITORED_SHEETS = [
   },
   {
     sheetName: 'RentalData',
-    dateColumn: 7,            // Column G = lastUpdated
+    dateColumn: 6,            // Column F = Last Updated (col 7 is Data Source)
     dateFormat: 'datestring',
     requiredColumns: [1, 2],  // City, Rent must not be blank
     requiredColumnNames: ['City', 'Rent'],
