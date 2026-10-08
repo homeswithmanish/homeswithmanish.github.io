@@ -201,6 +201,7 @@ export const CITIES = [
       { q: "Do Dublin homes have Mello-Roos?", a: "Many newer East Dublin communities carry community facilities district (CFD) assessments that raise the effective tax rate. I review the exact tax bill on any home a client is considering — try my property tax calculator for estimates." },
     ],
     related: [
+      { href: "/blog/east-dublin-vs-west-dublin", label: "East Dublin vs West Dublin" },
       { href: "/blog/tri-valley-east-bay-home-prices-by-city-2026", label: "Home Prices by City (2026)" },
       { href: "/blog/best-schools-in-dublin", label: "Best Schools in Dublin" },
       { href: "/blog/dublin-vs-san-ramon-for-families", label: "Dublin vs San Ramon for Families" },
