@@ -12,6 +12,7 @@ const selectField = (id, label, options) =>
 export const CALCULATORS = [
   {
     slug: "affordability",
+    related: [{ href: "/blog/tri-valley-east-bay-home-prices-by-city-2026", label: "Home Prices by City (2026)" }],
     title: "Home Affordability Calculator (East Bay Edition)",
     short: "How much house can I afford?",
     metaDescription:

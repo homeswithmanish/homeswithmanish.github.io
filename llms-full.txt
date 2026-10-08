@@ -603,6 +603,25 @@ A: San Ramon is home to highly-rated San Ramon Valley Unified School District (S
 Q: Is now a good time to buy in San Ramon?
 A: In 2026, San Ramon has been a more balanced market for buyers, with values softening from their 2022 peak. Inventory levels are healthier than 2021-2023, giving buyers more negotiating power. Interest rates remain elevated, which has cooled some demand. For buyers planning to stay 5+ years and who are financially prepared, the market offers better conditions than the peak frenzy of recent years, though prices remain at elevated levels.
 
+## Blog: Tri-Valley & East Bay Home Prices by City (2026) (https://homeswithmanish.com/blog/tri-valley-east-bay-home-prices-by-city-2026)
+Typical single-family home values, Aug 2026: Danville $1.88M, San Ramon $1.59M, Dublin $1.32M, Livermore $1.11M, Tracy $675K.
+
+FAQ:
+Q: How much is a house in Dublin, CA in 2026?
+A: Zillow's typical single-family home value for Dublin, CA was about $1,316,900 in August 2026, down about 5.9% from about $1,400,142 in August 2025. This is an index of typical values, not a median sale price or a quote for any specific listing.
+Q: How much are homes in Pleasanton in 2026?
+A: The Zillow Home Value Index put the typical single-family home in Pleasanton at about $1,578,137 in August 2026, down about 3.7% from August 2025. Actual sale prices vary widely by neighborhood, size and condition.
+Q: What is the cheapest city in the Tri-Valley?
+A: Of the Tri-Valley cities compared here, Livermore has the lowest typical single-family home value at about $1,106,336 (Zillow, August 2026), compared with $1,316,900 in Dublin, $1,552,225 in Fremont, $1,578,137 in Pleasanton and $1,587,275 in San Ramon. Tracy ($675,203) and Mountain House ($863,749) are lower still but are in San Joaquin County, not the Tri-Valley.
+Q: What is the most expensive city in the Tri-Valley and East Bay?
+A: Among the eight places compared, Danville has the highest typical single-family home value at about $1,877,539 in August 2026. San Ramon ($1,587,275) and Pleasanton ($1,578,137) follow.
+Q: Are home prices going up or down in the Tri-Valley?
+A: Down over the past year in all eight places. Between August 2025 and August 2026 the typical value changed by -0.4% in Danville, -1.9% in Fremont, -2.8% in Livermore, -3.4% in San Ramon, -3.7% in Pleasanton, -4.4% in Tracy, -5.9% in Dublin and -8.0% in Mountain House (ZIP 95391). Past trends do not predict future prices.
+Q: Is Mountain House or Tracy cheaper?
+A: Tracy. Zillow's typical single-family home value was about $675,203 in Tracy and about $863,749 in Mountain House (ZIP 95391) in August 2026. Both are in San Joaquin County.
+Q: What is the loan limit in these cities in 2026?
+A: Per FHFA's 2026 limits, the high-balance conforming loan limit is $1,249,125 in Alameda and Contra Costa counties and $832,750 in San Joaquin County. Loans above the limit are generally jumbo loans, which can have different rates and requirements.
+
 ## Calculators
 - Home Affordability Calculator (East Bay Edition) (https://homeswithmanish.com/calculators/affordability/): Conservative scenario caps housing costs at 28% of gross monthly income and total debts at 36%; the stretch scenario allows up to 43% back-end DTI (common for strong files). Payment estimates include principal, interest, ~1.1% property tax, and ~0.35% insurance. Actual qualification depends on credit, reserves, loan program, and lender overlays — get pre-approved for a real number.
 - Buy vs Rent Calculator for the East Bay (https://homeswithmanish.com/calculators/buy-vs-rent/): Owning costs include down payment, principal & interest (30-yr), ~1.1% property tax + ~0.35% insurance, and 1%/yr maintenance; the projected sale nets out remaining loan balance and 6% selling costs at your appreciation assumption. Renting compounds your rent at the growth rate you set. Tax savings value your deductible mortgage interest (on the first $750k of loan balance) plus property tax (conservatively capped at $10k; the 2026 federal SALT cap is $40,400 for most filers, phases down toward $10,000 at higher incomes and is shared with your California income tax) at the marginal rate you enter — this assumes you itemize and exceed the standard deduction, so treat it as an upper bound. Investment opportunity cost on the down payment and PMI are excluded. A framing tool, not a forecast — and not tax advice.
