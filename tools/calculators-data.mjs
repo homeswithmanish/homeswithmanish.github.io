@@ -69,6 +69,7 @@ export const CALCULATORS = [
   },
   {
     slug: "buy-vs-rent",
+    related: [{ href: "/blog/rent-vs-buy-san-ramon-2026", label: "Renting vs Buying in San Ramon: The 2026 Math" }],
     title: "Buy vs Rent Calculator for the East Bay",
     short: "Should I buy or keep renting?",
     metaDescription:
@@ -193,6 +194,7 @@ export const CALCULATORS = [
   },
   {
     slug: "property-tax",
+    related: [{ href: "/blog/mello-roos-mountain-house-tracy-hills", label: "Mello-Roos in Mountain House and Tracy Hills" }, { href: "/cities/san-ramon/dougherty-valley/", label: "Dougherty Valley guide (HOA and CFD costs)" }],
     title: "California Property Tax Estimator (East Bay & Tracy)",
     short: "What will my property taxes be?",
     metaDescription:
